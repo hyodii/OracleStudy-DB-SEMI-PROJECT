@@ -155,7 +155,7 @@ FROM TBL_INSA;
 
 ------------------------------------------------------------------------------------------------------------
 --4조_정효진
--- 92/95(풀이완료한 문제가 몇 문제다)
+-- 95/95(풀이완료한 문제가 몇 문제다)
 -- 문제 풀고나면 결과 붙여넣고 문제 주석처리하자!
 -- 수요일끝나고 제출!
 
@@ -2000,22 +2000,17 @@ ORDER BY TO_CHAR(IBSADATE,'MM');
 12월	4명
 */
 
--- 생년월일 해결 못함!   
-55. 이름, 생년월일, 기본급, 수당을 조회.
+-- 생년월일 해결 못함! -> TO_DATE으로 해결!  
+--55. 이름, 생년월일, 기본급, 수당을 조회.
     생년월일은 주민번호 기준 (2000-10-10 형식으로 출력)
     기본급은 \1,000,000 형식으로 출력
     
 SELECT NAME "이름"
-    -- , TO_CHAR(SUBSTR(SSN,1,6),'YYYY')+1900 "생년월일"
+     , TO_DATE(SUBSTR(SSN,1,2)+1900 || SUBSTR(SSN,3,4),'YYYY-MM-DD') "생년월일"
      , LTRIM(TO_CHAR(BASICPAY,'L999,999,999')) "기본급"
      , LTRIM(TO_CHAR(SUDANG,'L9,999,999')) "수당"
 FROM TBL_INSA;
 
-SELECT *
-FROM TBL_INSA;
-
-SELECT TO_NUMBER(SUBSTR(SSN,1,2))+1900 || SUBSTR(SSN,3,4) "생년월일"
-FROM TBL_INSA;
 
 --56. 이름, 출신도, 기본급을 조회하되 출신도 내림차순 출력(1차 정렬 기준).
     출신도가 같으면 기본급 오름차순 출력(2차 정렬 기준).
@@ -2550,32 +2545,55 @@ GROUP BY TRUNC(SUBSTR(IBSADATE,1,4),-1);
 2000	42
 */
 
-71. 전체인원수, 2000년, 1999년, 1998년도에 입사한 인원을 다음의 형식으로 조회.
+--[애매]--71. 전체인원수, 2000년, 1999년, 1998년도에 입사한 인원을 다음의 형식으로 조회.
     출력형태 ---------------    
     전체 2000 1999 1998
-      60    x    x    x
+      60    x    x    x     
+SELECT COUNT(*) "전체"
+     , COUNT(CASE WHEN SUBSTR(IBSADATE,1,4)=2000 THEN 2000 END) "2000"
+     , COUNT(CASE WHEN SUBSTR(IBSADATE,1,4)=1999 THEN 1999 END)  "1999"
+     , COUNT(CASE WHEN SUBSTR(IBSADATE,1,4)=1998 THEN 1998 END)  "1998"
+FROM TBL_INSA;
+--==>> 60	12	10	6
+
+SELECT SUBSTR(IBSADATE,1,4)
+FROM TBL_INSA
+WHERE SUBSTR(IBSADATE,1,4)=2000
+
+
 SELECT COUNT(*)"전체"
-     , T.년도구분
+     , CASE WHEN GROUPING(T.년도구분)=0 THEN T.년도구분 ELSE '전체' END "년도구분"
 FROM
 (
-    SELECT CASE WHEN SUBSTR(IBSADATE,1,4)=2000 THEN 2000
-                WHEN SUBSTR(IBSADATE,1,4)=1999 THEN 1999
-                WHEN SUBSTR(IBSADATE,1,4)=1998 THEN 1998
-                ELSE -1
+    SELECT CASE WHEN SUBSTR(IBSADATE,1,4)=2000 THEN '2000'
+                WHEN SUBSTR(IBSADATE,1,4)=1999 THEN '1999'
+                WHEN SUBSTR(IBSADATE,1,4)=1998 THEN '1998'
+                ELSE '나머지년도'
             END "년도구분"
     FROM TBL_INSA
 )T
-GROUP BY T.년도구분;
+GROUP BY ROLLUP(T.년도구분);
+--==>>
+/*
+6	1998
+10	1999
+12	2000
+32	나머지년도
+60	전체
+*/
 
-SELECT --COUNT(*)"전체"
-      COUNT(TO_CHAR(IBSADATE, 'YYYY'))
-FROM TBL_INSA;
 
-
-72. 아래 형식으로 지역별 인원수 조회.
+--[애매]--72. 아래 형식으로 지역별 인원수 조회.
     출력형태 -----------------
     전체 서울  인천  경기
       60    x     x     x
+      
+SELECT COUNT(*) "전체"
+     , COUNT(CASE WHEN CITY = '서울' THEN '서울' END) "2000"
+     , COUNT(CASE WHEN CITY = '인천' THEN '인천' END)  "1999"
+     , COUNT(CASE WHEN CITY = '경기' THEN '경기' END)  "1998"
+FROM TBL_INSA;
+--=>> 60	20	9	13
 
 --73. 기본급(BASICPAY)이 평균 이하인 사원 조회. (이름, 기본급). AVG() 함수. 서브쿼리.
 SELECT NAME"이름",BASICPAY"기본급" 
@@ -2674,7 +2692,7 @@ WHERE T.입사일순위<=5;
 1033	김미나	780505-2999999	1998-06-07	서울	011-2444-4444	영업부	사원	1020000	104000	5
 */
 
---[애매]--77. 평균 급여보다 많은 급여를 받는 직원 정보 조회. (모든 정보)
+--77. 평균 급여보다 많은 급여를 받는 직원 정보 조회. (모든 정보)
 SELECT *
 FROM TBL_INSA
 WHERE SUDANG+BASICPAY>(SELECT AVG(SUDANG+BASICPAY)
@@ -2709,6 +2727,7 @@ WHERE SUDANG+BASICPAY>(SELECT AVG(SUDANG+BASICPAY)
 1057	이미경	780406-2003214	1998-02-11	경기	016-6542-7546	자재부	부장	2520000	160000
 1058	김신제	800709-1321456	2003-08-08	인천	010-2415-5444	기획부	대리	1950000	180000
 */
+
 --78. '이순애' 직원의 급여보다 더 많은 급여를 받는 직원 조회. (모든 정보)
     단, 이순애 직원의 급여가 변하더라도 작성된 쿼리문은 기능 수행이 가능하도록 조회.
 SELECT *
@@ -2825,6 +2844,7 @@ WHERE BUSEO = (SELECT BUSEO
 1052	권옥경	820406-2000456	00/10/10	경기	010-3644-5577	기획부	사원	1020000	105000
 1058	김신제	800709-1321456	03/08/08	인천	010-2415-5444	기획부	대리	1950000	180000
 */
+
 --83. '김신애' 직원과 같은 부서, 직위를 가진 직원 정보 조회.
     단, 김신애 직원의 부서 및 직위가 바뀌더라도 작성된 쿼리문은 기능 수행이 가능하도록 조회.
 
@@ -3179,4 +3199,9 @@ ORDER BY 2 DESC;
        :
 */
 ----------------------------------------------------------------------------
+
+
+
+
+
 
