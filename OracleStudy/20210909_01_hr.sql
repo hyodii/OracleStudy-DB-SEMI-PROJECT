@@ -2,69 +2,69 @@ SELECT USER
 FROM DUAL;
 --==>> HR
 
---¡á¡á¡á PRIMARY KEY ¡á¡á¡á--
+--â– â– â–  PRIMARY KEY â– â– â– --
 
--- 1. Å×ÀÌºí¿¡ ´ëÇÑ ±âº» Å°¸¦ »ý¼ºÇÑ´Ù.
+-- 1. í…Œì´ë¸”ì— ëŒ€í•œ ê¸°ë³¸ í‚¤ë¥¼ ìƒì„±í•œë‹¤.
 
--- 2. Å×ÀÌºí¿¡¼­ °¢ ÇàÀ» À¯ÀÏÇÏ°Ô ½Äº°ÇÏ´Â ÄÃ·³(´ÜÀÏ ÇÁ¶óÀÌ¸Ó¸®Å°) ¶Ç´Â ÄÃ·³ÀÇ ÁýÇÕ(º¹ÇÕÇÁ¶óÀÌ¸Ó¸®Å°)ÀÌ´Ù.
---    ±âº» Å°´Â Å×ÀÌºí ´ç ÃÖ´ë ÇÏ³ª¸¸ Á¸ÀçÇÑ´Ù.
---    ±×·¯³ª ¹Ýµå½Ã ÇÏ³ªÀÇ ÄÃ·³À¸·Î¸¸ ±¸¼ºµÇ´Â °ÍÀº ¾Æ´Ï´Ù.
---    NULLÀÏ ¼ö ¾ø°í, ÀÌ¹Ì Å×ÀÌºí¿¡ Á¸ÀçÇÏ°í ÀÖ´Â µ¥ÀÌÅÍ¸¦
---    ´Ù½Ã ÀÔ·ÂÇÒ ¼ö ¾øµµ·Ï Ã³¸®µÈ´Ù.
---    UNIQUE INDEX °¡ ÀÚµ¿À¸·Î »ý¼ºµÈ´Ù.(¿À¶óÅ¬ÀÌ ÀÚÃ¼ÀûÀ¸·Î ¸¸µç´Ù.)
-
-
--- 3. Çü½Ä ¹× ±¸Á¶ ([] »ý·«°¡´ÉÇÏ´Ù´Â Ç¥Çö)
--- ¨ç ÄÃ·³ ·¹º§ÀÇ Çü½Ä
--- ÄÃ·³¸í µ¥ÀÌÅÍÅ¸ÀÔ [CONSTRAINT¸í] PRIMARY KEY[(ÄÃ·³¸í, ...)]
-
--- ¨è Å×ÀÌºí ·¹º§ÀÇ Çü½Ä (±ÇÀå!!)
--- ÄÃ·³¸í µ¥ÀÌÅÍ Å¸ÀÔ
--- , ÄÃ·³¸í µ¥ÀÌÅÍ Å¸ÀÔ
--- , CONSTRAINT CONSTRAINT¸í PRIMARY KEY(ÄÃ·³¸í[,...])
-
--- 4. CONSTRAINT Ãß°¡ ½Ã CONSTRAINT ¸íÀ» »ý·«ÇÏ¸é
---    ¿À¶óÅ¬ ¼­¹ö°¡ ÀÚµ¿ÀûÀ¸·Î CONSTRAINT ¸íÀ» ºÎ¿©ÇÏ°Ô µÈ´Ù.
---    (ÇÏÁö¸¸ ±ÇÀåÇÏÁö ¾ÊÀ½! Á÷Á¢¾²ÀÚ!)
---    ÀÏ¹ÝÀûÀ¸·Î CONSTRAINT ¸íÀº ¡ºÅ×ÀÌºí¸í_ÄÃ·³¸í_CONSTRAINT¾à¾î¡»
---    Çü½ÄÀ¸·Î ±â¼úÇÑ´Ù.
+-- 2. í…Œì´ë¸”ì—ì„œ ê° í–‰ì„ ìœ ì¼í•˜ê²Œ ì‹ë³„í•˜ëŠ” ì»¬ëŸ¼(ë‹¨ì¼ í”„ë¼ì´ë¨¸ë¦¬í‚¤) ë˜ëŠ” ì»¬ëŸ¼ì˜ ì§‘í•©(ë³µí•©í”„ë¼ì´ë¨¸ë¦¬í‚¤)ì´ë‹¤.
+--    ê¸°ë³¸ í‚¤ëŠ” í…Œì´ë¸” ë‹¹ ìµœëŒ€ í•˜ë‚˜ë§Œ ì¡´ìž¬í•œë‹¤.
+--    ê·¸ëŸ¬ë‚˜ ë°˜ë“œì‹œ í•˜ë‚˜ì˜ ì»¬ëŸ¼ìœ¼ë¡œë§Œ êµ¬ì„±ë˜ëŠ” ê²ƒì€ ì•„ë‹ˆë‹¤.
+--    NULLì¼ ìˆ˜ ì—†ê³ , ì´ë¯¸ í…Œì´ë¸”ì— ì¡´ìž¬í•˜ê³  ìžˆëŠ” ë°ì´í„°ë¥¼
+--    ë‹¤ì‹œ ìž…ë ¥í•  ìˆ˜ ì—†ë„ë¡ ì²˜ë¦¬ëœë‹¤.
+--    UNIQUE INDEX ê°€ ìžë™ìœ¼ë¡œ ìƒì„±ëœë‹¤.(ì˜¤ë¼í´ì´ ìžì²´ì ìœ¼ë¡œ ë§Œë“ ë‹¤.)
 
 
+-- 3. í˜•ì‹ ë° êµ¬ì¡° ([] ìƒëžµê°€ëŠ¥í•˜ë‹¤ëŠ” í‘œí˜„)
+-- â‘  ì»¬ëŸ¼ ë ˆë²¨ì˜ í˜•ì‹
+-- ì»¬ëŸ¼ëª… ë°ì´í„°íƒ€ìž… [CONSTRAINTëª…] PRIMARY KEY[(ì»¬ëŸ¼ëª…, ...)]
 
---¡Û PK ÁöÁ¤ ½Ç½À(¨ç ÄÃ·³ ·¹º§ÀÇ Çü½Ä)
--- Å×ÀÌºí »ý¼º
+-- â‘¡ í…Œì´ë¸” ë ˆë²¨ì˜ í˜•ì‹ (ê¶Œìž¥!!)
+-- ì»¬ëŸ¼ëª… ë°ì´í„° íƒ€ìž…
+-- , ì»¬ëŸ¼ëª… ë°ì´í„° íƒ€ìž…
+-- , CONSTRAINT CONSTRAINTëª… PRIMARY KEY(ì»¬ëŸ¼ëª…[,...])
+
+-- 4. CONSTRAINT ì¶”ê°€ ì‹œ CONSTRAINT ëª…ì„ ìƒëžµí•˜ë©´
+--    ì˜¤ë¼í´ ì„œë²„ê°€ ìžë™ì ìœ¼ë¡œ CONSTRAINT ëª…ì„ ë¶€ì—¬í•˜ê²Œ ëœë‹¤.
+--    (í•˜ì§€ë§Œ ê¶Œìž¥í•˜ì§€ ì•ŠìŒ! ì§ì ‘ì“°ìž!)
+--    ì¼ë°˜ì ìœ¼ë¡œ CONSTRAINT ëª…ì€ ã€Ží…Œì´ë¸”ëª…_ì»¬ëŸ¼ëª…_CONSTRAINTì•½ì–´ã€
+--    í˜•ì‹ìœ¼ë¡œ ê¸°ìˆ í•œë‹¤.
+
+
+
+--â—‹ PK ì§€ì • ì‹¤ìŠµ(â‘  ì»¬ëŸ¼ ë ˆë²¨ì˜ í˜•ì‹)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST1
 ( COL1  NUMBER(5)       PRIMARY KEY
 , COL2  VARCHAR2(30)
 );
---==>> Table TBL_TEST1ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST1ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
--- INSERT ±¸¹® »ç¿ëÇÒ ¶§
---INSERT INTO TBL_TEST1(COL1,COL2) VALUES(1,'TSET');        -- ±ÇÀå!!
---INSERT INTO TBL_TEST1 VALUES(1,'TEST');                   -- ºü¸£°Ô ³Ö¾î¾ßÇÒ ¶§ ¾Æ´Ï¸é ±ÇÀåX
---INSERT INTO TBL_TESL1(COL1) VALUES(4);                    -- COL2´Â NULL·Î ³Ö°Ú´Ù!
---INSERT INTO TBL_TEST1(COL2,COL1) VALUES('ABCD',2);        -- ¹Ù²ã¼­ ³Ö´Â°Íµµ °¡´É!   
+-- INSERT êµ¬ë¬¸ ì‚¬ìš©í•  ë•Œ
+--INSERT INTO TBL_TEST1(COL1,COL2) VALUES(1,'TSET');        -- ê¶Œìž¥!!
+--INSERT INTO TBL_TEST1 VALUES(1,'TEST');                   -- ë¹ ë¥´ê²Œ ë„£ì–´ì•¼í•  ë•Œ ì•„ë‹ˆë©´ ê¶Œìž¥X
+--INSERT INTO TBL_TESL1(COL1) VALUES(4);                    -- COL2ëŠ” NULLë¡œ ë„£ê² ë‹¤!
+--INSERT INTO TBL_TEST1(COL2,COL1) VALUES('ABCD',2);        -- ë°”ê¿”ì„œ ë„£ëŠ”ê²ƒë„ ê°€ëŠ¥!   
 
--- µ¥ÀÌÅÍ ÀÔ·Â
+-- ë°ì´í„° ìž…ë ¥
 INSERT INTO TBL_TEST1(COL1,COL2) VALUES(1,'TSET');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST1(COL1,COL2) VALUES(2,'ABCD');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST1(COL1,COL2) VALUES(3,'NULL');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST1(COL1) VALUES(4); 
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST1(COL1,COL2) VALUES(2,'ABCD');      --> ¿¡·¯ ¹ß»ý (¼ýÀÚ 2¶§¹®¿¡ ¾ÈµÇ´Â °Í!)
-INSERT INTO TBL_TEST1(COL1,COL2) VALUES(2,'KKKK');      --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST1(COL1,COL2) VALUES(5,'ABCD');  --µ¿¸íÀÌÀÎ °°Àº °Í!
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST1(COL1,COL2) VALUES(NULL,NULL);     --> ¿¡·¯ ¹ß»ý (NULL ¾ÈµÈ´Ù!)
-INSERT INTO TBL_TEST1(COL1,COL2) VALUES(NULL, 'STUDY');  --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST1(COL2) VALUES('STUDY');             --> ¿¡·¯ ¹ß»ý
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST1(COL1,COL2) VALUES(2,'ABCD');      --> ì—ëŸ¬ ë°œìƒ (ìˆ«ìž 2ë•Œë¬¸ì— ì•ˆë˜ëŠ” ê²ƒ!)
+INSERT INTO TBL_TEST1(COL1,COL2) VALUES(2,'KKKK');      --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST1(COL1,COL2) VALUES(5,'ABCD');  --ë™ëª…ì´ì¸ ê°™ì€ ê²ƒ!
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST1(COL1,COL2) VALUES(NULL,NULL);     --> ì—ëŸ¬ ë°œìƒ (NULL ì•ˆëœë‹¤!)
+INSERT INTO TBL_TEST1(COL1,COL2) VALUES(NULL, 'STUDY');  --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST1(COL2) VALUES('STUDY');             --> ì—ëŸ¬ ë°œìƒ
 
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
 SELECT *
 FROM TBL_TEST1;
@@ -78,19 +78,19 @@ FROM TBL_TEST1;
 */
 
 DESC TBL_TEST1;
---==>> DESC¸¦ ÅëÇØ¼­ PRIMARY Á¦¾àÁ¶°ÇÀ» È®ÀÎÇÒ ¼ö ¾ø´Ù! NOT NULLÀº È®ÀÎ °¡´É!
+--==>> DESCë¥¼ í†µí•´ì„œ PRIMARY ì œì•½ì¡°ê±´ì„ í™•ì¸í•  ìˆ˜ ì—†ë‹¤! NOT NULLì€ í™•ì¸ ê°€ëŠ¥!
 /*
-ÀÌ¸§   ³Î?       À¯Çü           
+ì´ë¦„   ë„?       ìœ í˜•           
 ---- -------- ------------ 
-COL1 NOT NULL NUMBER(5)     ¡æ PK Á¦¾à È®ÀÎ ºÒ°¡    
+COL1 NOT NULL NUMBER(5)     â†’ PK ì œì•½ í™•ì¸ ë¶ˆê°€    
 COL2          VARCHAR2(30) 
 */
 
---¡Û Á¦¾àÁ¶°Ç È®ÀÎ
+--â—‹ ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM USER_CONSTRAINTS;
 
---TBL_TEST1¸¸ º¸±â
+--TBL_TEST1ë§Œ ë³´ê¸°
 SELECT *
 FROM USER_CONSTRAINTS
 WHERE TABLE_NAME = 'TBL_TEST1';
@@ -99,9 +99,9 @@ WHERE TABLE_NAME = 'TBL_TEST1';
 HR	SYS_C007057	P	TBL_TEST1					ENABLED	NOT DEFERRABLE	IMMEDIATE	VALIDATED	GENERATED NAME			21/09/09	HR	SYS_C007057		
 */
 
---¡Û Á¦¾àÁ¶°ÇÀÌ ÁöÁ¤µÈ ÄÃ·³ È®ÀÎ(Á¶È¸)    
+--â—‹ ì œì•½ì¡°ê±´ì´ ì§€ì •ëœ ì»¬ëŸ¼ í™•ì¸(ì¡°íšŒ)    
 SELECT *
-FROM USER_CONS_COLUMNS;             -- CONS ´Â ¾à¾î!
+FROM USER_CONS_COLUMNS;             -- CONS ëŠ” ì•½ì–´!
 --==>>
 /*
 HR	REGION_ID_NN	REGIONS	    REGION_ID	
@@ -150,8 +150,8 @@ HR	SYS_C007057	TBL_TEST1	COL1	1
 */
 
 
---¡Û Á¦¾àÁ¶°ÇÀÌ ¼³Á¤µÈ ¼ÒÀ¯ÁÖ, Á¦¾àÁ¶°Ç¸í, Å×ÀÌºí¸í, Á¦¾àÁ¶°ÇÁ¾·ù, ÄÃ·³¸í Ç×¸ñ Á¶È¸
---(À§¿¡ Á¶È¸ÇÑ µÎ Å×ÀÌºí¿¡¼­ ¿øÇÏ´Â °ª¸¸ °¡Á®¿À±â!)
+--â—‹ ì œì•½ì¡°ê±´ì´ ì„¤ì •ëœ ì†Œìœ ì£¼, ì œì•½ì¡°ê±´ëª…, í…Œì´ë¸”ëª…, ì œì•½ì¡°ê±´ì¢…ë¥˜, ì»¬ëŸ¼ëª… í•­ëª© ì¡°íšŒ
+--(ìœ„ì— ì¡°íšŒí•œ ë‘ í…Œì´ë¸”ì—ì„œ ì›í•˜ëŠ” ê°’ë§Œ ê°€ì ¸ì˜¤ê¸°!)
 SELECT UC.OWNER, UC.CONSTRAINT_NAME, UC.TABLE_NAME
      , UC.CONSTRAINT_TYPE, UCC.COLUMN_NAME
 FROM USER_CONSTRAINTS UC, USER_CONS_COLUMNS UCC
@@ -161,34 +161,34 @@ WHERE UC.CONSTRAINT_NAME = UCC.CONSTRAINT_NAME
 
 
 
---¡Û PK ÁöÁ¤ ½Ç½À(¨è Å×ÀÌºí ·¹º§ÀÇ Çü½Ä)      ¡æ ÀÌ°É·Î »ç¿ëÇÏ´Â ¹ý ÀÍ¼÷ÇÏ°ÔÇÏ¸é 1¹ø ¹æ½ÄÀº ±×³ÉÇÒ¼öÀÖÀ½!
--- Å×ÀÌºí »ý¼º
+--â—‹ PK ì§€ì • ì‹¤ìŠµ(â‘¡ í…Œì´ë¸” ë ˆë²¨ì˜ í˜•ì‹)      â†’ ì´ê±¸ë¡œ ì‚¬ìš©í•˜ëŠ” ë²• ìµìˆ™í•˜ê²Œí•˜ë©´ 1ë²ˆ ë°©ì‹ì€ ê·¸ëƒ¥í• ìˆ˜ìžˆìŒ!
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST2
 ( COL1  NUMBER(5)
 , COL2  VARCHAR2(30)
-, CONSTRAINT TEST2_COL1_PK PRIMARY KEY(COL1)    -- TBL_TEST2 °¡ ¾Æ´Ï¶ó!! TEST2!!
+, CONSTRAINT TEST2_COL1_PK PRIMARY KEY(COL1)    -- TBL_TEST2 ê°€ ì•„ë‹ˆë¼!! TEST2!!
 );
---==>> Table TBL_TEST2ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST2ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- µ¥ÀÌÅÍ ÀÔ·Â
+-- ë°ì´í„° ìž…ë ¥
 INSERT INTO TBL_TEST2(COL1,COL2) VALUES(1,'TSET');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST2(COL1,COL2) VALUES(2,'ABCD');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST2(COL1,COL2) VALUES(3,NULL);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST2(COL1) VALUES(4);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST2(COL1,COL2) VALUES(2,'ABCD');      --> ¿¡·¯ ¹ß»ý (¼ýÀÚ 2¶§¹®¿¡ ¾ÈµÇ´Â °Í!)
-INSERT INTO TBL_TEST2(COL1,COL2) VALUES(2,'KKKK');      --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST2(COL1,COL2) VALUES(5,'ABCD');  --µ¿¸íÀÌÀÎ °°Àº °Í!
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST2(COL1,COL2) VALUES(NULL,NULL);     --> ¿¡·¯ ¹ß»ý (NULL ¾ÈµÈ´Ù!)
-INSERT INTO TBL_TEST2(COL1,COL2) VALUES(NULL, 'STUDY');  --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST2(COL2) VALUES('STUDY');             --> ¿¡·¯ ¹ß»ý
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST2(COL1,COL2) VALUES(2,'ABCD');      --> ì—ëŸ¬ ë°œìƒ (ìˆ«ìž 2ë•Œë¬¸ì— ì•ˆë˜ëŠ” ê²ƒ!)
+INSERT INTO TBL_TEST2(COL1,COL2) VALUES(2,'KKKK');      --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST2(COL1,COL2) VALUES(5,'ABCD');  --ë™ëª…ì´ì¸ ê°™ì€ ê²ƒ!
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST2(COL1,COL2) VALUES(NULL,NULL);     --> ì—ëŸ¬ ë°œìƒ (NULL ì•ˆëœë‹¤!)
+INSERT INTO TBL_TEST2(COL1,COL2) VALUES(NULL, 'STUDY');  --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST2(COL2) VALUES('STUDY');             --> ì—ëŸ¬ ë°œìƒ
 
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
 SELECT *
 FROM TBL_TEST2;
@@ -201,8 +201,8 @@ FROM TBL_TEST2;
 4	
 */
 
---¡Û Á¦¾àÁ¶°ÇÀÌ ¼³Á¤µÈ ¼ÒÀ¯ÁÖ, Á¦¾àÁ¶°Ç¸í, Å×ÀÌºí¸í, Á¦¾àÁ¶°ÇÁ¾·ù, ÄÃ·³¸í Ç×¸ñ Á¶È¸
---(À§¿¡ Á¶È¸ÇÑ µÎ Å×ÀÌºí¿¡¼­ ¿øÇÏ´Â °ª¸¸ °¡Á®¿À±â!)
+--â—‹ ì œì•½ì¡°ê±´ì´ ì„¤ì •ëœ ì†Œìœ ì£¼, ì œì•½ì¡°ê±´ëª…, í…Œì´ë¸”ëª…, ì œì•½ì¡°ê±´ì¢…ë¥˜, ì»¬ëŸ¼ëª… í•­ëª© ì¡°íšŒ
+--(ìœ„ì— ì¡°íšŒí•œ ë‘ í…Œì´ë¸”ì—ì„œ ì›í•˜ëŠ” ê°’ë§Œ ê°€ì ¸ì˜¤ê¸°!)
 SELECT UC.OWNER, UC.CONSTRAINT_NAME, UC.TABLE_NAME
      , UC.CONSTRAINT_TYPE, UCC.COLUMN_NAME
 FROM USER_CONSTRAINTS UC, USER_CONS_COLUMNS UCC
@@ -214,8 +214,8 @@ HR	TEST2_COL1_PK	TBL_TEST2	P	COL1
 */
 
 
---¡Û PK ÁöÁ¤ ½Ç½À(¨é ´ÙÁß ÄÃ·³ PKÁöÁ¤ ¡æ º¹ÇÕ ÇÁ¶óÀÌ¸Ó¸® Å°)
--- Å×ÀÌºí »ý¼º
+--â—‹ PK ì§€ì • ì‹¤ìŠµ(â‘¢ ë‹¤ì¤‘ ì»¬ëŸ¼ PKì§€ì • â†’ ë³µí•© í”„ë¼ì´ë¨¸ë¦¬ í‚¤)
+-- í…Œì´ë¸” ìƒì„±
 /*
 CREATE TABLE TBL_TEST3
 ( COL1 NUMBER(5)
@@ -224,8 +224,8 @@ CREATE TABLE TBL_TEST3
 , CONSTRAINT TEST3_COL2_PK PRIMARY KEY(COL2)
 );
 */
---(X)ÀÌ·¸°Ô ÇÏ¸é ¾È´í´Ù! ÀÌ°Å´Â Á¦¾àÁ¶°ÇÀ» µÎ°³ ¸¸µé°Ú´Ù´Â ¶æ!
---      ÇÑ Å×ÀÌºí¿¡ Á¦¾àÁ¶°ÇÀº ÇÏ³ª¸¸ °¡´ÉÇÏ´Ù! 
+--(X)ì´ë ‡ê²Œ í•˜ë©´ ì•ˆëŒ„ë‹¤! ì´ê±°ëŠ” ì œì•½ì¡°ê±´ì„ ë‘ê°œ ë§Œë“¤ê² ë‹¤ëŠ” ëœ»!
+--      í•œ í…Œì´ë¸”ì— ì œì•½ì¡°ê±´ì€ í•˜ë‚˜ë§Œ ê°€ëŠ¥í•˜ë‹¤! 
 
 
 CREATE TABLE TBL_TEST3
@@ -233,31 +233,31 @@ CREATE TABLE TBL_TEST3
 , COL2 VARCHAR2(30)
 , CONSTRAINT TEST3_COL1_COL2_PK PRIMARY KEY(COL1,COL2)
 );
---==>> Table TBL_TEST3ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST3ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
---? º¹ÇÕ ÇÁ¶óÀÌ¸Ó¸® Å° ÀÔ·ÂÇÏ´Â °ÍÀ» ÄÃ·³·¹º§ Çü½ÄÀ¸·Î ÁöÁ¤ÇÏ´Â °Íµµ °¡´ÉÇÏÁö¸¸ ¹Ù¶÷Á÷ÇÏÁö ¸øÇÏ´Ù!
+--? ë³µí•© í”„ë¼ì´ë¨¸ë¦¬ í‚¤ ìž…ë ¥í•˜ëŠ” ê²ƒì„ ì»¬ëŸ¼ë ˆë²¨ í˜•ì‹ìœ¼ë¡œ ì§€ì •í•˜ëŠ” ê²ƒë„ ê°€ëŠ¥í•˜ì§€ë§Œ ë°”ëžŒì§í•˜ì§€ ëª»í•˜ë‹¤!
 
 
 
--- µ¥ÀÌÅÍ ÀÔ·Â
+-- ë°ì´í„° ìž…ë ¥
 INSERT INTO TBL_TEST3(COL1, COL2) VALUES(1,'TEST');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST3(COL1, COL2) VALUES(2,'ABCD');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST3(COL1, COL2) VALUES(3, NULL);          --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST3(COL1) VALUES(4);                      --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST3(COL1, COL2) VALUES(3,'ABCD');         -- CHCECK~!!!(º¹ÇÕ PKÀÌ±â ¶§¹®¿¡ °¡´É!)
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST3(COL1, COL2) VALUES(3, NULL);          --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST3(COL1) VALUES(4);                      --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST3(COL1, COL2) VALUES(3,'ABCD');         -- CHCECK~!!!(ë³µí•© PKì´ê¸° ë•Œë¬¸ì— ê°€ëŠ¥!)
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST3(COL1, COL2) VALUES(2,'TEST');         -- CHCECK~!!!
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST3(COL1, COL2) VALUES(1,'KKKK');         -- CHCECK~!!!
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST3(COL1, COL2) VALUES(NULL, NULL);       --> ¿¡·¯ ¹ß»ý      
-INSERT INTO TBL_TEST3(COL1, COL2) VALUES(NULL, 'STUDY');    --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST3(COL2) VALUES('TEST');                 --> ¿¡·¯ ¹ß»ý
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST3(COL1, COL2) VALUES(NULL, NULL);       --> ì—ëŸ¬ ë°œìƒ      
+INSERT INTO TBL_TEST3(COL1, COL2) VALUES(NULL, 'STUDY');    --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST3(COL2) VALUES('TEST');                 --> ì—ëŸ¬ ë°œìƒ
 
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
 SELECT *
 FROM TBL_TEST3;
@@ -271,52 +271,52 @@ FROM TBL_TEST3;
 */
 
 
---¡Û PK ÁöÁ¤ ½Ç½À(¨ê Å×ÀÌºí »ý¼º ÀÌÈÄ Á¦¾àÁ¶°Ç Ãß°¡ ¡æ PK ÁöÁ¤)
--- Å×ÀÌºí »ý¼º
+--â—‹ PK ì§€ì • ì‹¤ìŠµ(â‘£ í…Œì´ë¸” ìƒì„± ì´í›„ ì œì•½ì¡°ê±´ ì¶”ê°€ â†’ PK ì§€ì •)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST4
 ( COL1  NUMBER(5)
 , COL2 VARCHAR2(30)
 );
---==>> Table TBL_TEST4ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST4ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- ±×·±µ¥ Å×ÀÌºí »ý¼º ÀÌÈÄ PKÃß°¡ÇÏ·Á°í ÇÏ´Âµ¥ ÀÌ¹Ì Á¦¾àÁ¶°Ç¿¡ À§¹èµÇ´Â °ªÀÌ ÀÖÀ¸¸é ÀÌÈÄ¿¡ PKÁöÁ¤ÇÒ ¼ö ¾øÀ½!
--- ¿¹¸¦ µé¾î ÀÌ¹Ì ÄÃ·³ °ª¿¡ NULL ÀÌ ÀÖ°Å³ª Áßº¹ÀÌ ÀÖÀ¸¸é ¾ÈµÊ!!
+-- ê·¸ëŸ°ë° í…Œì´ë¸” ìƒì„± ì´í›„ PKì¶”ê°€í•˜ë ¤ê³  í•˜ëŠ”ë° ì´ë¯¸ ì œì•½ì¡°ê±´ì— ìœ„ë°°ë˜ëŠ” ê°’ì´ ìžˆìœ¼ë©´ ì´í›„ì— PKì§€ì •í•  ìˆ˜ ì—†ìŒ!
+-- ì˜ˆë¥¼ ë“¤ì–´ ì´ë¯¸ ì»¬ëŸ¼ ê°’ì— NULL ì´ ìžˆê±°ë‚˜ ì¤‘ë³µì´ ìžˆìœ¼ë©´ ì•ˆë¨!!
 
---¡Ø ÀÌ¹Ì ¸¸µé¾îÁ® ÀÖ´Â Å×ÀÌºí¿¡
---   ¹«¿©ÇÏ·Á´Â Á¦¾àÁ¶°ÇÀ» À§¹ÝÇÑ µ¥ÀÌÅÍ°¡ Æ÷ÇÔµÇ¾î ÀÖÀ» °æ¿ì
---   ÇØ´ç Å×ÀÌºí¿¡ Á¦¾àÁ¶°ÇÀ» Ãß°¡ÇÏ´Â °ÍÀº ºÒ°¡´ÉÇÏ´Ù.
+--â€» ì´ë¯¸ ë§Œë“¤ì–´ì ¸ ìžˆëŠ” í…Œì´ë¸”ì—
+--   ë¶€ì—¬í•˜ë ¤ëŠ” ì œì•½ì¡°ê±´ì„ ìœ„ë°˜í•œ ë°ì´í„°ê°€ í¬í•¨ë˜ì–´ ìžˆì„ ê²½ìš°
+--   í•´ë‹¹ í…Œì´ë¸”ì— ì œì•½ì¡°ê±´ì„ ì¶”ê°€í•˜ëŠ” ê²ƒì€ ë¶ˆê°€ëŠ¥í•˜ë‹¤.
 
 
 
--- Á¦¾à Á¶°Ç Ãß°¡
+-- ì œì•½ ì¡°ê±´ ì¶”ê°€
 /*
 ALTER TABLE TBL_TEST4
-ADD ¿©±â¿¡ µÚ¿¡´Â Á¦¾àÁ¶°Ç ±¸¹® ¶È°°À½! Ãß°¡ÇØÁÖ¸é µÊ!
+ADD ì—¬ê¸°ì— ë’¤ì—ëŠ” ì œì•½ì¡°ê±´ êµ¬ë¬¸ ë˜‘ê°™ìŒ! ì¶”ê°€í•´ì£¼ë©´ ë¨!
 */
 ALTER TABLE TBL_TEST4
 ADD CONSTRAINT TEST4_COL1_PK PRIMARY KEY(COL1);
---==>> Table TBL_TEST4ÀÌ(°¡) º¯°æµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST4ì´(ê°€) ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
--- µ¥ÀÌÅÍ ÀÔ·Â
+-- ë°ì´í„° ìž…ë ¥
 INSERT INTO TBL_TEST4(COL1,COL2) VALUES(1,'TSET');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST4(COL1,COL2) VALUES(2,'ABCD');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST4(COL1,COL2) VALUES(3,NULL);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST4(COL1) VALUES(4);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST4(COL1,COL2) VALUES(2,'ABCD');      --> ¿¡·¯ ¹ß»ý (¼ýÀÚ 2¶§¹®¿¡ ¾ÈµÇ´Â °Í!)
-INSERT INTO TBL_TEST4(COL1,COL2) VALUES(2,'KKKK');      --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST4(COL1,COL2) VALUES(5,'ABCD');  --µ¿¸íÀÌÀÎ °°Àº °Í!
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST4(COL1,COL2) VALUES(NULL,NULL);     --> ¿¡·¯ ¹ß»ý (NULL ¾ÈµÈ´Ù!)
-INSERT INTO TBL_TEST4(COL1,COL2) VALUES(NULL, 'STUDY');  --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST4(COL2) VALUES('STUDY');             --> ¿¡·¯ ¹ß»ý
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST4(COL1,COL2) VALUES(2,'ABCD');      --> ì—ëŸ¬ ë°œìƒ (ìˆ«ìž 2ë•Œë¬¸ì— ì•ˆë˜ëŠ” ê²ƒ!)
+INSERT INTO TBL_TEST4(COL1,COL2) VALUES(2,'KKKK');      --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST4(COL1,COL2) VALUES(5,'ABCD');  --ë™ëª…ì´ì¸ ê°™ì€ ê²ƒ!
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST4(COL1,COL2) VALUES(NULL,NULL);     --> ì—ëŸ¬ ë°œìƒ (NULL ì•ˆëœë‹¤!)
+INSERT INTO TBL_TEST4(COL1,COL2) VALUES(NULL, 'STUDY');  --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST4(COL2) VALUES('STUDY');             --> ì—ëŸ¬ ë°œìƒ
 
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 SELECT *
 FROM TBL_TEST4;
 --==>>
@@ -328,8 +328,8 @@ FROM TBL_TEST4;
 5	ABCD
 */
 
--- Á¦¾àÁ¶°ÇÀ» ¸Å¹ø È®ÀÎÇÏ´Ï±î ºä¸¦ ÇÏ³ª ¸¸µéÀÚ!
---¡Ø Á¦¾àÁ¶°Ç È®ÀÎ¿ë Àü¿ë ºä(VIEW) »ý¼º
+-- ì œì•½ì¡°ê±´ì„ ë§¤ë²ˆ í™•ì¸í•˜ë‹ˆê¹Œ ë·°ë¥¼ í•˜ë‚˜ ë§Œë“¤ìž!
+--â€» ì œì•½ì¡°ê±´ í™•ì¸ìš© ì „ìš© ë·°(VIEW) ìƒì„±
 CREATE OR REPLACE VIEW VIEW_CONSTCHECK
 AS
 SELECT UC.OWNER "OWNER"
@@ -341,10 +341,10 @@ SELECT UC.OWNER "OWNER"
      , UC.DELETE_RULE "DELETE_RULE"
 FROM USER_CONSTRAINTS UC  JOIN  USER_CONS_COLUMNS UCC
 ON UC.CONSTRAINT_NAME = UCC.CONSTRAINT_NAME;
---==>> View VIEW_CONSTCHECKÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> View VIEW_CONSTCHECKì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
---¡Û »ý¼ºµÈ ºä(VIEW)¸¦ ÅëÇÑ Á¦¾à Á¶°Ç È®ÀÎ
+--â—‹ ìƒì„±ëœ ë·°(VIEW)ë¥¼ í†µí•œ ì œì•½ ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST4';
@@ -352,37 +352,37 @@ WHERE TABLE_NAME = 'TBL_TEST4';
 
 --------------------------------------------------------------------------------
 
---¡á¡á¡á UNIQUE(UK:U) ¡á¡á¡á--
--- NULLÀ» Çã¿ëÇÏ´Â °Í ÀÌ¿Ü¿¡´Â PK¿Í À¯»ç
+--â– â– â–  UNIQUE(UK:U) â– â– â– --
+-- NULLì„ í—ˆìš©í•˜ëŠ” ê²ƒ ì´ì™¸ì—ëŠ” PKì™€ ìœ ì‚¬
 
--- 1. Å×ÀÌºí¿¡¼­ ÁöÁ¤ÇÑ ÄÃ·³ÀÇ µ¥ÀÌÅÍ°¡ Áßº¹µÇÁö ¾Ê°í
---    Å×ÀÌºí ³»¿¡¼­ À¯ÀÏÇÒ ¼ö ÀÖµµ·Ï ¼³Á¤ÇÏ´Â Á¦¾àÁ¶°Ç.
---    PRIMARY KEY ¿Í À¯»çÇÑ Á¦¾àÁ¶°Ç ÀÌÁö¸¸, NULL À» Çã¿ëÇÑ´Ù´Â Â÷ÀÌ°¡ ÀÖ´Ù.
---    ³»ºÎÀûÀ¸·Î PRIMARY KEY ¿Í ¸¶Âù°¡Áö·Î UNIQUE INDEX °¡ ÀÚµ¿ »ý¼ºµÈ´Ù.
---    ÇÏ³ªÀÇ Å×ÀÌºí ³»¿¡¼­ UNIQUE Á¦¾àÁ¶°ÇÀº ¿©·¯ ¹ø ¼³Á¤ÇÏ´Â °ÍÀÌ °¡´ÉÇÏ´Ù.
---    Áï, ÇÏ³ªÀÇ Å×ÀÌºí¿¡ UNIQUE Á¦¾àÁ¶°ÇÀ» ¿©·¯ °³ ¸¸µå´Â °ÍÀÌ
---    °¡´ÉÇÏ´Ù´Â °ÍÀÌ´Ù.
+-- 1. í…Œì´ë¸”ì—ì„œ ì§€ì •í•œ ì»¬ëŸ¼ì˜ ë°ì´í„°ê°€ ì¤‘ë³µë˜ì§€ ì•Šê³ 
+--    í…Œì´ë¸” ë‚´ì—ì„œ ìœ ì¼í•  ìˆ˜ ìžˆë„ë¡ ì„¤ì •í•˜ëŠ” ì œì•½ì¡°ê±´.
+--    PRIMARY KEY ì™€ ìœ ì‚¬í•œ ì œì•½ì¡°ê±´ ì´ì§€ë§Œ, NULL ì„ í—ˆìš©í•œë‹¤ëŠ” ì°¨ì´ê°€ ìžˆë‹¤.
+--    ë‚´ë¶€ì ìœ¼ë¡œ PRIMARY KEY ì™€ ë§ˆì°¬ê°€ì§€ë¡œ UNIQUE INDEX ê°€ ìžë™ ìƒì„±ëœë‹¤.
+--    í•˜ë‚˜ì˜ í…Œì´ë¸” ë‚´ì—ì„œ UNIQUE ì œì•½ì¡°ê±´ì€ ì—¬ëŸ¬ ë²ˆ ì„¤ì •í•˜ëŠ” ê²ƒì´ ê°€ëŠ¥í•˜ë‹¤.
+--    ì¦‰, í•˜ë‚˜ì˜ í…Œì´ë¸”ì— UNIQUE ì œì•½ì¡°ê±´ì„ ì—¬ëŸ¬ ê°œ ë§Œë“œëŠ” ê²ƒì´
+--    ê°€ëŠ¥í•˜ë‹¤ëŠ” ê²ƒì´ë‹¤.
 
--- 2. Çü½Ä ¹× ±¸Á¶
--- ¨ç ÄÃ·³ ·¹º§ÀÇ Çü½Ä
--- ÄÃ·³¸í µ¥ÀÌÅÍ Å¸ÀÔ [CONSTRAINT CONSTRAINT¸í] UNIQUE
+-- 2. í˜•ì‹ ë° êµ¬ì¡°
+-- â‘  ì»¬ëŸ¼ ë ˆë²¨ì˜ í˜•ì‹
+-- ì»¬ëŸ¼ëª… ë°ì´í„° íƒ€ìž… [CONSTRAINT CONSTRAINTëª…] UNIQUE
 
--- ¨è Å×ÀÌºí ·¹º§ÀÇ Çü½Ä
--- ÄÃ·³¸í µ¥ÀÌÅÍ Å¸ÀÔ
---, ÄÃ·³¸í µ¥ÀÌÅÍ Å¸ÀÔ
---, CONSTRAINT CONSTRAINT¸í UNIQUE(ÄÃ·³¸í, ...)
+-- â‘¡ í…Œì´ë¸” ë ˆë²¨ì˜ í˜•ì‹
+-- ì»¬ëŸ¼ëª… ë°ì´í„° íƒ€ìž…
+--, ì»¬ëŸ¼ëª… ë°ì´í„° íƒ€ìž…
+--, CONSTRAINT CONSTRAINTëª… UNIQUE(ì»¬ëŸ¼ëª…, ...)
 
 
---¡Û UK ÁöÁ¤ ½Ç½À(¨ç ÄÃ·³ ·¹º§ÀÇ Çü½Ä)
--- Å×ÀÌºí »ý¼º
+--â—‹ UK ì§€ì • ì‹¤ìŠµ(â‘  ì»¬ëŸ¼ ë ˆë²¨ì˜ í˜•ì‹)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST5
 ( COL1  NUMBER(5)       PRIMARY KEY
 , COL2  VARCHAR(30)     UNIQUE
 );
---==>> Table TBL_TEST5ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST5ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
--- Á¦¾à Á¶°Ç Á¶È¸
+-- ì œì•½ ì¡°ê±´ ì¡°íšŒ
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST5';
@@ -392,25 +392,25 @@ HR	SYS_C007061	TBL_TEST5	P	COL1
 HR	SYS_C007062	TBL_TEST5	U	COL2		
 */
 
--- µ¥ÀÌÅÍ ÀÔ·Â
+-- ë°ì´í„° ìž…ë ¥
 INSERT INTO TBL_TEST5(COL1,COL2) VALUES(1,'TSET');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 INSERT INTO TBL_TEST5(COL1,COL2) VALUES(2,'ABCD');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST5(COL1,COL2) VALUES(3,NULL);        -- CHECK~!! NULL Çã¿ë!
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST5(COL1) VALUES(4);                  -- NULL À» °íÀ¯ÇÑ °ªÀ¸·Î °®Áö ¾Ê´Â´Ù!
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST5(COL1,COL2) VALUES(2,'ABCD');      --> ¿¡·¯ ¹ß»ý (¼ýÀÚ 2¶§¹®¿¡ ¾ÈµÇ´Â °Í!) PK ¶§¹®
-INSERT INTO TBL_TEST5(COL1,COL2) VALUES(2,'KKKK');      --> ¿¡·¯ ¹ß»ý                           PK ¶§¹®
-INSERT INTO TBL_TEST5(COL1,COL2) VALUES(5,'ABCD');  -- CHECK~!!    --> ¿¡·¯ ¹ß»ý --> Á¦¾àÁ¶°Ç ÀÌ¸§ ´Þ¾Æ¾ßÇÏ´Â ÀÌÀ¯!(¾îµð¿¡¼­ ¿À·ù³ª´ÂÁö È®ÀÎÇÏ±â À§ÇØ )
-INSERT INTO TBL_TEST5(COL1,COL2) VALUES(NULL,NULL);     --> ¿¡·¯ ¹ß»ý (NULL ¾ÈµÈ´Ù!)
-INSERT INTO TBL_TEST5(COL1,COL2) VALUES(NULL, 'STUDY');  --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST5(COL2) VALUES('STUDY');             --> ¿¡·¯ ¹ß»ý
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST5(COL1,COL2) VALUES(3,NULL);        -- CHECK~!! NULL í—ˆìš©!
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST5(COL1) VALUES(4);                  -- NULL ì„ ê³ ìœ í•œ ê°’ìœ¼ë¡œ ê°–ì§€ ì•ŠëŠ”ë‹¤!
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST5(COL1,COL2) VALUES(2,'ABCD');      --> ì—ëŸ¬ ë°œìƒ (ìˆ«ìž 2ë•Œë¬¸ì— ì•ˆë˜ëŠ” ê²ƒ!) PK ë•Œë¬¸
+INSERT INTO TBL_TEST5(COL1,COL2) VALUES(2,'KKKK');      --> ì—ëŸ¬ ë°œìƒ                           PK ë•Œë¬¸
+INSERT INTO TBL_TEST5(COL1,COL2) VALUES(5,'ABCD');  -- CHECK~!!    --> ì—ëŸ¬ ë°œìƒ --> ì œì•½ì¡°ê±´ ì´ë¦„ ë‹¬ì•„ì•¼í•˜ëŠ” ì´ìœ !(ì–´ë””ì—ì„œ ì˜¤ë¥˜ë‚˜ëŠ”ì§€ í™•ì¸í•˜ê¸° ìœ„í•´ )
+INSERT INTO TBL_TEST5(COL1,COL2) VALUES(NULL,NULL);     --> ì—ëŸ¬ ë°œìƒ (NULL ì•ˆëœë‹¤!)
+INSERT INTO TBL_TEST5(COL1,COL2) VALUES(NULL, 'STUDY');  --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST5(COL2) VALUES('STUDY');             --> ì—ëŸ¬ ë°œìƒ
 
 
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
 SELECT *
 FROM TBL_TEST5;
@@ -423,18 +423,18 @@ FROM TBL_TEST5;
 */
 
 
---¡Û UK ÁöÁ¤ ½Ç½À(¨è Å×ÀÌºí ·¹º§ÀÇ Çü½Ä)
--- Å×ÀÌºí »ý¼º
+--â—‹ UK ì§€ì • ì‹¤ìŠµ(â‘¡ í…Œì´ë¸” ë ˆë²¨ì˜ í˜•ì‹)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST6
 ( COL1  NUMBER(5)
 , COL2 VARCHAR(30)
 , CONSTRAINT TEST6_COL1_PK PRIMARY KEY(COL1)
 , CONSTRAINT TEST6_COL2_UK UNIQUE(COL2)
 );
---==>> Table TBL_TEST6ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST6ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST6';
@@ -445,29 +445,29 @@ HR	TEST6_COL2_UK	TBL_TEST6	U	COL2
 */
 
 
---¡Û UK ÁöÁ¤ ½Ç½À(¨é Å×ÀÌºí »ý¼º ÀÌÈÄ Á¦¾àÁ¶°Ç Ãß°¡)
--- Å×ÀÌºí »ý¼º
+--â—‹ UK ì§€ì • ì‹¤ìŠµ(â‘¢ í…Œì´ë¸” ìƒì„± ì´í›„ ì œì•½ì¡°ê±´ ì¶”ê°€)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST7
 ( COL1  NUMBER(5)
 , COL2 VARCHAR(30)
 );
---==>> Table TBL_TEST7ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST7ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- Á¦¾àÁ¶°Ç È®ÀÎ(Á¶È¸)
+-- ì œì•½ì¡°ê±´ í™•ì¸(ì¡°íšŒ)
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST7';
---==>> Á¶È¸ °á°ú ¾øÀ½ ¡æ Á¦¾àÁ¶°ÇÀ» ¼³Á¤ÇÏÁö ¾Ê¾ÒÀ½
+--==>> ì¡°íšŒ ê²°ê³¼ ì—†ìŒ â†’ ì œì•½ì¡°ê±´ì„ ì„¤ì •í•˜ì§€ ì•Šì•˜ìŒ
 
 
--- Á¦¾à Á¶°Ç Ãß°¡
+-- ì œì•½ ì¡°ê±´ ì¶”ê°€
 ALTER TABLE TBL_TEST7
 ADD ( CONSTRAINT TEST7_COL1_PK PRIMARY KEY(COL1)
     , CONSTRAINT TEST7_COL2_UK UNIQUE(COL2));
---==>> Table TBL_TEST7ÀÌ(°¡) º¯°æµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST7ì´(ê°€) ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
--- Á¦¾àÁ¶°Ç È®ÀÎ(Á¶È¸)
+-- ì œì•½ì¡°ê±´ í™•ì¸(ì¡°íšŒ)
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST7';
@@ -479,30 +479,30 @@ HR	TEST7_COL2_UK	TBL_TEST7	U	COL2
 
 --------------------------------------------------------------------------------
 
---¡á¡á¡á CHECK(CK:C) ¡á¡á¡á--
+--â– â– â–  CHECK(CK:C) â– â– â– --
 
--- 1. ÄÃ·³¿¡¼­ Çã¿ë °¡´ÉÇÑ µ¥ÀÌÅÍÀÇ ¹üÀ§³ª Á¶°ÇÀ» ÁöÁ¤ÇÏ±â À§ÇÑ Á¦¾àÁ¶°Ç
---    ÄÃ·³¿¡ ÀÔ·ÂµÇ´Â µ¥ÀÌÅÍ¸¦ °Ë»çÇÏ¿© Á¶°Ç¿¡ ¸Â´Â µ¥ÀÌÅÍ¸¸ ÀÔ·ÂµÉ ¼ö ÀÖµµ·Ï Ã³¸®ÇÏ¸ç,
---    ¼öÁ¤µÇ´Â µ¥ÀÌÅÍ ¶ÇÇÑ °Ë»çÇÏ¿© Á¶°Ç¿¡ ¸Â´Â µ¥ÀÌÅÍ·Î ¼öÁ¤µÇ´Â °Í¸¸ Çã¿ëÇÏ´Â
---    ±â´ÉÀ» ¼öÇàÇÏ°Ô µÈ´Ù.
+-- 1. ì»¬ëŸ¼ì—ì„œ í—ˆìš© ê°€ëŠ¥í•œ ë°ì´í„°ì˜ ë²”ìœ„ë‚˜ ì¡°ê±´ì„ ì§€ì •í•˜ê¸° ìœ„í•œ ì œì•½ì¡°ê±´
+--    ì»¬ëŸ¼ì— ìž…ë ¥ë˜ëŠ” ë°ì´í„°ë¥¼ ê²€ì‚¬í•˜ì—¬ ì¡°ê±´ì— ë§žëŠ” ë°ì´í„°ë§Œ ìž…ë ¥ë  ìˆ˜ ìžˆë„ë¡ ì²˜ë¦¬í•˜ë©°,
+--    ìˆ˜ì •ë˜ëŠ” ë°ì´í„° ë˜í•œ ê²€ì‚¬í•˜ì—¬ ì¡°ê±´ì— ë§žëŠ” ë°ì´í„°ë¡œ ìˆ˜ì •ë˜ëŠ” ê²ƒë§Œ í—ˆìš©í•˜ëŠ”
+--    ê¸°ëŠ¥ì„ ìˆ˜í–‰í•˜ê²Œ ëœë‹¤.
 
---2. Çü½Ä ¹× ±¸Á¶
--- ¨ç ÄÃ·³ ·¹º§ÀÇ Çü½Ä
--- ÄÃ·³¸í µ¥ÀÌÅÍ Å¸ÀÔ [CONSTRAINT CONSTRAINT¸í] CHEKC (ÄÃ·³ Á¶°Ç)
+--2. í˜•ì‹ ë° êµ¬ì¡°
+-- â‘  ì»¬ëŸ¼ ë ˆë²¨ì˜ í˜•ì‹
+-- ì»¬ëŸ¼ëª… ë°ì´í„° íƒ€ìž… [CONSTRAINT CONSTRAINTëª…] CHEKC (ì»¬ëŸ¼ ì¡°ê±´)
 
--- ¨è Å×ÀÌºí ·¹º§ÀÇ Çü½Ä
--- ÄÃ·³¸í µ¥ÀÌÅÍÅ¸ÀÔ
---, ÄÃ·³¸í µ¥ÀÌÅÍ Å¸ÀÔ
---, CONSTRAINT CONSRAINT¸í CHECK(ÄÃ·³ Á¶°Ç)
+-- â‘¡ í…Œì´ë¸” ë ˆë²¨ì˜ í˜•ì‹
+-- ì»¬ëŸ¼ëª… ë°ì´í„°íƒ€ìž…
+--, ì»¬ëŸ¼ëª… ë°ì´í„° íƒ€ìž…
+--, CONSTRAINT CONSRAINTëª… CHECK(ì»¬ëŸ¼ ì¡°ê±´)
 
 --  -99999999999999999999999999999999999999 ~ 99999999999999999999999999999999999999
 
---¡Ø NUMBER(38)        ±îÁö...
---   CHAR(2000)        ±îÁö...
---   VARCHAR2(4000)    ±îÁö...
---   NCHAR(1000)       ±îÁö...
---   NVARCHAR2(2000)   ±îÁö...
--- ¿Ü¿ï ÇÊ¿ä´Â ¾ø°í!1 ±×¶§±×¶§ ±æÀÌ ±æ°ÔÇØ¼­ Âï¾îº¸¸é ¾Ë¼ö ÀÖÀ½!!
+--â€» NUMBER(38)        ê¹Œì§€...
+--   CHAR(2000)        ê¹Œì§€...
+--   VARCHAR2(4000)    ê¹Œì§€...
+--   NCHAR(1000)       ê¹Œì§€...
+--   NVARCHAR2(2000)   ê¹Œì§€...
+-- ì™¸ìš¸ í•„ìš”ëŠ” ì—†ê³ !1 ê·¸ë•Œê·¸ë•Œ ê¸¸ì´ ê¸¸ê²Œí•´ì„œ ì°ì–´ë³´ë©´ ì•Œìˆ˜ ìžˆìŒ!!
 /*
 CREATE TABLE OHOH
 ( COL1  NUMBER(999999999999999999999999999999999999999999999999999999999999999999999999999)
@@ -513,35 +513,35 @@ ORA-01727: numeric precision specifier is out of range (1 to 38)
 */
 
 
---¡Û CK ÁöÁ¤ ½Ç½À(¨ç ÄÃ·³ ·¹º§ÀÇ Çü½Ä)
--- Å×ÀÌºí »ý¼º
+--â—‹ CK ì§€ì • ì‹¤ìŠµ(â‘  ì»¬ëŸ¼ ë ˆë²¨ì˜ í˜•ì‹)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST8
 ( COL1  NUMBER(5)   PRIMARY KEY
 , COL2  VARCHAR2(30)
-, COL3  NUMBER(3)   CHECK(COL3 BETWEEN 0 AND 100)       -- ¡æ -999 ~ 999 
+, COL3  NUMBER(3)   CHECK(COL3 BETWEEN 0 AND 100)       -- â†’ -999 ~ 999 
 );
----==>> Table TBL_TEST8ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+---==>> Table TBL_TEST8ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- µ¥ÀÌÅÍ ÀÔ·Â
-INSERT INTO TBL_TEST8(COL1, COL2, COL3) VALUES(1, '½Â±Õ', 100);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST8(COL1, COL2, COL3) VALUES(2, '¹ü¼®', 101);   --> ¿¡·¯¹ß»ý   
-INSERT INTO TBL_TEST8(COL1, COL2, COL3) VALUES(3, 'ÁøÈñ', -1);    --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST8(COL1, COL2, COL3) VALUES(4, 'ÁöÀ±', 80);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+-- ë°ì´í„° ìž…ë ¥
+INSERT INTO TBL_TEST8(COL1, COL2, COL3) VALUES(1, 'ìŠ¹ê· ', 100);
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST8(COL1, COL2, COL3) VALUES(2, 'ë²”ì„', 101);   --> ì—ëŸ¬ë°œìƒ   
+INSERT INTO TBL_TEST8(COL1, COL2, COL3) VALUES(3, 'ì§„í¬', -1);    --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST8(COL1, COL2, COL3) VALUES(4, 'ì§€ìœ¤', 80);
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
 SELECT *
 FROM TBL_TEST8;
 --==>>
 /*
-1	½Â±Õ	100
-4	ÁöÀ±	80
+1	ìŠ¹ê· 	100
+4	ì§€ìœ¤	80
 */
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME='TBL_TEST8';
@@ -552,8 +552,8 @@ HR	SYS_C007068	TBL_TEST8	P	COL1
 */
 
 
---¡Û CK ÁöÁ¤ ½Ç½À(¨è Å×ÀÌºí ·¹º§ÀÇ Çü½Ä)
--- Å×ÀÌºí »ý¼º
+--â—‹ CK ì§€ì • ì‹¤ìŠµ(â‘¡ í…Œì´ë¸” ë ˆë²¨ì˜ í˜•ì‹)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST9
 ( COL1  NUMBER(5)
 , COL2  VARCHAR(30)
@@ -561,30 +561,30 @@ CREATE TABLE TBL_TEST9
 , CONSTRAINT TEST9_COL1_PK PRIMARY KEY(COL1)
 , CONSTRAINT TEST9_COL3_CK CHECK(COL3 BETWEEN 0 AND 100)
 );
---==>> Table TBL_TEST9ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST9ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
--- µ¥ÀÌÅÍ ÀÔ·Â
-INSERT INTO TBL_TEST9(COL1, COL2, COL3) VALUES(1, '½Â±Õ', 100);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_TEST9(COL1, COL2, COL3) VALUES(2, '¹ü¼®', 101);   --> ¿¡·¯¹ß»ý   
-INSERT INTO TBL_TEST9(COL1, COL2, COL3) VALUES(3, 'ÁøÈñ', -1);    --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST9(COL1, COL2, COL3) VALUES(4, 'ÁöÀ±', 80);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+-- ë°ì´í„° ìž…ë ¥
+INSERT INTO TBL_TEST9(COL1, COL2, COL3) VALUES(1, 'ìŠ¹ê· ', 100);
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_TEST9(COL1, COL2, COL3) VALUES(2, 'ë²”ì„', 101);   --> ì—ëŸ¬ë°œìƒ   
+INSERT INTO TBL_TEST9(COL1, COL2, COL3) VALUES(3, 'ì§„í¬', -1);    --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST9(COL1, COL2, COL3) VALUES(4, 'ì§€ìœ¤', 80);
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
 
 SELECT *
 FROM TBL_TEST9;
 --==>>
 /*
-1	½Â±Õ	100
-4	ÁöÀ±	80
+1	ìŠ¹ê· 	100
+4	ì§€ìœ¤	80
 */
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST9';
@@ -593,32 +593,32 @@ WHERE TABLE_NAME = 'TBL_TEST9';
 HR	TEST9_COL3_CK	TBL_TEST9	C	COL3	COL3 BETWEEN 0 AND 100	
 HR	TEST9_COL1_PK	TBL_TEST9	P	COL1		
 */
--- À§¿¡¿Í ´Ù¸¥Á¡Àº Á¦¾àÁ¶°ÇÀÇ ÀÌ¸§À» ÁöÁ¤ÇØÁÜ!!
+-- ìœ„ì—ì™€ ë‹¤ë¥¸ì ì€ ì œì•½ì¡°ê±´ì˜ ì´ë¦„ì„ ì§€ì •í•´ì¤Œ!!
 
 
 
---¡Û CK ÁöÁ¤ ½Ç½À(¨é Å×ÀÌºí »ý¼º ÀÌÈÄ Á¦¾àÁ¶°Ç Ãß°¡)
--- Å×ÀÌºí »ý¼º
+--â—‹ CK ì§€ì • ì‹¤ìŠµ(â‘¢ í…Œì´ë¸” ìƒì„± ì´í›„ ì œì•½ì¡°ê±´ ì¶”ê°€)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST10
 ( COL1  NUMBER(5)
 , COL2  VARCHAR(30)
 , COL3  NUMBER(3)
 );
---==>> Table TBL_TEST10ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST10ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST10';
---==>> Á¶È¸°á°ú ¾øÀ½ ¡æ ÁöÁ¤µÈ Á¦¾àÁ¶°Ç ¾øÀ½
+--==>> ì¡°íšŒê²°ê³¼ ì—†ìŒ â†’ ì§€ì •ëœ ì œì•½ì¡°ê±´ ì—†ìŒ
 
---Á¦¾àÁ¶°Ç Ãß°¡
+--ì œì•½ì¡°ê±´ ì¶”ê°€
 ALTER TABLE TBL_TEST10
 ADD ( CONSTRAINT TEST10_COL1_PK PRIMARY KEY(COL1)
     , CONSTRAINT TEST10_COL3_CK CHECK(COL3 BETWEEN 0 AND 100) );
---==>> Table TBL_TEST10ÀÌ(°¡) º¯°æµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST10ì´(ê°€) ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST10';
@@ -629,37 +629,37 @@ HR	TEST10_COL3_CK	TBL_TEST10	C	COL3	COL3 BETWEEN 0 AND 100
 */
 
 
---¡Û ½Ç½À ¹®Á¦
--- ´ÙÀ½°ú °°ÀÌ TBL_TESTMEMBER Å×ÀÌºíÀ» »ý¼ºÇÏ¿©
--- SSNÄÃ·³(ÁÖ¹Î¹øÈ£ ÄÃ·³)¿¡¼­
--- µ¥ÀÌÅÍ ÀÔ·Â ½Ã ¼ºº°ÀÌ À¯È¿ÇÑ µ¥ÀÌÅÍ¸¸ ÀÔ·ÂµÉ ¼ö ÀÖµµ·Ï
--- Ã¼Å© Á¦¾àÁ¶°ÇÀ» Ãß°¡ÇÒ ¼ö ÀÖµµ·Ï ÇÑ´Ù.
--- ¡æ ÁÖ¹Î¹øÈ£ Æ¯Á¤ ÀÚ¸®¿¡ ÀÔ·Â °¡´ÉÇÑ µ¥ÀÌÅÍ·Î 1,2,3,4 ¸¦ Àû¿ë
--- ¶ÇÇÑ, SID ÄÃ·³¿¡´Â PRIMARY KEY Á¦¾àÁ¶°ÇÀ» ¼³Á¤ÇÒ ¼ö ÀÖµµ·Ï ÇÑ´Ù.
+--â—‹ ì‹¤ìŠµ ë¬¸ì œ
+-- ë‹¤ìŒê³¼ ê°™ì´ TBL_TESTMEMBER í…Œì´ë¸”ì„ ìƒì„±í•˜ì—¬
+-- SSNì»¬ëŸ¼(ì£¼ë¯¼ë²ˆí˜¸ ì»¬ëŸ¼)ì—ì„œ
+-- ë°ì´í„° ìž…ë ¥ ì‹œ ì„±ë³„ì´ ìœ íš¨í•œ ë°ì´í„°ë§Œ ìž…ë ¥ë  ìˆ˜ ìžˆë„ë¡
+-- ì²´í¬ ì œì•½ì¡°ê±´ì„ ì¶”ê°€í•  ìˆ˜ ìžˆë„ë¡ í•œë‹¤.
+-- â†’ ì£¼ë¯¼ë²ˆí˜¸ íŠ¹ì • ìžë¦¬ì— ìž…ë ¥ ê°€ëŠ¥í•œ ë°ì´í„°ë¡œ 1,2,3,4 ë¥¼ ì ìš©
+-- ë˜í•œ, SID ì»¬ëŸ¼ì—ëŠ” PRIMARY KEY ì œì•½ì¡°ê±´ì„ ì„¤ì •í•  ìˆ˜ ìžˆë„ë¡ í•œë‹¤.
 
--- Å×ÀÌºí »ý¼º
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TESTMEMBER
 ( SID   NUMBER
 , NAME  VARCHAR(30)         --                      |
-, SSN   CHAR(14)            -- ÀÔ·Â ÇüÅÂ ¡æ 'YYMMDD-NNNNNNN'
+, SSN   CHAR(14)            -- ìž…ë ¥ í˜•íƒœ â†’ 'YYMMDD-NNNNNNN'
 , TEL   VARCHAR2(40)
 );
---==>> Table TBL_TESTMEMBERÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TESTMEMBERì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 ALTER TABLE TBL_TESTMEMBER
 ADD( CONSTRAINT TESTMEMBER_SID_PK PRIMARY KEY(SID)
    , CONSTRAINT TESTMEMBER_SSN_CK CHECK(SUBSTR(SSN,8,1) IN('1','2','3','4')) );      -- OR / IN / =ANY 
---==>> Table TBL_TESTMEMBERÀÌ(°¡) º¯°æµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TESTMEMBERì´(ê°€) ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.
 
-INSERT INTO TBL_TESTMEMBER(SID,NAME,SSN,TEL) VALUES(1,'Á¤È¿Áø', 451205-7856985,01045457878);
---==>> ¿¡·¯ ¹ß»ý
+INSERT INTO TBL_TESTMEMBER(SID,NAME,SSN,TEL) VALUES(1,'ì •íš¨ì§„', 451205-7856985,01045457878);
+--==>> ì—ëŸ¬ ë°œìƒ
 /*
-INSERT INTO TBL_TESTMEMBER(SID,NAME,SSN,TEL) VALUES(1,'Á¤È¿Áø', 451205-7856985,01045457878)
-¿À·ù º¸°í -
+INSERT INTO TBL_TESTMEMBER(SID,NAME,SSN,TEL) VALUES(1,'ì •íš¨ì§„', 451205-7856985,01045457878)
+ì˜¤ë¥˜ ë³´ê³  -
 ORA-02290: check constraint (HR.TESTMEMBER_SSN_CK) violated
 */
 
--- Á¦¾àÁ¶°Ç Á¶È¸
+-- ì œì•½ì¡°ê±´ ì¡°íšŒ
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TESTMEMBER';
@@ -669,19 +669,19 @@ HR	TESTMEMBER_SID_PK	TBL_TESTMEMBER	P	SID
 HR	TESTMEMBER_SSN_CK	TBL_TESTMEMBER	C	SSN	SUBSTR(SSN,8,1) IN(1,2,3,4)	
 */
 
--- !!!!!!!!!!!!!!!!!!! ´ÙÇÏ°í º¸´Ï±î ¼ýÀÚ¿¡ ' ' ¸¦ ¾ÈÇÔ!!!!!!!!!!!!!!!!!
--- ¡ÚÁ¦¾àÁ¶°ÇÀº ¼öÁ¤À» ¸øÇÔ!!¡Ú Á¦°ÅÇÏ°í ´Ù½Ã ¸¸µé¾î¾ßÇÔ DROP!
+-- !!!!!!!!!!!!!!!!!!! ë‹¤í•˜ê³  ë³´ë‹ˆê¹Œ ìˆ«ìžì— ' ' ë¥¼ ì•ˆí•¨!!!!!!!!!!!!!!!!!
+-- â˜…ì œì•½ì¡°ê±´ì€ ìˆ˜ì •ì„ ëª»í•¨!!â˜… ì œê±°í•˜ê³  ë‹¤ì‹œ ë§Œë“¤ì–´ì•¼í•¨ DROP!
 
--- ALTER TABLE Å×ÀÌºí¸í DROP CONSTRAINT Á¦¾àÁ¶°Ç¸í;
+-- ALTER TABLE í…Œì´ë¸”ëª… DROP CONSTRAINT ì œì•½ì¡°ê±´ëª…;
 ALTER TABLE TBL_TESTMEMBER DROP CONSTRAINT TESTMEMBER_SSN_CK;
---==>> Table TBL_TESTMEMBERÀÌ(°¡) º¯°æµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TESTMEMBERì´(ê°€) ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- ´Ù½Ã CHECK Á¦¾àÁ¶°Ç ÀÔ·Â!
+-- ë‹¤ì‹œ CHECK ì œì•½ì¡°ê±´ ìž…ë ¥!
 ALTER TABLE TBL_TESTMEMBER
 ADD(CONSTRAINT TESTMEMBER_SSN_CK CHECK(SUBSTR(SSN,8,1) IN('1','2','3','4')) );
---==>> Table TBL_TESTMEMBERÀÌ(°¡) º¯°æµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TESTMEMBERì´(ê°€) ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- Á¦¾àÁ¶°Ç Á¶È¸
+-- ì œì•½ì¡°ê±´ ì¡°íšŒ
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TESTMEMBER';
@@ -691,187 +691,187 @@ HR	TESTMEMBER_SID_PK	TBL_TESTMEMBER	P	SID
 HR	TESTMEMBER_SSN_CK	TBL_TESTMEMBER	C	SSN	SUBSTR(SSN,8,1) IN('1','2','3','4')	
 */
 
--- ÀÔ·Â Å×½ºÆ®
+-- ìž…ë ¥ í…ŒìŠ¤íŠ¸
 INSERT INTO TBL_TESTMEMBER(SID,NAME,SSN,TEL) 
-VALUES(1,'¹ÚÈ¿ºó', '980611-2234567','010-1111-1111');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+VALUES(1,'ë°•íš¨ë¹ˆ', '980611-2234567','010-1111-1111');
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 INSERT INTO TBL_TESTMEMBER(SID,NAME,SSN,TEL) 
-VALUES(2,'¼Õ´ÙÁ¤', '940603-2234567','010-2222-2222');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+VALUES(2,'ì†ë‹¤ì •', '940603-2234567','010-2222-2222');
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 SELECT *
 FROM TBL_TESTMEMBER;
 
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
 
 INSERT INTO TBL_TESTMEMBER(SID, NAME, SSN, TEL)
-VALUES(3,'ÀÌÂùÈ£', '941108-1234567', '010-3333-3333');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+VALUES(3,'ì´ì°¬í˜¸', '941108-1234567', '010-3333-3333');
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 INSERT INTO TBL_TESTMEMBER(SID, NAME, SSN, TEL)
-VALUES(4,'¼Õ¹ü¼®', '960816-5234567', '010-4444-4444');
---==>> ¿¡·¯ ¹ß»ý
+VALUES(4,'ì†ë²”ì„', '960816-5234567', '010-4444-4444');
+--==>> ì—ëŸ¬ ë°œìƒ
 /*
 NSERT INTO TBL_TESTMEMBER(SID, NAME, SSN, TEL)
-VALUES(4,'¼Õ¹ü¼®', '960816-5234567', '010-4444-4444')
-¿À·ù º¸°í -
+VALUES(4,'ì†ë²”ì„', '960816-5234567', '010-4444-4444')
+ì˜¤ë¥˜ ë³´ê³  -
 ORA-02290: check constraint (HR.TESTMEMBER_SSN_CK) violated
 */
 
 INSERT INTO TBL_TESTMEMBER(SID, NAME, SSN, TEL)
-VALUES(5,'ÀÌ´Ù¿µ', '951027-9234567', '010-5555-5555');
+VALUES(5,'ì´ë‹¤ì˜', '951027-9234567', '010-5555-5555');
 --==>>
 /*
-¸í·ÉÀÇ 724 Çà¿¡¼­ ½ÃÀÛÇÏ´Â Áß ¿À·ù ¹ß»ý -
+ëª…ë ¹ì˜ 724 í–‰ì—ì„œ ì‹œìž‘í•˜ëŠ” ì¤‘ ì˜¤ë¥˜ ë°œìƒ -
 INSERT INTO TBL_TESTMEMBER(SID, NAME, SSN, TEL)
-VALUES(5,'ÀÌ´Ù¿µ', '951027-9234567', '010-5555-5555')
-¿À·ù º¸°í -
+VALUES(5,'ì´ë‹¤ì˜', '951027-9234567', '010-5555-5555')
+ì˜¤ë¥˜ ë³´ê³  -
 ORA-02290: check constraint (HR.TESTMEMBER_SSN_CK) violated
 */
 
---3,4 µµ Å×½ºÆ® ÇØº¸±â!!
+--3,4 ë„ í…ŒìŠ¤íŠ¸ í•´ë³´ê¸°!!
 
 --
 SELECT *
 FROM TBL_TESTMEMBER;
 --==>>
 /*
-1	¹ÚÈ¿ºó	980611-2234567	010-1111-1111
-2	¼Õ´ÙÁ¤	940603-2234567	010-2222-2222
-3	ÀÌÂùÈ£	941108-1234567	010-3333-3333
+1	ë°•íš¨ë¹ˆ	980611-2234567	010-1111-1111
+2	ì†ë‹¤ì •	940603-2234567	010-2222-2222
+3	ì´ì°¬í˜¸	941108-1234567	010-3333-3333
 */
 
 --------------------------------------------------------------------------------
---?? 1Á¤±ÔÈ­ ÇÏ°í ³ª¼­ Å×ÀÌºí ÂÉ°³Áö¸é¼­ ½Äº°ÀÚ¸¦ °°°Ô ÇØ¾ßÇØ¼­ PRIMARYÅ°¸¦ ¼³Á¤ÇØ¾ßÇÔ!! ¾Ë¾Æ¼­ »ý±â´Â °Í ¾Æ´Ô!!
+--?? 1ì •ê·œí™” í•˜ê³  ë‚˜ì„œ í…Œì´ë¸” ìª¼ê°œì§€ë©´ì„œ ì‹ë³„ìžë¥¼ ê°™ê²Œ í•´ì•¼í•´ì„œ PRIMARYí‚¤ë¥¼ ì„¤ì •í•´ì•¼í•¨!! ì•Œì•„ì„œ ìƒê¸°ëŠ” ê²ƒ ì•„ë‹˜!!
 
 
--- ¡á¡á¡á FOREIGN KEY(FK:F:R) ¡á¡á¡á--
--- ´Ù¸¥ Á¦¾àÁ¶°Ç°ú Çü½ÄÀÌ Á¶±Ý ´Ù¸§!!
+-- â– â– â–  FOREIGN KEY(FK:F:R) â– â– â– --
+-- ë‹¤ë¥¸ ì œì•½ì¡°ê±´ê³¼ í˜•ì‹ì´ ì¡°ê¸ˆ ë‹¤ë¦„!!
 
--- 1. ÂüÁ¶ Å° ¶Ç´Â ¿Ü·¡ Å°(FK)´Â
---    µÎ Å×ÀÌºíÀÇ µ¥ÀÌÅÍ °£ ¿¬°áÀ» ¼³Á¤ÇÏ°í
---    °­Á¦ Àû¿ë½ÃÅ°´Âµ¥ »ç¿ëµÇ´Â ¿­ÀÌ´Ù.
---    ÇÑ Å×ÀÌºíÀÇ ±âº» Å° °ªÀÌ ÀÖ´Â ¿­À»
---    ´Ù¸¥ Å×ÀÌºí¿¡ Ãß°¡ÇÏ¸é Å×ÀÌºí °£ ¿¬°áÀ» ¼³Á¤ÇÒ ¼ö ÀÖ´Ù.
---    ÀÌ ¶§, µÎ ¹øÂ° Å×ÀÌºí¿¡ Ãß°¡µÇ´Â ¿­ÀÌ ¿Ü·¡Å°°¡ µÈ´Ù.
+-- 1. ì°¸ì¡° í‚¤ ë˜ëŠ” ì™¸ëž˜ í‚¤(FK)ëŠ”
+--    ë‘ í…Œì´ë¸”ì˜ ë°ì´í„° ê°„ ì—°ê²°ì„ ì„¤ì •í•˜ê³ 
+--    ê°•ì œ ì ìš©ì‹œí‚¤ëŠ”ë° ì‚¬ìš©ë˜ëŠ” ì—´ì´ë‹¤.
+--    í•œ í…Œì´ë¸”ì˜ ê¸°ë³¸ í‚¤ ê°’ì´ ìžˆëŠ” ì—´ì„
+--    ë‹¤ë¥¸ í…Œì´ë¸”ì— ì¶”ê°€í•˜ë©´ í…Œì´ë¸” ê°„ ì—°ê²°ì„ ì„¤ì •í•  ìˆ˜ ìžˆë‹¤.
+--    ì´ ë•Œ, ë‘ ë²ˆì§¸ í…Œì´ë¸”ì— ì¶”ê°€ë˜ëŠ” ì—´ì´ ì™¸ëž˜í‚¤ê°€ ëœë‹¤.
 
--- 2. ºÎ¸ð Å×ÀÌºí(ÂüÁ¶¹Þ´Â ÄÃ·³ÀÌ Æ÷ÇÔµÈ Å×ÀÌºí)ÀÌ ¸ÕÀú »ý¼ºµÈ ÈÄ
---    ÀÚ½Ä Å×ÀÌºí(ÂüÁ¶ÇÏ´Â ÄÃ·³ÀÌ Æ÷ÇÔµÈ Å×ÀÌºí)ÀÌ »ý¼ºµÇ¾î¾ß ÇÑ´Ù.
---    ÀÌ ¶§, ÀÚ½Ä Å×ÀÌºí¿¡ FOREIGN KEY Á¦¾àÁ¶°ÇÀÌ ¼³Á¤µÈ´Ù.
+-- 2. ë¶€ëª¨ í…Œì´ë¸”(ì°¸ì¡°ë°›ëŠ” ì»¬ëŸ¼ì´ í¬í•¨ëœ í…Œì´ë¸”)ì´ ë¨¼ì € ìƒì„±ëœ í›„
+--    ìžì‹ í…Œì´ë¸”(ì°¸ì¡°í•˜ëŠ” ì»¬ëŸ¼ì´ í¬í•¨ëœ í…Œì´ë¸”)ì´ ìƒì„±ë˜ì–´ì•¼ í•œë‹¤.
+--    ì´ ë•Œ, ìžì‹ í…Œì´ë¸”ì— FOREIGN KEY ì œì•½ì¡°ê±´ì´ ì„¤ì •ëœë‹¤.
 
--- 3. Çü½Ä ¹× ±¸Á¶
--- ¨ç ÄÃ·³ ·¹º§ÀÇ Çü½Ä
---   ÄÃ·³ ¸í Å×ÀÌÅÍ Å¸ÀÔ [CONSTRAINT CONSTRAINT¸í]
---                       REFERENCES ÂüÁ¶Å×ÀÌºí¸í(ÂüÁ¶ÄÃ·³¸í)
+-- 3. í˜•ì‹ ë° êµ¬ì¡°
+-- â‘  ì»¬ëŸ¼ ë ˆë²¨ì˜ í˜•ì‹
+--   ì»¬ëŸ¼ ëª… í…Œì´í„° íƒ€ìž… [CONSTRAINT CONSTRAINTëª…]
+--                       REFERENCES ì°¸ì¡°í…Œì´ë¸”ëª…(ì°¸ì¡°ì»¬ëŸ¼ëª…)
 --                       [ON DELETE CASCADE | ON DELETE SET NULL]
 
--- ¨è Å×ÀÌºí ·¹º§ÀÇ Çü½Ä
---  ÄÃ·³¸í µ¥ÀÌÅÍ Å¸ÀÔ
--- , ÄÃ·³¸í µ¥ÀÌÅÍ Å¸ÀÔ
--- , CONSTRAINT CONSTRAINT¸í FOREIGN KEY(ÄÃ·³¸í)
---              REFERENCES ÂüÁ¶Å×ÀÌºí¸í(ÂüÁ¶ÄÃ·³¸í)
+-- â‘¡ í…Œì´ë¸” ë ˆë²¨ì˜ í˜•ì‹
+--  ì»¬ëŸ¼ëª… ë°ì´í„° íƒ€ìž…
+-- , ì»¬ëŸ¼ëª… ë°ì´í„° íƒ€ìž…
+-- , CONSTRAINT CONSTRAINTëª… FOREIGN KEY(ì»¬ëŸ¼ëª…)
+--              REFERENCES ì°¸ì¡°í…Œì´ë¸”ëª…(ì°¸ì¡°ì»¬ëŸ¼ëª…)
 --              [ON DELETE CASCADE | ON DELETE SET NULL]    
 
 
 
---¡Ø FOREIGN KEY Á¦¾àÁ¶°ÇÀ» ¼³Á¤ÇÏ´Â ½Ç½ÀÀ» ÁøÇàÇÏ±â À§ÇØ¼­´Â
---   µ¶¸³ÀûÀÎ ÇÏ³ªÀÇ Å×ÀÌºíÀ» »ý¼ºÇÏ¿© Ã³¸®ÇÏ´Â °ÍÀÌ ¾Æ´Ï¶ó
---   ºÎ¸ð Å×ÀÌºí »ý¼º ÀÛ¾÷À» ¸ÕÀú ¼öÇàÇØ¾ß ÇÑ´Ù.
---   ±×¸®°í ÀÌ ¶§, ºÎ¸ð Å×ÀÌºí¿¡´Â ¹Ýµå½Ã PK ¶Ç´Â UK Á¦¾àÁ¶°ÇÀÌ
---   ¼³Á¤µÈ ÄÃ·³ÀÌ Á¸ÀçÇØ¾ß ÇÑ´Ù.
+--â€» FOREIGN KEY ì œì•½ì¡°ê±´ì„ ì„¤ì •í•˜ëŠ” ì‹¤ìŠµì„ ì§„í–‰í•˜ê¸° ìœ„í•´ì„œëŠ”
+--   ë…ë¦½ì ì¸ í•˜ë‚˜ì˜ í…Œì´ë¸”ì„ ìƒì„±í•˜ì—¬ ì²˜ë¦¬í•˜ëŠ” ê²ƒì´ ì•„ë‹ˆë¼
+--   ë¶€ëª¨ í…Œì´ë¸” ìƒì„± ìž‘ì—…ì„ ë¨¼ì € ìˆ˜í–‰í•´ì•¼ í•œë‹¤.
+--   ê·¸ë¦¬ê³  ì´ ë•Œ, ë¶€ëª¨ í…Œì´ë¸”ì—ëŠ” ë°˜ë“œì‹œ PK ë˜ëŠ” UK ì œì•½ì¡°ê±´ì´
+--   ì„¤ì •ëœ ì»¬ëŸ¼ì´ ì¡´ìž¬í•´ì•¼ í•œë‹¤.
 
 
--- Å×ÀÌºí »ý¼º
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_JOBS
 ( JIKWI_ID      NUMBER(5)
 , JIKWI_NAME    VARCHAR(30)
 , CONSTRAINT JOBS_ID_PK PRIMARY KEY(JIKWI_ID)
 );
---==>> Table TBL_JOBSÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_JOBSì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- ºÎ¸ð Å×ÀÌºí¿¡ µ¥ÀÌÅÍ ÀÔ·Â
-INSERT INTO TBL_JOBS(JIKWI_ID, JIKWI_NAME) VALUES(1,'»ç¿ø');
-INSERT INTO TBL_JOBS(JIKWI_ID, JIKWI_NAME) VALUES(2,'´ë¸®');
-INSERT INTO TBL_JOBS(JIKWI_ID, JIKWI_NAME) VALUES(3,'°úÀå');
-INSERT INTO TBL_JOBS(JIKWI_ID, JIKWI_NAME) VALUES(4,'ºÎÀå');
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù. * 4
+-- ë¶€ëª¨ í…Œì´ë¸”ì— ë°ì´í„° ìž…ë ¥
+INSERT INTO TBL_JOBS(JIKWI_ID, JIKWI_NAME) VALUES(1,'ì‚¬ì›');
+INSERT INTO TBL_JOBS(JIKWI_ID, JIKWI_NAME) VALUES(2,'ëŒ€ë¦¬');
+INSERT INTO TBL_JOBS(JIKWI_ID, JIKWI_NAME) VALUES(3,'ê³¼ìž¥');
+INSERT INTO TBL_JOBS(JIKWI_ID, JIKWI_NAME) VALUES(4,'ë¶€ìž¥');
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤. * 4
 SELECT *
 FROM TBL_JOBS;
 --==>>
 /*
-1	»ç¿ø
-2	´ë¸®
-3	°úÀå
-4	ºÎÀå
+1	ì‚¬ì›
+2	ëŒ€ë¦¬
+3	ê³¼ìž¥
+4	ë¶€ìž¥
 */
 
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
 
---¡Û FK ÁöÁ¤ ½Ç½À(¨ç ÄÃ·³ ·¹º§ÀÇ Çü½Ä)
--- FORIGNÀÌ¶ó´Â ´Ü¾î µîÀåÇÏÁö ¾ÊÀ½!!
--- Å×ÀÌºí »ý¼º
+--â—‹ FK ì§€ì • ì‹¤ìŠµ(â‘  ì»¬ëŸ¼ ë ˆë²¨ì˜ í˜•ì‹)
+-- FORIGNì´ë¼ëŠ” ë‹¨ì–´ ë“±ìž¥í•˜ì§€ ì•ŠìŒ!!
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_EMP1
 ( SID       NUMBER(5)       PRIMARY KEY
 , NAME      VARCHAR2(30)
 , JIKWI_ID  NUMBER(5)       REFERENCES TBL_JOBS(JIKWI_ID)
 );
---==>> Table TBL_EMP1ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_EMP1ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_EMP1';
 --==>> 
 /*
 HR	SYS_C007077	TBL_EMP1	P	SID		
-HR	SYS_C007078	TBL_EMP1	R	JIKWI_ID		NO ACTION       -- DELETE_RULE¿¡ NO ACTION ÀÌ »ý±è!
+HR	SYS_C007078	TBL_EMP1	R	JIKWI_ID		NO ACTION       -- DELETE_RULEì— NO ACTION ì´ ìƒê¹€!
 */
 
--- µ¥ÀÌÅÍ ÀÔ·Â
-INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(1,'ÃÖÇöÁ¤',1);    --ÇöÁ¤ÀÌ°¡ »ç¿øÀÌ¶ó´Â ¶æ!
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(2,'ÃÖ¼öÁö',2);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(3,'Á¤°¡¿¬',3);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(4,'ÀÌ´Ù¿µ',4);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(5,'¼Õ¹ü¼®',5);    --¿¡·¯ ¹ß»ý(¼¼¹øÂ° ÄÃ·³ ¶§¹®!! ºÎ¸ð¿¡´Â 4±îÁö¹Û¿¡ ¾øÀ½!)
+-- ë°ì´í„° ìž…ë ¥
+INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(1,'ìµœí˜„ì •',1);    --í˜„ì •ì´ê°€ ì‚¬ì›ì´ë¼ëŠ” ëœ»!
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(2,'ìµœìˆ˜ì§€',2);
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(3,'ì •ê°€ì—°',3);
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(4,'ì´ë‹¤ì˜',4);
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(5,'ì†ë²”ì„',5);    --ì—ëŸ¬ ë°œìƒ(ì„¸ë²ˆì§¸ ì»¬ëŸ¼ ë•Œë¬¸!! ë¶€ëª¨ì—ëŠ” 4ê¹Œì§€ë°–ì— ì—†ìŒ!)
 /*
-¸í·ÉÀÇ 838 Çà¿¡¼­ ½ÃÀÛÇÏ´Â Áß ¿À·ù ¹ß»ý -
-INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(5,'¼Õ¹ü¼®',5)
-¿À·ù º¸°í -
+ëª…ë ¹ì˜ 838 í–‰ì—ì„œ ì‹œìž‘í•˜ëŠ” ì¤‘ ì˜¤ë¥˜ ë°œìƒ -
+INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(5,'ì†ë²”ì„',5)
+ì˜¤ë¥˜ ë³´ê³  -
 ORA-02291: integrity constraint (HR.SYS_C007078) violated - parent key not found
 */
-INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(5,'¼Õ¹ü¼®',1);
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_EMP1(SID, NAME) VALUES(6,'Á¤È¿Áø');                    --ÀÎÅÏ¿¹½Ã »ý°¢ÇÏ¸é ÀÌ°Å °¡´ÉÇÏ´Ù! (´ë½Å JIKWI_ID ¾ÈÀû¾î¾ßÇÔ!)
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
-INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(7,'¼Õ´ÙÁ¤', NULL);    --À§¿Í °°Àº ±¸¹®!
---==>> 1 Çà ÀÌ(°¡) »ðÀÔµÇ¾ú½À´Ï´Ù.
+INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(5,'ì†ë²”ì„',1);
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_EMP1(SID, NAME) VALUES(6,'ì •íš¨ì§„');                    --ì¸í„´ì˜ˆì‹œ ìƒê°í•˜ë©´ ì´ê±° ê°€ëŠ¥í•˜ë‹¤! (ëŒ€ì‹  JIKWI_ID ì•ˆì ì–´ì•¼í•¨!)
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
+INSERT INTO TBL_EMP1(SID, NAME, JIKWI_ID) VALUES(7,'ì†ë‹¤ì •', NULL);    --ìœ„ì™€ ê°™ì€ êµ¬ë¬¸!
+--==>> 1 í–‰ ì´(ê°€) ì‚½ìž…ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 SELECT *
 FROM TBL_EMP1;
 --==>>
 /*
-1	ÃÖÇöÁ¤	1
-2	ÃÖ¼öÁö	2
-3	Á¤°¡¿¬	3
-4	ÀÌ´Ù¿µ	4
-5	¼Õ¹ü¼®	1
-6	Á¤È¿Áø	
-7	¼Õ´ÙÁ¤	
+1	ìµœí˜„ì •	1
+2	ìµœìˆ˜ì§€	2
+3	ì •ê°€ì—°	3
+4	ì´ë‹¤ì˜	4
+5	ì†ë²”ì„	1
+6	ì •íš¨ì§„	
+7	ì†ë‹¤ì •	
 */
 
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
---¡Û FK ÁöÁ¤ ½Ä½À(¨è Å×ÀÌºí ·¹º§ÀÇ Çü½Ä)
+--â—‹ FK ì§€ì • ì‹ìŠµ(â‘¡ í…Œì´ë¸” ë ˆë²¨ì˜ í˜•ì‹)
 CREATE TABLE TBL_EMP2
 ( SID       NUMBER(5)
 , NAME      VARCHAR2(30)
@@ -880,9 +880,9 @@ CREATE TABLE TBL_EMP2
 , CONSTRAINT EMP2_JIKWI_ID_FK FOREIGN KEY(JIKWI_ID)
              REFERENCES TBL_JOBS(JIKWI_ID)
 );
---==>> Table TBL_EMP2ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_EMP2ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_EMP2';
@@ -892,29 +892,29 @@ HR	EMP2_SID_PK	TBL_EMP2	P	SID
 HR	EMP2_JIKWI_ID_FK	TBL_EMP2	R	JIKWI_ID		NO ACTION
 */
 
---¡Û FK ÁöÁ¤ ½Ä½À(¨é Å×ÀÌºí »ý¼º ÀÌÈÄ Á¦¾àÁ¶°Ç Ãß°¡)
--- Å×ÀÌºí »ý¼º
+--â—‹ FK ì§€ì • ì‹ìŠµ(â‘¢ í…Œì´ë¸” ìƒì„± ì´í›„ ì œì•½ì¡°ê±´ ì¶”ê°€)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_EMP3
 ( SID       NUMBER(3)
 , NAME      VARCHAR2(30)
 , JIKWI_ID  NUMBER(5)
 );
---==>> Table TBL_EMP3ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_EMP3ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_EMP3';
---==>> Á¶°Ç °á°ú ¾øÀ½ ¡æ Á¦¾àÁ¶°Ç ¼³Á¤µÇ¾î ÀÖÁö ¾ÊÀ½
+--==>> ì¡°ê±´ ê²°ê³¼ ì—†ìŒ â†’ ì œì•½ì¡°ê±´ ì„¤ì •ë˜ì–´ ìžˆì§€ ì•ŠìŒ
 
--- Á¦¾à Á¶°Ç Ãß°¡
+-- ì œì•½ ì¡°ê±´ ì¶”ê°€
 ALTER TABLE TBL_EMP3
 ADD( CONSTRAINT EMP3_SID_PK PRIMARY KEY(SID)
     , CONSTRAINT EMP3_JIKWI_ID_FK FOREIGN KEY(JIKWI_ID)
                  REFERENCES TBL_JOBS(JIKWI_ID) );
---==>> Table TBL_EMP3ÀÌ(°¡) º¯°æµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_EMP3ì´(ê°€) ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_EMP3';
@@ -924,120 +924,120 @@ HR	EMP3_SID_PK	        TBL_EMP3	P	SID
 HR	EMP3_JIKWI_ID_FK	TBL_EMP3	R	JIKWI_ID		NO ACTION
 */
 
--- 4. FOREIGN KEY »ý¼º ½Ã ÁÖÀÇ»çÇ×
---    ÂüÁ¶ÇÏ°íÀÚ ÇÏ´Â ºÎ¸ð Å×ÀÌºíÀ» ¸ÕÀú »ý¼ºÇØ¾ß ÇÑ´Ù.
---    ÂüÁ¶ÇÏ°íÀÚ ÇÏ´Â Å×ÀÌºíÀÇ ´ë»ó ÄÃ·³ÀÌ
---    PRIMARY KEY ³ª UNIQUE Á¦¾àÁ¶°ÇÀÌ ÀÖ¾î¾ß ÇÑ´Ù.
---    Å×ÀÌºí »çÀÌ¿¡ PRIMARY KEY ³ª FOREIGN KEY °¡ Á¤ÀÇµÇ¾î ÀÖÀ¸¸é
---    PRIMARY KEY Á¦¾àÁ¶°ÇÀÌ ¼³Á¤µÈ ÄÃ·³ÀÇ µ¥ÀÌÅÍ »èÁ¦ ½Ã
---    FOREIGN KEY ÄÃ·³¿¡ ±× °ªÀÌ ÀÔ·ÂµÇ¾î ÀÖ´Â °æ¿ì »èÁ¦µÇÁö ¾Ê´Â´Ù.
---    (´Ü, FK ¼³Á¤ °úÁ¤¿¡¼­ ¡ºON DELETE CASECADE¡» ³ª
---    ¡ºON DELETE SET NULL¡» ¿É¼ÇÀ» »ç¿ëÇÏ¿© ¼³Á¤ÇÑ °æ¿ì¿¡´Â
---    »èÁ¦°¡ °¡´ÉÇÏ´Ù.)
---    ºÎ¸ð Å×ÀÌºíÀ» Á¦°ÅÇÏ±â À§ÇØ¼­´Â ÀÚ½Ä Å×ÀÌºíµé ¸ÕÀú Á¦°ÅÇØ¾ß ÇÑ´Ù.
+-- 4. FOREIGN KEY ìƒì„± ì‹œ ì£¼ì˜ì‚¬í•­
+--    ì°¸ì¡°í•˜ê³ ìž í•˜ëŠ” ë¶€ëª¨ í…Œì´ë¸”ì„ ë¨¼ì € ìƒì„±í•´ì•¼ í•œë‹¤.
+--    ì°¸ì¡°í•˜ê³ ìž í•˜ëŠ” í…Œì´ë¸”ì˜ ëŒ€ìƒ ì»¬ëŸ¼ì´
+--    PRIMARY KEY ë‚˜ UNIQUE ì œì•½ì¡°ê±´ì´ ìžˆì–´ì•¼ í•œë‹¤.
+--    í…Œì´ë¸” ì‚¬ì´ì— PRIMARY KEY ë‚˜ FOREIGN KEY ê°€ ì •ì˜ë˜ì–´ ìžˆìœ¼ë©´
+--    PRIMARY KEY ì œì•½ì¡°ê±´ì´ ì„¤ì •ëœ ì»¬ëŸ¼ì˜ ë°ì´í„° ì‚­ì œ ì‹œ
+--    FOREIGN KEY ì»¬ëŸ¼ì— ê·¸ ê°’ì´ ìž…ë ¥ë˜ì–´ ìžˆëŠ” ê²½ìš° ì‚­ì œë˜ì§€ ì•ŠëŠ”ë‹¤.
+--    (ë‹¨, FK ì„¤ì • ê³¼ì •ì—ì„œ ã€ŽON DELETE CASECADEã€ ë‚˜
+--    ã€ŽON DELETE SET NULLã€ ì˜µì…˜ì„ ì‚¬ìš©í•˜ì—¬ ì„¤ì •í•œ ê²½ìš°ì—ëŠ”
+--    ì‚­ì œê°€ ê°€ëŠ¥í•˜ë‹¤.)
+--    ë¶€ëª¨ í…Œì´ë¸”ì„ ì œê±°í•˜ê¸° ìœ„í•´ì„œëŠ” ìžì‹ í…Œì´ë¸”ë“¤ ë¨¼ì € ì œê±°í•´ì•¼ í•œë‹¤.
 
 
---ºÎ¸ð Å×ÀÌºí
+--ë¶€ëª¨ í…Œì´ë¸”
 SELECT *
 FROM TBL_JOBS;
 --==>>
 /*
-1	»ç¿ø
-2	´ë¸®
-3	°úÀå
-4	ºÎÀå
+1	ì‚¬ì›
+2	ëŒ€ë¦¬
+3	ê³¼ìž¥
+4	ë¶€ìž¥
 */
 
---ÀÚ½Ä Å×ÀÌºí
+--ìžì‹ í…Œì´ë¸”
 SELECT *
 FROM TBL_EMP1;
 --==>>
 /*
-1	ÃÖÇöÁ¤	1
-2	ÃÖ¼öÁö	2
-3	Á¤°¡¿¬	3
-4	ÀÌ´Ù¿µ	4
-5	¼Õ¹ü¼®	1
-6	Á¤È¿Áø	
-7	¼Õ´ÙÁ¤	
+1	ìµœí˜„ì •	1
+2	ìµœìˆ˜ì§€	2
+3	ì •ê°€ì—°	3
+4	ì´ë‹¤ì˜	4
+5	ì†ë²”ì„	1
+6	ì •íš¨ì§„	
+7	ì†ë‹¤ì •	
 */
 
--- ÀÌ´Ù¿µ ºÎÀåÀÇ Á÷À§¸¦ »ç¿øÀ¸·Î º¯°æ
+-- ì´ë‹¤ì˜ ë¶€ìž¥ì˜ ì§ìœ„ë¥¼ ì‚¬ì›ìœ¼ë¡œ ë³€ê²½
 UPDATE TBL_EMP1
 SET JIKWI_ID=1
 WHERE SID = 4;
---==>> 1 Çà ÀÌ(°¡) ¾÷µ¥ÀÌÆ®µÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì—…ë°ì´íŠ¸ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- È®ÀÎ
+-- í™•ì¸
 SELECT *
 FROM TBL_EMP1;
 --==>>
 /*
-1	ÃÖÇöÁ¤	1
-2	ÃÖ¼öÁö	2
-3	Á¤°¡¿¬	3
-4	ÀÌ´Ù¿µ	1
-5	¼Õ¹ü¼®	1
-6	Á¤È¿Áø	
-7	¼Õ´ÙÁ¤	
+1	ìµœí˜„ì •	1
+2	ìµœìˆ˜ì§€	2
+3	ì •ê°€ì—°	3
+4	ì´ë‹¤ì˜	1
+5	ì†ë²”ì„	1
+6	ì •íš¨ì§„	
+7	ì†ë‹¤ì •	
 */
 
 
--- Ä¿¹Ô
+-- ì»¤ë°‹
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
 
--- ºÎ¸ð Å×ÀÌºí(TBL_JOBS)ÀÇ ºÎÀå µ¥ÀÌÅÍ¸¦ ÂüÁ¶ÇÏ°í ÀÖ´Â
--- ÀÚ½Ä Å×ÀÌºí(TBL_EMP1)ÀÇ µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏÁö ¾Ê´Â »óÈ².
+-- ë¶€ëª¨ í…Œì´ë¸”(TBL_JOBS)ì˜ ë¶€ìž¥ ë°ì´í„°ë¥¼ ì°¸ì¡°í•˜ê³  ìžˆëŠ”
+-- ìžì‹ í…Œì´ë¸”(TBL_EMP1)ì˜ ë°ì´í„°ê°€ ì¡´ìž¬í•˜ì§€ ì•ŠëŠ” ìƒí™©.
 
--- ÀÌ¿Í °°Àº »óÈ²¿¡¼­ ºÎ¸ð Å×ÀÌºí(TBL_JOBS)ÀÇ
--- ºÎÀå µ¥ÀÌÅÍ »èÁ¦
+-- ì´ì™€ ê°™ì€ ìƒí™©ì—ì„œ ë¶€ëª¨ í…Œì´ë¸”(TBL_JOBS)ì˜
+-- ë¶€ìž¥ ë°ì´í„° ì‚­ì œ
 DELETE
 FROM TBL_JOBS
 WHERE JIKWI_ID=4;
---==>> 1 Çà ÀÌ(°¡) »èÁ¦µÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.
 
---È®ÀÎ
+--í™•ì¸
 SELECT *
 FROM TBL_JOBS;
 --==>>
 /*
-1	»ç¿ø
-2	´ë¸®
-3	°úÀå
+1	ì‚¬ì›
+2	ëŒ€ë¦¬
+3	ê³¼ìž¥
 */
 
--- Ä¿¹Ô
+-- ì»¤ë°‹
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
 
--- ºÎ¸ð Å×ÀÌºí(TBL_JOBS)ÀÇ »ç¿ø µ¥ÀÌÅÍ¸¦ ÂüÁ¶ÇÏ°í ÀÖ´Â
--- ÀÚ½Ä Å×ÀÌºí(TBL_EMP1)ÀÇ µ¥ÀÌÅÍ°¡ 3°Ç Á¸ÀçÇÏ°í ÀÖ´Â »óÈ².
+-- ë¶€ëª¨ í…Œì´ë¸”(TBL_JOBS)ì˜ ì‚¬ì› ë°ì´í„°ë¥¼ ì°¸ì¡°í•˜ê³  ìžˆëŠ”
+-- ìžì‹ í…Œì´ë¸”(TBL_EMP1)ì˜ ë°ì´í„°ê°€ 3ê±´ ì¡´ìž¬í•˜ê³  ìžˆëŠ” ìƒí™©.
 
--- ÀÌ¿Í °°Àº »óÈ²¿¡¼­ ºÎ¸ð Å×ÀÌºí(TBL_JOBS)ÀÇ
---  »ç¿ø µ¥ÀÌÅÍ »èÁ¦
+-- ì´ì™€ ê°™ì€ ìƒí™©ì—ì„œ ë¶€ëª¨ í…Œì´ë¸”(TBL_JOBS)ì˜
+--  ì‚¬ì› ë°ì´í„° ì‚­ì œ
 DELETE
 FROM TBL_JOBS
 WHERE JIKWI_ID = 1;
---==>> ¿¡·¯ ¹ß»ý
+--==>> ì—ëŸ¬ ë°œìƒ
 /*
-¸í·ÉÀÇ 1,021 Çà¿¡¼­ ½ÃÀÛÇÏ´Â Áß ¿À·ù ¹ß»ý -
+ëª…ë ¹ì˜ 1,021 í–‰ì—ì„œ ì‹œìž‘í•˜ëŠ” ì¤‘ ì˜¤ë¥˜ ë°œìƒ -
 DELETE
 FROM TBL_JOBS
 WHERE JIKWI_ID = 1
-¿À·ù º¸°í -
+ì˜¤ë¥˜ ë³´ê³  -
 ORA-02292: integrity constraint (HR.SYS_C007078) violated - child record found
 */
 
---±×·¯¸é ºÎ¸ð Å×ÀÌºí(TBL_JOBS) Á¦°Å
+--ê·¸ëŸ¬ë©´ ë¶€ëª¨ í…Œì´ë¸”(TBL_JOBS) ì œê±°
 DROP TABLE TBL_JOBS;
---==>> ¿¡·¯ ¹ß»ý
+--==>> ì—ëŸ¬ ë°œìƒ
 /*
-¸í·ÉÀÇ 1,035 Çà¿¡¼­ ½ÃÀÛÇÏ´Â Áß ¿À·ù ¹ß»ý -
+ëª…ë ¹ì˜ 1,035 í–‰ì—ì„œ ì‹œìž‘í•˜ëŠ” ì¤‘ ì˜¤ë¥˜ ë°œìƒ -
 DROP TABLE TBL_JOBS
-¿À·ù º¸°í -
+ì˜¤ë¥˜ ë³´ê³  -
 ORA-02449: unique/primary keys in table referenced by foreign keys
 02449. 00000 -  "unique/primary keys in table referenced by foreign keys"
 *Cause:    An attempt was made to drop a table with unique or
@@ -1049,13 +1049,13 @@ ORA-02449: unique/primary keys in table referenced by foreign keys
            SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
 */
 
---¡Ø ºÎ¸ð Å×ÀÌºíÀÇ µ¥ÀÌÅÍ¸¦ ÀÚÀ¯·Ó°Ô »èÁ¦ÇÏ±â À§ÇØ¼­´Â
--- ¡ºON DELETE CASECADE¡» ¿É¼Ç ÁöÁ¤ÀÌ ÇÊ¿äÇÏ´Ù.
+--â€» ë¶€ëª¨ í…Œì´ë¸”ì˜ ë°ì´í„°ë¥¼ ìžìœ ë¡­ê²Œ ì‚­ì œí•˜ê¸° ìœ„í•´ì„œëŠ”
+-- ã€ŽON DELETE CASECADEã€ ì˜µì…˜ ì§€ì •ì´ í•„ìš”í•˜ë‹¤.
 
--- TBL_EMP1 Å×ÀÌºí(ÀÚ½Ä Å×ÀÌºí)¿¡¼­ FK Á¦¾àÁ¶°ÇÀ» Á¦°ÅÇÑ ÈÄ
--- CASCADE ¿É¼ÇÀ» Æ÷ÇÔÇÏ¿© ´Ù½Ã FK Á¦¾àÁ¶°ÇÀ» ¼³Á¤ÇÑ´Ù.
+-- TBL_EMP1 í…Œì´ë¸”(ìžì‹ í…Œì´ë¸”)ì—ì„œ FK ì œì•½ì¡°ê±´ì„ ì œê±°í•œ í›„
+-- CASCADE ì˜µì…˜ì„ í¬í•¨í•˜ì—¬ ë‹¤ì‹œ FK ì œì•½ì¡°ê±´ì„ ì„¤ì •í•œë‹¤.
 
---¡Û Á¦¾àÁ¶°Ç È®ÀÎ
+--â—‹ ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_EMP1';
@@ -1065,140 +1065,140 @@ HR	SYS_C007077	TBL_EMP1	P	SID
 HR	SYS_C007078	TBL_EMP1	R	JIKWI_ID		NO ACTION
 */
 
---¡Û Á¦¾àÁ¶°Ç Á¦°Å
+--â—‹ ì œì•½ì¡°ê±´ ì œê±°
 ALTER TABLE TBL_EMP1
-DROP CONSTRAINT SYS_C007078;    -- ÀÌ·¡¼­ Á¦¾àÁ¶°Ç¸í ¸í¸íÇØÁÖ´Â °ÍÀÌ ÁÁÀ½!
---==>> Table TBL_EMP1ÀÌ(°¡) º¯°æµÇ¾ú½À´Ï´Ù.
+DROP CONSTRAINT SYS_C007078;    -- ì´ëž˜ì„œ ì œì•½ì¡°ê±´ëª… ëª…ëª…í•´ì£¼ëŠ” ê²ƒì´ ì¢‹ìŒ!
+--==>> Table TBL_EMP1ì´(ê°€) ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.
 
---¡Û Á¦¾àÁ¶°Ç Á¦°Å ÀÌÈÄ ´Ù½Ã È®ÀÎ
+--â—‹ ì œì•½ì¡°ê±´ ì œê±° ì´í›„ ë‹¤ì‹œ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME =  'TBL_EMP1';
 --==>> HR	SYS_C007077	TBL_EMP1	P	SID		
 
 
---¡Û ¡ºON DELETE CASCADE¡» ¿É¼ÇÀÌ Æ÷ÇÔµÈ ³»¿ëÀ¸·Î Á¦¾àÁ¶°Ç ÀçÁöÁ¤
+--â—‹ ã€ŽON DELETE CASCADEã€ ì˜µì…˜ì´ í¬í•¨ëœ ë‚´ìš©ìœ¼ë¡œ ì œì•½ì¡°ê±´ ìž¬ì§€ì •
 ALTER TABLE TBL_EMP1
 ADD CONSTRAINT EMP1_JIKWIID_FK FOREIGN KEY(JIKWI_ID)
                REFERENCES TBL_JOBS(JIKWI_ID)
                ON DELETE CASCADE;
---==>> Table TBL_EMP1ÀÌ(°¡) º¯°æµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_EMP1ì´(ê°€) ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
---¡Û Á¦¾àÁ¶°Ç ÀçÁöÁ¤ ÀÌÈÄ ´Ù½Ã È®ÀÎ
+--â—‹ ì œì•½ì¡°ê±´ ìž¬ì§€ì • ì´í›„ ë‹¤ì‹œ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_EMP1';
 --==>>
 /*
 HR	SYS_C007077	        TBL_EMP1	P	SID		
-HR	EMP1_JIKWIID_FK	    TBL_EMP1	R	JIKWI_ID		CASCADE     --ÀÌÀü±îÁö´Â NO ACTION ÀÌ¾ú´Âµ¥ CASCADE·Î ¹Ù²ñ!
+HR	EMP1_JIKWIID_FK	    TBL_EMP1	R	JIKWI_ID		CASCADE     --ì´ì „ê¹Œì§€ëŠ” NO ACTION ì´ì—ˆëŠ”ë° CASCADEë¡œ ë°”ë€œ!
 */
 
---> CASCADE ¿É¼ÊÀ» ÁöÁ¤ÇÑ ÈÄ¿¡´Â
---  ÂüÁ¶¹Þ°í ÀÖ´Â ºÎ¸ð Å×ÀÌºíÀÇ µ¥ÀÌÅÍ¸¦
---  ¾ðÁ¦µçÁö Á¦ÇÑ¾øÀÌ »èÁ¦ÇÏ´Â °ÍÀÌ °¡´ÉÇÏ´Ù.
---  ´Ü, ... ... ... ºÎ¸ð Å×ÀÌºíÀÇ µ¥ÀÌÅÍ°¡ »èÁ¦µÉ °æ¿ì
---  ÀÌ¸¦ ÂüÁ¶ÇÏ´Â ÀÚ½Ä Å×ÀÌºíÀÇ µ¥ÀÌÅÍµµ ¸ð~~~~~~µÎ ÇÔ²² »èÁ¦µÈ´Ù.
+--> CASCADE ì˜µì…¥ì„ ì§€ì •í•œ í›„ì—ëŠ”
+--  ì°¸ì¡°ë°›ê³  ìžˆëŠ” ë¶€ëª¨ í…Œì´ë¸”ì˜ ë°ì´í„°ë¥¼
+--  ì–¸ì œë“ ì§€ ì œí•œì—†ì´ ì‚­ì œí•˜ëŠ” ê²ƒì´ ê°€ëŠ¥í•˜ë‹¤.
+--  ë‹¨, ... ... ... ë¶€ëª¨ í…Œì´ë¸”ì˜ ë°ì´í„°ê°€ ì‚­ì œë  ê²½ìš°
+--  ì´ë¥¼ ì°¸ì¡°í•˜ëŠ” ìžì‹ í…Œì´ë¸”ì˜ ë°ì´í„°ë„ ëª¨~~~~~~ë‘ í•¨ê»˜ ì‚­ì œëœë‹¤.
 --  CHECK~!!!
 
--- ºÎ¸ð Å×ÀÌºí
+-- ë¶€ëª¨ í…Œì´ë¸”
 SELECT *
 FROM TBL_JOBS;
 --==>>
 /*
-1	»ç¿ø
-2	´ë¸®
-3	°úÀå
+1	ì‚¬ì›
+2	ëŒ€ë¦¬
+3	ê³¼ìž¥
 */
 
--- ÀÚ½Ä Å×ÀÌºí
+-- ìžì‹ í…Œì´ë¸”
 SELECT *
 FROM TBL_EMP1;
 --==>>
 /*
-1	ÃÖÇöÁ¤	1     ¡ç
-2	ÃÖ¼öÁö	2
-3	Á¤°¡¿¬	3
-4	ÀÌ´Ù¿µ	1     ¡ç
-5	¼Õ¹ü¼®	1     ¡ç
-6	Á¤È¿Áø	
-7	¼Õ´ÙÁ¤	
+1	ìµœí˜„ì •	1     â†
+2	ìµœìˆ˜ì§€	2
+3	ì •ê°€ì—°	3
+4	ì´ë‹¤ì˜	1     â†
+5	ì†ë²”ì„	1     â†
+6	ì •íš¨ì§„	
+7	ì†ë‹¤ì •	
 */
 
---¡Û TBL_JOBS(ºÎ¸ð Å×ÀÌºí)ÀÇ »ç¿ø µ¥ÀÌÅÍ »èÁ¦
+--â—‹ TBL_JOBS(ë¶€ëª¨ í…Œì´ë¸”)ì˜ ì‚¬ì› ë°ì´í„° ì‚­ì œ
 DELETE
 FROM TBL_JOBS
 WHERE JIKWI_ID=1;
---==>> 1 Çà ÀÌ(°¡) »èÁ¦µÇ¾ú½À´Ï´Ù.
--- ÀÚ½ÄÀÌ ÀÖ´Âµ¥µµ Áö¿öÁü!! ON DELETE CASCADE!
+--==>> 1 í–‰ ì´(ê°€) ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.
+-- ìžì‹ì´ ìžˆëŠ”ë°ë„ ì§€ì›Œì§!! ON DELETE CASCADE!
 
--- ºÎ¸ð Å×ÀÌºí
+-- ë¶€ëª¨ í…Œì´ë¸”
 SELECT *
 FROM TBL_JOBS;
 --==>>
 /*
-2	´ë¸®
-3	°úÀå
+2	ëŒ€ë¦¬
+3	ê³¼ìž¥
 */
 
--- ÀÚ½Ä Å×ÀÌºí
+-- ìžì‹ í…Œì´ë¸”
 SELECT *
 FROM TBL_EMP1;
 --==>>
 /*
-2	ÃÖ¼öÁö	2
-3	Á¤°¡¿¬	3
-6	Á¤È¿Áø	
-7	¼Õ´ÙÁ¤	
+2	ìµœìˆ˜ì§€	2
+3	ì •ê°€ì—°	3
+6	ì •íš¨ì§„	
+7	ì†ë‹¤ì •	
 */
 
 
 
--- Áö±ÝÀº 3°ÇÀÌ¾î¼­ ±×·¸Áö ½Ç¹«¿¡¼­´Â È¸¿øµî±Þ ¸î¸¸°Ç ¸î¹é¸¸°Ç ÀÌ·¯¸é Å«ÀÏ
--- ±×·¡¼­ Á¤¸» ÇÊ¿äÇÒ ¶§¸¸ ½á¾ßÇÔ!! ¾öÃ» À§ÇèÇÑ ¿É¼Ç!!
+-- ì§€ê¸ˆì€ 3ê±´ì´ì–´ì„œ ê·¸ë ‡ì§€ ì‹¤ë¬´ì—ì„œëŠ” íšŒì›ë“±ê¸‰ ëª‡ë§Œê±´ ëª‡ë°±ë§Œê±´ ì´ëŸ¬ë©´ í°ì¼
+-- ê·¸ëž˜ì„œ ì •ë§ í•„ìš”í•  ë•Œë§Œ ì¨ì•¼í•¨!! ì—„ì²­ ìœ„í—˜í•œ ì˜µì…˜!!
 --------------------------------------------------------------------------------
 
--- ¡á¡á¡á NOT NULL(NN:CK:C) ¡á¡á¡á--
+-- â– â– â–  NOT NULL(NN:CK:C) â– â– â– --
 
--- 1. Å×ÀÌºí¿¡¼­ ÁöÁ¤ÇÑ ÄÃ·³ÀÇ µ¥ÀÌÅÍ°¡ NULL À» °®Áö ¸øÇÏµµ·Ï ÇÏ´Â Á¦¾àÁ¶°Ç.
+-- 1. í…Œì´ë¸”ì—ì„œ ì§€ì •í•œ ì»¬ëŸ¼ì˜ ë°ì´í„°ê°€ NULL ì„ ê°–ì§€ ëª»í•˜ë„ë¡ í•˜ëŠ” ì œì•½ì¡°ê±´.
 
--- 2. Çü½Ä ¹× ±¸Á¶           -- NOT NULL Á¦¾àÁ¶°Ç¸¸Å­Àº ÄÃ·³ ·¹º§ Çü½ÄÀ» »ç¿ëÇÏÀÚ!!!
--- ¨ç ÄÃ·³ ·¹º§ÀÇ Çü½Ä       -- (´Ù¸¥ Á¦¾àÁ¶°ÇÀº Å×ÀÌºí Çü½ÄÀ¸·Î!)
--- ÄÃ·³¸í µ¥ÀÌÅÍ Å¸ÀÔ [CONSTRAINT CONSTRAINT¸í] NOT NULL
+-- 2. í˜•ì‹ ë° êµ¬ì¡°           -- NOT NULL ì œì•½ì¡°ê±´ë§Œí¼ì€ ì»¬ëŸ¼ ë ˆë²¨ í˜•ì‹ì„ ì‚¬ìš©í•˜ìž!!!
+-- â‘  ì»¬ëŸ¼ ë ˆë²¨ì˜ í˜•ì‹       -- (ë‹¤ë¥¸ ì œì•½ì¡°ê±´ì€ í…Œì´ë¸” í˜•ì‹ìœ¼ë¡œ!)
+-- ì»¬ëŸ¼ëª… ë°ì´í„° íƒ€ìž… [CONSTRAINT CONSTRAINTëª…] NOT NULL
 
--- ¨è Å×ÀÌºí ·¹º§ÀÇ Çü½Ä
--- ÄÃ·³¸í µ¥ÀÌÅÍÅ¸ÀÔ
---, ÄÃ·³¸í µ¥ÀÌÅÍÅ¸ÀÔ
---, CONSTRAINT CONSTRAINT¸í CHECK(ÄÃ·³¸í IS NOT NULL)
+-- â‘¡ í…Œì´ë¸” ë ˆë²¨ì˜ í˜•ì‹
+-- ì»¬ëŸ¼ëª… ë°ì´í„°íƒ€ìž…
+--, ì»¬ëŸ¼ëª… ë°ì´í„°íƒ€ìž…
+--, CONSTRAINT CONSTRAINTëª… CHECK(ì»¬ëŸ¼ëª… IS NOT NULL)
 
--- 3. ±âÁ¸¿¡ »ý¼ºµÇ¾î ÀÖ´Â Å×ÀÌºí¿¡ NOT NULL Á¦¾àÁ¶°ÇÀ» Ãß°¡ÇÒ °æ¿ì
---    ADD º¸´Ù MODIFY ÀýÀÌ ´õ ¸¹ÀÌ »ç¿ëµÈ´Ù.       -- CHECK~!!!
+-- 3. ê¸°ì¡´ì— ìƒì„±ë˜ì–´ ìžˆëŠ” í…Œì´ë¸”ì— NOT NULL ì œì•½ì¡°ê±´ì„ ì¶”ê°€í•  ê²½ìš°
+--    ADD ë³´ë‹¤ MODIFY ì ˆì´ ë” ë§Žì´ ì‚¬ìš©ëœë‹¤.       -- CHECK~!!!
 
--- ALTER TABLE Å×ÀÌºí¸í
--- MODIFY ÄÃ·³¸í µ¥ÀÌÅÍÅ¸ÀÔ NOT NULL;
+-- ALTER TABLE í…Œì´ë¸”ëª…
+-- MODIFY ì»¬ëŸ¼ëª… ë°ì´í„°íƒ€ìž… NOT NULL;
 
--- 4. ±âÁ¸ Å×ÀÌºí¿¡ µ¥ÀÌÅÍ°¡ ÀÌ¹Ì µé¾îÀÖÁö ¾ÊÀº ÄÃ·³(¡æ NULL ÀÎ »óÅÂ)À»
---    NOT NULL Á¦¾àÁ¶°ÇÀ» °®°Ô²û ¼öÁ¤ÇÏ´Â °æ¿ì¿¡´Â ¿¡·¯ ¹ß»ýÇÑ´Ù.
+-- 4. ê¸°ì¡´ í…Œì´ë¸”ì— ë°ì´í„°ê°€ ì´ë¯¸ ë“¤ì–´ìžˆì§€ ì•Šì€ ì»¬ëŸ¼(â†’ NULL ì¸ ìƒíƒœ)ì„
+--    NOT NULL ì œì•½ì¡°ê±´ì„ ê°–ê²Œë” ìˆ˜ì •í•˜ëŠ” ê²½ìš°ì—ëŠ” ì—ëŸ¬ ë°œìƒí•œë‹¤.
 
 
---¡Û NOT NULL ÁöÁ¤ ½Ç½À(¨ç ÄÃ·³ ·¹º§ÀÇ Çü½Ä)
--- Å×ÀÌºí »ý¼º
+--â—‹ NOT NULL ì§€ì • ì‹¤ìŠµ(â‘  ì»¬ëŸ¼ ë ˆë²¨ì˜ í˜•ì‹)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST11
 ( COL1      NUMBER(5)       PRIMARY KEY
 , COL2      VARCHAR2(30)    NOT NULL
 );
---==>> Table TBL_TEST11ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST11ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
---Å×ÀÌºí È®ÀÎ
+--í…Œì´ë¸” í™•ì¸
 SELECT *
 FROM TAB;
 
--- µ¥ÀÌÅÍ ÀÔ·Â
+-- ë°ì´í„° ìž…ë ¥
 INSERT INTO TBL_TEST11(COL1, COL2) VALUES(1, 'TEST');
 INSERT INTO TBL_TEST11(COL1, COL2) VALUES(2, 'ABCD');
-INSERT INTO TBL_TEST11(COL1, COL2) VALUES(3, NULL); --> ¿¡·¯ ¹ß»ý
-INSERT INTO TBL_TEST11(COL1) VALUES(4);             --> ¿¡·¯ ¹ß»ý
+INSERT INTO TBL_TEST11(COL1, COL2) VALUES(3, NULL); --> ì—ëŸ¬ ë°œìƒ
+INSERT INTO TBL_TEST11(COL1) VALUES(4);             --> ì—ëŸ¬ ë°œìƒ
 
 SELECT *
 FROM TBL_TEST11;
@@ -1209,10 +1209,10 @@ FROM TBL_TEST11;
 */
 
 COMMIT;
---==>> Ä¿¹Ô ¿Ï·á.
+--==>> ì»¤ë°‹ ì™„ë£Œ.
 
 
---Á¦¾à Á¶°Ç È®ÀÎ
+--ì œì•½ ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST11';
@@ -1222,17 +1222,17 @@ HR	SYS_C007084	TBL_TEST11	C	COL2	"COL2" IS NOT NULL
 HR	SYS_C007085	TBL_TEST11	P	COL1		
 */
 
---¡Û NOT NULL ÁöÁ¤ ½Ç½À(¨è Å×ÀÌºí ·¹º§ÀÇ Çü½Ä)
--- Å×ÀÌºí »ý¼º
+--â—‹ NOT NULL ì§€ì • ì‹¤ìŠµ(â‘¡ í…Œì´ë¸” ë ˆë²¨ì˜ í˜•ì‹)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST12
 ( COL1      NUMBER(5)
 , COL2      VARCHAR2(30)
 , CONSTRAINT TEST12_COL1_PK PRIMARY KEY(COL1)
 , CONSTRAINT TEST12_COL2_NN CHECK(COL2 IS NOT NULL)
 );
---==>> Table TBL_TEST12ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST12ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST12';
@@ -1243,27 +1243,27 @@ HR	TEST12_COL1_PK	TBL_TEST12	P	COL1
 */
 
 
---¡Û NOT NULL ÁöÁ¤ ½Ç½À(¨é Å×ÀÌºí »ý¼º ÀÌÈÄ Á¦¾àÁ¶°Ç Ãß°¡)
--- Å×ÀÌºí »ý¼º
+--â—‹ NOT NULL ì§€ì • ì‹¤ìŠµ(â‘¢ í…Œì´ë¸” ìƒì„± ì´í›„ ì œì•½ì¡°ê±´ ì¶”ê°€)
+-- í…Œì´ë¸” ìƒì„±
 CREATE TABLE TBL_TEST13
 ( COL1   NUMBER(5)
 , COL2  VARCHAR2(30)
 );
---==>> Table TBL_TEST13ÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST13ì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST13';
---==>> Á¶È¸ °á°ú ¾øÀ½ ¡æ Á¦¾àÁ¶°ÇÀÌ ¼³Á¤µÇÁö ¾ÊÀ½
+--==>> ì¡°íšŒ ê²°ê³¼ ì—†ìŒ â†’ ì œì•½ì¡°ê±´ì´ ì„¤ì •ë˜ì§€ ì•ŠìŒ
 
---Á¦¾à Á¶°Ç Ãß°¡
+--ì œì•½ ì¡°ê±´ ì¶”ê°€
 ALTER TABLE TBL_TEST13
 ADD( CONSTRAINT TEST13_COL1_PK PRIMARY KEY(COL1)
     , CONSTRAINT TEST13_COL2_NN CHECK(COL2 IS NOT NULL) );
---==>> Table TBL_TEST13ÀÌ(°¡) º¯°æµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST13ì´(ê°€) ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- Á¦¾àÁ¶°Ç È®ÀÎ
+-- ì œì•½ì¡°ê±´ í™•ì¸
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME = 'TBL_TEST13';
@@ -1274,54 +1274,54 @@ HR	TEST13_COL2_NN	TBL_TEST13	C	COL2	COL2 IS NOT NULL
 */
 
 
---¡Ø NOT NULL Á¦¾àÁ¶°Ç¸¸ TBL_TEST13 Å×ÀÌºíÀÇ COL2 ¿¡ Ãß°¡ÇÏ´Â °æ¿ì
--- ´ÙÀ½°ú °°Àº ¹æ¹ýµµ °¡´ÉÇÏ´Ù.
+--â€» NOT NULL ì œì•½ì¡°ê±´ë§Œ TBL_TEST13 í…Œì´ë¸”ì˜ COL2 ì— ì¶”ê°€í•˜ëŠ” ê²½ìš°
+-- ë‹¤ìŒê³¼ ê°™ì€ ë°©ë²•ë„ ê°€ëŠ¥í•˜ë‹¤.
 ALTER TABLE TBL_TEST13
 MODIFY COL2 NOT NULL;
---==>> Table TBL_TEST13ÀÌ(°¡) º¯°æµÇ¾ú½À´Ï´Ù.
+--==>> Table TBL_TEST13ì´(ê°€) ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
 
 
 -- TBL_TEST11 / TBL_TEST12 / TBL_TEST13
 
--- ÄÃ·³ ·¹º§¿¡¼­ NOT NULL  Á¦¾àÁ¶°ÇÀ» ÁöÁ¤ÇÑ Å×ÀÌºí
+-- ì»¬ëŸ¼ ë ˆë²¨ì—ì„œ NOT NULL  ì œì•½ì¡°ê±´ì„ ì§€ì •í•œ í…Œì´ë¸”
 DESC TBL_TEST11;
 --==>>
 /*
-ÀÌ¸§   ³Î?       À¯Çü           
+ì´ë¦„   ë„?       ìœ í˜•           
 ---- -------- ------------ 
 COL1 NOT NULL NUMBER(5)    
 COL2 NOT NULL VARCHAR2(30) 
 */
---> DESC ¸¦ ÅëÇØ COL2 ÄÃ·³ÀÌ  NOT NULL ÀÎ Á¤º¸°¡ È®ÀÎµÇ´Â »óÈ²
+--> DESC ë¥¼ í†µí•´ COL2 ì»¬ëŸ¼ì´  NOT NULL ì¸ ì •ë³´ê°€ í™•ì¸ë˜ëŠ” ìƒí™©
 
--- Å×ÀÌºí ·¹º§¿¡¼­ NOT NULL  Á¦¾àÁ¶°ÇÀ» ÁöÁ¤ÇÑ Å×ÀÌºí
+-- í…Œì´ë¸” ë ˆë²¨ì—ì„œ NOT NULL  ì œì•½ì¡°ê±´ì„ ì§€ì •í•œ í…Œì´ë¸”
 DESC TBL_TEST12;
 --==>>
 /*
-ÀÌ¸§   ³Î?       À¯Çü           
+ì´ë¦„   ë„?       ìœ í˜•           
 ---- -------- ------------ 
 COL1 NOT NULL NUMBER(5)    
-COL2          VARCHAR2(30)      -- ¿©±â¿¡´Â NOT NULL ·Î ¾È³ª¿È!\
+COL2          VARCHAR2(30)      -- ì—¬ê¸°ì—ëŠ” NOT NULL ë¡œ ì•ˆë‚˜ì˜´!\
 */
---> DESC ¸¦ ÅëÇØ COL2 ÄÃ·³ÀÌ NOT NULL ÀÎ Á¤º¸°¡ È®ÀÎµÇÁö ¾ÊÀº »óÈ²
+--> DESC ë¥¼ í†µí•´ COL2 ì»¬ëŸ¼ì´ NOT NULL ì¸ ì •ë³´ê°€ í™•ì¸ë˜ì§€ ì•Šì€ ìƒí™©
 
 
--- Å×ÀÌºí »ý¼º ÀÌÈÄ ADD ¸¦ ÅëÇØ NOT NULL Á¦¾àÁ¶°ÇÀ» Ãß°¡ÇÏ¿´À¸¸ç
--- ¶ÇÇÑ, MODIFY ÀýÀ» ÅëÇØ NOT NULL Á¦¾àÁ¶°ÇÀ» ´Ù½Ã Ãß°¡ÇÑ Å×ÀÌºí
+-- í…Œì´ë¸” ìƒì„± ì´í›„ ADD ë¥¼ í†µí•´ NOT NULL ì œì•½ì¡°ê±´ì„ ì¶”ê°€í•˜ì˜€ìœ¼ë©°
+-- ë˜í•œ, MODIFY ì ˆì„ í†µí•´ NOT NULL ì œì•½ì¡°ê±´ì„ ë‹¤ì‹œ ì¶”ê°€í•œ í…Œì´ë¸”
 DESC TBL_TEST13;
 --==>>
 /*
-ÀÌ¸§   ³Î?       À¯Çü           
+ì´ë¦„   ë„?       ìœ í˜•           
 ---- -------- ------------ 
 COL1 NOT NULL NUMBER(5)    
 COL2 NOT NULL VARCHAR2(30) 
 */
---> DESC ¸¦ ÅëÇØ COL2 ÄÃ·³ÀÌ  NOT NULL ÀÎ Á¤º¸°¡ È®ÀÎµÇ´Â »óÈ²
+--> DESC ë¥¼ í†µí•´ COL2 ì»¬ëŸ¼ì´  NOT NULL ì¸ ì •ë³´ê°€ í™•ì¸ë˜ëŠ” ìƒí™©
 
 
--- Á¦¾àÁ¶°Ç È®ÀÎ Àü¿ë ºä(VIEW) Á¶È¸
+-- ì œì•½ì¡°ê±´ í™•ì¸ ì „ìš© ë·°(VIEW) ì¡°íšŒ
 SELECT *
 FROM VIEW_CONSTCHECK
 WHERE TABLE_NAME IN('TBL_TEST11', 'TBL_TEST12', 'TBL_TEST13');
@@ -1335,6 +1335,6 @@ HR	TEST13_COL1_PK	TBL_TEST13	P	COL1
 HR	TEST13_COL2_NN	TBL_TEST13	C	COL2	COL2 IS NOT NULL	
 HR	SYS_C007090	    TBL_TEST13	C	COL2	"COL2" IS NOT NULL	
 */
---> ÀÌ·¸°Ô Á¶È¸µÇ´Â °á°ú°¡ ´Ù¸£°Ô ³ª¿À±â ¶§¹®¿¡ ÄÃ·³ ·¹º§·Î ÀÔ·ÂÇÏ´Â °ÍÀÌ ÁÁÀ½!
+--> ì´ë ‡ê²Œ ì¡°íšŒë˜ëŠ” ê²°ê³¼ê°€ ë‹¤ë¥´ê²Œ ë‚˜ì˜¤ê¸° ë•Œë¬¸ì— ì»¬ëŸ¼ ë ˆë²¨ë¡œ ìž…ë ¥í•˜ëŠ” ê²ƒì´ ì¢‹ìŒ!
 
 
