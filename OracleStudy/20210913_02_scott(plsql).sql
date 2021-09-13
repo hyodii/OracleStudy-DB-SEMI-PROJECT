@@ -2,101 +2,102 @@ SELECT USER
 FROM DUAL;
 --==>> SCOTT
 
--- PL/SQLÀº µå·¡±×ÇØ¼­ ½ÇÇàÇØ¾ßÇÔ ¹«Á¶°Ç!!
--- PL/SQL ÀúÀåÀº(plsql)Àû¾î¼­ ÀúÀåÇÒ °ÍÀÓ!
+-- PL/SQLì€ ë“œëž˜ê·¸í•´ì„œ ì‹¤í–‰í•´ì•¼í•¨ ë¬´ì¡°ê±´!!
+-- PL/SQL ì €ìž¥ì€(plsql)ì ì–´ì„œ ì €ìž¥í•  ê²ƒìž„!
 
 
 
 
---¡á¡á¡á PL/SQL ¡á¡á¡á--
+--â– â– â–  PL/SQL â– â– â– --
 
--- 1. PL/SQL(Procedural Language extension to SQL)Àº
---   ÇÁ·Î±×·¡¹Ö ¾ð¾îÀÇ Æ¯¼ºÀ» °¡Áö´Â SQLÀÇ È®ÀåÀÌ¸ç,
---   µ¥ÀÌÅÍ Á¶ÀÛ°ú ÁúÀÇ ¹®ÀåÀº PL/SQL ÀÇ ÀýÂ÷Àû ÄÚµå ¾È¿¡ Æ÷ÇÔµÈ´Ù.
---   ¶ÇÇÑ PL/SQLÀ» »ç¿ëÇÏ¿© SQL ·Î ÇÒ ¼ö ¾ø´Â ÀýÂ÷Àû ÀÛ¾÷ÀÌ °¡´ÉÇÏ´Ù.
---   ¿©±â¿¡¼­ ¡ºÀýÂ÷Àû¡»ÀÌ¶ó´Â ´Ü¾î°¡ °¡Áö´Â ÀÇ¹Ì´Â
---   ¾î¶² °ÍÀÌ ¾î¶² °úÁ¤À» °ÅÃÄ ¾î¶»°Ô ¿Ï·áµÇ´ÂÁö
---   ±× ¹æ¹ýÀ» Á¤È®ÇÏ°Ô ÄÚµå¿¡ ±â¼úÇÑ´Ù´Â °ÍÀ» ÀÇ¹ÌÇÑ´Ù.
+-- 1. PL/SQL(Procedural Language extension to SQL)ì€
+--   í”„ë¡œê·¸ëž˜ë° ì–¸ì–´ì˜ íŠ¹ì„±ì„ ê°€ì§€ëŠ” SQLì˜ í™•ìž¥ì´ë©°,
+--   ë°ì´í„° ì¡°ìž‘ê³¼ ì§ˆì˜ ë¬¸ìž¥ì€ PL/SQL ì˜ ì ˆì°¨ì  ì½”ë“œ ì•ˆì— í¬í•¨ëœë‹¤.
+--   ë˜í•œ PL/SQLì„ ì‚¬ìš©í•˜ì—¬ SQL ë¡œ í•  ìˆ˜ ì—†ëŠ” ì ˆì°¨ì  ìž‘ì—…ì´ ê°€ëŠ¥í•˜ë‹¤.
+--   ì—¬ê¸°ì—ì„œ ã€Žì ˆì°¨ì ã€ì´ë¼ëŠ” ë‹¨ì–´ê°€ ê°€ì§€ëŠ” ì˜ë¯¸ëŠ”
+--   ì–´ë–¤ ê²ƒì´ ì–´ë–¤ ê³¼ì •ì„ ê±°ì³ ì–´ë–»ê²Œ ì™„ë£Œë˜ëŠ”ì§€
+--   ê·¸ ë°©ë²•ì„ ì •í™•í•˜ê²Œ ì½”ë“œì— ê¸°ìˆ í•œë‹¤ëŠ” ê²ƒì„ ì˜ë¯¸í•œë‹¤.
 
--- 2. PL/SQL Àº ÀûÂ÷ÀûÀ¸·Î Ç¥ÇöÇÏ±â À§ÇØ
---   º¯¼ö¸¦ ¼±¾ðÇÒ ¼ö ÀÖ´Â ±â´É,
---   Âü°ú °ÅÁþÀ» ±¸º°ÇÒ ¼ö ÀÖ´Â ±â´É,
---   ½ÇÇà Èå¸§À» ÄÁÆ®·ÑÇÒ ¼ö ÀÖ´Â ±â´É µîÀ» Á¦°øÇÑ´Ù.
+-- 2. PL/SQL ì€ ì ì°¨ì ìœ¼ë¡œ í‘œí˜„í•˜ê¸° ìœ„í•´
+--   ë³€ìˆ˜ë¥¼ ì„ ì–¸í•  ìˆ˜ ìžˆëŠ” ê¸°ëŠ¥,
+--   ì°¸ê³¼ ê±°ì§“ì„ êµ¬ë³„í•  ìˆ˜ ìžˆëŠ” ê¸°ëŠ¥,
+--   ì‹¤í–‰ íë¦„ì„ ì»¨íŠ¸ë¡¤í•  ìˆ˜ ìžˆëŠ” ê¸°ëŠ¥ ë“±ì„ ì œê³µí•œë‹¤.
 
--- 3. PL/SQL Àº ºí·° ±¸Á¶·Î µÇ¾î ÀÖÀ¸¸ç
---   ºí·°Àº ¼±¾ð ºÎºÐ, ½ÇÇàºÎºÐ, ¿¹¿Ü Ã³¸® ºÎºÐÀÇ
---   ¼¼ ºÎºÐÀ¸·Î ±¸¼ºµÇ¾î ÀÖ´Ù.
---   ¶ÇÇÑ, ¹Ýµå½Ã ½ÇÇà ºÎºÐÀº Á¸ÀçÇØ¾ß ÇÏ¸ç, ±¸Á¶´Â ´ÙÀ½°ú °°´Ù.
+-- 3. PL/SQL ì€ ë¸”ëŸ­ êµ¬ì¡°ë¡œ ë˜ì–´ ìžˆìœ¼ë©°
+--   ë¸”ëŸ­ì€ ì„ ì–¸ ë¶€ë¶„, ì‹¤í–‰ë¶€ë¶„, ì˜ˆì™¸ ì²˜ë¦¬ ë¶€ë¶„ì˜
+--   ì„¸ ë¶€ë¶„ìœ¼ë¡œ êµ¬ì„±ë˜ì–´ ìžˆë‹¤.
+--   ë˜í•œ, ë°˜ë“œì‹œ ì‹¤í–‰ ë¶€ë¶„ì€ ì¡´ìž¬í•´ì•¼ í•˜ë©°, êµ¬ì¡°ëŠ” ë‹¤ìŒê³¼ ê°™ë‹¤.
 
--- 4. Çü½Ä ¹× ±¸Á¶
--- DECLARE ¿Í BIGIN »çÀÌ°¡ ¼±¾ð¹®
--- BEGIN °ú END »çÀÌ°¡ ½ÇÇà¹®
--- ÀÍ¼Á¼Ê°ú ¿£µå »çÀÌ°¡ ¿¹¿ÜÃ³¸®¹®
+-- 4. í˜•ì‹ ë° êµ¬ì¡°
+-- DECLARE ì™€ BIGIN ì‚¬ì´ê°€ ì„ ì–¸ë¬¸
+-- BEGIN ê³¼ END ì‚¬ì´ê°€ ì‹¤í–‰ë¬¸
+-- ìµì…‰ì…¥ê³¼ ì—”ë“œ ì‚¬ì´ê°€ ì˜ˆì™¸ì²˜ë¦¬ë¬¸
 /*
 [DECLARE]
-    -- ¼±¾ð¹®(declarations)
+    -- ì„ ì–¸ë¬¸(declarations)
 BEGIN
-    -- ½ÇÇà¹®(statements)
+    -- ì‹¤í–‰ë¬¸(statements)
     [EXCEPTION]
-        -- ¿¹¿Ü Ã³¸®¹®(exception handlers)
+        -- ì˜ˆì™¸ ì²˜ë¦¬ë¬¸(exception handlers)
 END;
 */
 
--- 5. º¯¼ö ¼±¾ð
+-- 5. ë³€ìˆ˜ ì„ ì–¸
 /*
-DECLARE                                           <ÃÊ±âÈ­ ÇÏ´Â¹ý>
-    -- ÀÚ·áÇü º¯¼ö¸í;         int num; ¡æ X                int num = 10;
-    º¯¼ö¸í ÀÚ·áÇü;            COL1 NUMBER(3); ¡æ ¡Û        COL1 NUMBER(3) := 10;
-    º¯¼ö¸í ÀÚ·áÇü := ÃÊ±â°ª;(=:Àº ¾øÀ½!)
+DECLARE                                           <ì´ˆê¸°í™” í•˜ëŠ”ë²•>
+    -- ìžë£Œí˜• ë³€ìˆ˜ëª…;         int num; â†’ X                int num = 10;
+    ë³€ìˆ˜ëª… ìžë£Œí˜•;            COL1 NUMBER(3); â†’ â—‹        COL1 NUMBER(3) := 10;
+    ë³€ìˆ˜ëª… ìžë£Œí˜• := ì´ˆê¸°ê°’;(=:ì€ ì—†ìŒ!)
 BEGIN
-    PL/SQL ±¸ºÐ;
+    PL/SQL êµ¬ë¶„;
 END;
 */
 
 
 
 SET SERVEROUTPUT ON;
---==>> ½ºÅ©¸³Æ® Ãâ·Â¿¡ ÀÛ¾÷ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.
--- ¡ºDBMS_OUTPUT.PUT_LINE()¡»À» ÅëÇØ
--- È­¸é¿¡ °á°ú¸¦ Ãâ·ÂÇÏ±â À§ÇÑ È¯°æº¯¼ö¸¦ ¼³Á¤
+--==>> ìŠ¤í¬ë¦½íŠ¸ ì¶œë ¥ì— ìž‘ì—…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
+-- ìŠ¤í¬ë¦½íŠ¸ ì¶œë ¥ ë°‘ì— ìž‘ì€ ê¸€ì”¨ë¡œ ìžˆìŒ!!
+-- ã€ŽDBMS_OUTPUT.PUT_LINE()ã€ì„ í†µí•´
+-- í™”ë©´ì— ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ê¸° ìœ„í•œ í™˜ê²½ë³€ìˆ˜ë¥¼ ì„¤ì •
 
 
---¡Û º¯¼öÀÇ ÀÓÀÇÀÇ °ªÀ» ´ëÀÔÇÏ°í Ãâ·ÂÇÏ´Â ±¸¹® ÀÛ¼º
--- PL/SQLÀº STATEMENT°¡ ³¡³¯ ¶§¸¶´Ù ;Àû¾îÁØ´Ù! ±×·¡¼­ ºí·°Àâ¾Æ¼­ CTRL + ENTER / F5 ÇØÁà¾ß ÇÑ´Ù!!
+--â—‹ ë³€ìˆ˜ì˜ ìž„ì˜ì˜ ê°’ì„ ëŒ€ìž…í•˜ê³  ì¶œë ¥í•˜ëŠ” êµ¬ë¬¸ ìž‘ì„±
+-- PL/SQLì€ STATEMENTê°€ ëë‚  ë•Œë§ˆë‹¤ ;ì ì–´ì¤€ë‹¤! ê·¸ëž˜ì„œ ë¸”ëŸ­ìž¡ì•„ì„œ CTRL + ENTER / F5 í•´ì¤˜ì•¼ í•œë‹¤!!
 DECLARE
-    -- ¼±¾ðºÎ
+    -- ì„ ì–¸ë¶€
     V1 NUMBER := 10;
     V2 VARCHAR2(30) := 'HELLO';
     V3 VARCHAR2(20) := 'Oracle';
 BEGIN
-    -- ½ÇÇàºÎ
+    -- ì‹¤í–‰ë¶€
     --SYSTEM.OUT.PRINTLN(V1);
     DBMS_OUTPUT.PUT_LINE(V1);
     DBMS_OUTPUT.PUT_LINE(V2);
     DBMS_OUTPUT.PUT_LINE(V3);
 END;
---==>> PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.(Ã³À½¿¡´Â ÀÌ·¸°Ô¸¸ ³ª¿È! ±×·¡¼­ À§¿¡ SET±¸¹® ÇØÁà¾ßÇÔ!!)
+--==>> PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.(ì²˜ìŒì—ëŠ” ì´ë ‡ê²Œë§Œ ë‚˜ì˜´! ê·¸ëž˜ì„œ ìœ„ì— SETêµ¬ë¬¸ í•´ì¤˜ì•¼í•¨!!)
 /*
 10
 HELLO
 Oracle
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 
---¡Û º¯¼ö¿¡ ÀÓÀÇÀÇ °ªÀ» ´ëÀÔÇÏ°í Ãâ·ÂÇÏ´Â PL/SQL ±¸¹® ÀÛ¼º
+--â—‹ ë³€ìˆ˜ì— ìž„ì˜ì˜ ê°’ì„ ëŒ€ìž…í•˜ê³  ì¶œë ¥í•˜ëŠ” PL/SQL êµ¬ë¬¸ ìž‘ì„±
 DECLARE
-    -- ¼±¾ðºÎ
+    -- ì„ ì–¸ë¶€
     V1 NUMBER := 10;
     V2 VARCHAR2(30) := 'HELLO';
     V3 VARCHAR2(30) := 'Oracle';
     
 BEGIN
-    -- ½ÇÇàºÎ
+    -- ì‹¤í–‰ë¶€
     V1 := V1 * 10;          -- V1 *= 10;
-    V2 := V2 || ' ¼öÁö';     -- V2 += " ¼öÁö"; 
+    V2 := V2 || ' ìˆ˜ì§€';     -- V2 += " ìˆ˜ì§€"; 
     V3 := V3 || ' World';
     
     DBMS_OUTPUT.PUT_LINE(V1);
@@ -107,42 +108,42 @@ END;
 --==>>
 /*
 100
-HELLO ¼öÁö
+HELLO ìˆ˜ì§€
 Oracle World
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 
---¡Û IF¹®(Á¶°Ç¹®)
+--â—‹ IFë¬¸(ì¡°ê±´ë¬¸)
 -- IF ~ THEN ~ ELSE ~ END IF;
 
--- 1. PL/SQL ÀÇ IF ¹®ÀåÀº ´Ù¸¥ ¾ð¾îÀÇ IF Á¶°Ç¹®°ú °ÅÀÇ À¯»çÇÏ´Ù.
---    ÀÏÄ¡ÇÏ´Â Á¶°Ç¿¡ µû¶ó ¼±ÅÃÀûÀ¸·Î ÀÛ¾÷À» ¼öÇàÇÒ ¼ö ÀÖµµ·Ï ÇÑ´Ù.
---    TRUE ÀÌ¸é THEN °ú ELSE »çÀÌÀÇ ¹®ÀåÀ» ¼öÇàÇÏ°í
---    FALSE ³ª NULL ÀÌ¸é ELSE ¿Í END IF »çÀÌÀÇ ¹®ÀåÀ» ¼öÇàÇÏ°Ô µÈ´Ù.
+-- 1. PL/SQL ì˜ IF ë¬¸ìž¥ì€ ë‹¤ë¥¸ ì–¸ì–´ì˜ IF ì¡°ê±´ë¬¸ê³¼ ê±°ì˜ ìœ ì‚¬í•˜ë‹¤.
+--    ì¼ì¹˜í•˜ëŠ” ì¡°ê±´ì— ë”°ë¼ ì„ íƒì ìœ¼ë¡œ ìž‘ì—…ì„ ìˆ˜í–‰í•  ìˆ˜ ìžˆë„ë¡ í•œë‹¤.
+--    TRUE ì´ë©´ THEN ê³¼ ELSE ì‚¬ì´ì˜ ë¬¸ìž¥ì„ ìˆ˜í–‰í•˜ê³ 
+--    FALSE ë‚˜ NULL ì´ë©´ ELSE ì™€ END IF ì‚¬ì´ì˜ ë¬¸ìž¥ì„ ìˆ˜í–‰í•˜ê²Œ ëœë‹¤.
 
--- 2. Çü½Ä ¹× ±¸Á¶
--- IF ´Â THEN ÀÌ ÀÖ´Âµ¥ ELSE´Â ¾ø´Ù!!
+-- 2. í˜•ì‹ ë° êµ¬ì¡°
+-- IF ëŠ” THEN ì´ ìžˆëŠ”ë° ELSEëŠ” ì—†ë‹¤!!
 /*
-IF Á¶°Ç
-    THEN Ã³¸®±¸¹®;
-ELSIF Á¶°Ç
-    THEN Ã³¸®±¸¹®;
-ELSIF Á¶°Ç
-    THEN Ã³¸®±¸¹®;
+IF ì¡°ê±´
+    THEN ì²˜ë¦¬êµ¬ë¬¸;
+ELSIF ì¡°ê±´
+    THEN ì²˜ë¦¬êµ¬ë¬¸;
+ELSIF ì¡°ê±´
+    THEN ì²˜ë¦¬êµ¬ë¬¸;
 ELSE
-    Ã³¸®±¸¹®;
+    ì²˜ë¦¬êµ¬ë¬¸;
 END IF;
 */
 
 
---¡Û º¯¼ö¿¡ µé¾îÀÖ´Â °ª¿¡ µû¶ó...
---   Excellent , Good, Fail ·Î ±¸ºÐÇÏ¿©
---   °á°ú¸¦ Ãâ·ÂÇÏ´Â PL/SQL ±¸¹®À» ÀÛ¼ºÇÑ´Ù.
+--â—‹ ë³€ìˆ˜ì— ë“¤ì–´ìžˆëŠ” ê°’ì— ë”°ë¼...
+--   Excellent , Good, Fail ë¡œ êµ¬ë¶„í•˜ì—¬
+--   ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ëŠ” PL/SQL êµ¬ë¬¸ì„ ìž‘ì„±í•œë‹¤.
 DECLARE
-    GRADE CHAR; -- 1ÀÚ¸® ¹®ÀÚ
+    GRADE CHAR; -- 1ìžë¦¬ ë¬¸ìž
 BEGIN
     GRADE := 'C';
     
@@ -159,11 +160,11 @@ END;
 Fail
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 DECLARE
-    GRADE CHAR; -- 1ÀÚ¸® ¹®ÀÚ
+    GRADE CHAR; -- 1ìžë¦¬ ë¬¸ìž
 BEGIN
     GRADE := 'B';
     
@@ -180,11 +181,11 @@ END;
 Good
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 DECLARE
-    GRADE CHAR; -- 1ÀÚ¸® ¹®ÀÚ
+    GRADE CHAR; -- 1ìžë¦¬ ë¬¸ìž
 BEGIN
     GRADE := 'A';
     
@@ -201,32 +202,32 @@ END;
 Excellent
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 
---¡Û CASE¹® (Á¶°Ç¹®)
+--â—‹ CASEë¬¸ (ì¡°ê±´ë¬¸)
 -- CASE ~WHEN ~ THEN ~ ELSE ~ END CASE;
 
--- 1. Çü½Ä ¹× ±¸Á¶
+-- 1. í˜•ì‹ ë° êµ¬ì¡°
 /*
-CASE º¯¼ö
-    WHEN °ª1
-        THEN ½ÇÇà¹®;
-    WHEN °ª2
-        THEN ½ÇÇà¹®;
+CASE ë³€ìˆ˜
+    WHEN ê°’1
+        THEN ì‹¤í–‰ë¬¸;
+    WHEN ê°’2
+        THEN ì‹¤í–‰ë¬¸;
     ELSE
-        ½ÇÇà¹®;
+        ì‹¤í–‰ë¬¸;
     
 END CASE;
 */
 
 
 
---¡Û º¯¼ö¿¡ µé¾îÀÖ´Â °ª¿¡ µû¶ó...
---   Excellent, Good, Fail ·Î ±¸ºÐÇÏ¿©
---   °á°ú¸¦ Ãâ·ÂÇÏ´Â PL/SQL ±¸¹®À» ÀÛ¼ºÇÑ´Ù.
---   ´Ü, CASE À» È°¿ëÇÏ¿© ÀÛ¼ºÇÑ´Ù.
+--â—‹ ë³€ìˆ˜ì— ë“¤ì–´ìžˆëŠ” ê°’ì— ë”°ë¼...
+--   Excellent, Good, Fail ë¡œ êµ¬ë¶„í•˜ì—¬
+--   ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ëŠ” PL/SQL êµ¬ë¬¸ì„ ìž‘ì„±í•œë‹¤.
+--   ë‹¨, CASE ì„ í™œìš©í•˜ì—¬ ìž‘ì„±í•œë‹¤.
 DECLARE
     GRADE CHAR;
 BEGIN
@@ -246,7 +247,7 @@ END;
 Excellent
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 DECLARE
@@ -268,7 +269,7 @@ END;
 Good
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 DECLARE
@@ -290,35 +291,35 @@ END;
 Fail
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 
 
---¡Û ¿ÜºÎ ÀÔ·Â Ã³¸®
+--â—‹ ì™¸ë¶€ ìž…ë ¥ ì²˜ë¦¬
 
--- ACCEPT ¹®
--- ACCEPT º¯¼ö¸í PROMPT '¸Þ¼¼Áö';
--- ¿ÜºÎ º¯¼ö·ÎºÎÅÍ ÀÔ·Â¹ÞÀº µ¥ÀÌÅÍ¸¦ ³»ºÎ º¯¼ö¿¡ Àü´ÞÇÒ ¶§
--- ¡º&¿ÜºÎº¯¼ö¸í¡» ÇüÅÂ·Î Á¢±ÙÇÏ°Ô µÈ´Ù.
+-- ACCEPT ë¬¸
+-- ACCEPT ë³€ìˆ˜ëª… PROMPT 'ë©”ì„¸ì§€';
+-- ì™¸ë¶€ ë³€ìˆ˜ë¡œë¶€í„° ìž…ë ¥ë°›ì€ ë°ì´í„°ë¥¼ ë‚´ë¶€ ë³€ìˆ˜ì— ì „ë‹¬í•  ë•Œ
+-- ã€Ž&ì™¸ë¶€ë³€ìˆ˜ëª…ã€ í˜•íƒœë¡œ ì ‘ê·¼í•˜ê²Œ ëœë‹¤.
 
---¡Û Á¤¼ö 2°³¸¦ ¿ÜºÎ·ÎºÎÅÍ(»ç¿ëÀÚ·ÎºÎÅÍ) ÀÔ·Â¹Þ¾Æ
---   ÀÌµéÀÇ µ«¼À °á°ú¸¦ Ãâ·ÂÇÏ´Â PL/SQL ±¸¹®À» ÀÛ¼ºÇÑ´Ù.
+--â—‹ ì •ìˆ˜ 2ê°œë¥¼ ì™¸ë¶€ë¡œë¶€í„°(ì‚¬ìš©ìžë¡œë¶€í„°) ìž…ë ¥ë°›ì•„
+--   ì´ë“¤ì˜ ëŽƒì…ˆ ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ëŠ” PL/SQL êµ¬ë¬¸ì„ ìž‘ì„±í•œë‹¤.
 
-ACCEPT N1 PROMPT 'Ã¹ ¹øÂ° Á¤¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä';
-ACCEPT N2 PROMPT 'µÎ ¹øÂ° Á¤¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä';
--- ½ÇÇàÇÏ¸é ¹ÙÀÎµùÃ¢ÀÌ ¶ä Ã¹ ¹øÀç´Â 10 µÎ ¹øÂ°´Â 20 ÀÔ·Â!
+ACCEPT N1 PROMPT 'ì²« ë²ˆì§¸ ì •ìˆ˜ë¥¼ ìž…ë ¥í•˜ì„¸ìš”';
+ACCEPT N2 PROMPT 'ë‘ ë²ˆì§¸ ì •ìˆ˜ë¥¼ ìž…ë ¥í•˜ì„¸ìš”';
+-- ì‹¤í–‰í•˜ë©´ ë°”ì¸ë”©ì°½ì´ ëœ¸ ì²« ë²ˆìž¬ëŠ” 10 ë‘ ë²ˆì§¸ëŠ” 20 ìž…ë ¥!
 
 DECLARE
-    -- ÁÖ¿ä º¯¼ö ¼±¾ð ¹× ÃÊ±âÈ­
+    -- ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸ ë° ì´ˆê¸°í™”
     NUM1    NUMBER := &N1;
     NUM2    NUMBER := &N2;
     TOTAL   NUMBER := 0;
 BEGIN
-    -- ¿¬»ê ¹× Ã³¸®
+    -- ì—°ì‚° ë° ì²˜ë¦¬
     TOTAL := NUM1 + NUM2;
     
-    -- °á°ú Ãâ·Â
+    -- ê²°ê³¼ ì¶œë ¥
     DBMS_OUTPUT.PUT_LINE(NUM1 || ' + ' || NUM2 || ' = ' || TOTAL);
 END;
 --==>>
@@ -326,23 +327,23 @@ END;
 10 + 20 = 30
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 
---¡Û »ç¿ëÀÚ·ÎºÎÅÍ ÀÔ·Â¹ÞÀº ±Ý¾×À» È­Æó ´ÜÀ§·Î Ãâ·ÂÇÏ´Â ÇÁ·Î±×·¥À» ÀÛ¼ºÇÑ´Ù.
---   ´Ü, ¹ÝÈ¯ ±Ý¾×Àº ÆòÀÇ»ó 1Ãµ¿ø ¹Ì¸¸, 10¿ø ÀÌ»ó¸¸ °¡´ÉÇÏ´Ù°í °¡Á¤ÇÑ´Ù.
+--â—‹ ì‚¬ìš©ìžë¡œë¶€í„° ìž…ë ¥ë°›ì€ ê¸ˆì•¡ì„ í™”í ë‹¨ìœ„ë¡œ ì¶œë ¥í•˜ëŠ” í”„ë¡œê·¸ëž¨ì„ ìž‘ì„±í•œë‹¤.
+--   ë‹¨, ë°˜í™˜ ê¸ˆì•¡ì€ í‰ì˜ìƒ 1ì²œì› ë¯¸ë§Œ, 10ì› ì´ìƒë§Œ ê°€ëŠ¥í•˜ë‹¤ê³  ê°€ì •í•œë‹¤.
 /*
-½ÇÇà ¿¹)
-¹ÙÀÎµù º¯¼ö ÀÔ·Â ´ëÈ­Ã¢ ¡æ ±Ý¾× ÀÔ·Â : [  890]
+ì‹¤í–‰ ì˜ˆ)
+ë°”ì¸ë”© ë³€ìˆ˜ ìž…ë ¥ ëŒ€í™”ì°½ â†’ ê¸ˆì•¡ ìž…ë ¥ : [  890]
 
-ÀÔ·Â¹ÞÀº ±Ý¾× ÃÑ¾× : 890¿ø
-È­Æó´ÜÀ§ : ¿À¹é¿ø 1, ¹é¿ø 3, ¿À½Ê¿ø 1, ½Ê¿ø 4
+ìž…ë ¥ë°›ì€ ê¸ˆì•¡ ì´ì•¡ : 890ì›
+í™”íë‹¨ìœ„ : ì˜¤ë°±ì› 1, ë°±ì› 3, ì˜¤ì‹­ì› 1, ì‹­ì› 4
 */
 
---³ªÀÇ Ç®ÀÌ...(ÇØ°á¸øÇÔ)
+--ë‚˜ì˜ í’€ì´...(í•´ê²°ëª»í•¨)
 /*
-ACCEPT N1 PROMPT '±Ý¾× ÀÔ·Â';
+ACCEPT N1 PROMPT 'ê¸ˆì•¡ ìž…ë ¥';
 
 DECLARE
     NUM1    NUMBER := &N1;
@@ -351,7 +352,7 @@ DECLARE
     NUM4    NUMBER := 0;
     NUM5    NUMBER := 0;
 BEGIN
-    -- ¿¬»ê ¹× Ã³¸®
+    -- ì—°ì‚° ë° ì²˜ë¦¬
     IF NUM1>500
         THEN NUM2 := NUM1/500;
     ELSIF NUM1<500
@@ -362,76 +363,76 @@ BEGIN
         THEN NUM5 := NUM1/50;
         
     END IF;
-    -- Ãâ·Â°á°ú
-    DBMS_OUTPUT.PUT_LINE('È­Æó´ÜÀ§ : ¿À¹é¿ø ' || NUM2 || ', ¹é¿ø ' || NUM3 ||', ¿À½Ê¿ø ' ||NUM4||', ½Ê¿ø '||NUM5);
+    -- ì¶œë ¥ê²°ê³¼
+    DBMS_OUTPUT.PUT_LINE('í™”íë‹¨ìœ„ : ì˜¤ë°±ì› ' || NUM2 || ', ë°±ì› ' || NUM3 ||', ì˜¤ì‹­ì› ' ||NUM4||', ì‹­ì› '||NUM5);
 END;
 */
 
 
 
---Ç®ÀÌ--------------------------------------------------------------------------
-ACCEPT INPUT PROMPT '±Ý¾× ÀÔ·Â';
+--í’€ì´--------------------------------------------------------------------------
+ACCEPT INPUT PROMPT 'ê¸ˆì•¡ ìž…ë ¥';
 
 DECLARE
-    --¡Û ÁÖ¿ä º¯¼ö ¼±¾ð ¹× ÃÊ±âÈ­
-    MONEY   NUMBER := &INPUT;     -- ¿¬»êÀ» À§ÇØ ´ã¾ÆµÐ º¯¼ö
-    MONEY2  NUMBER := &INPUT;     -- Ãâ·ÂÀ» À§ÇØ ´ã¾ÆµÐ º¯¼ö(¿¬»ê °úÁ¤¿¡¼­ °ªÀÌ º¯ÇÏ±â ¶§¹®¿¡...)
-    M500    NUMBER;               -- 500¿ø Â¥¸® °¹¼ö¸¦ ´ã¾ÆµÑ º¯¼ö
-    M100    NUMBER;               -- 100¿ø Â¥¸® °¹¼ö¸¦ ´ã¾ÆµÑ º¯¼ö
-    M50     NUMBER;               --  50¿ø Â¥¸® °¹¼ö¸¦ ´ã¾ÆµÑ º¯¼ö
-    M10     NUMBER;               --  10¿ø Â¥¸® °¹¼ö¸¦ ´ã¾ÆµÑ º¯¼ö
+    --â—‹ ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸ ë° ì´ˆê¸°í™”
+    MONEY   NUMBER := &INPUT;     -- ì—°ì‚°ì„ ìœ„í•´ ë‹´ì•„ë‘” ë³€ìˆ˜
+    MONEY2  NUMBER := &INPUT;     -- ì¶œë ¥ì„ ìœ„í•´ ë‹´ì•„ë‘” ë³€ìˆ˜(ì—°ì‚° ê³¼ì •ì—ì„œ ê°’ì´ ë³€í•˜ê¸° ë•Œë¬¸ì—...)
+    M500    NUMBER;               -- 500ì› ì§œë¦¬ ê°¯ìˆ˜ë¥¼ ë‹´ì•„ë‘˜ ë³€ìˆ˜
+    M100    NUMBER;               -- 100ì› ì§œë¦¬ ê°¯ìˆ˜ë¥¼ ë‹´ì•„ë‘˜ ë³€ìˆ˜
+    M50     NUMBER;               --  50ì› ì§œë¦¬ ê°¯ìˆ˜ë¥¼ ë‹´ì•„ë‘˜ ë³€ìˆ˜
+    M10     NUMBER;               --  10ì› ì§œë¦¬ ê°¯ìˆ˜ë¥¼ ë‹´ì•„ë‘˜ ë³€ìˆ˜
 BEGIN
-    --¡Û ¿¬»ê ¹× Ã³¸®
-    -- MONEY ¸¦ 500À¸·Î ³ª´²¼­ ¸òÀ» ÃëÇÏ°í ³ª¸ÓÁö´Â ¹ö¸°´Ù. ¡æ 500¿øÀÇ °¹¼ö
+    --â—‹ ì—°ì‚° ë° ì²˜ë¦¬
+    -- MONEY ë¥¼ 500ìœ¼ë¡œ ë‚˜ëˆ ì„œ ëª«ì„ ì·¨í•˜ê³  ë‚˜ë¨¸ì§€ëŠ” ë²„ë¦°ë‹¤. â†’ 500ì›ì˜ ê°¯ìˆ˜
     M500 := TRUNC(MONEY/500);
-    -- MONEY ¸¦ 500À¸·Î ³ª´²¼­ ¸òÀ» ¹ö¸®°í ³ª¸ÓÁö¸¦ ÃëÇÑ´ÙÀ½
-    -- ÀÌ °á°ú¸¦ ´Ù½Ã MONEY¿¡ ´ã¾Æ³½´Ù.(500¿øÀÌ »©Áø ³ª¸ÓÁö ÀÜµ·)
+    -- MONEY ë¥¼ 500ìœ¼ë¡œ ë‚˜ëˆ ì„œ ëª«ì„ ë²„ë¦¬ê³  ë‚˜ë¨¸ì§€ë¥¼ ì·¨í•œë‹¤ìŒ
+    -- ì´ ê²°ê³¼ë¥¼ ë‹¤ì‹œ MONEYì— ë‹´ì•„ë‚¸ë‹¤.(500ì›ì´ ë¹¼ì§„ ë‚˜ë¨¸ì§€ ìž”ëˆ)
     MONEY := MOD(MONEY,500);
-    -- MONEY ¸¦ 100À¸·Î ³ª´²¼­ ¸òÀ» ÃëÇÏ°í ³ª¸ÓÁö´Â ¹ö¸°´Ù. ¡æ 100¿øÀÇ °¹¼ö
+    -- MONEY ë¥¼ 100ìœ¼ë¡œ ë‚˜ëˆ ì„œ ëª«ì„ ì·¨í•˜ê³  ë‚˜ë¨¸ì§€ëŠ” ë²„ë¦°ë‹¤. â†’ 100ì›ì˜ ê°¯ìˆ˜
     M100 := TRUNC(MONEY/100);
-    -- MONEY ¸¦ 100À¸·Î ³ª´²¼­ ¸òÀ» ¹ö¸®°í ³ª¸ÓÁö¸¦ ÃëÇÑ´ÙÀ½
-    -- ÀÌ °á°ú¸¦ ´Ù½Ã MONEY¿¡ ´ã¾Æ³½´Ù.(100¿øÀÌ »©Áø ³ª¸ÓÁö ÀÜµ·)
+    -- MONEY ë¥¼ 100ìœ¼ë¡œ ë‚˜ëˆ ì„œ ëª«ì„ ë²„ë¦¬ê³  ë‚˜ë¨¸ì§€ë¥¼ ì·¨í•œë‹¤ìŒ
+    -- ì´ ê²°ê³¼ë¥¼ ë‹¤ì‹œ MONEYì— ë‹´ì•„ë‚¸ë‹¤.(100ì›ì´ ë¹¼ì§„ ë‚˜ë¨¸ì§€ ìž”ëˆ)
     MONEY := MOD(MONEY,100);
-    -- MONEY ¸¦ 50À¸·Î ³ª´²¼­ ¸òÀ» ÃëÇÏ°í ³ª¸ÓÁö´Â ¹ö¸°´Ù. ¡æ 50¿øÀÇ °¹¼ö
+    -- MONEY ë¥¼ 50ìœ¼ë¡œ ë‚˜ëˆ ì„œ ëª«ì„ ì·¨í•˜ê³  ë‚˜ë¨¸ì§€ëŠ” ë²„ë¦°ë‹¤. â†’ 50ì›ì˜ ê°¯ìˆ˜
     M50 := TRUNC(MONEY/50);
-    -- MONEY ¸¦ 50À¸·Î ³ª´²¼­ ¸òÀ» ¹ö¸®°í ³ª¸ÓÁö¸¦ ÃëÇÑ´ÙÀ½
-    -- ÀÌ °á°ú¸¦ ´Ù½Ã MONEY¿¡ ´ã¾Æ³½´Ù.(50¿øÀÌ »©Áø ³ª¸ÓÁö ÀÜµ·)
+    -- MONEY ë¥¼ 50ìœ¼ë¡œ ë‚˜ëˆ ì„œ ëª«ì„ ë²„ë¦¬ê³  ë‚˜ë¨¸ì§€ë¥¼ ì·¨í•œë‹¤ìŒ
+    -- ì´ ê²°ê³¼ë¥¼ ë‹¤ì‹œ MONEYì— ë‹´ì•„ë‚¸ë‹¤.(50ì›ì´ ë¹¼ì§„ ë‚˜ë¨¸ì§€ ìž”ëˆ)
     MONEY := MOD(MONEY,50);
-    -- MONEY ¸¦ 10À¸·Î ³ª´²¼­ ¸òÀ» ÃëÇÏ°í ³ª¸ÓÁö´Â ¹ö¸°´Ù. ¡æ 10¿øÀÇ °¹¼ö
+    -- MONEY ë¥¼ 10ìœ¼ë¡œ ë‚˜ëˆ ì„œ ëª«ì„ ì·¨í•˜ê³  ë‚˜ë¨¸ì§€ëŠ” ë²„ë¦°ë‹¤. â†’ 10ì›ì˜ ê°¯ìˆ˜
     M10 := TRUNC(MONEY/10);
     
-    --¡Û °á°ú Ãâ·Â
-    DBMS_OUTPUT.PUT_LINE('ÀÔ·Â¹ÞÀº ±Ý¾× ÃÑ¾× : ' || MONEY2 || '¿ø');
-    DBMS_OUTPUT.PUT_LINE('È­Æó´ÜÀ§ : ¿À¹é¿ø ' || M500 || ', ¹é¿ø ' || M100 ||
-                        ', ¿À½Ê¿ø ' ||M50||', ½Ê¿ø '||M10);
+    --â—‹ ê²°ê³¼ ì¶œë ¥
+    DBMS_OUTPUT.PUT_LINE('ìž…ë ¥ë°›ì€ ê¸ˆì•¡ ì´ì•¡ : ' || MONEY2 || 'ì›');
+    DBMS_OUTPUT.PUT_LINE('í™”íë‹¨ìœ„ : ì˜¤ë°±ì› ' || M500 || ', ë°±ì› ' || M100 ||
+                        ', ì˜¤ì‹­ì› ' ||M50||', ì‹­ì› '||M10);
     
 END;
 --==>>
 /*
-ÀÔ·Â¹ÞÀº ±Ý¾× ÃÑ¾× : 870¿ø
-È­Æó´ÜÀ§ : ¿À¹é¿ø 1, ¹é¿ø 3, ¿À½Ê¿ø 1, ½Ê¿ø 2
+ìž…ë ¥ë°›ì€ ê¸ˆì•¡ ì´ì•¡ : 870ì›
+í™”íë‹¨ìœ„ : ì˜¤ë°±ì› 1, ë°±ì› 3, ì˜¤ì‹­ì› 1, ì‹­ì› 2
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 
---¡Û ±âº» ¹Ýº¹¹®
+--â—‹ ê¸°ë³¸ ë°˜ë³µë¬¸
 -- LOOP ~ END LOOP;
 
--- 1. º°µµÀÇ Á¶°Ç°ú »ó°ü¾øÀÌ ¹«Á¶°Ç ¹Ýº¹ÇÏ´Â ±¸¹®.
+-- 1. ë³„ë„ì˜ ì¡°ê±´ê³¼ ìƒê´€ì—†ì´ ë¬´ì¡°ê±´ ë°˜ë³µí•˜ëŠ” êµ¬ë¬¸.
 
--- 2. Çü½Ä ¹× ±¸Á¶
+-- 2. í˜•ì‹ ë° êµ¬ì¡°
 /*
 LOOP
-    -- ½ÇÇà¹®;
+    -- ì‹¤í–‰ë¬¸;
     
-    [EXIT WHEN Á¶°Ç]      -- Á¶°ÇÀÌ ÂüÀÎ °æ¿ì ¹Ýº¹¹®À» ºüÁ®³ª°£´Ù.
+    [EXIT WHEN ì¡°ê±´]      -- ì¡°ê±´ì´ ì°¸ì¸ ê²½ìš° ë°˜ë³µë¬¸ì„ ë¹ ì ¸ë‚˜ê°„ë‹¤.
     
 END LOOP;
 */
 
---¡Û 1 ºÎÅÍ 10±îÁöÀÇ ¼ö Ãâ·Â(LOOP È°¿ë)
+--â—‹ 1 ë¶€í„° 10ê¹Œì§€ì˜ ìˆ˜ ì¶œë ¥(LOOP í™œìš©)
 DECLARE
     N   NUMBER;
 BEGIN
@@ -456,26 +457,26 @@ END;
 10
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
---¡Û WHILE ¹Ýº¹¹®
+--â—‹ WHILE ë°˜ë³µë¬¸
 -- WHILE LOOP ~ END LOOP;
 
--- 1. Á¦¾î Á¶°ÇÀÌ TRUE ÀÎ µ¿¾È ÀÏ·ÃÀÇ ¹®ÀåÀ» ¹Ýº¹ÇÏ±â À§ÇØ
---    WHILE LOOP ¹®ÀåÀ» »ç¿ëÇÏ°Ô µÈ´Ù.
---    Á¶°ÇÀº ¹Ýº¹ÀÌ ½ÃÀÛµÉ ¶§ Ã¼Å©ÇÏ°Ô µÇ¾î
---    LOOP ³»ÀÇ ¹®ÀåÀÌ ÇÑ ¹øµµ ¼öÇàµÇÁö ¾ÊÀ» ¼öµµ ÀÖ´Ù.
---    LOOP ¸¦ ½ÃÀÛÇÒ ¶§ Á¶°ÇÀÌ FALSE ÀÌ¸é ¹Ýº¹ ¹®ÀåÀ» Å»ÃâÇÏ°Ô µÈ´Ù.
+-- 1. ì œì–´ ì¡°ê±´ì´ TRUE ì¸ ë™ì•ˆ ì¼ë ¨ì˜ ë¬¸ìž¥ì„ ë°˜ë³µí•˜ê¸° ìœ„í•´
+--    WHILE LOOP ë¬¸ìž¥ì„ ì‚¬ìš©í•˜ê²Œ ëœë‹¤.
+--    ì¡°ê±´ì€ ë°˜ë³µì´ ì‹œìž‘ë  ë•Œ ì²´í¬í•˜ê²Œ ë˜ì–´
+--    LOOP ë‚´ì˜ ë¬¸ìž¥ì´ í•œ ë²ˆë„ ìˆ˜í–‰ë˜ì§€ ì•Šì„ ìˆ˜ë„ ìžˆë‹¤.
+--    LOOP ë¥¼ ì‹œìž‘í•  ë•Œ ì¡°ê±´ì´ FALSE ì´ë©´ ë°˜ë³µ ë¬¸ìž¥ì„ íƒˆì¶œí•˜ê²Œ ëœë‹¤.
 
--- 2. Çü½Ä ¹× ±¸Á¶
+-- 2. í˜•ì‹ ë° êµ¬ì¡°
 /*
-WHILE Á¶°Ç LOOP       -- Á¶°ÇÀÌ ÂüÀÎ °æ¿ì ¹Ýº¹ ¼öÇà(À§¿¡´Â Á¶°ÇÀÌ ÂüÀÎ °æ¿ì ºüÁ®³ª¿À´Â °Í!)
-    -- ½ÇÇà¹®;
+WHILE ì¡°ê±´ LOOP       -- ì¡°ê±´ì´ ì°¸ì¸ ê²½ìš° ë°˜ë³µ ìˆ˜í–‰(ìœ„ì—ëŠ” ì¡°ê±´ì´ ì°¸ì¸ ê²½ìš° ë¹ ì ¸ë‚˜ì˜¤ëŠ” ê²ƒ!)
+    -- ì‹¤í–‰ë¬¸;
 END LOOP;
 */
 
---¡Û 1 ºÎÅÍ 10±îÁöÀÇ ¼ö Ãâ·Â(WHILE LOOP È°¿ë)
+--â—‹ 1 ë¶€í„° 10ê¹Œì§€ì˜ ìˆ˜ ì¶œë ¥(WHILE LOOP í™œìš©)
 DECLARE
     N   NUMBER;
 BEGIN
@@ -499,10 +500,10 @@ END;
 10
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
---Ç®ÀÌ-----------------------------------------------
+--í’€ì´-----------------------------------------------
 DECLARE
     N   NUMBER;
 BEGIN
@@ -526,23 +527,23 @@ END;
 10
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
---¡Û FOR ¹Ýº¹¹®
+--â—‹ FOR ë°˜ë³µë¬¸
 -- FOR LOOP ~ END LOOP;
 
--- 1. ¡º½ÃÀÛ ¼ö¡»¿¡¼­ 1¾¿ Áõ°¡ÇÏ¿©
---    ¡º³¡³¿ ¼ö¡»°¡ µÉ ¶§ ±îÁö ¹Ýº¹ ¼öÇàÇÑ´Ù.
+-- 1. ã€Žì‹œìž‘ ìˆ˜ã€ì—ì„œ 1ì”© ì¦ê°€í•˜ì—¬
+--    ã€Žëëƒ„ ìˆ˜ã€ê°€ ë  ë•Œ ê¹Œì§€ ë°˜ë³µ ìˆ˜í–‰í•œë‹¤.
 
--- 2. Çü½Ä ¹× ±¸Á¶
+-- 2. í˜•ì‹ ë° êµ¬ì¡°
 /*
-FOR Ä«¿îÅÍ in [REVERSE] ½ÃÀÛ¼ö .. ³¡³¿¼ö LOOP
-    -- ½ÇÇà¹®;
+FOR ì¹´ìš´í„° in [REVERSE] ì‹œìž‘ìˆ˜ .. ëëƒ„ìˆ˜ LOOP
+    -- ì‹¤í–‰ë¬¸;
 END LOOP;
 */
 
---¡Û 1 ºÎÅÍ 10 ±îÁöÀÇ ¼ö Ãâ·Â(FOR LOOP È°¿ë)
+--â—‹ 1 ë¶€í„° 10 ê¹Œì§€ì˜ ìˆ˜ ì¶œë ¥(FOR LOOP í™œìš©)
 DECLARE
     N   NUMBER;
 BEGIN
@@ -564,9 +565,11 @@ END;
 10
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
+
+-- REVERSE ì‚¬ìš©!
 DECLARE
     N   NUMBER;
 BEGIN
@@ -588,17 +591,17 @@ END;
 1
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 
 
 
---¡Û »ç¿ëÀÚ·ÎºÎÅÍ ÀÓÀÇÀÇ ´Ü(±¸±¸´Ü)À» ÀÔ·Â¹Þ¾Æ
---   ÇØ´ç ´Ü¼öÀÇ ±¸±¸´ÜÀ» Ãâ·ÂÇÏ´Â PL/SQL ±¸¹®À» ÀÛ¼ºÇÑ´Ù.
+--â—‹ ì‚¬ìš©ìžë¡œë¶€í„° ìž„ì˜ì˜ ë‹¨(êµ¬êµ¬ë‹¨)ì„ ìž…ë ¥ë°›ì•„
+--   í•´ë‹¹ ë‹¨ìˆ˜ì˜ êµ¬êµ¬ë‹¨ì„ ì¶œë ¥í•˜ëŠ” PL/SQL êµ¬ë¬¸ì„ ìž‘ì„±í•œë‹¤.
 /*
-½ÇÇà ¿¹)
-¹ÙÀÎµù º¯¼ö ÀÔ·Â ´ëÈ­Ã¢ ¡æ ´ÜÀ» ÀÔ·ÂÇÏ¼¼¿ä : [   2]
+ì‹¤í–‰ ì˜ˆ)
+ë°”ì¸ë”© ë³€ìˆ˜ ìž…ë ¥ ëŒ€í™”ì°½ â†’ ë‹¨ì„ ìž…ë ¥í•˜ì„¸ìš” : [   2]
 
 2 * 1 = 2
 2 * 2 = 4
@@ -607,8 +610,8 @@ PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
 2 * 9 = 18
 */
 
--- 1. LOOP¹®ÀÎ °æ¿ì
-ACCEPT N PROMPT '´ÜÀ» ÀÔ·ÂÇÏ¼¼¿ä : ';
+-- 1. LOOPë¬¸ì¸ ê²½ìš°
+ACCEPT N PROMPT 'ë‹¨ì„ ìž…ë ¥í•˜ì„¸ìš” : ';
 
 DECLARE
     NUM1 NUMBER := &N;
@@ -634,13 +637,13 @@ END;
 2 * 9 = 18
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
--- 2. WHILE LOOP ¹®ÀÇ °æ¿ì
+-- 2. WHILE LOOP ë¬¸ì˜ ê²½ìš°
 SET SERVEROUTPUT ON;
 
-ACCEPT N PROMPT '´ÜÀ» ÀÔ·ÂÇÏ¼¼¿ä : ';
+ACCEPT N PROMPT 'ë‹¨ì„ ìž…ë ¥í•˜ì„¸ìš” : ';
 
 DECLARE
     NUM1 NUMBER := &N;
@@ -666,11 +669,11 @@ END;
 2 * 9 = 18
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
--- 3. FOR LOOP ¹®ÀÇ °æ¿ì
-ACCEPT N PROMPT '´ÜÀ» ÀÔ·ÂÇÏ¼¼¿ä : ';
+-- 3. FOR LOOP ë¬¸ì˜ ê²½ìš°
+ACCEPT N PROMPT 'ë‹¨ì„ ìž…ë ¥í•˜ì„¸ìš” : ';
 
 DECLARE
     NUM1 NUMBER := &N;
@@ -685,9 +688,9 @@ BEGIN
 END;
 
 
--- Ç®ÀÌ-----------------------------------------------------------
--- 1. LOOP¹®ÀÎ °æ¿ì
-ACCEPT NUM PROMPT '´ÜÀ» ÀÔ·ÂÇÏ¼¼¿ä';
+-- í’€ì´-----------------------------------------------------------
+-- 1. LOOPë¬¸ì¸ ê²½ìš°
+ACCEPT NUM PROMPT 'ë‹¨ì„ ìž…ë ¥í•˜ì„¸ìš”';
 
 DECLARE
     DAN NUMBER := &NUM;
@@ -714,13 +717,13 @@ END;
 6 * 9 = 54
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 
--- 2. WHILE LOOP ¹®ÀÇ °æ¿ì
+-- 2. WHILE LOOP ë¬¸ì˜ ê²½ìš°
 SET SERVEROUTPUT ON;
-ACCEPT NUM PROMPT '´ÜÀ» ÀÔ·ÂÇÏ¼¼¿ä';
+ACCEPT NUM PROMPT 'ë‹¨ì„ ìž…ë ¥í•˜ì„¸ìš”';
 
 DECLARE
     DAN NUMBER := &NUM;
@@ -746,12 +749,12 @@ END;
 5 * 9 = 45
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
 
 
--- 3. FOR LOOP ¹®ÀÇ °æ¿ì
-ACCEPT NUM PROMPT '´ÜÀ» ÀÔ·ÂÇÏ¼¼¿ä';
+-- 3. FOR LOOP ë¬¸ì˜ ê²½ìš°
+ACCEPT NUM PROMPT 'ë‹¨ì„ ìž…ë ¥í•˜ì„¸ìš”';
 
 DECLARE
     DAN NUMBER := &NUM;
@@ -774,30 +777,7 @@ END;
 4 * 9 = 36
 
 
-PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
