@@ -3,14 +3,14 @@ FROM DUAL;
 --==>>HR
 
 
---¡Û EMPLOYEES Å×ÀÌºí¿¡¼­ SALARY¸¦
---   °¢ ºÎ¼­ÀÇ ÀÌ¸§º°·Î ´Ù¸¥ ÀÎ»ó·üÀ» Àû¿ëÇÏ¿© ¼öÁ¤ÇÒ ¼ö ÀÖµµ·Ï ÇÑ´Ù.
---   Finance ¡æ 10%
---   Executive ¡æ 15%
---   Accounting ¡æ 20%
---   (Äõ¸®¹® ±¸¼º ¹× °á°ú È®ÀÎ ÈÄ ROLLBACK)
+--â—‹ EMPLOYEES í…Œì´ë¸”ì—ì„œ SALARYë¥¼
+--   ê° ë¶€ì„œì˜ ì´ë¦„ë³„ë¡œ ë‹¤ë¥¸ ì¸ìƒë¥ ì„ ì ìš©í•˜ì—¬ ìˆ˜ì •í•  ìˆ˜ ìžˆë„ë¡ í•œë‹¤.
+--   Finance â†’ 10%
+--   Executive â†’ 15%
+--   Accounting â†’ 20%
+--   (ì¿¼ë¦¬ë¬¸ êµ¬ì„± ë° ê²°ê³¼ í™•ì¸ í›„ ROLLBACK)
 
---   ³ª¸Ó´Ï ¡æ 0%
+--   ë‚˜ë¨¸ì§€ â†’ 0%
 
 SELECT *
 FROM DEPARTMENTS;
@@ -30,7 +30,7 @@ SET SALARY =  CASE DEPARTMENT_ID WHEN (SELECT DEPARTMENT_ID
                                         FROM DEPARTMENTS
                                         WHERE DEPARTMENT_NAME = 'Accounting') 
                                THEN SALARY*1.2
-                               ELSE SALARY END "ÀÎ»óµÈ±Þ¿©";
+                               ELSE SALARY END "ì¸ìƒëœê¸‰ì—¬";
 
 SELECT DEPARTMENT_ID
 FROM DEPARTMENTS
@@ -44,68 +44,87 @@ SELECT DEPARTMENT_ID
 FROM DEPARTMENTS
 WHERE DEPARTMENT_NAME = 'Accounting';
 
---Ç®ÀÌ-------------------------------------------------------------------------
--- ÀÚ°ÝÁõ Á¢¼öÇÏ´À¶ó ½Ç½ÀÀß ¸øÇÔ! ´Ù½ÃÇØº¸±â!
--- ¸Þ¸ð¸®´Â ÀÌ·¸°Ô ÇÏ´Â°Ô ´õ ¾Æ³¥¼ö ÀÖÀ½!
+--í’€ì´-------------------------------------------------------------------------
+-- ë©”ëª¨ë¦¬ëŠ” ì´ë ‡ê²Œ í•˜ëŠ”ê²Œ ë” ì•„ë‚„ìˆ˜ ìžˆìŒ!
 UPDATE EMPLOYEES
-SET SALARY = CASE DEPARTMENT_ID WHEN ('Finance'ÀÇ ºÎ¼­¾ÆÀÌµð) 
+SET SALARY = CASE DEPARTMENT_ID WHEN ('Finance'ì˜ ë¶€ì„œì•„ì´ë””) 
                                  THEN SALARY * 1.1 
-                                 WHEN ('Executive'ÀÇ ºÎ¼­¾ÆÀÌµð) 
+                                 WHEN ('Executive'ì˜ ë¶€ì„œì•„ì´ë””) 
                                  THEN SALARY * 1.15 
-                                 WHEN ('Accounting'ÀÇ ºÎ¼­¾ÆÀÌµð) 
+                                 WHEN ('Accounting'ì˜ ë¶€ì„œì•„ì´ë””) 
                                  THEN SALARY * 1.2 
                                  ELSE SALARY 
               END 
-WHERE DEPARTMENT_ID IN ('Finance'ÀÇ ºÎ¼­¾ÆÀÌµð,'Executive'ÀÇ ºÎ¼­¾ÆÀÌµð, 'Accounting'ÀÇ ºÎ¼­¾ÆÀÌµð);
+WHERE DEPARTMENT_ID IN ('Finance'ì˜ ë¶€ì„œì•„ì´ë””,'Executive'ì˜ ë¶€ì„œì•„ì´ë””, 'Accounting'ì˜ ë¶€ì„œì•„ì´ë””);
 
---WHEREÀý »©µµ ¶È°°Àº ±¸¹®!
+
+--WHEREì ˆ ë¹¼ë„ ë˜‘ê°™ì€ êµ¬ë¬¸!
 UPDATE EMPLOYEES
-SET SALARY = CASE DEPARTMENT_ID_ID WHEN ('Finance'ÀÇ ºÎ¼­¾ÆÀÌµð) 
+SET SALARY = CASE DEPARTMENT_ID_ID WHEN ('Finance'ì˜ ë¶€ì„œì•„ì´ë””) 
                                  THEN SALARY * 1.1 
-                                 WHEN ('Executive'ÀÇ ºÎ¼­¾ÆÀÌµð) 
+                                 WHEN ('Executive'ì˜ ë¶€ì„œì•„ì´ë””) 
                                  THEN SALARY * 1.15 
-                                 WHEN ('Accounting'ÀÇ ºÎ¼­¾ÆÀÌµð) 
+                                 WHEN ('Accounting'ì˜ ë¶€ì„œì•„ì´ë””) 
                                  THEN SALARY * 1.2 
                                  ELSE SALARY 
               END;
 
 
--- ('Finance'ÀÇ ºÎ¼­¾ÆÀÌµð)
+-- ('Finance'ì˜ ë¶€ì„œì•„ì´ë””)
 SELECT DEPARTMENT_ID
 FROM DEPARTMENTS
 WHERE DEPARTMENT_NAME = 'Finance';
 --==>> 100
 
--- ('Executive'ÀÇ ºÎ¼­¾ÆÀÌµð)
+-- ('Executive'ì˜ ë¶€ì„œì•„ì´ë””)
 SELECT DEPARTMENT_ID
 FROM DEPARTMENTS
 WHERE DEPARTMENT_NAME = 'Executive';
 --==>> 90
 
--- ('Accounting'ÀÇ ºÎ¼­¾ÆÀÌµð)
+-- ('Accounting'ì˜ ë¶€ì„œì•„ì´ë””)
 SELECT DEPARTMENT_ID
 FROM DEPARTMENTS
 WHERE DEPARTMENT_NAME = 'Accounting';
 --==>> 110
 
 
--- ³Ö¾îÁÖ±â!
+-- ë„£ì–´ì£¼ê¸°!
 UPDATE EMPLOYEES
-SET SALARY = CASE DEPARTMENT_ID WHEN ('Finance'ÀÇ ºÎ¼­¾ÆÀÌµð) 
+SET SALARY = CASE DEPARTMENT_ID WHEN (SELECT DEPARTMENT_ID
+                                FROM DEPARTMENTS
+                                WHERE DEPARTMENT_NAME = 'Finance') 
                                  THEN SALARY * 1.1 
-                                 WHEN ('Executive'ÀÇ ºÎ¼­¾ÆÀÌµð) 
+                                 WHEN (SELECT DEPARTMENT_ID
+                                FROM DEPARTMENTS
+                                WHERE DEPARTMENT_NAME = 'Executive') 
                                  THEN SALARY * 1.15 
-                                 WHEN ('Accounting'ÀÇ ºÎ¼­¾ÆÀÌµð) 
+                                 WHEN (SELECT DEPARTMENT_ID
+                                FROM DEPARTMENTS
+                                WHERE DEPARTMENT_NAME = 'Accounting') 
                                  THEN SALARY * 1.2 
                                  ELSE SALARY 
               END 
-WHERE DEPARTMENT_ID IN ('Finance'ÀÇ ºÎ¼­¾ÆÀÌµð,'Executive'ÀÇ ºÎ¼­¾ÆÀÌµð, 'Accounting'ÀÇ ºÎ¼­¾ÆÀÌµð);
---==>> 11°³ ÇàÀÌ ¾øµ¥ÀÌÆ®µÇ¾ú½À´Ï´Ù. ³ª¿Í¾ßÇÔ IN ¾È¿¡ °ýÈ£·Î ¹­¾îÁà¾ßÇÔ!
+WHERE DEPARTMENT_ID IN ((SELECT DEPARTMENT_ID
+                        FROM DEPARTMENTS
+                        WHERE DEPARTMENT_NAME = 'Finance')
+                        ,(SELECT DEPARTMENT_ID
+                        FROM DEPARTMENTS
+                        WHERE DEPARTMENT_NAME = 'Executive')
+                        , (SELECT DEPARTMENT_ID
+                            FROM DEPARTMENTS
+                            WHERE DEPARTMENT_NAME = 'Accounting'));
+--==>> 11ê°œ í–‰ ì´(ê°€) ì—…ë°ì´íŠ¸ë˜ì—ˆìŠµë‹ˆë‹¤.
+-- IN ì•ˆì— ê´„í˜¸ë¡œ ë¬¶ì–´ì¤˜ì•¼í•¨!
 
 ROLLBACK;
 
+SELECT *
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID IN(90,100,110);
+--==>> 11ê°œ í™•ì¸
 
---WHEREÀý ¾øÀÌ!
+--WHEREì ˆ ì—†ì´!
 UPDATE EMPLOYEES
 SET SALARY = CASE DEPARTMENT_ID_ID WHEN (SELECT DEPARTMENT_ID
                                         FROM DEPARTMENTS
@@ -121,13 +140,13 @@ SET SALARY = CASE DEPARTMENT_ID_ID WHEN (SELECT DEPARTMENT_ID
                                  THEN SALARY * 1.2 
                                  ELSE SALARY 
               END; 
---==>> 107°³ ¾÷µ¥ÀÌÆ® µÇ¾î¾ßÇÔ!
+--==>> 107ê°œ ì—…ë°ì´íŠ¸ ë˜ì–´ì•¼í•¨!
 
 ROLLBACK;
 
 
 
--- WHERE Àý ´õ ÁÙÀÌ±â!
+-- WHERE ì ˆ ë” ì¤„ì´ê¸°!
 UPDATE EMPLOYEES
 SET SALARY = CASE DEPARTMENT_ID WHEN (SELECT DEPARTMENT_ID
                                         FROM DEPARTMENTS
@@ -146,19 +165,19 @@ SET SALARY = CASE DEPARTMENT_ID WHEN (SELECT DEPARTMENT_ID
 WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID
                                         FROM DEPARTMENTS
                                         WHERE DEPARTMENT_NAME IN('Finance','Executive','Accounting'));
---==>>11°³ Çà ÀÌ(°¡) ¾÷µ¥ÀÌÆ®µÇ¾ú½À´Ï´Ù.
+--==>>11ê°œ í–‰ ì´(ê°€) ì—…ë°ì´íŠ¸ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 ROLLBACK;
---==>> ·Ñ¹é ¿Ï·á.
+--==>> ë¡¤ë°± ì™„ë£Œ.
 
 
---¡á¡á¡á DELETE ¡á¡á¡á--
+--â– â– â–  DELETE â– â– â– --
 
--- 1. Å×ÀÌºí¿¡¼­ ÁöÁ¤µÈ Çà(·¹ÄÚµå)À» »èÁ¦ÇÏ´Â µ¥ »ç¿ëÇÏ´Â ±¸¹®.
+-- 1. í…Œì´ë¸”ì—ì„œ ì§€ì •ëœ í–‰(ë ˆì½”ë“œ)ì„ ì‚­ì œí•˜ëŠ” ë° ì‚¬ìš©í•˜ëŠ” êµ¬ë¬¸.
 
--- 2. Çü½Ä ¹× ±¸Á¶
--- DELETE [FROM] Å×ÀÌºí¸í
--- [WHERE Á¶°ÇÀý]; --Á¶°ÇÀ» ¸í½ÃÇÏ°í SELECT·Î È®ÀÎÇÑ´ÙÀ½¿¡ Áö¿ìÀÚ!
+-- 2. í˜•ì‹ ë° êµ¬ì¡°
+-- DELETE [FROM] í…Œì´ë¸”ëª…
+-- [WHERE ì¡°ê±´ì ˆ]; --ì¡°ê±´ì„ ëª…ì‹œí•˜ê³  SELECTë¡œ í™•ì¸í•œë‹¤ìŒì— ì§€ìš°ìž!
 
 SELECT *
 FROM EMPLOYEES
@@ -168,19 +187,19 @@ WHERE EMPLOYEE_ID = 198;
 DELETE
 FROM EMPLOYEES
 WHERE EMPLOYEE_ID = 198;
---==>> 1 Çà ÀÌ(°¡) »èÁ¦µÇ¾ú½À´Ï´Ù.
+--==>> 1 í–‰ ì´(ê°€) ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.
 
 ROLLBACK;
---==>> ·Ñ¹é ¿Ï·á.
+--==>> ë¡¤ë°± ì™„ë£Œ.
 
 
---¡Û EMPLOYEES Å×ÀÌºí¿¡¼­ Á÷¿øµéÀÇ Á¤º¸¸¦ »èÁ¦ÇÑ´Ù.
---   ´Ü, ºÎ¼­¸íÀÌ 'IT'ÀÎ °æ¿ì·Î ÇÑÁ¤ÇÑ´Ù.
+--â—‹ EMPLOYEES í…Œì´ë¸”ì—ì„œ ì§ì›ë“¤ì˜ ì •ë³´ë¥¼ ì‚­ì œí•œë‹¤.
+--   ë‹¨, ë¶€ì„œëª…ì´ 'IT'ì¸ ê²½ìš°ë¡œ í•œì •í•œë‹¤.
 
---¡Ø ½ÇÁ¦·Î´Â EMPLOYEES Å×ÀÌºíÀÇ µ¥ÀÌÅÍ°¡(»èÁ¦ÇÏ°íÀÚ ÇÏ´Â ´ë»ó)
---   ´Ù¸¥ Å×ÀÌºí(È¤Àº ÀÚ±â ÀÚ½Å Å×ÀÌºí)¿¡ ÀÇÇØ ÂüÁ¶´çÇÏ´Â °æ¿ì
---   »èÁ¦µÇÁö ¤·³ºÀ» ¼ö ÀÖ´Ù´Â »ç½ÇÀ» ¿°µÎÇØ¾ß ÇÏ¸ç...
---   ±×¿¡ ´ëÇÑ ÀÌÀ¯µµ ¾Ë¾Æ¾ß ÇÑ´Ù.
+--â€» ì‹¤ì œë¡œëŠ” EMPLOYEES í…Œì´ë¸”ì˜ ë°ì´í„°ê°€(ì‚­ì œí•˜ê³ ìž í•˜ëŠ” ëŒ€ìƒ)
+--   ë‹¤ë¥¸ í…Œì´ë¸”(í˜¹ì€ ìžê¸° ìžì‹  í…Œì´ë¸”)ì— ì˜í•´ ì°¸ì¡°ë‹¹í•˜ëŠ” ê²½ìš°
+--   ì‚­ì œë˜ì§€ ã…‡ë‚³ì„ ìˆ˜ ìžˆë‹¤ëŠ” ì‚¬ì‹¤ì„ ì—¼ë‘í•´ì•¼ í•˜ë©°...
+--   ê·¸ì— ëŒ€í•œ ì´ìœ ë„ ì•Œì•„ì•¼ í•œë‹¤.
 
 DELETE
 FROM EMPLOYEES
@@ -189,25 +208,25 @@ WHERE DEPARTMENT_ID = (SELECT DEPARTMENT_ID
                          WHERE DEPARTMENT_NAME = 'IT');
 --==>>
 /*
-¿À·ù º¸°í -
+ì˜¤ë¥˜ ë³´ê³  -
 ORA-02292: integrity constraint (HR.DEPT_MGR_FK) violated - child record found
 */
 
 SELECT *
 FROM DEPARTMENTS;
 
---Ç®ÀÌ--------------------------------------------------------------------------
+--í’€ì´--------------------------------------------------------------------------
 SELECT *
 FROM EMPLOYEES
-WHERE DEPARTMENT_ID = ('IT'ÀÇ ºÎ¼­¹øÈ£);
+WHERE DEPARTMENT_ID = ('IT'ì˜ ë¶€ì„œë²ˆí˜¸);
 
---('IT'ÀÇ ºÎ¼­¹øÈ£)
+--('IT'ì˜ ë¶€ì„œë²ˆí˜¸)
 SELECT DEPARTMENT_ID
 FROM DEPARTMENTS 
 WHERE DEPARTMENT_NAME = 'IT';
 --==>> 60
 
--- ³Ö¾îÁÖ±â
+-- ë„£ì–´ì£¼ê¸°
 SELECT *
 FROM EMPLOYEES
 WHERE DEPARTMENT_ID = (SELECT DEPARTMENT_ID
@@ -222,38 +241,38 @@ WHERE DEPARTMENT_ID = (SELECT DEPARTMENT_ID
 107	Diana	Lorentz	DLORENTZ	590.423.5567	07/02/07	IT_PROG	4200		    103	60
 */
 
---»èÁ¦ÇØÁÖ±â
+--ì‚­ì œí•´ì£¼ê¸°
 DELETE
 FROM EMPLOYEES
 WHERE DEPARTMENT_ID = (SELECT DEPARTMENT_ID
                         FROM DEPARTMENTS 
                         WHERE DEPARTMENT_NAME = 'IT');
---==>> ¿¡·¯ ¹ß»ý
+--==>> ì—ëŸ¬ ë°œìƒ
 /*
 ORA-02292: integrity constraint (HR.DEPT_MGR_FK) violated - child record found
 */
 
---¡á¡á¡á ºä(VIEW) ¡á¡á¡á--
+--â– â– â–  ë·°(VIEW) â– â– â– --
 
--- 1. ºä(VIEW)¶õ ÀÌ¹Ì Æ¯Á¤ÇÑ µ¥ÀÌÅÍº£ÀÌ½º ³»¿¡ Á¸ÀçÇÏ´Â
---    ÇÏ³ª ÀÌ»óÀÇ Å×ÀÌºí¿¡¼­ »ç¿ë°¡ÀÚ ¾ò±â ¿øÇÏ´Â µ¥ÀÌÅÍµé¸¸À»
---    Á¤È®ÇÏ°í ÆíÇÏ°Ô °¡Á®¿À±â À§ÇÏ¿© »çÀü¿¡ ÄÃ·³µé¸¸ ¸ð¾Æ¼­
---    ¸¸µé¾î³õÀº °¡»óÀÇ Å×ÀÌºí·Î ÆíÀÇ¼º ¹× º¸¾È¿¡ ¸ñÀûÀÌ ÀÖ´Ù.
+-- 1. ë·°(VIEW)ëž€ ì´ë¯¸ íŠ¹ì •í•œ ë°ì´í„°ë² ì´ìŠ¤ ë‚´ì— ì¡´ìž¬í•˜ëŠ”
+--    í•˜ë‚˜ ì´ìƒì˜ í…Œì´ë¸”ì—ì„œ ì‚¬ìš©ê°€ìž ì–»ê¸° ì›í•˜ëŠ” ë°ì´í„°ë“¤ë§Œì„
+--    ì •í™•í•˜ê³  íŽ¸í•˜ê²Œ ê°€ì ¸ì˜¤ê¸° ìœ„í•˜ì—¬ ì‚¬ì „ì— ì»¬ëŸ¼ë“¤ë§Œ ëª¨ì•„ì„œ
+--    ë§Œë“¤ì–´ë†“ì€ ê°€ìƒì˜ í…Œì´ë¸”ë¡œ íŽ¸ì˜ì„± ë° ë³´ì•ˆì— ëª©ì ì´ ìžˆë‹¤.
 
---    °¡»óÀÇ Å×ÀÌºíÀÌ¶õ ºä°¡ ½ÇÁ¦·Î Á¸ÀçÇÏ´Â Å×ÀÌºí(°´Ã¼)ÀÌ ¾Æ´Ï¶ó
---    ÇÏ³ª ÀÌ»óÀÇ Å×ÀÌºí¿¡¼­ ÆÄ»ýµÈ ¶Ç ´Ù¸¥ Á¤º¸¸¦ º¼¼ö ÀÖ´Â ¹æ¹ýÀÌ¸ç
---    ±× Á¤º¸¸¦ ÃßÃâÇØ³»´Â SQL ¹®ÀåÀÌ¶ó°í º¼ ¼ö ÀÖ´Ù´Â °ÍÀÌ´Ù.
+--    ê°€ìƒì˜ í…Œì´ë¸”ì´ëž€ ë·°ê°€ ì‹¤ì œë¡œ ì¡´ìž¬í•˜ëŠ” í…Œì´ë¸”(ê°ì²´)ì´ ì•„ë‹ˆë¼
+--    í•˜ë‚˜ ì´ìƒì˜ í…Œì´ë¸”ì—ì„œ íŒŒìƒëœ ë˜ ë‹¤ë¥¸ ì •ë³´ë¥¼ ë³¼ìˆ˜ ìžˆëŠ” ë°©ë²•ì´ë©°
+--    ê·¸ ì •ë³´ë¥¼ ì¶”ì¶œí•´ë‚´ëŠ” SQL ë¬¸ìž¥ì´ë¼ê³  ë³¼ ìˆ˜ ìžˆë‹¤ëŠ” ê²ƒì´ë‹¤.
 
--- 2. Çü½Ä ¹× ±¸Á¶
--- CREATE [OR REPLACE] VIEW ºäÀÌ¸§
+-- 2. í˜•ì‹ ë° êµ¬ì¡°
+-- CREATE [OR REPLACE] VIEW ë·°ì´ë¦„
 -- [(ALIAS[, ALIAS, ...])]
 -- AS
--- ¼­ºêÄõ¸®(SUBQUERY)
+-- ì„œë¸Œì¿¼ë¦¬(SUBQUERY)
 -- [WITH CHECK OPTION]
 -- [WITH READ ONLY];
 
 
---¡Û ºä(VIEW) »ý¼º
+--â—‹ ë·°(VIEW) ìƒì„±
 CREATE OR REPLACE VIEW VIEW_EMPLOYEES
 AS
 SELECT E.FIRST_NAME, E.LAST_NAME, D.DEPARTMENT_NAME, L.CITY
@@ -263,18 +282,18 @@ WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID(+)
   AND D.LOCATION_ID = L.LOCATION_ID(+)
   AND L.COUNTRY_ID = C.COUNTRY_ID(+)
   AND C.REGION_ID = R.REGION_ID(+);
---==>> View VIEW_EMPLOYEESÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
+--==>> View VIEW_EMPLOYEESì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
---¡Û ºä(VIEW) Á¶È¸
+--â—‹ ë·°(VIEW) ì¡°íšŒ
 SELECT *
 FROM VIEW_EMPLOYEES;
 
---ºä´Â Å×ÀÌºí Á¶È¸ÇÏ´Â °ÅÃ³·³ ±¸Á¶È®ÀÎµµ µÈ´Ù!
---¡Û ºä(VIEW) ±¸Á¶ È®ÀÎ
+--ë·°ëŠ” í…Œì´ë¸” ì¡°íšŒí•˜ëŠ” ê±°ì²˜ëŸ¼ êµ¬ì¡°í™•ì¸ë„ ëœë‹¤!
+--â—‹ ë·°(VIEW) êµ¬ì¡° í™•ì¸
 DESC VIEW_EMPLOYEES;
 --==>>
 /*
-ÀÌ¸§              ³Î?       À¯Çü           
+ì´ë¦„              ë„?       ìœ í˜•           
 --------------- -------- ------------ 
 FIRST_NAME               VARCHAR2(20) 
 LAST_NAME       NOT NULL VARCHAR2(25) 
@@ -284,14 +303,14 @@ COUNTRY_NAME             VARCHAR2(40)
 REGION_NAME              VARCHAR2(25) 
 */
 
--- À¯¿ëÇÑ ±â´É!
---¡Û ºä(VIEW) ¼Ò½º È®ÀÎ       -- CHECK~!!!
+-- ìœ ìš©í•œ ê¸°ëŠ¥!
+--â—‹ ë·°(VIEW) ì†ŒìŠ¤ í™•ì¸       -- CHECK~!!!
 SELECT VIEW_NAME, TEXT                  -- TECXT
 FROM USER_VIEWS                         -- USER_VIEWS
 WHERE VIEW_NAME = 'VIEW_EMPLOYEES';
 
--- TEXT³»¿ë º¹»ç ºÙ¿©³Ö±â
--- ºä¼Ò½º È®ÀÎÇÒ ¼ö ÀÖÀ½!!
+-- TEXTë‚´ìš© ë³µì‚¬ ë¶™ì—¬ë„£ê¸°
+-- ë·°ì†ŒìŠ¤ í™•ì¸í•  ìˆ˜ ìžˆìŒ!!
 /*
 "SELECT E.FIRST_NAME, E.LAST_NAME, D.DEPARTMENT_NAME, L.CITY
      , C.COUNTRY_NAME, R.REGION_NAME
@@ -303,7 +322,7 @@ WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID(+)
 */
 
 
--- ¿©±â±îÁö SQL¹® Á¾·á!
+-- ì—¬ê¸°ê¹Œì§€ SQLë¬¸ ì¢…ë£Œ!
 --------------------------------------------------------------------------------
 
 
