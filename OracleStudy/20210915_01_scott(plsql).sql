@@ -2,91 +2,91 @@ SELECT USER
 FROM DUAL;
 --==>> SCOTT
 
--- ¡á¡á¡á FUNCTION(ÇÔ¼ö) ¡á¡á¡á--
+-- â– â– â–  FUNCTION(í•¨ìˆ˜) â– â– â– --
 
--- 1. ÇÔ¼ö¶õ ÇÏ³ª ÀÌ»óÀÇ PL/SQL ¹®À¸·Î ±¸¼ºµÈ ¼­ºê·çÆ¾À¸·Î
---    ÄÚµå¸¦ ´Ù½Ã »ç¿ëÇÒ ¼ö ÀÖµµ·Ï Ä¸½¶È­ ÇÏ´Âµ¥ »ç¿ëµÈ´Ù.(¾èÀº ÀÇ¹ÌÀÇ Ä¸½¶È­)
---    ¿À¶óÅ¬¿¡¼­´Â ¿À¶óÅ¬¿¡ Á¤ÀÇµÈ ±âº» Á¦°ø ÇÔ¼ö¸¦ »ç¿ëÇÏ°Å³ª
---    Á÷Á¢ ½ºÅä¾îµå ÇÔ¼ö¸¦ ¸¸µé ¼ö ÀÖ´Ù. (¡æ »ç¿ëÀÚ Á¤ÀÇ ÇÔ¼ö)
---    ÀÌ »ç¿ëÀÚ Á¤ÀÇ ÇÔ¼ö´Â ½Ã½ºÅÛ ÇÔ¼öÃ³·³ Äõ¸®¿¡¼­ È£ÃâÇÏ°Å³ª
---    ÀúÀå ÇÁ·Î½ÃÀúÃ³·³ EXECUTE ¹®À» ÅëÇØ ½ÇÇàÇÒ ¼ö ÀÖ´Ù.
+-- 1. í•¨ìˆ˜ëž€ í•˜ë‚˜ ì´ìƒì˜ PL/SQL ë¬¸ìœ¼ë¡œ êµ¬ì„±ëœ ì„œë¸Œë£¨í‹´ìœ¼ë¡œ
+--    ì½”ë“œë¥¼ ë‹¤ì‹œ ì‚¬ìš©í•  ìˆ˜ ìžˆë„ë¡ ìº¡ìŠí™” í•˜ëŠ”ë° ì‚¬ìš©ëœë‹¤.(ì–•ì€ ì˜ë¯¸ì˜ ìº¡ìŠí™”)
+--    ì˜¤ë¼í´ì—ì„œëŠ” ì˜¤ë¼í´ì— ì •ì˜ëœ ê¸°ë³¸ ì œê³µ í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ê±°ë‚˜
+--    ì§ì ‘ ìŠ¤í† ì–´ë“œ í•¨ìˆ˜ë¥¼ ë§Œë“¤ ìˆ˜ ìžˆë‹¤. (â†’ ì‚¬ìš©ìž ì •ì˜ í•¨ìˆ˜)
+--    ì´ ì‚¬ìš©ìž ì •ì˜ í•¨ìˆ˜ëŠ” ì‹œìŠ¤í…œ í•¨ìˆ˜ì²˜ëŸ¼ ì¿¼ë¦¬ì—ì„œ í˜¸ì¶œí•˜ê±°ë‚˜
+--    ì €ìž¥ í”„ë¡œì‹œì €ì²˜ëŸ¼ EXECUTE ë¬¸ì„ í†µí•´ ì‹¤í–‰í•  ìˆ˜ ìžˆë‹¤.
 
--- 2. Çü½Ä ¹× ±¸Á¶
+-- 2. í˜•ì‹ ë° êµ¬ì¡°
 /*
-CREATE [OR REPLACE] FUNCTION ÇÔ¼ö¸í
+CREATE [OR REPLACE] FUNCTION í•¨ìˆ˜ëª…
 [(
-    ¸Å°³º¯¼ö1 ÀÚ·áÇü
-  , ¸Å°³º¯¼ö2 ÀÚ·áÇü
+    ë§¤ê°œë³€ìˆ˜1 ìžë£Œí˜•
+  , ë§¤ê°œë³€ìˆ˜2 ìžë£Œí˜•
 )]
-RETURN µ¥ÀÌÅÍÅ¸ÀÔ            -- ÇÔ¼ö´Â ¹Ýµå½Ã RETURNÀÌ ÀÖ¾î¾ßÇÔ!
+RETURN ë°ì´í„°íƒ€ìž…            -- í•¨ìˆ˜ëŠ” ë°˜ë“œì‹œ RETURNì´ ìžˆì–´ì•¼í•¨!
 IS
-    -- ÁÖ¿ä º¯¼ö ¼±¾ð(Áö¿ªº¯¼ö)
+    -- ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸(ì§€ì—­ë³€ìˆ˜)
 BEGIN
-    -- ½ÇÇà¹®
+    -- ì‹¤í–‰ë¬¸
     ...
-    RETURN(°ª);
+    RETURN(ê°’);
     
     [EXCEPTION]
-        -- ¿¹¿Ü Ã³¸® ±¸¹®;
+        -- ì˜ˆì™¸ ì²˜ë¦¬ êµ¬ë¬¸;
 END;
 */
 
---¡Ø »ç¿ëÀÚ Á¤ÀÇ ÇÔ¼ö(½ºÅä¾îµå ÇÔ¼ö)´Â
---   IN ÆÄ¶ó¹ÌÅÍ(ÀÔ·Â ¸Å°³º¯¼ö)¸¸ »ç¿ëÇÒ ¼ö ÀÖÀ¸¸ç
---   ¹Ýµå½Ã ¹ÝÈ¯µÉ °ªÀÇ µ¥ÀÌÅÍÅ¸ÀÔÀ» RETURN ¹®¿¡ ¼±¾ðÇØ¾ß ÇÏ°í,
---   FUNCTION Àº ¹Ýµå½Ã ´ÜÀÏ °ª¸¸ ¹ÝÈ¯ÇÑ´Ù.
+--â€» ì‚¬ìš©ìž ì •ì˜ í•¨ìˆ˜(ìŠ¤í† ì–´ë“œ í•¨ìˆ˜)ëŠ”
+--   IN íŒŒë¼ë¯¸í„°(ìž…ë ¥ ë§¤ê°œë³€ìˆ˜)ë§Œ ì‚¬ìš©í•  ìˆ˜ ìžˆìœ¼ë©°
+--   ë°˜ë“œì‹œ ë°˜í™˜ë  ê°’ì˜ ë°ì´í„°íƒ€ìž…ì„ RETURN ë¬¸ì— ì„ ì–¸í•´ì•¼ í•˜ê³ ,
+--   FUNCTION ì€ ë°˜ë“œì‹œ ë‹¨ì¼ ê°’ë§Œ ë°˜í™˜í•œë‹¤.
 
---¡Û TBL_INSA Å×ÀÌºí¿¡¼­ ÁÖ¹Îµî·Ï¹øÈ£¸¦ °¡Áö°í ¼ºº°À» Á¶È¸ÇÑ´Ù.
+--â—‹ TBL_INSA í…Œì´ë¸”ì—ì„œ ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ë¥¼ ê°€ì§€ê³  ì„±ë³„ì„ ì¡°íšŒí•œë‹¤.
 
 SELECT *
 FROM TBL_INSA;
 
-SELECT NAME, SSN, DECODE(SUBSTR(SSN,8,1),'1','³²ÀÚ','2','¿©ÀÚ','È®ÀÎºÒ°¡')"¼ºº°"
+SELECT NAME, SSN, DECODE(SUBSTR(SSN,8,1),'1','ë‚¨ìž','2','ì—¬ìž','í™•ì¸ë¶ˆê°€')"ì„±ë³„"
 FROM TBL_INSA;
 /*
-             ¡é ÁÖ¹Îµî·Ï¹øÈ£
+             â†“ ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸
             \  /
        -----   ---------
        |               |
        ------------  ---
                   /  \
-                   ¡é ¼ºº°
+                   â†“ ì„±ë³„
 
 */
 
---¡Û FUNCTION »ý¼º
--- ÇÔ¼ö¸í : FN_GENDER()
---                      SSN(ÁÖ¹Îµî·Ï¹øÈ£) ¡æ 'YYMMDD-NNNNNNN'
+--â—‹ FUNCTION ìƒì„±
+-- í•¨ìˆ˜ëª… : FN_GENDER()
+--                      SSN(ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸) â†’ 'YYMMDD-NNNNNNN'
 
 CREATE OR REPLACE FUNCTION FN_GENDER
-( VSSN  VARCHAR2    -- ¸Å°³º¯¼ö : ÀÚ¸´¼ö(±æÀÌ) ÁöÁ¤ ¾ÈÇÔ
+( VSSN  VARCHAR2    -- ë§¤ê°œë³€ìˆ˜ : ìžë¦¿ìˆ˜(ê¸¸ì´) ì§€ì • ì•ˆí•¨
 )
-RETURN VARCHAR2     -- RETURN ²À ±¸¼º! ¹ÝÈ¯ ÀÚ·áÇü : ÀÚ¸´¼ö(±æÀÌ) ÁöÁ¤ ¾ÈÇÔ!
+RETURN VARCHAR2     -- RETURN ê¼­ êµ¬ì„±! ë°˜í™˜ ìžë£Œí˜• : ìžë¦¿ìˆ˜(ê¸¸ì´) ì§€ì • ì•ˆí•¨!
 IS
-    -- ÁÖ¿ä º¯¼ö ¼±¾ð
+    -- ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸
     VRESULT VARCHAR2(20);
 BEGIN
-    -- ¿¬»ê ¹× Ã³¸®
+    -- ì—°ì‚° ë° ì²˜ë¦¬
     IF ( SUBSTR(VSSN,8,1) IN ('1','3') )
-        THEN VRESULT := '³²ÀÚ';
+        THEN VRESULT := 'ë‚¨ìž';
     ELSIF ( SUBSTR(VSSN,8,1) IN ('2','4') )
-        THEN VRESULT := '¿©ÀÚ';
+        THEN VRESULT := 'ì—¬ìž';
     ELSE
-        VRESULT := '¼ºº°È®ÀÎºÒ°¡';
+        VRESULT := 'ì„±ë³„í™•ì¸ë¶ˆê°€';
     END IF;
     
-    -- ÃÖÁ¾ °á°ú°ª ¹ÝÈ¯
+    -- ìµœì¢… ê²°ê³¼ê°’ ë°˜í™˜
     RETURN VRESULT;
 END;
---==>> Function FN_GENDERÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Function FN_GENDERì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
 
---¡Û ÀÓÀÇÀÇ Á¤¼ö µÎ °³¸¦ ¸Å°³º¯¼ö(ÀÔ·Â ÆÄ¶ó¹ÌÅÍ)·Î ³Ñ°Ü¹Þ¾Æ
---   A ÀÇ B ½ÂÀÇ °ªÀ» ¹ÝÈ¯ÇÏ´Â »ç¿ëÀÚ Á¤ÀÇ ÇÔ¼ö¸¦ ÀÛ¼ºÇÑ´Ù.
---   ÇÔ¼ö¸í : FN_POW()
+--â—‹ ìž„ì˜ì˜ ì •ìˆ˜ ë‘ ê°œë¥¼ ë§¤ê°œë³€ìˆ˜(ìž…ë ¥ íŒŒë¼ë¯¸í„°)ë¡œ ë„˜ê²¨ë°›ì•„
+--   A ì˜ B ìŠ¹ì˜ ê°’ì„ ë°˜í™˜í•˜ëŠ” ì‚¬ìš©ìž ì •ì˜ í•¨ìˆ˜ë¥¼ ìž‘ì„±í•œë‹¤.
+--   í•¨ìˆ˜ëª… : FN_POW()
 /*
-»ç¿ë ¿¹)
+ì‚¬ìš© ì˜ˆ)
 SELECT FN_POW(10,3)
 FROM DUAL;
 --==>> 1000
@@ -97,7 +97,7 @@ CREATE OR REPLACE FUNCTION FN_POW
 )
 RETURN NUMBER
 IS
-    -- ÁÖ¿ä º¯¼ö ¼±¾ð
+    -- ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸
     VRESULT NUMBER
 BEGIN
     IF A>0 AND B>0
@@ -106,39 +106,39 @@ BEGIN
         VRESULT := 0;
     END IF;
     
-    -- ÃÖÁ¾ °á°ú°ª ¹ÝÈ¯
+    -- ìµœì¢… ê²°ê³¼ê°’ ë°˜í™˜
     RETURN VRESULT;
 END;
---==>> ¿¡·¯
--- POWER ÇÔ¼ö »ç¿ëÇÏ´Â °Å ¾Æ´Ô!! ¹Ýº¹¹® »ç¿ë!!
+--==>> ì—ëŸ¬
+-- POWER í•¨ìˆ˜ ì‚¬ìš©í•˜ëŠ” ê±° ì•„ë‹˜!! ë°˜ë³µë¬¸ ì‚¬ìš©!!
 
--- ³ªÀÇ Ç®ÀÌ-------------------------------------------
+-- ë‚˜ì˜ í’€ì´-------------------------------------------
 CREATE OR REPLACE FUNCTION FN_POW
 ( A NUMBER
 , B NUMBER
 )
 RETURN NUMBER
 IS
-    -- ÁÖ¿ä º¯¼ö ¼±¾ð
+    -- ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸
     VRESULT NUMBER :=1;
     VCOUNT  NUMBER :=0;
 BEGIN
-    -- FOR LOOP ¹®
+    -- FOR LOOP ë¬¸
     FOR VCOUNT IN 1 .. B LOOP
     VRESULT := VRESULT * A;
     END LOOP;
     
-    -- ÃÖÁ¾ °á°ú°ª ¹ÝÈ¯
+    -- ìµœì¢… ê²°ê³¼ê°’ ë°˜í™˜
     RETURN VRESULT;
 END;
---==>> Function FN_POWÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Function FN_POWì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
--- °°ÀÌ Ç®ÀÌ-------------------------------------------
+-- ê°™ì´ í’€ì´-------------------------------------------
 CREATE OR REPLACE FUNCTION FN_POW(A NUMBER, B NUMBER)
 RETURN NUMBER
 IS
-    V_RESULT    NUMBER := 1;        -- ´©Àû °öÀ» ´ãÀ» ²¨¿©¼­ 0 ¸»°í 1·Î ÃÊ±âÈ­
+    V_RESULT    NUMBER := 1;        -- ëˆ„ì  ê³±ì„ ë‹´ì„ êº¼ì—¬ì„œ 0 ë§ê³  1ë¡œ ì´ˆê¸°í™”
     V_NUM       NUMBER;
 BEGIN
     FOR V_NUM IN 1 .. B LOOP
@@ -149,11 +149,29 @@ BEGIN
     RETURN V_RESULT;
     
 END;
+
+--ì—°ìŠµ
+CREATE OR REPLACE FUNCTION FN_POW2(A NUMBER, B NUMBER)
+RETURN  NUMBER      --CHECK~!! ; ì•ˆë¶™ëŠ”ë‹¤!!!!!
+IS
+    VRESULT NUMBER :=1;
+    VNUM    NUMBER;
+    
+BEGIN
+    FOR VNUM IN 1 .. B LOOP
+        VRESULT := VRESULT * A;
+    END LOOP;
+    
+    RETURN VRESULT;
+    
+END;
+--==>> Function FN_POW2ì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
 --------------------------------------------------------------------------------
---¡Û °úÁ¦1 (Ä«Æä¿¡ ¿Ã¸®±â)
--- TBL_INSA Å×ÀÌºíÀÇ ±Þ¿© °è»ê Àü¿ë ÇÔ¼ö¸¦ Á¤ÀÇÇÑ´Ù.
--- ±Þ¿©´Â ¡º(±âº»±Þ*12)+¼ö´ç¡»À» ±â¹ÝÀ¸·Î ¿¬»êÀ» ¼öÇàÇÑ´Ù.
--- ÇÔ¼ö¸í : FN_PAY(±âº»±Þ, ¼ö´ç)
+--â—‹ ê³¼ì œ1 (ì¹´íŽ˜ì— ì˜¬ë¦¬ê¸°)
+-- TBL_INSA í…Œì´ë¸”ì˜ ê¸‰ì—¬ ê³„ì‚° ì „ìš© í•¨ìˆ˜ë¥¼ ì •ì˜í•œë‹¤.
+-- ê¸‰ì—¬ëŠ” ã€Ž(ê¸°ë³¸ê¸‰*12)+ìˆ˜ë‹¹ã€ì„ ê¸°ë°˜ìœ¼ë¡œ ì—°ì‚°ì„ ìˆ˜í–‰í•œë‹¤.
+-- í•¨ìˆ˜ëª… : FN_PAY(ê¸°ë³¸ê¸‰, ìˆ˜ë‹¹)
 CREATE OR REPLACE FUNCTION FN_PAY
 ( BASIC NUMBER
 , SU NUMBER)
@@ -166,14 +184,14 @@ BEGIN
     
     RETURN V_RESULT;
 END;
---==>> Function FN_PAYÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Function FN_PAYì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
---¡Û °úÁ¦2
--- TBL_INSA Å×ÀÌºíÀÇ ÀÔ»çÀÏÀ» ±âÁØÀ¸·Î
--- ÇöÀç±îÁöÀÇ ±Ù¹«³â¼ö¸¦ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö¸¦ Á¤ÀÇÇÑ´Ù.
--- ´Ü, ±Ù¹«³â¼ö´Â ¼Ò¼öÁ¡ ÀÌÇÏ ÇÑÀÚ¸®±îÁö °è»êÇÑ´Ù.
--- ÇÔ¼ö¸í : FN_WORKYEAR(ÀÔ»çÀÏ)
+--â—‹ ê³¼ì œ2
+-- TBL_INSA í…Œì´ë¸”ì˜ ìž…ì‚¬ì¼ì„ ê¸°ì¤€ìœ¼ë¡œ
+-- í˜„ìž¬ê¹Œì§€ì˜ ê·¼ë¬´ë…„ìˆ˜ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜ë¥¼ ì •ì˜í•œë‹¤.
+-- ë‹¨, ê·¼ë¬´ë…„ìˆ˜ëŠ” ì†Œìˆ˜ì  ì´í•˜ í•œìžë¦¬ê¹Œì§€ ê³„ì‚°í•œë‹¤.
+-- í•¨ìˆ˜ëª… : FN_WORKYEAR(ìž…ì‚¬ì¼)
 CREATE OR REPLACE FUNCTION FN_WORKYEAR(IBSA DATE)
 RETURN NUMBER
 IS
@@ -182,119 +200,119 @@ BEGIN
     V_RESULT := TRUNC(MONTHS_BETWEEN(SYSDATE,IBSA)/12,1);
     RETURN V_RESULT;
 END;
---==>> Function FN_WORKYEARÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Function FN_WORKYEARì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
 --------------------------------------------------------------------------------
 
---¡Ø Âü°í(¡Ú±â¾ïÇØµÎ±â¡Ú)
+--â€» ì°¸ê³ (â˜…ê¸°ì–µí•´ë‘ê¸°â˜…)
 
 -- 1. INSERT, UPDATE, DELETE, (MERGE)
 --==>> DML(Data Manipulation Language)
--- COMMIT / ROLLBACK ÀÌ ÇÊ¿äÇÏ´Ù.
+-- COMMIT / ROLLBACK ì´ í•„ìš”í•˜ë‹¤.
 
 -- 2. CREATE, DROP, ALTER, (TRUNCATE)
 --==>> DDL(Data Definition Language)
--- ½ÇÇàÇÏ¸é ÀÚµ¿À¸·Î COMMIT µÈ´Ù.
+-- ì‹¤í–‰í•˜ë©´ ìžë™ìœ¼ë¡œ COMMIT ëœë‹¤.
 
 --3. GRANT, REVOKE
 --==>> DCL(Data Control Language)
--- ½ÇÇàÇÏ¸é ÀÚµ¿À¸·Î COMMIT µÈ´Ù.
+-- ì‹¤í–‰í•˜ë©´ ìžë™ìœ¼ë¡œ COMMIT ëœë‹¤.
 
 -- 4. COMMIT, ROLLBACK
 --==>> TCL(Transaction Control Language)
 
--- Á¤Àû PL/SQL¹® ¡æ DML¹®, TCL¹®¸¸ »ç¿ë °¡´ÉÇÏ´Ù.
--- µ¿Àû PL/SQL¹® ¡æ DML¹®, DDL¹®, DCL¹®, TCL¹® »ç¿ë °¡´ÉÇÏ´Ù.
+-- ì •ì  PL/SQLë¬¸ â†’ DMLë¬¸, TCLë¬¸ë§Œ ì‚¬ìš© ê°€ëŠ¥í•˜ë‹¤.
+-- ë™ì  PL/SQLë¬¸ â†’ DMLë¬¸, DDLë¬¸, DCLë¬¸, TCLë¬¸ ì‚¬ìš© ê°€ëŠ¥í•˜ë‹¤.
 
 --------------------------------------------------------------------------------
--- PL/SQL ÀÇ ²É! P°¡ ÇÁ·Î½ÃÀú
--- ¡á¡á¡á PROCEDURE(ÇÁ·ÎÁö¼­) ¡á¡á¡á--
+-- PL/SQL ì˜ ê½ƒ! Pê°€ í”„ë¡œì‹œì €
+-- â– â– â–  PROCEDURE(í”„ë¡œì‹œì €) â– â– â– --
 
 
--- 1. PL/SQL ¿¡¼­ °¡Àå ´ëÇ¥ÀûÀÎ ±¸Á¶ÀÎ ½ºÅä¾îµå ÇÁ·Î½ÃÀú´Â
---   °³¹ßÀÚ°¡ ÀÚÁÖ ÀÛ¼ºÇØ¾ß ÇÏ´Â ¾÷¹«ÀÇ Èå¸§À»
---   ¹Ì¸® ÀÛ¼ºÇÏ¿© µ¥ÀÌÅÍº£ÀÌ½º ³»¿¡ ÀúÀåÇØ µÎ¾ú´Ù°¡
---   ÇÊ¿äÇÒ ¶§ ¸¶´Ù È£ÃâÇÏ¿© ½ÇÇàÇÒ ¼ö ÀÖµµ·Ï Ã³¸®ÇØ ÁÖ´Â ±¸¹®ÀÌ´Ù.
+-- 1. PL/SQL ì—ì„œ ê°€ìž¥ ëŒ€í‘œì ì¸ êµ¬ì¡°ì¸ ìŠ¤í† ì–´ë“œ í”„ë¡œì‹œì €ëŠ”
+--   ê°œë°œìžê°€ ìžì£¼ ìž‘ì„±í•´ì•¼ í•˜ëŠ” ì—…ë¬´ì˜ íë¦„ì„
+--   ë¯¸ë¦¬ ìž‘ì„±í•˜ì—¬ ë°ì´í„°ë² ì´ìŠ¤ ë‚´ì— ì €ìž¥í•´ ë‘ì—ˆë‹¤ê°€
+--   í•„ìš”í•  ë•Œ ë§ˆë‹¤ í˜¸ì¶œí•˜ì—¬ ì‹¤í–‰í•  ìˆ˜ ìžˆë„ë¡ ì²˜ë¦¬í•´ ì£¼ëŠ” êµ¬ë¬¸ì´ë‹¤.
 
--- 2. Çü½Ä ¹× ±¸Á¶
--- RETURN ¹®ÀÌ ¾øÀ½!!
--- DBA¶ó¸é IN OUT Àß¾Ë¾Æ¾ßÇÔ!!
+-- 2. í˜•ì‹ ë° êµ¬ì¡°
+-- RETURN ë¬¸ì´ ì—†ìŒ!!
+-- DBAë¼ë©´ IN OUT ìž˜ì•Œì•„ì•¼í•¨!!
 /*
-CREATE [OR REPLACE] PROCEDURE ÇÁ·Î½ÃÀú¸í
+CREATE [OR REPLACE] PROCEDURE í”„ë¡œì‹œì €ëª…
 [(
-    ¸Å°³º¯¼ö IN µ¥ÀÌÅÍÅ¸ÀÔ       -- ÀÔ·Â ÆÄ¶ó¹ÌÅÍ      -- IN ¸í½Ã ¾ÈÇÏ¸é  INOUTÀ¸·Î ¾²´Â °Í
-  , ¸Å°³º¯¼ö OUT µ¥ÀÌÅÍÅ¸ÀÔ      -- Ãâ·Â ÆÄ¶ó¹ÌÅÍ
-  , ¸Å°³º¯¼ö INOUT µ¥ÀÌÅÍÅ¸ÀÔ    -- ÀÔÃâ·Â ÆÄ¶ó¹ÌÅÍ
+    ë§¤ê°œë³€ìˆ˜ IN ë°ì´í„°íƒ€ìž…       -- ìž…ë ¥ íŒŒë¼ë¯¸í„°      -- IN ëª…ì‹œ ì•ˆí•˜ë©´  INOUTìœ¼ë¡œ ì“°ëŠ” ê²ƒ
+  , ë§¤ê°œë³€ìˆ˜ OUT ë°ì´í„°íƒ€ìž…      -- ì¶œë ¥ íŒŒë¼ë¯¸í„°
+  , ë§¤ê°œë³€ìˆ˜ INOUT ë°ì´í„°íƒ€ìž…    -- ìž…ì¶œë ¥ íŒŒë¼ë¯¸í„°
 )]
 IS
-    -- ÁÖ¿ä º¯¼ö ¼±¾ð
+    -- ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸
 BEGIN
-    -- ½ÇÇà±¸¹®
+    -- ì‹¤í–‰êµ¬ë¬¸
     ...
     [EXCEPTION]
-        -- ¿¹¿Ü Ã³¸® ±¸¹®
+        -- ì˜ˆì™¸ ì²˜ë¦¬ êµ¬ë¬¸
 END;
 */
 
---¡Ø FUNCTION °ú ºñ±³ÇßÀ» ¶§...
---   ¡ºRETURN ¹ÝÈ¯ÀÚ·áÇü¡» ºÎºÐÀÌ Á¸ÀçÇÏÁö ¾ÊÀ¸¸ç,
---   ¡ºRETURN¡»¹® ÀÚÃ¼µµ Á¸ÀçÇÏÁö ¾ÊÀ¸¸ç,
---   ÇÁ·Î½ÃÀú ½ÇÇà ½Ã ³Ñ°ÜÁÖ°Ô µÇ´Â ¸Å°³º¯¼öÀÇ Á¾·ù´Â
---   IN, OUT, INOUT À¸·Î ±¸ºÐµÈ´Ù.
+--â€» FUNCTION ê³¼ ë¹„êµí–ˆì„ ë•Œ...
+--   ã€ŽRETURN ë°˜í™˜ìžë£Œí˜•ã€ ë¶€ë¶„ì´ ì¡´ìž¬í•˜ì§€ ì•Šìœ¼ë©°,
+--   ã€ŽRETURNã€ë¬¸ ìžì²´ë„ ì¡´ìž¬í•˜ì§€ ì•Šìœ¼ë©°,
+--   í”„ë¡œì‹œì € ì‹¤í–‰ ì‹œ ë„˜ê²¨ì£¼ê²Œ ë˜ëŠ” ë§¤ê°œë³€ìˆ˜ì˜ ì¢…ë¥˜ëŠ”
+--   IN, OUT, INOUT ìœ¼ë¡œ êµ¬ë¶„ëœë‹¤.
 
--- 3. ½ÇÇà(È£Ãâ)
+-- 3. ì‹¤í–‰(í˜¸ì¶œ)
 /*
-EXEC[UTE] ÇÁ·Î½ÃÀú¸í[(ÀÎ¼ö1, ÀÎ¼ö2, ...)];
+EXEC[UTE] í”„ë¡œì‹œì €ëª…[(ì¸ìˆ˜1, ì¸ìˆ˜2, ...)];
 */
 
 
---¡Û INSERT Äõ¸® ½ÇÇàÀ» ÇÁ·Î½ÃÀú·Î ÀÛ¼º( ¡æ INSERT ÇÁ·Î½ÃÀú )
+--â—‹ INSERT ì¿¼ë¦¬ ì‹¤í–‰ì„ í”„ë¡œì‹œì €ë¡œ ìž‘ì„±( â†’ INSERT í”„ë¡œì‹œì € )
 
--- SQL·Î~
+-- SQLë¡œ~
 
 
--- ÇÁ·Î½ÃÀú »ý¼º(ÀÛ¼º)
+-- í”„ë¡œì‹œì € ìƒì„±(ìž‘ì„±)
 CREATE OR REPLACE PROCEDURE PRC_STUDENTS_INSERT
-( V_ID      IN TBL_IDPW.ID%TYPE      -- µÎ Å×ÀÌºí¿¡ ÀÖ´Â IDµ¥ÀÌÅÍÅ¸ÀÔ°ú °°¾Æ¾ß ÇÏ´Ï±î!
+( V_ID      IN TBL_IDPW.ID%TYPE      -- ë‘ í…Œì´ë¸”ì— ìžˆëŠ” IDë°ì´í„°íƒ€ìž…ê³¼ ê°™ì•„ì•¼ í•˜ë‹ˆê¹Œ!
 , V_PW      IN TBL_IDPW.PW%TYPE
 , V_NAME    IN TBL_STUDENTS.NAME%TYPE
 , V_TEL     IN TBL_STUDENTS.TEL%TYPE
 , V_ADDR    IN TBL_STUDENTS.ADDR%TYPE
 )
 IS
-    -- ÁÖ¿ä º¯¼ö ¼±¾ð º°µµ·Î ÇÊ¿ä ¾øÀ½!! À§¿¡²¨ Àâ¾Æ¿À¸é µÊ!
+    -- ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸ ë³„ë„ë¡œ í•„ìš” ì—†ìŒ!! ìœ„ì—êº¼ ìž¡ì•„ì˜¤ë©´ ë¨!
 BEGIN
-    -- TBL_IDPW Å×ÀÌºí¿¡ µ¥ÀÌÅÍ ÀÔ·Â
+    -- TBL_IDPW í…Œì´ë¸”ì— ë°ì´í„° ìž…ë ¥
     INSERT INTO TBL_IDPW(ID, PW)
     VALUES(V_ID, V_PW);
     
-    -- TBL_STUDENTS Å×ÀÌºí¿¡ µ¥ÀÌÅÍ ÀÔ·Â
+    -- TBL_STUDENTS í…Œì´ë¸”ì— ë°ì´í„° ìž…ë ¥
     INSERT INTO TBL_STUDENTS(ID, NAME, TEL, ADDR)
     VALUES(V_ID, V_NAME, V_TEL, V_ADDR);
     
-    -- Ä¿¹Ô
+    -- ì»¤ë°‹
     COMMIT;
     
 END;
---==>> Procedure PRC_STUDENTS_INSERTÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Procedure PRC_STUDENTS_INSERTì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 --------------------------------------------------------------------------------
 
 
---¡Û TBL_SUNGJUK Å×ÀÌºí¿¡ µ¥ÀÌÅÍ ÀÔ·Â ½Ã
---   Æ¯Á¤ Ç×¸ñÀÇ µ¥ÀÌÅÍ(ÇÐ¹ø, ÀÌ¸§, ±¹¾îÁ¡¼ö, ¿µ¾îÁ¡¼ö, ¼öÇÐÁ¡¼ö)¸¸ ÀÔ·ÂÇÏ¸é
---   ³»ºÎÀûÀ¸·Î ÃÑÁ¡, Æò±Õ, µî±Þ Ç×¸ñÀÌ ÇÔ²² ÀÔ·Â Ã³¸®µÉ ¼ö ÀÖµµ·Ï ÇÏ´Â
---   ÇÁ·Î½ÃÀú¸¦ »ý¼ºÇÑ´Ù.
---   ÇÁ·Î½ÃÀú ¸í : PRC_SUNGJUK_INSERT()
+--â—‹ TBL_SUNGJUK í…Œì´ë¸”ì— ë°ì´í„° ìž…ë ¥ ì‹œ
+--   íŠ¹ì • í•­ëª©ì˜ ë°ì´í„°(í•™ë²ˆ, ì´ë¦„, êµ­ì–´ì ìˆ˜, ì˜ì–´ì ìˆ˜, ìˆ˜í•™ì ìˆ˜)ë§Œ ìž…ë ¥í•˜ë©´
+--   ë‚´ë¶€ì ìœ¼ë¡œ ì´ì , í‰ê· , ë“±ê¸‰ í•­ëª©ì´ í•¨ê»˜ ìž…ë ¥ ì²˜ë¦¬ë  ìˆ˜ ìžˆë„ë¡ í•˜ëŠ”
+--   í”„ë¡œì‹œì €ë¥¼ ìƒì„±í•œë‹¤.
+--   í”„ë¡œì‹œì € ëª… : PRC_SUNGJUK_INSERT()
 /*
-½ÇÇà ¿¹_
-EXEC PRC_SUNGJUK_INSERT(1, '±èÁøÈñ', 90, 80, 70);
+ì‹¤í–‰ ì˜ˆ_
+EXEC PRC_SUNGJUK_INSERT(1, 'ê¹€ì§„í¬', 90, 80, 70);
 
-ÇÁ·Î½ÃÀú È£Ãâ·Î Ã³¸®µÈ °á°ú)
-ÇÐ¹ø  ÀÌ¸§  ±¹¾îÁ¡¼ö  ¿µ¾îÁ¡¼ö  ¼öÇÐÁ¡¼ö  ÃÑÁ¡  Æò±Õ  µî±Þ
- 1   ±èÁøÈñ    90        80        70     240    80     B
+í”„ë¡œì‹œì € í˜¸ì¶œë¡œ ì²˜ë¦¬ëœ ê²°ê³¼)
+í•™ë²ˆ  ì´ë¦„  êµ­ì–´ì ìˆ˜  ì˜ì–´ì ìˆ˜  ìˆ˜í•™ì ìˆ˜  ì´ì   í‰ê·   ë“±ê¸‰
+ 1   ê¹€ì§„í¬    90        80        70     240    80     B
 */
--- ³ªÀÇ Ç®ÀÌ---------------------------------------------------------
+-- ë‚˜ì˜ í’€ì´---------------------------------------------------------
 CREATE OR REPLACE PROCEDURAL PRC_SUNGJUK_INSERT
 ( V_HAKBUN  IN TBL_SUNGJUK.HAKBUN%TYPE
 , V_NAME    IN TBL_SUNGJUK.NAME%TYPE
@@ -306,8 +324,8 @@ CREATE OR REPLACE PROCEDURAL PRC_SUNGJUK_INSERT
 --, V_GRADE   IN TBL_SUNGJUK.GRADE%TYPE
 )
 IS
-    -- ÁÖ¿ä º¯¼ö ¼±¾ð
-    V_TOT   NUMBER(3);      -- ÀÌºÎºÐ Æ²¸²!
+    -- ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸
+    V_TOT   NUMBER(3);      -- ì´ë¶€ë¶„ í‹€ë¦¼!
     V_AVG   NUMBER(4,1);
     V_GRADE CHAR;
      
@@ -326,15 +344,15 @@ BEGIN
         V_GRADE := 'F';
     END IF;
     
-    -- µ¥ÀÌÅÍ ÀÔ·Â
-    INSERT INTO(HAKBUN,NAME, KOR, ENG, MAT, TOT, AVG, GRADE)                -- ÀÌºÎºÐ Æ²¸²! TBL_SUNGJUK À» ¾È³ÖÀ½!!!!
+    -- ë°ì´í„° ìž…ë ¥
+    INSERT INTO(HAKBUN,NAME, KOR, ENG, MAT, TOT, AVG, GRADE)                -- ì´ë¶€ë¶„ í‹€ë¦¼! TBL_SUNGJUK ì„ ì•ˆë„£ìŒ!!!!
     VALUES(V_HAKBUN,V_NAME, V_KOR, V_ENG, V_MAT, V_TOT, V_AVG, V_GRADE);
     
-    -- Ä¿¹Ô
+    -- ì»¤ë°‹
     COMMIT;
 END;
 
--- °°ÀÌ Ç®ÀÌ--------------------------------------------------------------
+-- ê°™ì´ í’€ì´--------------------------------------------------------------
 --CREATE OR REPLACE PROCEDURAL PRC_SUNGJUK_INSERT
 CREATE OR REPLACE PROCEDURE PRC_SUNGJUK_INSERT
 ( V_HAKBUN  IN TBL_SUNGJUK.HAKBUN%TYPE
@@ -344,13 +362,13 @@ CREATE OR REPLACE PROCEDURE PRC_SUNGJUK_INSERT
 , V_MAT     IN TBL_SUNGJUK.MAT%TYPE
 )
 IS
-     -- ¾Æ·¡ÀÇ INSERT Äõ¸®¹®À» ¼öÇàÇÏ´Âµ¥ ÇÊ¿äÇÑ ÁÖ¿ä º¯¼ö ¼±¾ð
-    V_TOT   TBL_SUNGJUK.TOT%TYPE;   -- ¿©±â¼­´Â ³»ºÎ¿¡¼­ »ç¿ëÇÏ´Â Áö¿ªº¯¼öÀÌ±â ¶§¹®¿¡
-    V_AVG   TBL_SUNGJUK.AVG%TYPE;   -- IN ¾È½áµµ µÊ!    À§¿¡´Â ,·Î ±¸ºÐ ¿©±â´Â ;·Î ±¸ºÐ!        
+     -- ì•„ëž˜ì˜ INSERT ì¿¼ë¦¬ë¬¸ì„ ìˆ˜í–‰í•˜ëŠ”ë° í•„ìš”í•œ ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸
+    V_TOT   TBL_SUNGJUK.TOT%TYPE;   -- ì—¬ê¸°ì„œëŠ” ë‚´ë¶€ì—ì„œ ì‚¬ìš©í•˜ëŠ” ì§€ì—­ë³€ìˆ˜ì´ê¸° ë•Œë¬¸ì—
+    V_AVG   TBL_SUNGJUK.AVG%TYPE;   -- IN ì•ˆì¨ë„ ë¨!    ìœ„ì—ëŠ” ,ë¡œ êµ¬ë¶„ ì—¬ê¸°ëŠ” ;ë¡œ êµ¬ë¶„!        
     V_GRADE TBL_SUNGJUK.GRADE%TYPE;
 BEGIN
-    -- ¾Æ·¡ÀÇ INSERT Äõ¸®¹®À» ¼öÇàÇÏ±â À§ÇØ¼­´Â
-    -- À§¿¡¼­ ¼±¾ðÇÑ º¯¼öµé¿¡ °ªÀ» ´ã¾Æ³»¾ß ÇÑ´Ù.
+    -- ì•„ëž˜ì˜ INSERT ì¿¼ë¦¬ë¬¸ì„ ìˆ˜í–‰í•˜ê¸° ìœ„í•´ì„œëŠ”
+    -- ìœ„ì—ì„œ ì„ ì–¸í•œ ë³€ìˆ˜ë“¤ì— ê°’ì„ ë‹´ì•„ë‚´ì•¼ í•œë‹¤.
     V_TOT := V_KOR + V_ENG + V_MAT;
     V_AVG := V_TOT / 3;
     IF (V_AVG>=90)
@@ -365,33 +383,33 @@ BEGIN
         V_GRADE := 'F';
     END IF;
     
-    -- À§ÀÇ ÀÏ·ÃÀÇ °úÁ¤(line 336 ~ 348)À» ÅëÇØ ´ã¾Æ³½ °ªµé·Î
-    -- INSERT Äõ¸®¹® ½ÇÇà
+    -- ìœ„ì˜ ì¼ë ¨ì˜ ê³¼ì •(line 336 ~ 348)ì„ í†µí•´ ë‹´ì•„ë‚¸ ê°’ë“¤ë¡œ
+    -- INSERT ì¿¼ë¦¬ë¬¸ ì‹¤í–‰
     INSERT INTO TBL_SUNGJUK(HAKBUN,NAME, KOR, ENG, MAT, TOT, AVG, GRADE)
     VALUES(V_HAKBUN,V_NAME, V_KOR, V_ENG, V_MAT, V_TOT, V_AVG, V_GRADE);
     
-    -- Ä¿¹Ô
+    -- ì»¤ë°‹
     COMMIT;
 END;
---==>> Procedure PRC_SUNGJUK_INSERTÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Procedure PRC_SUNGJUK_INSERTì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 --------------------------------------------------------------------------------
 
 
 
 
---¡Û TBL_SUNGJUK Å×ÀÌºí¿¡¼­
---   Æ¯Á¤ ÇÐ»ýÀÇ Á¡¼ö(ÇÐ¹ø, ±¹¾î, ¿µ¾î, ¼öÇÐ)
---   µ¥ÀÌÅÍ ¼öÁ¤ ½Ã ÃÑÁ¡, Æò±Õ, µî±Þ±îÁö ¼öÁ¤ÇÏ´Â ÇÁ·Î½ÃÀú¸¦ ÀÛ¼ºÇÑ´Ù.
---   ÇÁ·Î½ÃÀú ¸í : PRC_SUNGJUK_UPDATE()
+--â—‹ TBL_SUNGJUK í…Œì´ë¸”ì—ì„œ
+--   íŠ¹ì • í•™ìƒì˜ ì ìˆ˜(í•™ë²ˆ, êµ­ì–´, ì˜ì–´, ìˆ˜í•™)
+--   ë°ì´í„° ìˆ˜ì • ì‹œ ì´ì , í‰ê· , ë“±ê¸‰ê¹Œì§€ ìˆ˜ì •í•˜ëŠ” í”„ë¡œì‹œì €ë¥¼ ìž‘ì„±í•œë‹¤.
+--   í”„ë¡œì‹œì € ëª… : PRC_SUNGJUK_UPDATE()
 /*
-½ÇÇà ¿¹)
+ì‹¤í–‰ ì˜ˆ)
 EXEC PRC_SUNGJUK_UPDATE(2, 100, 100, 100);
 
-ÇÁ·Î½ÃÀú È£Ãâ·Î Ã³¸®µÈ °á°ú)
-ÇÐ¹ø  ÀÌ¸§  ±¹¾îÁ¡¼ö  ¿µ¾îÁ¡¼ö  ¼öÇÐÁ¡¼ö  ÃÑÁ¡  Æò±Õ  µî±Þ
- 2   ±è¼Ò¿¬   100      100        100     300   100     A
+í”„ë¡œì‹œì € í˜¸ì¶œë¡œ ì²˜ë¦¬ëœ ê²°ê³¼)
+í•™ë²ˆ  ì´ë¦„  êµ­ì–´ì ìˆ˜  ì˜ì–´ì ìˆ˜  ìˆ˜í•™ì ìˆ˜  ì´ì   í‰ê·   ë“±ê¸‰
+ 2   ê¹€ì†Œì—°   100      100        100     300   100     A
 */
--- ³ªÀÇ Ç®ÀÌ---------------------------------------------------
+-- ë‚˜ì˜ í’€ì´---------------------------------------------------
 CREATE OR REPLACE PROCEDURE PRC_SUNGJUK_UPDATE
 ( V_HAKBUN  IN TBL_SUNGJUK.HAKBUN%TYPE
 , V_KOR     IN TBL_SUNGJUK.KOR%TYPE
@@ -418,7 +436,7 @@ BEGIN
     END IF;
     
     UPDATE TBL_SUNGJUK      
-    SET KOR = V_KOR                 -- := ¾Æ´Ô!!
+    SET KOR = V_KOR                 -- := ì•„ë‹˜!!
        ,ENG = V_ENG
        ,MAT = V_MAT
        ,TOT = V_TOT
@@ -428,9 +446,9 @@ BEGIN
     
     COMMIT;
 END;
---==>> Procedure PRC_SUNGJUK_UPDATEÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Procedure PRC_SUNGJUK_UPDATEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- °°ÀÌ Ç®ÀÌ-----------------------------------------------------
+-- ê°™ì´ í’€ì´-----------------------------------------------------
 CREATE OR REPLACE PROCEDURE PRC_SUNGJUK_UPDATE
 ( V_HAKBUN  IN TBL_SUNGJUK.HAKBUN%TYPE
 , V_KOR     IN TBL_SUNGJUK.KOR%TYPE
@@ -438,13 +456,13 @@ CREATE OR REPLACE PROCEDURE PRC_SUNGJUK_UPDATE
 , V_MAT     IN TBL_SUNGJUK.MAT%TYPE
 )
 IS
-    -- UPDATE ÁøÇà ½Ã ÇÊ¿äÇÑ µ¥ÀÌÅÍ¸¦ ´ã¾Æ³¾ ÁÖ¿ä º¯¼ö ¼±¾ð
+    -- UPDATE ì§„í–‰ ì‹œ í•„ìš”í•œ ë°ì´í„°ë¥¼ ë‹´ì•„ë‚¼ ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸
     V_TOT   TBL_SUNGJUK.TOT%TYPE;
     V_AVG   TBL_SUNGJUK.AVG%TYPE;
     V_GRADE TBL_SUNGJUK.GRADE%TYPE;
 BEGIN
-    -- ¾Æ·¡ UPDATE Äõ¸®¹® ¼öÇàÀ» À§ÇØ
-    -- À§¿¡¼­ ¼±¾ðÇÑ º¯¼öµé¿¡ °ªÀ» ´ã¾Æ³»±â
+    -- ì•„ëž˜ UPDATE ì¿¼ë¦¬ë¬¸ ìˆ˜í–‰ì„ ìœ„í•´
+    -- ìœ„ì—ì„œ ì„ ì–¸í•œ ë³€ìˆ˜ë“¤ì— ê°’ì„ ë‹´ì•„ë‚´ê¸°
     V_TOT := V_KOR+V_ENG+V_MAT;
     V_AVG := V_TOT / 3;
     IF (V_AVG>=90)
@@ -459,31 +477,31 @@ BEGIN
         V_GRADE := 'F';
     END IF;
     
-    -- UPDATE Äõ¸®¹® ¼öÇà
+    -- UPDATE ì¿¼ë¦¬ë¬¸ ìˆ˜í–‰
     UPDATE TBL_SUNGJUK
     SET KOR=V_KOR, ENG=V_ENG, MAT=V_MAT, TOT=V_TOT , AVG=V_AVG, GRADE=V_GRADE
     WHERE HAKBUN = V_HAKBUN;
-    --Ä¿¹Ô
+    --ì»¤ë°‹
     COMMIT;
 END;
---==>> Procedure PRC_SUNGJUK_UPDATEÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Procedure PRC_SUNGJUK_UPDATEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 --------------------------------------------------------------------------------
 
---¡Û TBL_STUDENTS Å×ÀÌºí¿¡¼­ 
---   ÀüÈ­¹øÈ£¿Í ÁÖ¼Ò µ¥ÀÌÅÍ¸¦ ¼öÁ¤ÇÏ´Â(º¯°æÇÏ´Â) ÇÁ·Î½ÃÀú¸¦ ÀÛ¼ºÇÑ´Ù.
---   ´Ü, ID ¿Í PW°¡ ÀÏÄ¡ÇÏ´Â °æ¿ì¿¡¸¸ ¼öÁ¤À» ÁøÇàÇÒ ¼ö ÀÖµµ·Ï ÇÑ´Ù.
--- ÇÁ·Î½ÃÀú ¸í : PRC_STUDENTS_UPDATE()
+--â—‹ TBL_STUDENTS í…Œì´ë¸”ì—ì„œ 
+--   ì „í™”ë²ˆí˜¸ì™€ ì£¼ì†Œ ë°ì´í„°ë¥¼ ìˆ˜ì •í•˜ëŠ”(ë³€ê²½í•˜ëŠ”) í”„ë¡œì‹œì €ë¥¼ ìž‘ì„±í•œë‹¤.
+--   ë‹¨, ID ì™€ PWê°€ ì¼ì¹˜í•˜ëŠ” ê²½ìš°ì—ë§Œ ìˆ˜ì •ì„ ì§„í–‰í•  ìˆ˜ ìžˆë„ë¡ í•œë‹¤.
+-- í”„ë¡œì‹œì € ëª… : PRC_STUDENTS_UPDATE()
 /*
-½ÇÇà ¿¹)
-EXEC PRC_STUDENTS_UPDATE('superman','java006$','010-9999-9999','ÀÎÃµ');
+ì‹¤í–‰ ì˜ˆ)
+EXEC PRC_STUDENTS_UPDATE('superman','java006$','010-9999-9999','ì¸ì²œ');
 
-ÇÁ·Î½ÃÀú È£Ãâ·Î Ã³¸®µÈ °á°ú
-superman	¼Õ¹ü¼®	010-9999-9999	ÀÎÃµ
+í”„ë¡œì‹œì € í˜¸ì¶œë¡œ ì²˜ë¦¬ëœ ê²°ê³¼
+superman	ì†ë²”ì„	010-9999-9999	ì¸ì²œ
 
-¾ÆÀÌµð¿Í ÆÐ½º¿öµå°¡ ÀÏÄ¡ÇÏÁö ¾ÊÀ¸¸é ÇÁ·Î½ÃÀú µ¹¾Æ°¡Áö ¾Êµµ·Ï!
+ì•„ì´ë””ì™€ íŒ¨ìŠ¤ì›Œë“œê°€ ì¼ì¹˜í•˜ì§€ ì•Šìœ¼ë©´ í”„ë¡œì‹œì € ëŒì•„ê°€ì§€ ì•Šë„ë¡!
 */
--- ³ªÀÇ Ç®ÀÌ-----------------------------------------------------------
+-- ë‚˜ì˜ í’€ì´-----------------------------------------------------------
 CREATE OR REPLACE PROCEDURE PRC_STUDENTS_UPDATE
 ( V_ID      IN TBL_STUDENTS.ID%TYPE
 , V_PW      IN TBL_STUDENTS.PW%TYPE
@@ -500,7 +518,7 @@ BEGIN
     COMMIT;
 END;
 
--- °°ÀÌ Ç®ÀÌ-----------------------------------------------------------
+-- ê°™ì´ í’€ì´-----------------------------------------------------------
 CREATE OR REPLACE PROCEDURE PRC_STUDENTS_UPDATE
 ( V_ID      IN TBL_STUDENTS.ID%TYPE             
 , V_PW      IN TBL_IDPW.PW%TYPE                 --CHECK~!!! TBL_IDPW
@@ -509,32 +527,34 @@ CREATE OR REPLACE PROCEDURE PRC_STUDENTS_UPDATE
 )
 IS 
 BEGIN
-    -- UPDATE Äõ¸®¹® ±¸¼º
+    -- UPDATE ì¿¼ë¦¬ë¬¸ êµ¬ì„±
     UPDATE(SELECT I.ID, I.PW, S.TEL, S.ADDR
            FROM TBL_IDPW I JOIN TBL_STUDENTS S
            ON I.ID = S.ID) T
     SET T.TEL=V_TEL, T.ADDR=V_ADDR
-    WHERE T.ID = V_ID AND T.PW = V_PW;          --CHECK~!!! AND ¿Í ;
+    WHERE T.ID = V_ID AND T.PW = V_PW;          --CHECK~!!! AND ì™€ ;
     
-    -- Ä¿¹Ô
+    -- ì»¤ë°‹
     COMMIT;
 END;
---==>> Procedure PRC_STUDENTS_UPDATEÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Procedure PRC_STUDENTS_UPDATEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
---¡Û TBL_INSA Å×ÀÌºíÀ» ´ë»óÀ¸·Î ½Å±Ô µ¥ÀÌÅÍ ÀÔ·Â ÇÁ·Î½ÃÀú¸¦ ÀÛ¼ºÇÑ´Ù.
+
+
+--â—‹ TBL_INSA í…Œì´ë¸”ì„ ëŒ€ìƒìœ¼ë¡œ ì‹ ê·œ ë°ì´í„° ìž…ë ¥ í”„ë¡œì‹œì €ë¥¼ ìž‘ì„±í•œë‹¤.
 --  NUM, NAME, SSN, IBSADATE, CITY, TEL, BUSEO, JIKWI, BASICPAY, SUDANG  
---  ±¸Á¶¸¦ °®°í ÀÖ´Â ´ë»ó Å×ÀÌºí¿¡ µ¥ÀÌÅÍ ÀÔ·Â ½Ã
---  NUM ÄÃ·³(»ç¿ø¹øÈ£)ÀÇ °ªÀº
---  ±âÁ¸ ºÎ¿©µÈ »ç¿ø¹øÈ£ ¸¶Áö¸· ¹øÈ£ÀÇ ±× ´ÙÀ½ ¹øÈ£¸¦ ÀÚµ¿À¸·Î
---  ÀÔ·Â Ã³¸®ÇÒ ¼ö ÀÖ´Â ÇÁ·Î½ÃÀú¸¦ ±¸¼ºÇÑ´Ù.
---  ÇÁ·Î½ÃÀú ¸í : PRC_INSA_INSERT(NAME, SSN, IBSADATE, CITY, TEL, BUSEO, JIKWI, BASICPAY, SUDANG);
---                               ¡èNUM ºüÁ®ÀÖÀ½!!
+--  êµ¬ì¡°ë¥¼ ê°–ê³  ìžˆëŠ” ëŒ€ìƒ í…Œì´ë¸”ì— ë°ì´í„° ìž…ë ¥ ì‹œ
+--  NUM ì»¬ëŸ¼(ì‚¬ì›ë²ˆí˜¸)ì˜ ê°’ì€
+--  ê¸°ì¡´ ë¶€ì—¬ëœ ì‚¬ì›ë²ˆí˜¸ ë§ˆì§€ë§‰ ë²ˆí˜¸ì˜ ê·¸ ë‹¤ìŒ ë²ˆí˜¸ë¥¼ ìžë™ìœ¼ë¡œ
+--  ìž…ë ¥ ì²˜ë¦¬í•  ìˆ˜ ìžˆëŠ” í”„ë¡œì‹œì €ë¥¼ êµ¬ì„±í•œë‹¤.
+--  í”„ë¡œì‹œì € ëª… : PRC_INSA_INSERT(NAME, SSN, IBSADATE, CITY, TEL, BUSEO, JIKWI, BASICPAY, SUDANG);
+--                               â†‘NUM ë¹ ì ¸ìžˆìŒ!!
 /*
-EXEC PRC_INSA_INSERT('ÀÌ´Ù¿µ', '951027-2234567', SYSDATE, '¼­¿ï', '010-4113-2353', '¿µ¾÷ºÎ', '´ë¸®', 10000000, 2000000); -- Ãµ¸¸, ÀÌ¹é¸¸
+EXEC PRC_INSA_INSERT('ì´ë‹¤ì˜', '951027-2234567', SYSDATE, 'ì„œìš¸', '010-4113-2353', 'ì˜ì—…ë¶€', 'ëŒ€ë¦¬', 10000000, 2000000); -- ì²œë§Œ, ì´ë°±ë§Œ
 
-ÇÁ·Î½ÃÀú È£Ãâ·Î Ã³¸®µÈ °á°ú)
-1061 ÀÌ´Ù¿µ 951027-2234567 SYSDATE ¼­¿ï 010-4113-2353 ¿µ¾÷ºÎ ´ë¸® 10000000 2000000
+í”„ë¡œì‹œì € í˜¸ì¶œë¡œ ì²˜ë¦¬ëœ ê²°ê³¼)
+1061 ì´ë‹¤ì˜ 951027-2234567 SYSDATE ì„œìš¸ 010-4113-2353 ì˜ì—…ë¶€ ëŒ€ë¦¬ 10000000 2000000
 */
 CREATE OR REPLACE PROCEDURE PRC_INSA_INSERT
 ( V_NAME        IN TBL_INSA.NAME%TYPE
@@ -553,116 +573,6 @@ BEGIN
     SET
     WHERE
 END;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
