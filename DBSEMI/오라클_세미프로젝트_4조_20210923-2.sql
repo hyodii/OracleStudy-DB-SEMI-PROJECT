@@ -1,0 +1,839 @@
+SELECT USER
+FROM DUAL;
+--==>> HR
+/*
+[테이블 생성 순서]
+1. 관리자
+2. 교수
+3. 학생
+4. 과목
+5. 과정
+6. 개설과목
+7. 시험
+8. 수강신청
+9. 성적
+10. 중도포기
+--> 절대적으로 이 순서여야만 하는 것은 아닙니다.
+
+교수정보, 학생정보 패스워드 -  데이터 입력 구문 작성 시에 SSN에서 
+                               주민번호 뒷자리만 문자열 추출해서 저장
+                               
+SCORE 테이블 - SCORE테이블에서 출결, 실기, 필기 점수는 각각 100점으로 입력하되 
+               나중에 개설과목 테이블에서 비중을 가져와서 출력창에 100점 만점으로 
+               표시하는 방식은 어떨까요? 제약조건 에러가 나서 한번 생각해봤습니다. 
+               우선 그 제약조건들 제외하고 테이블 생성했습니다.
+               
+MID_DROP - 테이블.컬럼명 이 방식을 테이블 생성할 때 인식을 못하는 것 같아요! 
+           이것도 아마 프로시저 등으로 나중에 예외처리하는 방식으로 하는 건 
+           어떨지 생각해봤고 우선 그 제약조건 제외하고 테이블 생성했습니다.
+*/
+
+/*
+[할 일]
+1. 위의 사항들 논의
+2. 본인이 맡은 테이블 제약조건 설명
+3. 논의 + 발표(설명) 후 필요한 프로시저, 트리거 등 생각하기(자기가 맡은 테이블 위주로)
+4. 본인이 생각한 프로시저, 트리거 등 어떤 부분이 필요한지 발표
+5. 코딩 
+6. 샘플 데이터 생성
+*/
+--① 현정
+CREATE TABLE ADMINISTRATOR
+( ADMIN_ID  VARCHAR2(30)
+, ADMIN_PW  VARCHAR2(30) 
+, CONSTRAINT ADMINISTRATOR_ADMIN_ID_PK PRIMARY KEY(ADMIN_ID)
+);
+
+ALTER TABLE ADMINISTRATOR
+MODIFY
+( ADMIN_PW CONSTRAINT ADMINISTRATOR_ADMIN_PW_NN NOT NULL );
+
+
+
+CREATE TABLE ESTABLISHED_SUB
+( EST_SUB_ID        VARCHAR2(30)
+, PRO_ID            VARCHAR2(30)
+, COURSE_ID         VARCHAR2(30)
+, SUB_ID            VARCHAR2(30)
+, ATTEND_PER        NUMBER(3)
+, PRACTICAL_PER     NUMBER(3)
+, WRITING_PER       NUMBER(3)
+, CONSTRAINT EST_SUB_EST_SUB_ID_PK PRIMARY KEY(EST_SUB_ID)
+, CONSTRAINT EST_SUB_PRO_ID_FK FOREIGN KEY(PRO_ID) 
+                                       REFERENCES PROFESSORS(PRO_ID)
+, CONSTRAINT SUBJECTS_COURSE_ID_FK FOREIGN KEY(COURSE_ID) 
+                                       REFERENCES COURSE(COURSE_ID)
+, CONSTRAINT EST_SUB_SUB_ID_FK FOREIGN KEY(SUB_ID) 
+                                       REFERENCES SUBJECTS(SUB_ID)
+, CONSTRAINT EST_SUB_ATTEND_PER_CK CHECK(ATTEND_PER BETWEEN 0 AND 100)
+, CONSTRAINT EST_SUB_PRACTICAL_PER_CK CHECK(PRACTICAL_PER BETWEEN 0 AND 100)
+, CONSTRAINT EST_SUB_WRITING_PER_CK CHECK(WRITING_PER BETWEEN 0 AND 100)
+, CONSTRAINT EST_SUB_TOTAL_PER_CK CHECK( (ATTEND_PER + PRACTICAL_PER + WRITING_PER) = 100 )
+);
+
+
+--② 승균
+CREATE TABLE COURSE
+( COURSE_ID     VARCHAR2(30)  
+, COURSE_NAME   VARCHAR2(30)
+, PRO_ID        VARCHAR2(30)
+, C_START       DATE
+, C_END         DATE
+, CLASSROOM     VARCHAR2(30)
+, CONSTRAINT COURSE_COURSE_ID_PK PRIMARY KEY(COURSE_ID)
+, CONSTRAINT COURSE_COURSE_NAME_FK FOREIGN KEY(PRO_ID)
+                                            REFERENCES PROFESSORS(PRO_ID)
+, CONSTRAINT COURSE_C_START_CK CHECK(C_START < C_END)
+);
+
+CREATE TABLE TEST
+(
+ TEST_ID      VARCHAR2(30)
+,SUB_ID       VARCHAR2(30)
+,TEST_DATE      DATE
+,CONSTRAINT TEST_TEST_ID_PK PRIMARY KEY(TEST_ID)
+,CONSTRAINT TEST_SUB_ID_FK FOREIGN KEY(SUB_ID) REFERENCES SUBJECTS(SUB_ID)
+);
+
+
+
+--③ 미화
+CREATE TABLE MID_DROP
+( DROP_ID       VARCHAR2(30)
+, ENROLL_ID     VARCHAR2(30)
+, DROP_DATE     DATE           NOT NULL
+, CONSTRAINT MID_DPOP_ID_PK PRIMARY KEY(DROP_ID)
+, CONSTRAINT MID_DPOP_ENROLL_ID_FK FOREIGN KEY(ENROLL_ID)
+             REFERENCES ENROLL(ENROLL_ID)
+-- 등록일보다 중도포기 날짜가 뒤여야 한다는 제약조건
+);
+
+-- E_ID로 변경
+ALTER TABLE MID_DROP RENAME COLUMN ENROLL_ID TO E_ID;
+
+SELECT *
+FROM MID_DROP;
+
+CREATE TABLE SCORE
+( SCORE_ID              VARCHAR2(30) 
+, ENROLL_ID             VARCHAR2(30)
+, EST_SUB_ID            VARCHAR2(30)
+, ATTEND_SCORE          NUMBER(3)
+, PRACTICAL_SCORE       NUMBER(3)
+, WRITING_SCORE         NUMBER(3)
+, CONSTRAINT SOCRE_ID_PK PRIMARY KEY(SCORE_ID)
+, CONSTRAINT SCORE_ENROLL_ID_FK FOREIGN KEY(ENROLL_ID)
+             REFERENCES ENROLL(ENROLL_ID)
+, CONSTRAINT SCORE_ESTABLISHED_SUB_ID_FK FOREIGN KEY(EST_SUB_ID)
+             REFERENCES ESTABLISHED_SUB(EST_SUB_ID)
+, CONSTRAINT SCORE_ATTEND_SCORE_CK CHECK(ATTEND_SCORE BETWEEN 0 AND 100)            
+, CONSTRAINT SCORE_PRACTICAL_SCORE_CK CHECK(PRACTICAL_SCORE BETWEEN 0 AND 100)            
+, CONSTRAINT SCOREWRITING_SCORE_CK CHECK(WRITING_SCORE BETWEEN 0 AND 100)
+
+);
+-- E_ID로 변경
+ALTER TABLE SCORE RENAME COLUMN ENROLL_ID TO E_ID;
+
+--④ 효진
+-- 교수정보 테이블
+CREATE TABLE PROFESSORS
+( PRO_ID     VARCHAR2(30)                               -- 교수자번호
+, PRO_NAME   VARCHAR2(10)                               -- 교수자명
+, PRO_PW     VARCHAR2(30)                               -- 교수자 비밀번호(초기값은 주민번호 뒷자리)
+, PRO_SSN    CHAR(14)                                   -- 교수자 주민번호
+, CONSTRAINT PROFESSORS_PRO_ID_PK PRIMARY KEY(PRO_ID)
+);
+
+-- NOT NULL 제약조건 수정
+ALTER TABLE PROFESSORS
+MODIFY
+( PRO_NAME CONSTRAINT PROFESSORS_PRO_NAME_NN NOT NULL
+, PRO_PW CONSTRAINT PROFESSORS_PRO_PW_NN NOT NULL
+, PRO_SSN CONSTRAINT PROFESSORS_PRO_SSN_NN NOT NULL
+);
+-- 유니크 제약조건 추가
+ALTER TABLE PROFESSORS
+ADD CONSTRAINT PROFESSORS_PRO_SSN_UK UNIQUE(PRO_SSN);
+
+
+-- 과목 테이블
+CREATE TABLE SUBJECTS
+( SUB_ID            VARCHAR2(30)        -- 과목코드
+, SUB_NAME            VARCHAR2(30)
+, S_START           DATE                -- 시작일
+, S_END             DATE                -- 종료일
+, CLASSROOM         VARCHAR2(30)        -- 강의실
+, BOOK_NAME         VARCHAR2(30)        -- 책이름
+, CONSTRAINT SUBJECTS_SUB_ID_PK PRIMARY KEY(SUB_ID)
+, CONSTRAINT SUBJECTS_S_START_CK CHECK(S_START < S_END)
+);
+
+
+-- 이벤트로그(PRO_EVENTLOG) 테이블 생성
+CREATE TABLE PRO_EVENTLOG
+( PRO_ID    VARCHAR2(30)
+, MEMO      VARCHAR2(200)
+, ILJA      DATE DEFAULT SYSDATE
+, CONSTRAINT PRO_EVENTLOG_PRO_ID_FK FOREIGN KEY(PRO_ID)
+                REFERENCES PROFESSORS(PRO_ID)
+);
+
+--⑤ 지윤
+--학생정보
+CREATE TABLE STUDENTS
+( ST_ID     VARCHAR2(30) 
+, ST_PW     VARCHAR2(30)         -- ★초기값 주민번호 뒷자리
+, ST_NAME   VARCHAR2(10)  
+, ST_SSN    CHAR(14)     UNIQUE
+, ST_DATE   DATE         DEFAULT SYSDATE
+, CONSTRAINT STUDENTS_ST_ID_PK PRIMARY KEY(ST_ID)
+);
+
+-- 제약조건 수정
+ALTER TABLE STUDENTS
+MODIFY
+( ST_ID CONSTRAINT STUDENTS_STUDENT_ID_NN NOT NULL
+, ST_NAME CONSTRAINT STUDENTS_STUDENT_NAME_NN NOT NULL
+, ST_PW CONSTRAINT STUDENTS_STUDENT_PASSWORD_NN NOT NULL
+, ST_SSN CONSTRAINT STUDENTS_STUDENT_SSN_NN NOT NULL
+, ST_DATE CONSTRAINT STUDENTS_STUDENT_DATE_NN NOT NULL
+);
+
+--수강신청
+CREATE TABLE ENROLL
+( ENROLL_ID     VARCHAR2(30)
+, ST_ID         VARCHAR2(30)
+, COURSE_ID     VARCHAR2(30)
+, ENROLL_DATE   DATE    DEFAULT SYSDATE
+, CONSTRAINT ENROLL_ENROLL_ID_PK PRIMARY KEY(ENROLL_ID)
+, CONSTRAINT ENROLL_ST_ID_FK FOREIGN KEY(ST_ID) 
+                                       REFERENCES STUDENTS(ST_ID)
+, CONSTRAINT ENROLL_COURSE_ID_FK FOREIGN KEY(COURSE_ID) 
+                                       REFERENCES COURSE(COURSE_ID)
+);
+
+
+
+-- 제약조건 수정
+ALTER TABLE ENROLL
+MODIFY
+( ENROLL_ID     CONSTRAINT ENROLL_ENROLL_ID_NN NOT NULL --
+, ENROLL_DATE   CONSTRAINT ENROLL_ENROLL_DATE_NN NOT NULL
+);
+
+-- E_ID로 변경
+ALTER TABLE ENROLL RENAME COLUMN ENROLL_ID TO E_ID;
+
+--E_DATE로 변경
+ALTER TABLE ENROLL RENAME COLUMN ENROLL_DATE TO E_DATE;
+
+--------------------------------------------------------------------------------
+--PLSQL
+--○ STUDENT_INSERT 프로시저
+CREATE OR REPLACE PROCEDURE PRC_STUDENT_INSERT
+(
+   V_ST_ID IN STUDENTS.ST_ID%TYPE
+ , V_ST_NAME IN STUDENTS.ST_NAME%TYPE
+ , V_ST_SSN IN STUDENTS.ST_SSN%TYPE
+)
+IS
+BEGIN
+
+    INSERT INTO STUDENTS(ST_ID, ST_PW, ST_NAME, ST_SSN)
+    VALUES(V_ST_ID,SUBSTR(V_ST_SSN,8),V_ST_NAME,V_ST_SSN);
+
+    COMMIT;
+END;
+--==>> Procedure PRC_STUDENT_INSERT이(가) 컴파일되었습니다.
+
+
+--○ STUDENT_UPDATE 프로시저
+CREATE OR REPLACE PROCEDURE PRC_STUDENT_UPDATE
+( V_ST_SSN    IN STUDENTS.ST_SSN%TYPE            -- 주민번호를 받는 파라미터
+, V_ST_NAME   IN STUDENTS.ST_NAME%TYPE           -- 바꿀이름
+, V2_ST_NAME  IN STUDENTS.ST_NAME%TYPE           -- 바꿀이름 확인
+)
+IS
+    USER_DEFINE_ERROR   EXCEPTION; -- 이름 확인용 변수선언
+BEGIN  
+
+    IF V_ST_NAME != V2_ST_NAME               -- 바꿀이름과 확인용 파라미터 불일치
+        THEN RAISE USER_DEFINE_ERROR;            
+    END IF;
+
+
+    UPDATE STUDENTS
+    SET  ST_NAME = V_ST_NAME
+    WHERE SUBSTR(ST_SSN,8,7) = SUBSTR(V_ST_SSN,8,7); 
+
+    COMMIT;
+
+    EXCEPTION
+        WHEN USER_DEFINE_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20002, '이름 불일치');
+END;
+--==>> Procedure PRC_STUDENT_UPDATE이(가) 컴파일되었습니다.
+
+
+--○ STUDENT_DELETE 프로시저
+CREATE OR REPLACE PROCEDURE PRC_STUDENT_DELETE 
+(
+    V_ST_ID      STUDENTS.ST_ID%TYPE          
+  , V_ST_PW      STUDENTS.ST_PW%TYPE      
+  , V_ST_NAME    STUDENTS.ST_NAME%TYPE      
+  , V_ST_SSN     STUDENTS.ST_SSN%TYPE      -- 학생 주민번호
+)
+IS
+BEGIN
+        DELETE      
+            FROM STUDENTS      
+            WHERE ST_ID = V_ST_ID             -- 학생 아이디 체크
+                  AND ST_PW = V_ST_PW          -- 학생 비밀번호 체크
+                  AND ST_NAME = V_ST_NAME      -- 학생 이름 체크
+                  --AND ST_SSN = V_ST_SSN; 
+                  AND SUBSTR(ST_SSN,8,7) = SUBSTR(V_ST_SSN,8,7);         -- 학생 주민번호 뒷자리 체크--★수정
+        COMMIT;
+
+        EXCEPTION
+            WHEN OTHERS
+                THEN RAISE_APPLICATION_ERROR(-20003,'다시 입력해주세요');
+                     ROLLBACK; 
+END;
+--==>> Procedure PRC_STUDENT_DELETE이(가) 컴파일되었습니다.
+
+
+
+-- ○ 과목 기간 관련 트리거
+
+    
+--○ 트리거 생성 BEFORE STATEMENT TRIGGER(TRG_STUDENTS_DELETE)---필요없나??
+CREATE OR REPLACE TRIGGER TRG_STUDENTS_DELETE
+        BEFORE
+        DELETE ON STUDENTS
+        FOR EACH ROW
+        
+BEGIN
+    DELETE
+    FROM STUDENTS
+    WHERE ST_ID=:OLD.ST_ID; 
+    
+END;
+--==>> Trigger TRG_STUDENTS_DELETE이(가) 컴파일되었습니다.
+
+
+--○ 테이블 생성 필요(LOG)--현정님이 테이블명 변경했음(체크 필요) -- 체크 완료
+CREATE TABLE STD_EVENTLOG
+( ST_ID         VARCHAR2(30)
+, ILJA          DATE DEFAULT SYSDATE
+, MEMO          VARCHAR2(200)
+, CONSTRAINT TBL_EVENTLOG_ST_ID_FK FOREIGN KEY(ST_ID) 
+                                       REFERENCES STUDENTS(ST_ID)
+);
+--==>> Table STD_EVENTLOG이(가) 생성되었습니다.
+
+
+--○ 트리거 생성 AFTER STATEMENT TRIGGER(TRG_EVENTLOG)
+CREATE OR REPLACE TRIGGER TRG_STD_EVENTLOG
+            AFTER
+            INSERT OR UPDATE ON STUDENTS
+DECLARE
+    V_ST_ID    STD_EVENTLOG.ST_ID%TYPE;
+BEGIN
+
+    IF(INSERTING)
+        THEN INSERT INTO STD_EVENTLOG(ST_ID, MEMO) 
+            VALUES(V_ST_ID,'학생 정보 추가 완료');    
+    ELSIF(UPDATING)
+        THEN INSERT INTO STD_EVENTLOG(ST_ID, MEMO) 
+            VALUES(V_ST_ID,'학생 정보 업데이트 완료');
+            
+    END IF; 
+END;
+--==>> Trigger TRG_STD_EVENTLOG이(가) 컴파일되었습니다.
+
+
+--○ 수강신청 불가 프로시저
+
+-- 중도포기 INSERT 프로시저
+--> 중도포기 레코드를 입력 시, "과정 시작일 < 중도포기일 < 과정종료일"이 맞는지 확인하는 프로시저
+CREATE OR REPLACE PROCEDURE PRC_MID_DROP_INSERT
+( V_DROP_ID     IN MID_DROP.DROP_ID%TYPE
+, V_ENROLL_ID   IN MID_DROP.ENROLL_ID%TYPE
+, V_DROP_DATE   IN MID_DROP.DROP_DATE%TYPE
+)
+IS
+    V_COURSE_ID         COURSE.COURSE_ID%TYPE;
+    V_C_START           COURSE.C_START%TYPE;
+    V_C_END             COURSE.C_END%TYPE;
+    USER_DEFINE_ERROR   EXCEPTION;
+
+BEGIN
+    -- 변수에 값 담기
+    SELECT COURSE_ID INTO V_COURSE_ID
+    FROM ENROLL
+    WHERE ENROLL_ID = V_ENROLL_ID;  
+    
+    SELECT C_START, C_END INTO V_C_START, V_C_END
+    FROM COURSE
+    WHERE COURSE_ID = V_COURSE_ID;
+    
+    -- 예외 처리 : "과정 시작일 < 중도포기일 < 과정종료일"이 아닐 경우
+    IF (V_DROP_DATE < V_C_START OR V_DROP_DATE > V_C_END)
+        THEN RAISE USER_DEFINE_ERROR;
+    END IF;
+
+    -- INSERT
+    INSERT INTO MID_DROP(DROP_ID, ENROLL_ID, DROP_DATE)
+    VALUES (V_DROP_ID, V_ENROLL_ID, V_DROP_DATE);
+    
+    -- 커밋
+    COMMIT;
+    
+    -- 예외 발생
+    EXCEPTION
+        WHEN USER_DEFINE_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20001, '중도포기 날짜가 잘못 입력되었습니다.');
+                 ROLLBACK;
+        WHEN OTHERS
+            THEN ROLLBACK;
+END;
+--==>> Procedure PRC_MID_DROP_INSERT이(가) 컴파일되었습니다.
+
+
+-- <PRC_PRO_PW_INSERT> 교수 초기 비밀번호 데이터 입력 프로시저(완성)
+CREATE OR REPLACE PROCEDURE PRC_PRO_PW_INSERT
+( V_PRO_ID      IN PROFESSORS.PRO_ID%TYPE
+, V_PRO_NAME    IN PROFESSORS.PRO_NAME%TYPE
+, V_PRO_SSN     IN PROFESSORS.PRO_SSN%TYPE
+)
+IS
+BEGIN
+    -- INSERT 쿼리문
+    INSERT INTO PROFESSORS(PRO_ID, PRO_NAME, PRO_PW, PRO_SSN)
+    VALUES(V_PRO_ID, V_PRO_NAME, SUBSTR(V_PRO_SSN,8), V_PRO_SSN);
+    
+    -- 커밋
+    COMMIT;
+    
+END;
+--==>> Procedure PRC_PRO_PW_INSERT이(가) 컴파일되었습니다.
+
+
+-- <TRG_PRO_EVENTLOG> 교수 이벤트로그 트리거 생성-AFTER STATEMENT TRIGGER 사용(완성)
+CREATE OR REPLACE TRIGGER TRG_PRO_EVENTLOG
+            AFTER
+            INSERT OR UPDATE ON PROFESSORS
+DECLARE
+    V_PRO_ID    PRO_EVENTLOG.PRO_ID%TYPE;
+BEGIN
+
+    IF (INSERTING)
+        THEN INSERT INTO PRO_EVENTLOG(PRO_ID,MEMO)
+            VALUES(V_PRO_ID,'교수정보 INSERT 쿼리문이 수행되었습니다.');
+    ELSIF (UPDATING)
+        THEN INSERT INTO PRO_EVENTLOG(PRO_ID,MEMO)
+            VALUES(V_PRO_ID,'교수정보 UPDATE 쿼리문이 수행되었습니다.');
+    END IF;
+END;
+--==>> Trigger TRG_PRO_EVENTLOG이(가) 컴파일되었습니다.
+
+-- 프로시저PRO_ID
+SELECT *
+FROM PRO_EVENTLOG;
+
+-- <TRG_PROFESSORS_DELETE> 교수정보 삭제 트리거 - BEFORE ROW TRIGGER사용
+-- 삭제할 때 과정에 참조하고 있지 않으면 바로 삭제하도록 하면 되고 
+-- 과정이나 개설과목 이런 테이블에 참조하고 있는 교수면 교수를 삭제할 때 가지고 있는 정보 모두 NULL값으로 처리
+-- 교수자가 퇴사(?)해서 삭제한 경우 → 새로운 교수자가 수업을 인계하여 진행 ... 한다는 쪽으로 생각
+CREATE OR REPLACE TRIGGER TRG_PROFESSORS_DELETE
+        AFTER
+        DELETE ON PROFESSORS
+        FOR EACH ROW
+BEGIN
+    UPDATE COURSE
+    SET PRO_ID = NULL
+    WHERE PRO_ID = :OLD.PRO_ID;
+
+    UPDATE ESTABLISHED_SUB
+    SET PRO_ID = NULL
+    WHERE PRO_ID = :OLD.PRO_ID;
+END;
+--==>> Trigger TRG_PROFESSORS_DELETE이(가) 컴파일되었습니다.
+
+SELECT *
+FROM PROFESSORS;
+
+SELECT *
+FROM COURSE;
+
+SELECT *
+FROM ESTABLISHED_SUB;
+
+DELETE
+FROM PROFESSORS
+WHERE PRO_ID = 'PRO1';
+--==>> 1 행 이(가) 삭제되었습니다.
+
+
+-- <PRC_PRO_UPDATE> 교수 정보 수정 프로시저
+-- 삭제할 교수와 대체할 교수 입력해서 변경하기!
+CREATE OR REPLACE PROCEDURE PRC_PRO_CHANGE
+( V_COURSE_ID   IN COURSE.COURSE_ID%TYPE
+, V_PRO_ID      IN PROFESSORS.PRO_ID%TYPE
+)
+IS
+BEGIN
+    -- COURSE(과정테이블) 교수코드 업데이트
+    UPDATE COURSE
+    SET PRO_ID = V_PRO_ID
+    WHERE COURSE_ID = V_COURSE_ID;
+    
+    -- CREATE TABLE ESTABLISHED_SUB(개설과목테이블) 교수코드 업데이트
+    UPDATE ESTABLISHED_SUB
+    SET PRO_ID = V_PRO_ID
+    WHERE COURSE_ID = V_COURSE_ID;
+
+END;
+--==>> Procedure PRC_PRO_CHANGE이(가) 컴파일되었습니다.
+
+EXEC PRC_PRO_CHANGE('CO1','PRO4');
+
+
+
+-- 교수삭제와 수정 패키지로 묶기 (보류)
+/*
+-- 1. 명세부 작성
+CREATE OR REPLACE PACKAGE PRO_PACK
+IS
+    PROCEDURE PRC_PRO_CHANGE;
+    TRIGGER TRG_PROFESSORS_DELETE;
+END PRO_PACK;
+
+-- 2. 몸체부 작성
+CREATE OR REPLACE PACK BODY PRO_PACK
+IS
+    PROCEDURE PRC_PRO_CHANGE
+    ( V_COURSE_ID   IN COURSE.COURSE_ID%TYPE
+    , V_PRO_ID      IN PROFESSORS.PRO_ID%TYPE
+    )
+    IS
+    BEGIN
+    -- COURSE(과정테이블) 교수코드 업데이트
+    UPDATE COURSE
+    SET PRO_ID = V_PRO_ID
+    WHERE COURSE_ID = V_COURSE_ID;
+    
+    -- CREATE TABLE ESTABLISHED_SUB(개설과목테이블) 교수코드 업데이트
+    UPDATE ESTABLISHED_SUB
+    SET PRO_ID = V_PRO_ID
+    WHERE COURSE_ID = V_COURSE_ID;
+
+    END;
+    
+    
+    TRIGGER TRG_PROFESSORS_DELETE
+        AFTER
+        DELETE ON PROFESSORS
+        FOR EACH ROW
+    BEGIN
+        UPDATE COURSE
+        SET PRO_ID = NULL
+        WHERE PRO_ID = :OLD.PRO_ID;
+    
+        UPDATE ESTABLISHED_SUB
+        SET PRO_ID = NULL
+        WHERE PRO_ID = :OLD.PRO_ID;
+    END;
+    
+END PRO_PACK;
+*/
+
+--○학생 로그인 프로시저 생성
+CREATE OR REPLACE PROCEDURE PRC_LOGIN_ST 
+(
+    V_USERID IN STUDENTS.ST_ID%TYPE
+,   V_USERPW IN STUDENTS.ST_PW%TYPE
+)
+IS
+    V_COUNT            NUMBER;
+BEGIN
+    SELECT COUNT(ST_ID) INTO V_COUNT FROM STUDENTS
+    WHERE ST_ID=V_USERID AND ST_PW=V_USERPW;
+ 
+    IF(V_COUNT > 0) THEN
+        DBMS_OUTPUT.PUT_LINE(V_USERID||'님 로그인 되었습니다.');  
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('아이디 또는 비밀번호가 잘못되었습니다.');
+    END IF;
+ 
+END;
+--==>> Procedure PRC_LOGIN_ST이(가) 컴파일되었습니다.
+
+--○관리자 로그인 프로시저 생성
+CREATE OR REPLACE PROCEDURE PRC_LOGIN_AD 
+(
+    V_USERID IN ADMINISTRATOR.ADMIN_ID%TYPE
+,   V_USERPW IN ADMINISTRATOR.ADMIN_PW%TYPE
+)
+IS
+    V_COUNT            NUMBER;
+BEGIN
+    SELECT COUNT(ADMIN_ID) INTO V_COUNT FROM ADMINISTRATOR
+    WHERE ADMIN_ID=V_USERID AND ADMIN_PW=V_USERPW;
+    
+    IF(V_COUNT > 0) THEN
+        DBMS_OUTPUT.PUT_LINE(V_USERID||'님 로그인 되었습니다.');  
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('아이디 또는 비밀번호가 잘못되었습니다.');
+    END IF;
+END;
+--==>> Procedure PRC_LOGIN_AD이(가) 컴파일되었습니다.
+
+--○교수 로그인 프로시저 생성
+CREATE OR REPLACE PROCEDURE PRC_LOGIN_PRO 
+(
+    V_USERID IN PROFESSORS.PRO_ID%TYPE
+,   V_USERPW IN PROFESSORS.PRO_PW%TYPE
+)
+IS
+    V_COUNT            NUMBER;
+BEGIN
+    SELECT COUNT(PRO_ID) INTO V_COUNT FROM PROFESSORS
+    WHERE PRO_ID=V_USERID AND PRO_PW=V_USERPW;
+ 
+    IF(V_COUNT > 0) THEN
+        DBMS_OUTPUT.PUT_LINE(V_USERID||'님 로그인 되었습니다.');  
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('아이디 또는 비밀번호가 잘못되었습니다.');    
+    END IF;
+  
+END;
+--==>> Procedure PRC_LOGIN_PR이(가) 컴파일되었습니다.
+
+
+--○로그인 프로시저 생성
+CREATE OR REPLACE PROCEDURE PRC_LOGIN
+(
+    V_USER    IN NUMBER    
+,   V_USERID  IN PROFESSORS.PRO_ID%TYPE
+,   V_USERPW  IN PROFESSORS.PRO_PW%TYPE
+)
+IS
+    INPUT_ERROR    EXCEPTION;
+    V_COUNT        NUMBER;
+BEGIN
+    IF(V_USER = 1) -- 관리자
+        THEN PRC_LOGIN_AD(V_USERID, V_USERPW);
+      
+    ELSIF(V_USER = 2) -- 교수
+        THEN PRC_LOGIN_PRO(V_USERID, V_USERPW);
+  
+      
+    ELSIF(V_USER = 3) -- 학생
+        THEN PRC_LOGIN_ST(V_USERID, V_USERPW);  
+    ELSIF (V_USER != 1 AND V_USER != 2 AND V_USER != 3)
+        THEN RAISE INPUT_ERROR;
+    END IF; 
+    
+    EXCEPTION
+    WHEN INPUT_ERROR
+        THEN RAISE_APPLICATION_ERROR(-20005, '해당하는 사용자를 선택하세요. (1.관리자, 2.교수, 3.학생)');
+             ROLLBACK;
+    WHEN OTHERS
+        THEN ROLLBACK;
+ 
+END;
+
+--------------------------------------------------------------------------------
+--요구분석서 내용 진행한 부분 공유드립니다.
+--○ 관리자 요구 분석
+-- 3-5~6. 모든 교수자의 정보를 출력
+-- 교수자명, 과목명, 과목기간(시작), 과목기간(끝), 교재명, 강의실, 강의진행여부(강의 예정, 강의 중, 강의종료)
+SELECT P.PRO_NAME "교수자명", S.SUB_NAME "과목명", S.S_START "과목 시작일", S.S_END "과목 종료일"
+     , S.BOOK_NAME "교재명", S.CLASSROOM "강의실"
+     , CASE WHEN SYSDATE < S.S_START THEN '강의 예정'
+            WHEN S.S_END < SYSDATE THEN '강의 종료'
+            ELSE '강의 중'
+       END "강의진행여부"
+FROM PROFESSORS P JOIN ESTABLISHED_SUB E
+     ON P.PRO_ID = E.PRO_ID
+                 JOIN SUBJECTS S
+                 ON E.SUB_ID = S.SUB_ID;
+                 
+                 
+-- 4-4~5. 모든 과정의 정보를 출력
+-- 과정명, 강의실, 과목기간(시작), 과목기간(끝), 교재명, 교수자명
+SELECT C.COURSE_NAME "과정명", C.CLASSROOM "과정 강의실"
+     , S.SUB_NAME "과목명", S.CLASSROOM "과목 강의실", S.S_START "과목 시작일", S.S_END "과목 종료일"
+     , S.BOOK_NAME "교재명", P.PRO_NAME "교수자명"
+FROM COURSE C JOIN PROFESSORS P
+     ON C.PRO_ID = P.PRO_ID
+             JOIN ESTABLISHED_SUB E
+             ON C.COURSE_ID = E.COURSE_ID
+                    JOIN SUBJECTS S
+                    ON E.SUB_ID = S.SUB_ID;
+
+
+-- 3. 교수자 관점에서 성적 출력 기능 구현
+--교수자 자신이 강의한 과목에 대한 성적
+-- 과목명, 과목기간, 교재명, 학생명, 출결, 실기, 필기, 총점, 등수
+-- 과정 중도탈락 시: 수강한 과목 성적 출력, 중도탈락 여부 출력
+
+/* 아래와 중도탈락여부 빼고 동일
+SELECT S.SUB_NAME "과목명", S.S_START "과목시작일",S.S_END "과목종료일", S.BOOK_NAME "교재명"
+     , ST.ST_NAME "학생명", SC.ATTEND_SCORE "출결",SC.PRACTICAL_SCORE "실기", SC.WRITING_SCORE "필기"
+     , (NVL(SC.ATTEND_SCORE,0) + NVL(SC.PRACTICAL_SCORE,0) + NVL(SC.WRITING_SCORE,0)) "총점"
+     , RANK() OVER(ORDER BY (NVL(SC.ATTEND_SCORE,0) + NVL(SC.PRACTICAL_SCORE,0) + NVL(SC.WRITING_SCORE,0)) DESC) "등수"
+     --, DECODE(M.E_ID,NULL,'N','Y')"중도탈락 여부"
+     , (CASE  WHEN M.DROP_DATE BETWEEN S.S_START AND S.S_END 
+              THEN'중도탈락'
+              ELSE '수료'
+        END) "중도탈락 여부"
+FROM STUDENTS ST JOIN ENROLL E
+ON ST.ST_ID = E.ST_ID
+    LEFT JOIN SCORE SC
+    ON E.E_ID = SC.E_ID
+        LEFT JOIN ESTABLISHED_SUB ES
+        ON SC.EST_SUB_ID = ES.EST_SUB_ID
+            LEFT JOIN SUBJECTS S
+            ON ES.SUB_ID = S.SUB_ID
+                LEFT JOIN MID_DROP M
+                ON E.E_ID = M.E_ID
+WHERE PRO_ID IN ('PRO1', 'PRO2');-- WHERE절에 해당되는 교수 코드 입력
+*/
+
+-- ++ 과목 추가
+INSERT INTO SUBJECTS(SUB_ID, SUB_NAME, S_START, S_END, CLASSROOM, BOOK_NAME)
+VALUES('SUB3', '파이썬고급',  TO_DATE('2020-10-2', 'YYYY-MM-DD'),  TO_DATE('2020-10-29', 'YYYY-MM-DD'), '파이썬강의실B1', '고급파이썬마스터');
+
+
+SELECT SUB.SUB_NAME "과목명", SUB.S_START "과목 시작일", SUB.S_END "과목 종료일", SUB.BOOK_NAME "교재명"
+     , STU.ST_NAME "학생명", SC.ATTEND_SCORE "출결점수", SC.PRACTICAL_SCORE "실기점수", SC.WRITING_SCORE "필기점수"
+     , (NVL(SC.ATTEND_SCORE, 0) + NVL(SC.PRACTICAL_SCORE, 0) + NVL(SC.WRITING_SCORE, 0)) "총점"
+     , RANK() OVER(ORDER BY (NVL(SC.ATTEND_SCORE, 0) + NVL(SC.PRACTICAL_SCORE, 0) + NVL(SC.WRITING_SCORE, 0)) DESC) "등수"
+     , CASE WHEN MID.E_ID IS NOT NULL THEN 'Y'
+            ELSE 'N'
+       END "중도포기"
+FROM STUDENTS STU LEFT JOIN ENROLL E
+    ON STU.ST_ID = E.ST_ID
+        LEFT JOIN SCORE SC
+        ON E.E_ID = SC.E_ID
+            LEFT JOIN ESTABLISHED_SUB EST
+            ON SC.EST_SUB_ID = EST.EST_SUB_ID
+                LEFT JOIN SUBJECTS SUB
+                ON EST.SUB_ID = SUB.SUB_ID
+                    LEFT JOIN MID_DROP MID
+                    ON E.E_ID = MID.E_ID;                   
+WHERE PRO_ID IN ('PRO1', 'PRO2');-- WHERE절에 해당되는 교수 코드 입력
+
+SELECT *
+FROM ENROLL;
+
+SELECT *
+FROM SUBJECTS;
+
+
+SELECT *
+FROM TEST;
+--------------------------------------------------------------------------------
+-- 샘플데이터
+-- 1. 관리자
+INSERT INTO ADMINISTRATOR(ADMIN_ID, ADMIN_PW) VALUES('AD1', 'QWER1234');
+INSERT INTO ADMINISTRATOR(ADMIN_ID, ADMIN_PW) VALUES('AD2', 'ASDF1234');
+
+-- 2. 교수
+INSERT INTO PROFESSORS(PRO_ID, PRO_NAME, PRO_PW, PRO_SSN)
+VALUES('PRO1', '남궁 성', 'QWER1234', '840218-2813239');
+
+INSERT INTO PROFESSORS(PRO_ID, PRO_NAME, PRO_PW, PRO_SSN)
+VALUES('PRO2', '서진수', 'ASDF1234', '111111-1111111');
+
+-- 3. 학생
+INSERT INTO STUDENTS(ST_ID, ST_PW, ST_NAME, ST_SSN, ST_DATE)
+VALUES('STU1', 'QWER1234', '정회일', '111111-3111111', TO_DATE('2020-09-24', 'YYYY-MM-DD'));
+
+INSERT INTO STUDENTS(ST_ID, ST_PW, ST_NAME, ST_SSN, ST_DATE)
+VALUES('STU2', 'ASDF1234', '김초엽', '111111-4111111', TO_DATE('2020-09-24', 'YYYY-MM-DD'));
+
+-- 4. 과목
+INSERT INTO SUBJECTS(SUB_ID, SUB_NAME, S_START, S_END, CLASSROOM, BOOK_NAME)
+VALUES('SUB1', '오라클중급',  TO_DATE('2020-12-24', 'YYYY-MM-DD'),  TO_DATE('2021-1-19', 'YYYY-MM-DD'), '오라클강의실A1', '오라클의정석');
+
+INSERT INTO SUBJECTS(SUB_ID, SUB_NAME, S_START, S_END, CLASSROOM, BOOK_NAME)
+VALUES('SUB2', '자바고급',  TO_DATE('2020-7-2', 'YYYY-MM-DD'),  TO_DATE('2020-9-19', 'YYYY-MM-DD'), '자바강의실B1', '고급자바마스터');
+
+-- ++ 과목 추가
+INSERT INTO SUBJECTS(SUB_ID, SUB_NAME, S_START, S_END, CLASSROOM, BOOK_NAME)
+VALUES('SUB3', '파이썬고급',  TO_DATE('2020-10-2', 'YYYY-MM-DD'),  TO_DATE('2020-10-29', 'YYYY-MM-DD'), '파이썬강의실B1', '고급파이썬마스터');
+
+-- 5. 과정
+INSERT INTO COURSE(COURSE_ID, COURSE_NAME, PRO_ID, C_START, C_END, CLASSROOM)
+VALUES('CO1', '개발자양성과정', 'PRO1', TO_DATE('2020-11-24', 'YYYY-MM-DD'), TO_DATE('2021-4-18', 'YYYY-MM-DD'), '오라클강의실A1');
+
+INSERT INTO COURSE(COURSE_ID, COURSE_NAME, PRO_ID, C_START, C_END, CLASSROOM)
+VALUES('CO2', '빅데이터전문가과정', 'PRO2', TO_DATE('2020-6-14', 'YYYY-MM-DD'), TO_DATE('2020-12-30', 'YYYY-MM-DD'), '자바강의실B1');
+
+
+-- 6. 개설과목
+INSERT INTO ESTABLISHED_SUB(EST_SUB_ID, PRO_ID, COURSE_ID, SUB_ID, ATTEND_PER, PRACTICAL_PER, WRITING_PER)
+VALUES('ESI1', 'PRO1', 'CO1', 'SUB1', 20, 40, 40);
+
+INSERT INTO ESTABLISHED_SUB(EST_SUB_ID, PRO_ID, COURSE_ID, SUB_ID, ATTEND_PER, PRACTICAL_PER, WRITING_PER)
+VALUES('ESI2', 'PRO2', 'CO2', 'SUB2', 20, 20, 60);
+
+-- 7. 시험
+INSERT INTO TEST(TEST_ID, SUB_ID, TEST_DATE)
+VALUES('TEST1', 'SUB1', TO_DATE('2020-12-31', 'YYYY-MM-DD'));
+
+INSERT INTO TEST(TEST_ID, SUB_ID, TEST_DATE)
+VALUES('TEST2', 'SUB1', TO_DATE('2021-01-10', 'YYYY-MM-DD'));
+
+
+-- 8. 수강신청
+INSERT INTO ENROLL(ENROLL_ID, ST_ID, COURSE_ID, ENROLL_DATE)
+VALUES('ENROLL1', 'STU1', 'CO1', TO_DATE('2020-10-24', 'YYYY-MM-DD'));
+
+INSERT INTO ENROLL(ENROLL_ID, ST_ID, COURSE_ID, ENROLL_DATE)
+VALUES('ENROLL2', 'STU2', 'CO1', TO_DATE('2020-10-25', 'YYYY-MM-DD'));
+
+-- 9. 성적
+INSERT INTO SCORE(SCORE_ID, ENROLL_ID, EST_SUB_ID, ATTEND_SCORE, PRACTICAL_SCORE, WRITING_SCORE)
+VALUES('SCORE1', 'ENROLL1', 'ESI1', 90, 30, 100);
+
+-- 10. 중도포기
+INSERT INTO MID_DROP(DROP_ID, ENROLL_ID, DROP_DATE)
+VALUES('DROP1', 'ENROLL2', TO_DATE('2020-10-29', 'YYYY-MM-DD'));
+
+-- 커밋
+COMMIT;
+
+
+
+-- 교수 추가 테스트!
+INSERT INTO PROFESSORS(PRO_ID, PRO_NAME, PRO_PW, PRO_SSN)
+VALUES('PRO3', '김호진', 'QWER1234', '850218-1813239');
+
+EXEC PRC_PRO_PW_INSERT('PRO4', '마호진', '550218-1813239');
+
+
+
+SELECT *
+FROM PROFESSORS;
+
+PURGE RECYCLEBIN;
+
+/*
+
+[제출 항목]
+1. ERD
+2. 물리설계 ERD
+3. 테이블 구조 SQL파일 (프로시저 FUNCTION, TRIGGER)
+4. 요구분석서대로 쿼리문 구성. SQL
+5. 팀원들 후기(세미프로젝트 하면서 얻게 된 내용)
+
+
+TIP. 추출해서 쓸 수 있는 내용 컬럼화 시키지 않는다.
+그 문장의 동사가 테이블 명사가 컬럼
+제4정규화 일대다로 깨뜨리는 관계에서 파생테이블 생긴다.
+
+*/
