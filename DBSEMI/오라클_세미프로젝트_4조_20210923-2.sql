@@ -2,42 +2,38 @@ SELECT USER
 FROM DUAL;
 --==>> HR
 /*
-[Å×ÀÌºí »ý¼º ¼ø¼­]
-1. °ü¸®ÀÚ
-2. ±³¼ö
-3. ÇÐ»ý
-4. °ú¸ñ
-5. °úÁ¤
-6. °³¼³°ú¸ñ
-7. ½ÃÇè
-8. ¼ö°­½ÅÃ»
-9. ¼ºÀû
-10. ÁßµµÆ÷±â
---> Àý´ëÀûÀ¸·Î ÀÌ ¼ø¼­¿©¾ß¸¸ ÇÏ´Â °ÍÀº ¾Æ´Õ´Ï´Ù.
+[í…Œì´ë¸” ìƒì„± ìˆœì„œ]
+1. ê´€ë¦¬ìž
+2. êµìˆ˜
+3. í•™ìƒ
+4. ê³¼ëª©
+5. ê³¼ì •
+6. ê°œì„¤ê³¼ëª©
+7. ì‹œí—˜
+8. ìˆ˜ê°•ì‹ ì²­
+9. ì„±ì 
+10. ì¤‘ë„í¬ê¸°
+--> ì ˆëŒ€ì ìœ¼ë¡œ ì´ ìˆœì„œì—¬ì•¼ë§Œ í•˜ëŠ” ê²ƒì€ ì•„ë‹™ë‹ˆë‹¤.
 
-±³¼öÁ¤º¸, ÇÐ»ýÁ¤º¸ ÆÐ½º¿öµå -  µ¥ÀÌÅÍ ÀÔ·Â ±¸¹® ÀÛ¼º ½Ã¿¡ SSN¿¡¼­ 
-                               ÁÖ¹Î¹øÈ£ µÞÀÚ¸®¸¸ ¹®ÀÚ¿­ ÃßÃâÇØ¼­ ÀúÀå
+êµìˆ˜ì •ë³´, í•™ìƒì •ë³´ íŒ¨ìŠ¤ì›Œë“œ -  ë°ì´í„° ìž…ë ¥ êµ¬ë¬¸ ìž‘ì„± ì‹œì— SSNì—ì„œ 
+                               ì£¼ë¯¼ë²ˆí˜¸ ë’·ìžë¦¬ë§Œ ë¬¸ìžì—´ ì¶”ì¶œí•´ì„œ ì €ìž¥
                                
-SCORE Å×ÀÌºí - SCOREÅ×ÀÌºí¿¡¼­ Ãâ°á, ½Ç±â, ÇÊ±â Á¡¼ö´Â °¢°¢ 100Á¡À¸·Î ÀÔ·ÂÇÏµÇ 
-               ³ªÁß¿¡ °³¼³°ú¸ñ Å×ÀÌºí¿¡¼­ ºñÁßÀ» °¡Á®¿Í¼­ Ãâ·ÂÃ¢¿¡ 100Á¡ ¸¸Á¡À¸·Î 
-               Ç¥½ÃÇÏ´Â ¹æ½ÄÀº ¾î¶³±î¿ä? Á¦¾àÁ¶°Ç ¿¡·¯°¡ ³ª¼­ ÇÑ¹ø »ý°¢ÇØºÃ½À´Ï´Ù. 
-               ¿ì¼± ±× Á¦¾àÁ¶°Çµé Á¦¿ÜÇÏ°í Å×ÀÌºí »ý¼ºÇß½À´Ï´Ù.
+SCORE í…Œì´ë¸” - SCOREí…Œì´ë¸”ì—ì„œ ì¶œê²°, ì‹¤ê¸°, í•„ê¸° ì ìˆ˜ëŠ” ê°ê° 100ì ìœ¼ë¡œ ìž…ë ¥í•˜ë˜ 
+               ë‚˜ì¤‘ì— ê°œì„¤ê³¼ëª© í…Œì´ë¸”ì—ì„œ ë¹„ì¤‘ì„ ê°€ì ¸ì™€ì„œ ì¶œë ¥ì°½ì— 100ì  ë§Œì ìœ¼ë¡œ 
+               í‘œì‹œí•˜ëŠ” ë°©ì‹ì€ ì–´ë–¨ê¹Œìš”? ì œì•½ì¡°ê±´ ì—ëŸ¬ê°€ ë‚˜ì„œ í•œë²ˆ ìƒê°í•´ë´¤ìŠµë‹ˆë‹¤. 
+               ìš°ì„  ê·¸ ì œì•½ì¡°ê±´ë“¤ ì œì™¸í•˜ê³  í…Œì´ë¸” ìƒì„±í–ˆìŠµë‹ˆë‹¤.
                
-MID_DROP - Å×ÀÌºí.ÄÃ·³¸í ÀÌ ¹æ½ÄÀ» Å×ÀÌºí »ý¼ºÇÒ ¶§ ÀÎ½ÄÀ» ¸øÇÏ´Â °Í °°¾Æ¿ä! 
-           ÀÌ°Íµµ ¾Æ¸¶ ÇÁ·Î½ÃÀú µîÀ¸·Î ³ªÁß¿¡ ¿¹¿ÜÃ³¸®ÇÏ´Â ¹æ½ÄÀ¸·Î ÇÏ´Â °Ç 
-           ¾î¶³Áö »ý°¢ÇØºÃ°í ¿ì¼± ±× Á¦¾àÁ¶°Ç Á¦¿ÜÇÏ°í Å×ÀÌºí »ý¼ºÇß½À´Ï´Ù.
+MID_DROP - í…Œì´ë¸”.ì»¬ëŸ¼ëª… ì´ ë°©ì‹ì„ í…Œì´ë¸” ìƒì„±í•  ë•Œ ì¸ì‹ì„ ëª»í•˜ëŠ” ê²ƒ ê°™ì•„ìš”! 
+           ì´ê²ƒë„ ì•„ë§ˆ í”„ë¡œì‹œì € ë“±ìœ¼ë¡œ ë‚˜ì¤‘ì— ì˜ˆì™¸ì²˜ë¦¬í•˜ëŠ” ë°©ì‹ìœ¼ë¡œ í•˜ëŠ” ê±´ 
+           ì–´ë–¨ì§€ ìƒê°í•´ë´¤ê³  ìš°ì„  ê·¸ ì œì•½ì¡°ê±´ ì œì™¸í•˜ê³  í…Œì´ë¸” ìƒì„±í–ˆìŠµë‹ˆë‹¤.
 */
 
 /*
-[ÇÒ ÀÏ]
-1. À§ÀÇ »çÇ×µé ³íÀÇ
-2. º»ÀÎÀÌ ¸ÃÀº Å×ÀÌºí Á¦¾àÁ¶°Ç ¼³¸í
-3. ³íÀÇ + ¹ßÇ¥(¼³¸í) ÈÄ ÇÊ¿äÇÑ ÇÁ·Î½ÃÀú, Æ®¸®°Å µî »ý°¢ÇÏ±â(ÀÚ±â°¡ ¸ÃÀº Å×ÀÌºí À§ÁÖ·Î)
-4. º»ÀÎÀÌ »ý°¢ÇÑ ÇÁ·Î½ÃÀú, Æ®¸®°Å µî ¾î¶² ºÎºÐÀÌ ÇÊ¿äÇÑÁö ¹ßÇ¥
-5. ÄÚµù 
-6. »ùÇÃ µ¥ÀÌÅÍ »ý¼º
-*/
---¨ç ÇöÁ¤
+SELECT USER
+FROM DUAL;
+--==>> HR
+
+--â‘  ê´€ë¦¬ìž
 CREATE TABLE ADMINISTRATOR
 ( ADMIN_ID  VARCHAR2(30)
 , ADMIN_PW  VARCHAR2(30) 
@@ -49,7 +45,75 @@ MODIFY
 ( ADMIN_PW CONSTRAINT ADMINISTRATOR_ADMIN_PW_NN NOT NULL );
 
 
+--â‘¡ êµìˆ˜ìž
+CREATE TABLE PROFESSORS
+( PRO_ID     VARCHAR2(30)                               -- êµìˆ˜ìžë²ˆí˜¸
+, PRO_NAME   VARCHAR2(10)                               -- êµìˆ˜ìžëª…
+, PRO_PW     VARCHAR2(30)                               -- êµìˆ˜ìž ë¹„ë°€ë²ˆí˜¸(ì´ˆê¸°ê°’ì€ ì£¼ë¯¼ë²ˆí˜¸ ë’·ìžë¦¬)
+, PRO_SSN    CHAR(14)                                   -- êµìˆ˜ìž ì£¼ë¯¼ë²ˆí˜¸
+, CONSTRAINT PROFESSORS_PRO_ID_PK PRIMARY KEY(PRO_ID)
+, CONSTRAINT PROFESSORS_PRO_SSN_UK UNIQUE(PRO_SSN)
+);
 
+-- NOT NULL ì œì•½ì¡°ê±´ ìˆ˜ì •
+ALTER TABLE PROFESSORS
+MODIFY
+( PRO_NAME CONSTRAINT PROFESSORS_PRO_NAME_NN NOT NULL
+, PRO_PW CONSTRAINT PROFESSORS_PRO_PW_NN NOT NULL
+, PRO_SSN CONSTRAINT PROFESSORS_PRO_SSN_NN NOT NULL
+);
+
+
+--â‘¢ í•™ìƒ
+CREATE TABLE STUDENTS
+( ST_ID     VARCHAR2(30) 
+, ST_PW     VARCHAR2(30)         -- â˜…ì´ˆê¸°ê°’ ì£¼ë¯¼ë²ˆí˜¸ ë’·ìžë¦¬
+, ST_NAME   VARCHAR2(10)  
+, ST_SSN    CHAR(14)     UNIQUE
+, ST_DATE   DATE         DEFAULT SYSDATE
+, CONSTRAINT STUDENTS_ST_ID_PK PRIMARY KEY(ST_ID)
+);
+
+-- ì œì•½ì¡°ê±´ ìˆ˜ì •
+ALTER TABLE STUDENTS
+MODIFY
+( ST_ID CONSTRAINT STUDENTS_STUDENT_ID_NN NOT NULL
+, ST_NAME CONSTRAINT STUDENTS_STUDENT_NAME_NN NOT NULL
+, ST_PW CONSTRAINT STUDENTS_STUDENT_PASSWORD_NN NOT NULL
+, ST_SSN CONSTRAINT STUDENTS_STUDENT_SSN_NN NOT NULL
+, ST_DATE CONSTRAINT STUDENTS_STUDENT_DATE_NN NOT NULL
+);
+
+
+--â‘£ ê³¼ëª©
+CREATE TABLE SUBJECTS
+( SUB_ID            VARCHAR2(30)        -- ê³¼ëª©ì½”ë“œ
+, SUB_NAME            VARCHAR2(30)
+, S_START           DATE                -- ì‹œìž‘ì¼
+, S_END             DATE                -- ì¢…ë£Œì¼
+, CLASSROOM         VARCHAR2(30)        -- ê°•ì˜ì‹¤
+, BOOK_NAME         VARCHAR2(30)        -- ì±…ì´ë¦„
+, CONSTRAINT SUBJECTS_SUB_ID_PK PRIMARY KEY(SUB_ID)
+, CONSTRAINT SUBJECTS_S_START_CK CHECK(S_START < S_END)
+);
+
+
+--â‘¤ ê³¼ì •
+CREATE TABLE COURSE
+( COURSE_ID     VARCHAR2(30)  
+, COURSE_NAME   VARCHAR2(30)
+, PRO_ID        VARCHAR2(30)
+, C_START       DATE
+, C_END         DATE
+, CLASSROOM     VARCHAR2(30)
+, CONSTRAINT COURSE_COURSE_ID_PK PRIMARY KEY(COURSE_ID)
+, CONSTRAINT COURSE_COURSE_NAME_FK FOREIGN KEY(PRO_ID)
+                                            REFERENCES PROFESSORS(PRO_ID)
+, CONSTRAINT COURSE_C_START_CK CHECK(C_START < C_END)
+);
+
+
+--â‘¥ ê°œì„¤ê³¼ëª©
 CREATE TABLE ESTABLISHED_SUB
 ( EST_SUB_ID        VARCHAR2(30)
 , PRO_ID            VARCHAR2(30)
@@ -72,58 +136,47 @@ CREATE TABLE ESTABLISHED_SUB
 );
 
 
---¨è ½Â±Õ
-CREATE TABLE COURSE
-( COURSE_ID     VARCHAR2(30)  
-, COURSE_NAME   VARCHAR2(30)
-, PRO_ID        VARCHAR2(30)
-, C_START       DATE
-, C_END         DATE
-, CLASSROOM     VARCHAR2(30)
-, CONSTRAINT COURSE_COURSE_ID_PK PRIMARY KEY(COURSE_ID)
-, CONSTRAINT COURSE_COURSE_NAME_FK FOREIGN KEY(PRO_ID)
-                                            REFERENCES PROFESSORS(PRO_ID)
-, CONSTRAINT COURSE_C_START_CK CHECK(C_START < C_END)
-);
-
+--â‘¦ ì‹œí—˜
 CREATE TABLE TEST
 (
- TEST_ID      VARCHAR2(30)
-,SUB_ID       VARCHAR2(30)
-,TEST_DATE      DATE
+ TEST_ID          VARCHAR2(30)
+,EST_SUB_ID       VARCHAR2(30)
+,TEST_DATE        DATE
 ,CONSTRAINT TEST_TEST_ID_PK PRIMARY KEY(TEST_ID)
-,CONSTRAINT TEST_SUB_ID_FK FOREIGN KEY(SUB_ID) REFERENCES SUBJECTS(SUB_ID)
+,CONSTRAINT TEST_EST_SUB_ID_FK FOREIGN KEY(EST_SUB_ID) REFERENCES ESTABLISHED_SUB(EST_SUB_ID)
 );
 
 
-
---¨é ¹ÌÈ­
-CREATE TABLE MID_DROP
-( DROP_ID       VARCHAR2(30)
-, ENROLL_ID     VARCHAR2(30)
-, DROP_DATE     DATE           NOT NULL
-, CONSTRAINT MID_DPOP_ID_PK PRIMARY KEY(DROP_ID)
-, CONSTRAINT MID_DPOP_ENROLL_ID_FK FOREIGN KEY(ENROLL_ID)
-             REFERENCES ENROLL(ENROLL_ID)
--- µî·ÏÀÏº¸´Ù ÁßµµÆ÷±â ³¯Â¥°¡ µÚ¿©¾ß ÇÑ´Ù´Â Á¦¾àÁ¶°Ç
+--â‘§ ìˆ˜ê°•ì‹ ì²­
+CREATE TABLE ENROLL
+( E_ID          VARCHAR2(30)
+, ST_ID         VARCHAR2(30)
+, COURSE_ID     VARCHAR2(30)
+, E_DATE        DATE    DEFAULT SYSDATE
+, CONSTRAINT ENROLL_E_ID_PK PRIMARY KEY(E_ID)
+, CONSTRAINT ENROLL_ST_ID_FK FOREIGN KEY(ST_ID) 
+                                       REFERENCES STUDENTS(ST_ID)
+, CONSTRAINT ENROLL_COURSE_ID_FK FOREIGN KEY(COURSE_ID) 
+                                       REFERENCES COURSE(COURSE_ID)
 );
 
--- E_ID·Î º¯°æ
-ALTER TABLE MID_DROP RENAME COLUMN ENROLL_ID TO E_ID;
+--ìˆ˜ê°•ì‹ ì²­ ì œì•½ì¡°ê±´ ìˆ˜ì •
+ALTER TABLE ENROLL
+MODIFY
+(E_DATE   CONSTRAINT ENROLL_E_DATE_NN NOT NULL);
 
-SELECT *
-FROM MID_DROP;
 
+--â‘¨ ì„±ì 
 CREATE TABLE SCORE
 ( SCORE_ID              VARCHAR2(30) 
-, ENROLL_ID             VARCHAR2(30)
+, E_ID             VARCHAR2(30)
 , EST_SUB_ID            VARCHAR2(30)
 , ATTEND_SCORE          NUMBER(3)
 , PRACTICAL_SCORE       NUMBER(3)
 , WRITING_SCORE         NUMBER(3)
 , CONSTRAINT SOCRE_ID_PK PRIMARY KEY(SCORE_ID)
-, CONSTRAINT SCORE_ENROLL_ID_FK FOREIGN KEY(ENROLL_ID)
-             REFERENCES ENROLL(ENROLL_ID)
+, CONSTRAINT SCORE_E_ID_FK FOREIGN KEY(E_ID)
+             REFERENCES ENROLL(E_ID)
 , CONSTRAINT SCORE_ESTABLISHED_SUB_ID_FK FOREIGN KEY(EST_SUB_ID)
              REFERENCES ESTABLISHED_SUB(EST_SUB_ID)
 , CONSTRAINT SCORE_ATTEND_SCORE_CK CHECK(ATTEND_SCORE BETWEEN 0 AND 100)            
@@ -131,45 +184,21 @@ CREATE TABLE SCORE
 , CONSTRAINT SCOREWRITING_SCORE_CK CHECK(WRITING_SCORE BETWEEN 0 AND 100)
 
 );
--- E_ID·Î º¯°æ
-ALTER TABLE SCORE RENAME COLUMN ENROLL_ID TO E_ID;
-
---¨ê È¿Áø
--- ±³¼öÁ¤º¸ Å×ÀÌºí
-CREATE TABLE PROFESSORS
-( PRO_ID     VARCHAR2(30)                               -- ±³¼öÀÚ¹øÈ£
-, PRO_NAME   VARCHAR2(10)                               -- ±³¼öÀÚ¸í
-, PRO_PW     VARCHAR2(30)                               -- ±³¼öÀÚ ºñ¹Ð¹øÈ£(ÃÊ±â°ªÀº ÁÖ¹Î¹øÈ£ µÞÀÚ¸®)
-, PRO_SSN    CHAR(14)                                   -- ±³¼öÀÚ ÁÖ¹Î¹øÈ£
-, CONSTRAINT PROFESSORS_PRO_ID_PK PRIMARY KEY(PRO_ID)
-);
-
--- NOT NULL Á¦¾àÁ¶°Ç ¼öÁ¤
-ALTER TABLE PROFESSORS
-MODIFY
-( PRO_NAME CONSTRAINT PROFESSORS_PRO_NAME_NN NOT NULL
-, PRO_PW CONSTRAINT PROFESSORS_PRO_PW_NN NOT NULL
-, PRO_SSN CONSTRAINT PROFESSORS_PRO_SSN_NN NOT NULL
-);
--- À¯´ÏÅ© Á¦¾àÁ¶°Ç Ãß°¡
-ALTER TABLE PROFESSORS
-ADD CONSTRAINT PROFESSORS_PRO_SSN_UK UNIQUE(PRO_SSN);
 
 
--- °ú¸ñ Å×ÀÌºí
-CREATE TABLE SUBJECTS
-( SUB_ID            VARCHAR2(30)        -- °ú¸ñÄÚµå
-, SUB_NAME            VARCHAR2(30)
-, S_START           DATE                -- ½ÃÀÛÀÏ
-, S_END             DATE                -- Á¾·áÀÏ
-, CLASSROOM         VARCHAR2(30)        -- °­ÀÇ½Ç
-, BOOK_NAME         VARCHAR2(30)        -- Ã¥ÀÌ¸§
-, CONSTRAINT SUBJECTS_SUB_ID_PK PRIMARY KEY(SUB_ID)
-, CONSTRAINT SUBJECTS_S_START_CK CHECK(S_START < S_END)
+--â‘© ì¤‘ë„í¬ê¸°
+CREATE TABLE MID_DROP
+( DROP_ID       VARCHAR2(30)
+, E_ID     VARCHAR2(30)
+, DROP_DATE     DATE           NOT NULL
+, CONSTRAINT MID_DPOP_ID_PK PRIMARY KEY(DROP_ID)
+, CONSTRAINT MID_DPOP_E_ID_FK FOREIGN KEY(E_ID)
+             REFERENCES ENROLL(E_ID)
+-- ë“±ë¡ì¼ë³´ë‹¤ ì¤‘ë„í¬ê¸° ë‚ ì§œê°€ ë’¤ì—¬ì•¼ í•œë‹¤ëŠ” ì œì•½ì¡°ê±´
 );
 
 
--- ÀÌº¥Æ®·Î±×(PRO_EVENTLOG) Å×ÀÌºí »ý¼º
+--â—‹ êµìˆ˜ìž ì´ë²¤íŠ¸ë¡œê·¸ í…Œì´ë¸”
 CREATE TABLE PRO_EVENTLOG
 ( PRO_ID    VARCHAR2(30)
 , MEMO      VARCHAR2(200)
@@ -177,59 +206,132 @@ CREATE TABLE PRO_EVENTLOG
 , CONSTRAINT PRO_EVENTLOG_PRO_ID_FK FOREIGN KEY(PRO_ID)
                 REFERENCES PROFESSORS(PRO_ID)
 );
+--==>> Table PRO_EVENTLOGì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
---¨ë ÁöÀ±
---ÇÐ»ýÁ¤º¸
-CREATE TABLE STUDENTS
-( ST_ID     VARCHAR2(30) 
-, ST_PW     VARCHAR2(30)         -- ¡ÚÃÊ±â°ª ÁÖ¹Î¹øÈ£ µÞÀÚ¸®
-, ST_NAME   VARCHAR2(10)  
-, ST_SSN    CHAR(14)     UNIQUE
-, ST_DATE   DATE         DEFAULT SYSDATE
-, CONSTRAINT STUDENTS_ST_ID_PK PRIMARY KEY(ST_ID)
-);
 
--- Á¦¾àÁ¶°Ç ¼öÁ¤
-ALTER TABLE STUDENTS
-MODIFY
-( ST_ID CONSTRAINT STUDENTS_STUDENT_ID_NN NOT NULL
-, ST_NAME CONSTRAINT STUDENTS_STUDENT_NAME_NN NOT NULL
-, ST_PW CONSTRAINT STUDENTS_STUDENT_PASSWORD_NN NOT NULL
-, ST_SSN CONSTRAINT STUDENTS_STUDENT_SSN_NN NOT NULL
-, ST_DATE CONSTRAINT STUDENTS_STUDENT_DATE_NN NOT NULL
-);
-
---¼ö°­½ÅÃ»
-CREATE TABLE ENROLL
-( ENROLL_ID     VARCHAR2(30)
-, ST_ID         VARCHAR2(30)
-, COURSE_ID     VARCHAR2(30)
-, ENROLL_DATE   DATE    DEFAULT SYSDATE
-, CONSTRAINT ENROLL_ENROLL_ID_PK PRIMARY KEY(ENROLL_ID)
-, CONSTRAINT ENROLL_ST_ID_FK FOREIGN KEY(ST_ID) 
+--â—‹ í•™ìƒ ì´ë²¤íŠ¸ë¡œê·¸ í…Œì´ë¸”
+CREATE TABLE STD_EVENTLOG
+( ST_ID         VARCHAR2(30)
+, ILJA          DATE DEFAULT SYSDATE
+, MEMO          VARCHAR2(200)
+, CONSTRAINT TBL_EVENTLOG_ST_ID_FK FOREIGN KEY(ST_ID) 
                                        REFERENCES STUDENTS(ST_ID)
-, CONSTRAINT ENROLL_COURSE_ID_FK FOREIGN KEY(COURSE_ID) 
-                                       REFERENCES COURSE(COURSE_ID)
 );
+--==>> Table STD_EVENTLOGì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
+DROP TABLE ADMINISTRATOR;
+DROP TABLE PROFESSORS;
+DROP TABLE STUDENTS;
+DROP TABLE SUBJECTS;
+DROP TABLE COURSE;
+DROP TABLE ESTABLISHED_SUB;
+DROP TABLE TEST;
+DROP TABLE ENROLL;
+DROP TABLE SCORE;
+DROP TABLE MID_DROP;
 
--- Á¦¾àÁ¶°Ç ¼öÁ¤
-ALTER TABLE ENROLL
-MODIFY
-( ENROLL_ID     CONSTRAINT ENROLL_ENROLL_ID_NN NOT NULL --
-, ENROLL_DATE   CONSTRAINT ENROLL_ENROLL_DATE_NN NOT NULL
-);
-
--- E_ID·Î º¯°æ
-ALTER TABLE ENROLL RENAME COLUMN ENROLL_ID TO E_ID;
-
---E_DATE·Î º¯°æ
-ALTER TABLE ENROLL RENAME COLUMN ENROLL_DATE TO E_DATE;
 
 --------------------------------------------------------------------------------
 --PLSQL
---¡Û STUDENT_INSERT ÇÁ·Î½ÃÀú
+--â—‹í•™ìƒ ë¡œê·¸ì¸ í”„ë¡œì‹œì € ìƒì„±
+CREATE OR REPLACE PROCEDURE PRC_LOGIN_ST 
+(
+    V_USERID IN STUDENTS.ST_ID%TYPE
+,   V_USERPW IN STUDENTS.ST_PW%TYPE
+)
+IS
+    V_COUNT            NUMBER;
+BEGIN
+    SELECT COUNT(ST_ID) INTO V_COUNT FROM STUDENTS
+    WHERE ST_ID=V_USERID AND ST_PW=V_USERPW;
+ 
+    IF(V_COUNT > 0) THEN
+        DBMS_OUTPUT.PUT_LINE(V_USERID||'ë‹˜ ë¡œê·¸ì¸ ë˜ì—ˆìŠµë‹ˆë‹¤.');  
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ ìž˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.');
+    END IF;
+ 
+END;
+--==>> Procedure PRC_LOGIN_STì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+
+--â—‹ê´€ë¦¬ìž ë¡œê·¸ì¸ í”„ë¡œì‹œì € ìƒì„±
+CREATE OR REPLACE PROCEDURE PRC_LOGIN_AD 
+(
+    V_USERID IN ADMINISTRATOR.ADMIN_ID%TYPE
+,   V_USERPW IN ADMINISTRATOR.ADMIN_PW%TYPE
+)
+IS
+    V_COUNT            NUMBER;
+BEGIN
+    SELECT COUNT(ADMIN_ID) INTO V_COUNT FROM ADMINISTRATOR
+    WHERE ADMIN_ID=V_USERID AND ADMIN_PW=V_USERPW;
+    
+    IF(V_COUNT > 0) THEN
+        DBMS_OUTPUT.PUT_LINE(V_USERID||'ë‹˜ ë¡œê·¸ì¸ ë˜ì—ˆìŠµë‹ˆë‹¤.');  
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ ìž˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.');
+    END IF;
+END;
+--==>> Procedure PRC_LOGIN_ADì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+--â—‹êµìˆ˜ ë¡œê·¸ì¸ í”„ë¡œì‹œì € ìƒì„±
+CREATE OR REPLACE PROCEDURE PRC_LOGIN_PRO 
+(
+    V_USERID IN PROFESSORS.PRO_ID%TYPE
+,   V_USERPW IN PROFESSORS.PRO_PW%TYPE
+)
+IS
+    V_COUNT            NUMBER;
+BEGIN
+    SELECT COUNT(PRO_ID) INTO V_COUNT FROM PROFESSORS
+    WHERE PRO_ID=V_USERID AND PRO_PW=V_USERPW;
+ 
+    IF(V_COUNT > 0) THEN
+        DBMS_OUTPUT.PUT_LINE(V_USERID||'ë‹˜ ë¡œê·¸ì¸ ë˜ì—ˆìŠµë‹ˆë‹¤.');  
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ ìž˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.');    
+    END IF;
+  
+END;
+--==>> Procedure PRC_LOGIN_PRì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+--â—‹ë¡œê·¸ì¸ í”„ë¡œì‹œì € ìƒì„±
+CREATE OR REPLACE PROCEDURE PRC_LOGIN
+(
+    V_USER    IN NUMBER    
+,   V_USERID  IN PROFESSORS.PRO_ID%TYPE
+,   V_USERPW  IN PROFESSORS.PRO_PW%TYPE
+)
+IS
+    INPUT_ERROR    EXCEPTION;
+    --V_COUNT        NUMBER;                        -- ì•ˆì‚¬ìš©í•´ì„œ ë¹¼ê³  ë ë“¯?
+BEGIN
+    IF(V_USER = 1) -- ê´€ë¦¬ìž
+        THEN PRC_LOGIN_AD(V_USERID, V_USERPW);
+      
+    ELSIF(V_USER = 2) -- êµìˆ˜
+        THEN PRC_LOGIN_PRO(V_USERID, V_USERPW);
+  
+    ELSIF(V_USER = 3) -- í•™ìƒ
+        THEN PRC_LOGIN_ST(V_USERID, V_USERPW);  
+    ELSIF (V_USER != 1 AND V_USER != 2 AND V_USER != 3)
+        THEN RAISE INPUT_ERROR;
+    END IF; 
+    
+    EXCEPTION
+    WHEN INPUT_ERROR
+        THEN RAISE_APPLICATION_ERROR(-20005, 'í•´ë‹¹í•˜ëŠ” ì‚¬ìš©ìžë¥¼ ì„ íƒí•˜ì„¸ìš”. (1.ê´€ë¦¬ìž, 2.êµìˆ˜, 3.í•™ìƒ)');
+             ROLLBACK;
+    WHEN OTHERS
+        THEN ROLLBACK;
+ 
+END;
+--==>> Procedure PRC_LOGINì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤
+
+
+--â—‹ STUDENT_INSERT í”„ë¡œì‹œì €
 CREATE OR REPLACE PROCEDURE PRC_STUDENT_INSERT
 (
    V_ST_ID IN STUDENTS.ST_ID%TYPE
@@ -244,95 +346,66 @@ BEGIN
 
     COMMIT;
 END;
---==>> Procedure PRC_STUDENT_INSERTÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Procedure PRC_STUDENT_INSERTì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
---¡Û STUDENT_UPDATE ÇÁ·Î½ÃÀú
+--â—‹ STUDENT_UPDATE í”„ë¡œì‹œì €
 CREATE OR REPLACE PROCEDURE PRC_STUDENT_UPDATE
-( V_ST_SSN    IN STUDENTS.ST_SSN%TYPE            -- ÁÖ¹Î¹øÈ£¸¦ ¹Þ´Â ÆÄ¶ó¹ÌÅÍ
-, V_ST_NAME   IN STUDENTS.ST_NAME%TYPE           -- ¹Ù²ÜÀÌ¸§
-, V2_ST_NAME  IN STUDENTS.ST_NAME%TYPE           -- ¹Ù²ÜÀÌ¸§ È®ÀÎ
+(
+  V_ST_ID   IN STUDENTS.ST_ID%TYPE
+, V_ST_NAME IN STUDENTS.ST_NAME%TYPE
+, V_ST_SSN  IN STUDENTS.ST_SSN%TYPE
 )
 IS
-    USER_DEFINE_ERROR   EXCEPTION; -- ÀÌ¸§ È®ÀÎ¿ë º¯¼ö¼±¾ð
-BEGIN  
-
-    IF V_ST_NAME != V2_ST_NAME               -- ¹Ù²ÜÀÌ¸§°ú È®ÀÎ¿ë ÆÄ¶ó¹ÌÅÍ ºÒÀÏÄ¡
-        THEN RAISE USER_DEFINE_ERROR;            
-    END IF;
-
-
+    NONEXIST_ERROR  EXCEPTION;
+BEGIN
     UPDATE STUDENTS
-    SET  ST_NAME = V_ST_NAME
-    WHERE SUBSTR(ST_SSN,8,7) = SUBSTR(V_ST_SSN,8,7); 
-
+    SET ST_NAME = V_ST_NAME, ST_SSN = V_ST_SSN
+    WHERE ST_ID = V_ST_ID;
+    
+    IF SQL%NOTFOUND
+        THEN RAISE NONEXIST_ERROR;
+    END IF;
+       
     COMMIT;
-
+    
     EXCEPTION
-        WHEN USER_DEFINE_ERROR
-            THEN RAISE_APPLICATION_ERROR(-20002, 'ÀÌ¸§ ºÒÀÏÄ¡');
+        WHEN NONEXIST_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20006,'ì¼ì¹˜í•˜ëŠ” ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.');
+                 ROLLBACK;
+        WHEN OTHERS
+            THEN ROLLBACK;
 END;
---==>> Procedure PRC_STUDENT_UPDATEÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Procedure PRC_STUDENT_UPDATEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
---¡Û STUDENT_DELETE ÇÁ·Î½ÃÀú
+--â—‹ STUDENT_DELETE í”„ë¡œì‹œì €
 CREATE OR REPLACE PROCEDURE PRC_STUDENT_DELETE 
 (
     V_ST_ID      STUDENTS.ST_ID%TYPE          
   , V_ST_PW      STUDENTS.ST_PW%TYPE      
   , V_ST_NAME    STUDENTS.ST_NAME%TYPE      
-  , V_ST_SSN     STUDENTS.ST_SSN%TYPE      -- ÇÐ»ý ÁÖ¹Î¹øÈ£
+  , V_ST_SSN     STUDENTS.ST_SSN%TYPE      -- í•™ìƒ ì£¼ë¯¼ë²ˆí˜¸ ë’·ìžë¦¬
 )
 IS
 BEGIN
         DELETE      
             FROM STUDENTS      
-            WHERE ST_ID = V_ST_ID             -- ÇÐ»ý ¾ÆÀÌµð Ã¼Å©
-                  AND ST_PW = V_ST_PW          -- ÇÐ»ý ºñ¹Ð¹øÈ£ Ã¼Å©
-                  AND ST_NAME = V_ST_NAME      -- ÇÐ»ý ÀÌ¸§ Ã¼Å©
-                  --AND ST_SSN = V_ST_SSN; 
-                  AND SUBSTR(ST_SSN,8,7) = SUBSTR(V_ST_SSN,8,7);         -- ÇÐ»ý ÁÖ¹Î¹øÈ£ µÞÀÚ¸® Ã¼Å©--¡Ú¼öÁ¤
+            WHERE ST_ID = V_ST_ID             -- í•™ìƒ ì•„ì´ë”” ì²´í¬
+                  AND ST_PW = V_ST_PW          -- í•™ìƒ ë¹„ë°€ë²ˆí˜¸ ì²´í¬
+                  AND ST_NAME = V_ST_NAME      -- í•™ìƒ ì´ë¦„ ì²´í¬
+                  AND ST_SSN = V_ST_SSN;         -- í•™ìƒ ì£¼ë¯¼ë²ˆí˜¸ ë’·ìžë¦¬ ì²´í¬
         COMMIT;
 
         EXCEPTION
             WHEN OTHERS
-                THEN RAISE_APPLICATION_ERROR(-20003,'´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä');
+                THEN RAISE_APPLICATION_ERROR(-20003,'ë‹¤ì‹œ ìž…ë ¥í•´ì£¼ì„¸ìš”');
                      ROLLBACK; 
 END;
---==>> Procedure PRC_STUDENT_DELETEÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Procedure PRC_STUDENT_DELETEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
-
--- ¡Û °ú¸ñ ±â°£ °ü·Ã Æ®¸®°Å
-
-    
---¡Û Æ®¸®°Å »ý¼º BEFORE STATEMENT TRIGGER(TRG_STUDENTS_DELETE)---ÇÊ¿ä¾ø³ª??
-CREATE OR REPLACE TRIGGER TRG_STUDENTS_DELETE
-        BEFORE
-        DELETE ON STUDENTS
-        FOR EACH ROW
-        
-BEGIN
-    DELETE
-    FROM STUDENTS
-    WHERE ST_ID=:OLD.ST_ID; 
-    
-END;
---==>> Trigger TRG_STUDENTS_DELETEÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
-
-
---¡Û Å×ÀÌºí »ý¼º ÇÊ¿ä(LOG)--ÇöÁ¤´ÔÀÌ Å×ÀÌºí¸í º¯°æÇßÀ½(Ã¼Å© ÇÊ¿ä) -- Ã¼Å© ¿Ï·á
-CREATE TABLE STD_EVENTLOG
-( ST_ID         VARCHAR2(30)
-, ILJA          DATE DEFAULT SYSDATE
-, MEMO          VARCHAR2(200)
-, CONSTRAINT TBL_EVENTLOG_ST_ID_FK FOREIGN KEY(ST_ID) 
-                                       REFERENCES STUDENTS(ST_ID)
-);
---==>> Table STD_EVENTLOGÀÌ(°¡) »ý¼ºµÇ¾ú½À´Ï´Ù.
-
-
---¡Û Æ®¸®°Å »ý¼º AFTER STATEMENT TRIGGER(TRG_EVENTLOG)
+--â—‹ í•™ìƒ í…Œì´ë¸” ì´ë²¤íŠ¸ë¡œê·¸ íŠ¸ë¦¬ê±°
 CREATE OR REPLACE TRIGGER TRG_STD_EVENTLOG
             AFTER
             INSERT OR UPDATE ON STUDENTS
@@ -342,23 +415,106 @@ BEGIN
 
     IF(INSERTING)
         THEN INSERT INTO STD_EVENTLOG(ST_ID, MEMO) 
-            VALUES(V_ST_ID,'ÇÐ»ý Á¤º¸ Ãß°¡ ¿Ï·á');    
+            VALUES(V_ST_ID,'í•™ìƒ ì •ë³´ ì¶”ê°€ ì™„ë£Œ');    
     ELSIF(UPDATING)
         THEN INSERT INTO STD_EVENTLOG(ST_ID, MEMO) 
-            VALUES(V_ST_ID,'ÇÐ»ý Á¤º¸ ¾÷µ¥ÀÌÆ® ¿Ï·á');
+            VALUES(V_ST_ID,'í•™ìƒ ì •ë³´ ì—…ë°ì´íŠ¸ ì™„ë£Œ');
             
     END IF; 
 END;
---==>> Trigger TRG_STD_EVENTLOGÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Trigger TRG_STD_EVENTLOGì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+--â—‹ ìˆ˜ê°•ì‹ ì²­ INSERT í”„ë¡œì‹œì €
+-- ì•„ëž˜ì˜ ì¡°ê±´ì„ í™•ì¸ í›„ ë°ì´í„°ë¥¼ ìž…ë ¥í•œë‹¤.
+-- 1) ê³„ì •ë“±ë¡ì¼ê³¼ ê°œê°•ì¼
+-- 2) ë™ì¼í•œ ê³¼ì • ì‹ ì²­ ì—¬ë¶€
+-- 3) ìˆ˜ê°• ë‚ ì§œ ì¤‘ë³µ
+CREATE OR REPLACE PROCEDURE PRC_ENROLL_INSERT
+( V_E_ID       IN ENROLL.E_ID%TYPE
+, V_ST_ID      IN ENROLL.ST_ID%TYPE
+, V_COURSE_ID  IN ENROLL.COURSE_ID%TYPE
+, V_E_DATE     IN ENROLL.E_DATE%TYPE
+)
+
+IS
+   V_ST_DATE           STUDENTS.ST_DATE%TYPE;
+   V_C_START           COURSE.C_START%TYPE;     -- ë“±ë¡í•˜ë ¤ëŠ” ê³¼ì •ì˜ ì‹œìž‘ì¼
+   V_C_END             COURSE.C_END%TYPE;       -- ë“±ë¡í•˜ë ¤ëŠ” ê³¼ì •ì˜ ì¢…ë£Œì¼
+   nCNT                NUMBER;
+   USER_DEFINE_ERROR   EXCEPTION;
+   SAME_COURSE         EXCEPTION;
+   SAME_DATE           EXCEPTION;
+
+BEGIN
+    -- ì˜ˆì™¸ ì²˜ë¦¬ 1. ê³„ì •ë“±ë¡ì¼ê³¼ ê°œê°•ì¼
+    -- ìˆ˜ê°•ì‹ ì²­ì¼ì€ ê³„ì •ë“±ë¡ì¼ë³´ë‹¤ ë¹ ë¥´ê±°ë‚˜, ê°œê°•ì¼ë³´ë‹¤ ëŠë¦¬ê±°ë‚˜ ê°™ì„ ìˆ˜ ì—†ë‹¤.
+    SELECT ST_DATE INTO V_ST_DATE
+    FROM STUDENTS
+    WHERE ST_ID = V_ST_ID;
+    
+    SELECT C_START, C_END INTO V_C_START, V_C_END
+    FROM COURSE
+    WHERE COURSE_ID = V_COURSE_ID;    
+
+    IF (V_E_DATE < V_ST_DATE OR V_E_DATE >= V_C_START)
+        THEN RAISE USER_DEFINE_ERROR;
+    END IF;
+    
+    
+    -- ì˜ˆì™¸ ì²˜ë¦¬ 2. ë™ì¼í•œ ê³¼ì • ì‹ ì²­ ì—¬ë¶€
+    -- í•œ í•™ìƒì´ ê°™ì€ ê³¼ì •ì„ ì‹ ì²­í•  ìˆ˜ ì—†ë‹¤.
+    SELECT COUNT(*) INTO nCNT
+    FROM ENROLL
+    WHERE ST_ID = V_ST_ID AND COURSE_ID = V_COURSE_ID;    
+    
+    IF (nCNT > 0)
+        THEN RAISE SAME_COURSE;
+    END IF;
+
+    
+    -- ì˜ˆì™¸ ì²˜ë¦¬ 3. ìˆ˜ê°• ë‚ ì§œ ì¤‘ë³µ
+    -- í•œ í•™ìƒì´ ê¸°ì¡´ì— ìˆ˜ê°•í•œ ê³¼ì •ì˜ ë‚ ì§œê°€, ìƒˆë¡œ ìˆ˜ê°•í•˜ë ¤ëŠ” ê³¼ì •ì˜ ë‚ ì§œì™€ ê²¹ì¹  ìˆ˜ ì—†ë‹¤.
+    SELECT COUNT(*) INTO nCNT
+    FROM ENROLL E JOIN COURSE C
+      ON E.COURSE_ID = C.COURSE_ID      
+    WHERE E.ST_ID = V_ST_ID
+      AND ( V_C_START > C.C_START AND V_C_START < C.C_END     -- ë“±ë¡í•˜ë ¤ëŠ” ê³¼ì •ì˜ ì‹œìž‘ ë‚ ì§œ ì¡°ê±´ í™•ì¸
+       OR   V_C_END > C.C_START AND V_C_END < C.C_END );      -- ë“±ë¡í•˜ë ¤ëŠ” ê³¼ì •ì˜ ì¢…ë£Œ ë‚ ì§œ ì¡°ê±´ í™•ì¸
+
+    IF (nCNT > 0)
+        THEN RAISE SAME_DATE;
+    END IF; 
 
 
---¡Û ¼ö°­½ÅÃ» ºÒ°¡ ÇÁ·Î½ÃÀú
+    -- INSERT
+    INSERT INTO ENROLL(E_ID, ST_ID, COURSE_ID, E_DATE)
+    VALUES (V_E_ID, V_ST_ID, V_COURSE_ID, V_E_DATE);
 
--- ÁßµµÆ÷±â INSERT ÇÁ·Î½ÃÀú
---> ÁßµµÆ÷±â ·¹ÄÚµå¸¦ ÀÔ·Â ½Ã, "°úÁ¤ ½ÃÀÛÀÏ < ÁßµµÆ÷±âÀÏ < °úÁ¤Á¾·áÀÏ"ÀÌ ¸Â´ÂÁö È®ÀÎÇÏ´Â ÇÁ·Î½ÃÀú
+    -- ì»¤ë°‹
+    COMMIT;
+        
+    -- ì˜ˆì™¸ ë°œìƒ
+    EXCEPTION
+        WHEN USER_DEFINE_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20002, 'ìˆ˜ê°• ì‹ ì²­ì´ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                 ROLLBACK;
+        WHEN SAME_COURSE
+            THEN RAISE_APPLICATION_ERROR(-20003, 'ì´ë¯¸ ì‹ ì²­í•œ ê³¼ëª©ìž…ë‹ˆë‹¤.');
+                 ROLLBACK;
+        WHEN SAME_DATE
+            THEN RAISE_APPLICATION_ERROR(-20004, 'ë‚ ì§œê°€ ì¤‘ë³µë˜ëŠ” ê³¼ëª©ìž…ë‹ˆë‹¤.');
+                 ROLLBACK;
+        WHEN OTHERS
+            THEN ROLLBACK;            
+END;
+--==>> Procedure PRC_ENROLL_INSERTì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+
+--â—‹ ì¤‘ë„í¬ê¸° INSERT í”„ë¡œì‹œì €
+--> ì¤‘ë„í¬ê¸° ë ˆì½”ë“œë¥¼ ìž…ë ¥ ì‹œ, "ê³¼ì • ì‹œìž‘ì¼ < ì¤‘ë„í¬ê¸°ì¼ < ê³¼ì •ì¢…ë£Œì¼"ì´ ë§žëŠ”ì§€ í™•ì¸í•˜ëŠ” í”„ë¡œì‹œì €
 CREATE OR REPLACE PROCEDURE PRC_MID_DROP_INSERT
 ( V_DROP_ID     IN MID_DROP.DROP_ID%TYPE
-, V_ENROLL_ID   IN MID_DROP.ENROLL_ID%TYPE
+, V_E_ID        IN MID_DROP.E_ID%TYPE
 , V_DROP_DATE   IN MID_DROP.DROP_DATE%TYPE
 )
 IS
@@ -368,39 +524,39 @@ IS
     USER_DEFINE_ERROR   EXCEPTION;
 
 BEGIN
-    -- º¯¼ö¿¡ °ª ´ã±â
+    -- ë³€ìˆ˜ì— ê°’ ë‹´ê¸°
     SELECT COURSE_ID INTO V_COURSE_ID
     FROM ENROLL
-    WHERE ENROLL_ID = V_ENROLL_ID;  
+    WHERE E_ID = V_E_ID;  
     
     SELECT C_START, C_END INTO V_C_START, V_C_END
     FROM COURSE
     WHERE COURSE_ID = V_COURSE_ID;
     
-    -- ¿¹¿Ü Ã³¸® : "°úÁ¤ ½ÃÀÛÀÏ < ÁßµµÆ÷±âÀÏ < °úÁ¤Á¾·áÀÏ"ÀÌ ¾Æ´Ò °æ¿ì
+    -- ì˜ˆì™¸ ì²˜ë¦¬ : "ê³¼ì • ì‹œìž‘ì¼ < ì¤‘ë„í¬ê¸°ì¼ < ê³¼ì •ì¢…ë£Œì¼"ì´ ì•„ë‹ ê²½ìš°
     IF (V_DROP_DATE < V_C_START OR V_DROP_DATE > V_C_END)
         THEN RAISE USER_DEFINE_ERROR;
     END IF;
 
     -- INSERT
-    INSERT INTO MID_DROP(DROP_ID, ENROLL_ID, DROP_DATE)
-    VALUES (V_DROP_ID, V_ENROLL_ID, V_DROP_DATE);
+    INSERT INTO MID_DROP(DROP_ID, E_ID, DROP_DATE)
+    VALUES (V_DROP_ID, V_E_ID, V_DROP_DATE);
     
-    -- Ä¿¹Ô
+    -- ì»¤ë°‹
     COMMIT;
     
-    -- ¿¹¿Ü ¹ß»ý
+    -- ì˜ˆì™¸ ë°œìƒ
     EXCEPTION
         WHEN USER_DEFINE_ERROR
-            THEN RAISE_APPLICATION_ERROR(-20001, 'ÁßµµÆ÷±â ³¯Â¥°¡ Àß¸ø ÀÔ·ÂµÇ¾ú½À´Ï´Ù.');
+            THEN RAISE_APPLICATION_ERROR(-20001, 'ì¤‘ë„í¬ê¸° ë‚ ì§œê°€ ìž˜ëª» ìž…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤.');
                  ROLLBACK;
         WHEN OTHERS
             THEN ROLLBACK;
 END;
---==>> Procedure PRC_MID_DROP_INSERTÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Procedure PRC_MID_DROP_INSERTì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
--- <PRC_PRO_PW_INSERT> ±³¼ö ÃÊ±â ºñ¹Ð¹øÈ£ µ¥ÀÌÅÍ ÀÔ·Â ÇÁ·Î½ÃÀú(¿Ï¼º)
+--â—‹ êµìˆ˜ INSERT í”„ë¡œì‹œì €
 CREATE OR REPLACE PROCEDURE PRC_PRO_PW_INSERT
 ( V_PRO_ID      IN PROFESSORS.PRO_ID%TYPE
 , V_PRO_NAME    IN PROFESSORS.PRO_NAME%TYPE
@@ -408,43 +564,49 @@ CREATE OR REPLACE PROCEDURE PRC_PRO_PW_INSERT
 )
 IS
 BEGIN
-    -- INSERT Äõ¸®¹®
+    -- INSERT ì¿¼ë¦¬ë¬¸
     INSERT INTO PROFESSORS(PRO_ID, PRO_NAME, PRO_PW, PRO_SSN)
     VALUES(V_PRO_ID, V_PRO_NAME, SUBSTR(V_PRO_SSN,8), V_PRO_SSN);
     
-    -- Ä¿¹Ô
+    -- ì»¤ë°‹
     COMMIT;
     
 END;
---==>> Procedure PRC_PRO_PW_INSERTÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Procedure PRC_PRO_PW_INSERTì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
--- <TRG_PRO_EVENTLOG> ±³¼ö ÀÌº¥Æ®·Î±× Æ®¸®°Å »ý¼º-AFTER STATEMENT TRIGGER »ç¿ë(¿Ï¼º)
+--â—‹ êµìˆ˜ ì´ë²¤íŠ¸ë¡œê·¸ íŠ¸ë¦¬ê±° ìƒì„±
+-- ì—ëŸ¬ë‚¨!
 CREATE OR REPLACE TRIGGER TRG_PRO_EVENTLOG
             AFTER
             INSERT OR UPDATE ON PROFESSORS
 DECLARE
     V_PRO_ID    PRO_EVENTLOG.PRO_ID%TYPE;
 BEGIN
-
     IF (INSERTING)
         THEN INSERT INTO PRO_EVENTLOG(PRO_ID,MEMO)
-            VALUES(V_PRO_ID,'±³¼öÁ¤º¸ INSERT Äõ¸®¹®ÀÌ ¼öÇàµÇ¾ú½À´Ï´Ù.');
+            VALUES(PRO_ID,'êµìˆ˜ì •ë³´ INSERT ì¿¼ë¦¬ë¬¸ì´ ìˆ˜í–‰ë˜ì—ˆìŠµë‹ˆë‹¤.');
     ELSIF (UPDATING)
         THEN INSERT INTO PRO_EVENTLOG(PRO_ID,MEMO)
-            VALUES(V_PRO_ID,'±³¼öÁ¤º¸ UPDATE Äõ¸®¹®ÀÌ ¼öÇàµÇ¾ú½À´Ï´Ù.');
+            VALUES(PRO_ID,'êµìˆ˜ì •ë³´ UPDATE ì¿¼ë¦¬ë¬¸ì´ ìˆ˜í–‰ë˜ì—ˆìŠµë‹ˆë‹¤.');
     END IF;
 END;
---==>> Trigger TRG_PRO_EVENTLOGÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Trigger TRG_PRO_EVENTLOGì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+/*
+LINE/COL  ERROR
+--------- -------------------------------------------------------------
+5/14      PL/SQL: SQL Statement ignored
+6/20      PL/SQL: ORA-00984: column not allowed here
+8/14      PL/SQL: SQL Statement ignored
+9/20      PL/SQL: ORA-00984: column not allowed here
+ì˜¤ë¥˜: ì»´íŒŒì¼ëŸ¬ ë¡œê·¸ë¥¼ í™•ì¸í•˜ì‹­ì‹œì˜¤.
+*/
 
--- ÇÁ·Î½ÃÀúPRO_ID
-SELECT *
-FROM PRO_EVENTLOG;
+DROP TRIGGER TRG_PRO_EVENTLOG;
 
--- <TRG_PROFESSORS_DELETE> ±³¼öÁ¤º¸ »èÁ¦ Æ®¸®°Å - BEFORE ROW TRIGGER»ç¿ë
--- »èÁ¦ÇÒ ¶§ °úÁ¤¿¡ ÂüÁ¶ÇÏ°í ÀÖÁö ¾ÊÀ¸¸é ¹Ù·Î »èÁ¦ÇÏµµ·Ï ÇÏ¸é µÇ°í 
--- °úÁ¤ÀÌ³ª °³¼³°ú¸ñ ÀÌ·± Å×ÀÌºí¿¡ ÂüÁ¶ÇÏ°í ÀÖ´Â ±³¼ö¸é ±³¼ö¸¦ »èÁ¦ÇÒ ¶§ °¡Áö°í ÀÖ´Â Á¤º¸ ¸ðµÎ NULL°ªÀ¸·Î Ã³¸®
--- ±³¼öÀÚ°¡ Åð»ç(?)ÇØ¼­ »èÁ¦ÇÑ °æ¿ì ¡æ »õ·Î¿î ±³¼öÀÚ°¡ ¼ö¾÷À» ÀÎ°èÇÏ¿© ÁøÇà ... ÇÑ´Ù´Â ÂÊÀ¸·Î »ý°¢
+--â—‹ êµìˆ˜ì •ë³´ ì‚­ì œ íŠ¸ë¦¬ê±°
+-- ì‚­ì œí•  ë•Œ ê³¼ì •ì— ì°¸ì¡°í•˜ê³  ìžˆì§€ ì•Šìœ¼ë©´ ë°”ë¡œ ì‚­ì œí•˜ë„ë¡ í•˜ë©´ ë˜ê³  
+-- ê³¼ì •ì´ë‚˜ ê°œì„¤ê³¼ëª© ì´ëŸ° í…Œì´ë¸”ì— ì°¸ì¡°í•˜ê³  ìžˆëŠ” êµìˆ˜ë©´ êµìˆ˜ë¥¼ ì‚­ì œí•  ë•Œ ê°€ì§€ê³  ìžˆëŠ” ì •ë³´ ëª¨ë‘ NULLê°’ìœ¼ë¡œ ì²˜ë¦¬
 CREATE OR REPLACE TRIGGER TRG_PROFESSORS_DELETE
         AFTER
         DELETE ON PROFESSORS
@@ -457,383 +619,536 @@ BEGIN
     UPDATE ESTABLISHED_SUB
     SET PRO_ID = NULL
     WHERE PRO_ID = :OLD.PRO_ID;
+    
 END;
---==>> Trigger TRG_PROFESSORS_DELETEÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Trigger TRG_PROFESSORS_DELETEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
-SELECT *
-FROM PROFESSORS;
-
-SELECT *
-FROM COURSE;
-
-SELECT *
-FROM ESTABLISHED_SUB;
-
-DELETE
-FROM PROFESSORS
-WHERE PRO_ID = 'PRO1';
---==>> 1 Çà ÀÌ(°¡) »èÁ¦µÇ¾ú½À´Ï´Ù.
-
-
--- <PRC_PRO_UPDATE> ±³¼ö Á¤º¸ ¼öÁ¤ ÇÁ·Î½ÃÀú
--- »èÁ¦ÇÒ ±³¼ö¿Í ´ëÃ¼ÇÒ ±³¼ö ÀÔ·ÂÇØ¼­ º¯°æÇÏ±â!
+--â—‹ ì‚­ì œëœ êµìˆ˜ ëŒ€ì²´í•˜ëŠ” í”„ë¡œì‹œì €
 CREATE OR REPLACE PROCEDURE PRC_PRO_CHANGE
 ( V_COURSE_ID   IN COURSE.COURSE_ID%TYPE
 , V_PRO_ID      IN PROFESSORS.PRO_ID%TYPE
 )
 IS
 BEGIN
-    -- COURSE(°úÁ¤Å×ÀÌºí) ±³¼öÄÚµå ¾÷µ¥ÀÌÆ®
+    -- COURSE(ê³¼ì •í…Œì´ë¸”) êµìˆ˜ì½”ë“œ ì—…ë°ì´íŠ¸
     UPDATE COURSE
     SET PRO_ID = V_PRO_ID
     WHERE COURSE_ID = V_COURSE_ID;
     
-    -- CREATE TABLE ESTABLISHED_SUB(°³¼³°ú¸ñÅ×ÀÌºí) ±³¼öÄÚµå ¾÷µ¥ÀÌÆ®
+    -- CREATE TABLE ESTABLISHED_SUB(ê°œì„¤ê³¼ëª©í…Œì´ë¸”) êµìˆ˜ì½”ë“œ ì—…ë°ì´íŠ¸
     UPDATE ESTABLISHED_SUB
     SET PRO_ID = V_PRO_ID
     WHERE COURSE_ID = V_COURSE_ID;
 
 END;
---==>> Procedure PRC_PRO_CHANGEÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
-
-EXEC PRC_PRO_CHANGE('CO1','PRO4');
+--==>> Procedure PRC_PRO_CHANGEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
-
--- ±³¼ö»èÁ¦¿Í ¼öÁ¤ ÆÐÅ°Áö·Î ¹­±â (º¸·ù)
-/*
--- 1. ¸í¼¼ºÎ ÀÛ¼º
-CREATE OR REPLACE PACKAGE PRO_PACK
+--â—‹ êµìˆ˜ ì •ë³´ ìˆ˜ì • í”„ë¡œì‹œì €
+CREATE OR REPLACE PROCEDURE PRC_PRO_UPDATE
+( V_PRO_ID      IN PROFESSORS.PRO_ID%TYPE
+, V_PRO_NAME    IN PROFESSORS.PRO_NAME%TYPE
+, V_PRO_PW     IN PROFESSORS.PRO_PW%TYPE
+)
 IS
-    PROCEDURE PRC_PRO_CHANGE;
-    TRIGGER TRG_PROFESSORS_DELETE;
-END PRO_PACK;
+BEGIN
+    -- PROFESSORS(êµìˆ˜í…Œì´ë¸”) ì´ë¦„, ë¹„ë°€ë²ˆí˜¸ ì—…ë°ì´íŠ¸
+    UPDATE PROFESSORS
+    SET PRO_NAME = V_PRO_NAME, PRO_PW = V_PRO_PW
+    WHERE PRO_ID = V_PRO_ID;
+END;
+--==>> Procedure PRC_PRO_UPDATEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
--- 2. ¸öÃ¼ºÎ ÀÛ¼º
-CREATE OR REPLACE PACK BODY PRO_PACK
+
+
+--â—‹ ê°œì„¤ê³¼ëª© INSERT í”„ë¡œì‹œì €
+CREATE OR REPLACE PROCEDURE PRC_ESTABLISHED_SUB
+( V_EST_SUB_ID      IN ESTABLISHED_SUB.EST_SUB_ID%TYPE
+, V_PRO_ID          IN ESTABLISHED_SUB.PRO_ID%TYPE
+, V_COURSE_ID       IN ESTABLISHED_SUB.COURSE_ID%TYPE
+, V_SUB_ID          IN ESTABLISHED_SUB.SUB_ID%TYPE
+, V_ATTEND_PER      IN ESTABLISHED_SUB.ATTEND_PER%TYPE
+, V_PRACTICAL_PER   IN ESTABLISHED_SUB.PRACTICAL_PER%TYPE
+, V_WRITING_PER     IN ESTABLISHED_SUB.WRITING_PER%TYPE
+)
 IS
-    PROCEDURE PRC_PRO_CHANGE
-    ( V_COURSE_ID   IN COURSE.COURSE_ID%TYPE
-    , V_PRO_ID      IN PROFESSORS.PRO_ID%TYPE
-    )
-    IS
-    BEGIN
-    -- COURSE(°úÁ¤Å×ÀÌºí) ±³¼öÄÚµå ¾÷µ¥ÀÌÆ®
-    UPDATE COURSE
-    SET PRO_ID = V_PRO_ID
+    V_C_START           COURSE.C_START%TYPE;
+    V_C_END             COURSE.C_END%TYPE;
+    V_S_START           SUBJECTS.S_START%TYPE;
+    V_S_END             SUBJECTS.S_END%TYPE;
+    
+    USER_DEFINE_ERROR   EXCEPTION;
+
+BEGIN
+    -- ë³€ìˆ˜ì— ê°’ ë‹´ê¸°
+    SELECT C_START, C_END INTO V_C_START, V_C_END
+    FROM COURSE
     WHERE COURSE_ID = V_COURSE_ID;
     
-    -- CREATE TABLE ESTABLISHED_SUB(°³¼³°ú¸ñÅ×ÀÌºí) ±³¼öÄÚµå ¾÷µ¥ÀÌÆ®
-    UPDATE ESTABLISHED_SUB
-    SET PRO_ID = V_PRO_ID
-    WHERE COURSE_ID = V_COURSE_ID;
+    SELECT S_START, S_END INTO V_S_START, V_S_END
+    FROM SUBJECTS
+    WHERE SUB_ID = V_SUB_ID;
+    
+    IF (V_C_START > V_S_START OR V_S_END > V_C_END) --ê³¼ì • ì‹œìž‘ì¼ì´ ê³¼ëª© ì‹œìž‘ì¼ë³´ë‹¤ ë’¤ê±°ë‚˜ ê³¼ëª© ì¢…ë£Œì¼ì´ ê³¼ì • ì¢…ë£Œì¼ë³´ë‹¤ ë’¤ë©´ ì—ëŸ¬ë°œìƒ
+        THEN RAISE USER_DEFINE_ERROR;
+    END IF;
 
-    END;
+    -- INSERT
+    INSERT INTO ESTABLISHED_SUB(EST_SUB_ID,PRO_ID,COURSE_ID,SUB_ID,ATTEND_PER,PRACTICAL_PER,WRITING_PER)
+    VALUES (V_EST_SUB_ID, V_PRO_ID,V_COURSE_ID,V_SUB_ID,V_ATTEND_PER,V_PRACTICAL_PER,V_WRITING_PER);
     
+    -- ì»¤ë°‹
+    COMMIT;
     
-    TRIGGER TRG_PROFESSORS_DELETE
+    -- ì˜ˆì™¸ ë°œìƒ
+    EXCEPTION
+        WHEN USER_DEFINE_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20001, 'ê³¼ëª© ì„¤ì • ë‚ ì§œê°€ ìž˜ëª» ìž…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤.');
+                 ROLLBACK;
+        WHEN OTHERS
+            THEN ROLLBACK;
+END;
+--==>> Procedure PRC_ESTABLISHED_SUBì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+
+--ì œ ì»´ì—ì„œëŠ” ëŒì•„ê°€ì§€ ì•Šì•„ìš”!!!!(í˜„ì •)
+--â—‹ ê³¼ì • ì‚­ì œ íŠ¸ë¦¬ê±°
+--> ìˆ˜ê°•ì‹ ì²­ í…Œì´ë¸”, ê°œì„¤ê³¼ëª© í…Œì´ë¸”ì—ì„œë„ ê³¼ì • ì‚­ì œ
+CREATE OR REPLACE TRIGGER DEL_COURSE
         AFTER
-        DELETE ON PROFESSORS
+        DELETE ON COURSE
         FOR EACH ROW
-    BEGIN
-        UPDATE COURSE
-        SET PRO_ID = NULL
-        WHERE PRO_ID = :OLD.PRO_ID;
+BEGIN
+    DELETE
+    FROM ENROLL
+    WHERE COURSE_ID=:OLD.COURSE_ID;
     
-        UPDATE ESTABLISHED_SUB
-        SET PRO_ID = NULL
-        WHERE PRO_ID = :OLD.PRO_ID;
-    END;
+    DELETE
+    FROM ESTABLISHED_SUB
+    WHERE COURSE_ID=:OLD.COURSE_ID;
     
-END PRO_PACK;
-*/
-
---¡ÛÇÐ»ý ·Î±×ÀÎ ÇÁ·Î½ÃÀú »ý¼º
-CREATE OR REPLACE PROCEDURE PRC_LOGIN_ST 
-(
-    V_USERID IN STUDENTS.ST_ID%TYPE
-,   V_USERPW IN STUDENTS.ST_PW%TYPE
-)
-IS
-    V_COUNT            NUMBER;
-BEGIN
-    SELECT COUNT(ST_ID) INTO V_COUNT FROM STUDENTS
-    WHERE ST_ID=V_USERID AND ST_PW=V_USERPW;
- 
-    IF(V_COUNT > 0) THEN
-        DBMS_OUTPUT.PUT_LINE(V_USERID||'´Ô ·Î±×ÀÎ µÇ¾ú½À´Ï´Ù.');  
-    ELSE
-        DBMS_OUTPUT.PUT_LINE('¾ÆÀÌµð ¶Ç´Â ºñ¹Ð¹øÈ£°¡ Àß¸øµÇ¾ú½À´Ï´Ù.');
-    END IF;
- 
 END;
---==>> Procedure PRC_LOGIN_STÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
 
---¡Û°ü¸®ÀÚ ·Î±×ÀÎ ÇÁ·Î½ÃÀú »ý¼º
-CREATE OR REPLACE PROCEDURE PRC_LOGIN_AD 
-(
-    V_USERID IN ADMINISTRATOR.ADMIN_ID%TYPE
-,   V_USERPW IN ADMINISTRATOR.ADMIN_PW%TYPE
+
+
+
+--â—‹ ê°•ì˜ì§„í–‰ì—¬ë¶€(ê°•ì˜ ì˜ˆì •, ê°•ì˜ ì¤‘, ê°•ì˜ ì¢…ë£Œ)
+CREATE OR REPLACE FUNCTION FN_STATUS
+( V_S_START    IN SUBJECTS.S_START%TYPE
+, V_S_END     IN SUBJECTS.S_END%TYPE
 )
+RETURN VARCHAR2     -- ë°˜í™˜ ìžë£Œí˜• : ìžë¦¿ìˆ˜(ê¸¸ì´) ì§€ì • ì•ˆ í•¨
 IS
-    V_COUNT            NUMBER;
+    -- ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸
+    VRESULT VARCHAR2(20);
 BEGIN
-    SELECT COUNT(ADMIN_ID) INTO V_COUNT FROM ADMINISTRATOR
-    WHERE ADMIN_ID=V_USERID AND ADMIN_PW=V_USERPW;
+    -- ì—°ì‚° ë° ì²˜ë¦¬
+    IF ( V_S_START > SYSDATE )
+        THEN VRESULT := 'ê°•ì˜ ì˜ˆì •';
+    ELSIF ( V_S_END <= SYSDATE )
+        THEN VRESULT := 'ê°•ì˜ ì¤‘';
+    ELSE
+        VRESULT := 'ê°•ì˜ ì¢…ë£Œ';
+    END IF;
     
-    IF(V_COUNT > 0) THEN
-        DBMS_OUTPUT.PUT_LINE(V_USERID||'´Ô ·Î±×ÀÎ µÇ¾ú½À´Ï´Ù.');  
-    ELSE
-        DBMS_OUTPUT.PUT_LINE('¾ÆÀÌµð ¶Ç´Â ºñ¹Ð¹øÈ£°¡ Àß¸øµÇ¾ú½À´Ï´Ù.');
-    END IF;
+    -- ìµœì¢… ê²°ê³¼ê°’ ë°˜í™˜
+    RETURN VRESULT;
+    
 END;
---==>> Procedure PRC_LOGIN_ADÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Function FN_STATUSì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
---¡Û±³¼ö ·Î±×ÀÎ ÇÁ·Î½ÃÀú »ý¼º
-CREATE OR REPLACE PROCEDURE PRC_LOGIN_PRO 
-(
-    V_USERID IN PROFESSORS.PRO_ID%TYPE
-,   V_USERPW IN PROFESSORS.PRO_PW%TYPE
+
+--â—‹ ìˆ˜ê°•ê³¼ëª© ì´ì 
+CREATE OR REPLACE FUNCTION FN_TOTAL_SCORE
+( V_ST_ID    IN STUDENTS.ST_ID%TYPE
+, V_SUB_ID   IN ESTABLISHED_SUB.SUB_ID%TYPE
+)
+RETURN NUMBER     -- ë°˜í™˜ ìžë£Œí˜• : ìžë¦¿ìˆ˜(ê¸¸ì´) ì§€ì • ì•ˆ í•¨
+IS
+    -- ì£¼ìš” ë³€ìˆ˜ ì„ ì–¸
+    VRESULT NUMBER;
+    
+    V_A_PER ESTABLISHED_SUB.ATTEND_PER%TYPE;
+    V_P_PER ESTABLISHED_SUB.ATTEND_PER%TYPE;
+    V_W_PER ESTABLISHED_SUB.ATTEND_PER%TYPE;
+    
+    V_A_SCORE SCORE.ATTEND_SCORE%TYPE;
+    V_P_SCORE SCORE.ATTEND_SCORE%TYPE;
+    V_W_SCORE SCORE.ATTEND_SCORE%TYPE;
+    
+BEGIN
+
+    -- ë¹„ì¤‘ ë°›ì•„ì˜¤ê¸°
+    SELECT NVL(ATTEND_PER, 0), NVL(PRACTICAL_PER, 0), NVL(WRITING_PER, 0) INTO V_A_PER, V_P_PER, V_W_PER
+    FROM ESTABLISHED_SUB
+    WHERE SUB_ID = V_SUB_ID;
+    
+    -- ì ìˆ˜ ë°›ì•„ì˜¤ê¸°
+    SELECT NVL(ATTEND_SCORE, 0), NVL(PRACTICAL_SCORE, 0), NVL(WRITING_SCORE, 0) INTO V_A_SCORE, V_P_SCORE, V_W_SCORE
+    FROM SCORE
+    WHERE E_ID = (SELECT E.E_ID
+                  FROM ENROLL E
+                  WHERE E.ST_ID = V_ST_ID)
+          AND EST_SUB_ID = (SELECT ES.EST_SUB_ID
+                            FROM ESTABLISHED_SUB ES
+                            WHERE ES.SUB_ID = V_SUB_ID);
+
+    VRESULT := (V_A_SCORE*V_A_PER + V_P_SCORE*V_P_PER + V_W_SCORE*V_W_PER)/100;
+    
+    -- ìµœì¢… ê²°ê³¼ê°’ ë°˜í™˜
+    RETURN VRESULT;
+    
+END;
+--==>> Function FN_TOTAL_SCOREì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+
+--ì„±ì ì½”ë“œ ì‹œí€€ìŠ¤ ìƒì„±
+CREATE SEQUENCE SEQ_SCORE_ID
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOCACHE;
+--==>> Sequence SEQ_SCORE_IDì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+
+--â—‹ ì„±ì ìž…ë ¥ í”„ë¡œì‹œì €
+CREATE OR REPLACE PROCEDURE PRC_SCORE_INSERT 
+( V_E_ID                IN SCORE.E_ID%TYPE                -- ìˆ˜ê°•ì‹ ì²­í•œ ê³¼ì •
+, V_EST_SUB_ID          IN SCORE.EST_SUB_ID%TYPE            -- ê°œì„¤ëœ ê³¼ëª©
+, V_ATTEND_SCORE        IN SCORE.ATTEND_SCORE%TYPE
+, V_PRACTICAL_SCORE     IN SCORE.PRACTICAL_SCORE%TYPE
+, V_WRITING_SCORE       IN SCORE.WRITING_SCORE%TYPE
 )
 IS
-    V_COUNT            NUMBER;
 BEGIN
-    SELECT COUNT(PRO_ID) INTO V_COUNT FROM PROFESSORS
-    WHERE PRO_ID=V_USERID AND PRO_PW=V_USERPW;
- 
-    IF(V_COUNT > 0) THEN
-        DBMS_OUTPUT.PUT_LINE(V_USERID||'´Ô ·Î±×ÀÎ µÇ¾ú½À´Ï´Ù.');  
-    ELSE
-        DBMS_OUTPUT.PUT_LINE('¾ÆÀÌµð ¶Ç´Â ºñ¹Ð¹øÈ£°¡ Àß¸øµÇ¾ú½À´Ï´Ù.');    
-    END IF;
-  
+    
+
+    -- SCORE(ì„±ì í…Œì´ë¸”) INSERT 
+    INSERT INTO SCORE(SCORE_ID, E_ID, EST_SUB_ID, ATTEND_SCORE, PRACTICAL_SCORE, WRITING_SCORE)
+    VALUES('SCORE' || SEQ_SCORE_ID.NEXTVAL, V_E_ID, V_EST_SUB_ID, V_ATTEND_SCORE, V_PRACTICAL_SCORE, V_WRITING_SCORE);
+
 END;
---==>> Procedure PRC_LOGIN_PRÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+--==>> Procedure PRC_SCORE_INSERTì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
---¡Û·Î±×ÀÎ ÇÁ·Î½ÃÀú »ý¼º
-CREATE OR REPLACE PROCEDURE PRC_LOGIN
-(
-    V_USER    IN NUMBER    
-,   V_USERID  IN PROFESSORS.PRO_ID%TYPE
-,   V_USERPW  IN PROFESSORS.PRO_PW%TYPE
+--â—‹ ì„±ì ìˆ˜ì • í”„ë¡œì‹œì €
+CREATE OR REPLACE PROCEDURE PRC_SCORE_UPDATE
+( V_SCORE_ID            IN SCORE.SCORE_ID%TYPE
+, V_ATTEND_SCORE        IN SCORE.ATTEND_SCORE%TYPE
+, V_PRACTICAL_SCORE     IN SCORE.PRACTICAL_SCORE%TYPE
+, V_WRITING_SCORE       IN SCORE.WRITING_SCORE%TYPE
 )
 IS
-    INPUT_ERROR    EXCEPTION;
-    V_COUNT        NUMBER;
 BEGIN
-    IF(V_USER = 1) -- °ü¸®ÀÚ
-        THEN PRC_LOGIN_AD(V_USERID, V_USERPW);
-      
-    ELSIF(V_USER = 2) -- ±³¼ö
-        THEN PRC_LOGIN_PRO(V_USERID, V_USERPW);
-  
-      
-    ELSIF(V_USER = 3) -- ÇÐ»ý
-        THEN PRC_LOGIN_ST(V_USERID, V_USERPW);  
-    ELSIF (V_USER != 1 AND V_USER != 2 AND V_USER != 3)
-        THEN RAISE INPUT_ERROR;
-    END IF; 
+    -- SCORE(ì„±ì í…Œì´ë¸”) ì¶œê²°, ì‹¤ê¸°, í•„ê¸° ì—…ë°ì´íŠ¸
+    UPDATE SCORE
+    SET ATTEND_SCORE = V_ATTEND_SCORE, PRACTICAL_SCORE = V_PRACTICAL_SCORE, WRITING_SCORE = V_WRITING_SCORE
+    WHERE SCORE_ID = V_SCORE_ID;
+
+END;
+--==>> Procedure PRC_SCORE_UPDATEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+--â—‹ ì„±ì ì‚­ì œ í”„ë¡œì‹œì €
+CREATE OR REPLACE PROCEDURE PRC_SCORE_DELETE
+( V_SCORE_ID            IN SCORE.SCORE_ID%TYPE
+)
+IS
+BEGIN
+    -- SCORE(ì„±ì í…Œì´ë¸”) ì—ì„œ ì‚­ì œ
+    DELETE
+    FROM SCORE
+    WHERE SCORE_ID = V_SCORE_ID;
+
+END;
+--==>> Procedure PRC_SCORE_DELETEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+--ê³¼ì •ì½”ë“œ ì‹œí€€ìŠ¤ ìƒì„±
+CREATE SEQUENCE SEQ_COURSE_ID
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOCACHE;
+--==>> Sequence SEQ_COURSE_IDì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+
+--â—‹ ê³¼ì • ìž…ë ¥ í”„ë¡œì‹œì €
+CREATE OR REPLACE PROCEDURE PRC_COR_INSERT
+( V_COURSE_NAME  IN COURSE.COURSE_NAME%TYPE
+, V_C_START     IN COURSE.C_START%TYPE
+, V_C_END       IN COURSE.C_END%TYPE
+, V_CLASSROOM   IN COURSE.CLASSROOM%TYPE
+)
+IS
+BEGIN
+
+    INSERT INTO COURSE(COURSE_ID, COURSE_NAME, C_START,C_END, CLASSROOM)
+    VALUES ('COURSE' || SEQ_COURSE_ID.NEXTVAL, V_COURSE_NAME, V_C_START,V_C_END,V_CLASSROOM);
+
+END;
+--==>> Procedure PRC_COR_INSERTì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+
+--â—‹ ê³¼ì • ìˆ˜ì • í”„ë¡œì‹œì €
+CREATE OR REPLACE PROCEDURE PRC_COR_UPDATE
+( V_COURSE_ID    IN COURSE.COURSE_ID%TYPE 
+, V_COURSE_NAME  IN COURSE.COURSE_NAME%TYPE
+, V_C_START      IN COURSE.C_START%TYPE
+, V_C_END        IN COURSE.C_END%TYPE
+, V_CLASSROOM    IN COURSE.CLASSROOM%TYPE
+)
+IS
+BEGIN
+
+    UPDATE COURSE
+    SET COURSE_NAME = V_COURSE_NAME, C_START = V_C_START, C_END = V_C_END, CLASSROOM = V_CLASSROOM
+    WHERE COURSE_ID = V_COURSE_ID; 
+
+END;
+--==>> Procedure PRC_COR_UPDATEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+
+
+--â—‹ ê³¼ëª©ë³„ ë°°ì (ë¹„ì¤‘) ë¶€ì—¬
+CREATE OR REPLACE PROCEDURE PRC_SUB_SCORE_RATIO
+( V_EST_SUB_ID     IN ESTABLISHED_SUB.EST_SUB_ID%TYPE 
+, V_ATTEND_PER     IN ESTABLISHED_SUB.ATTEND_PER%TYPE
+, V_PRACTICAL_PER  IN ESTABLISHED_SUB.PRACTICAL_PER%TYPE
+, V_WRITING_PER    IN ESTABLISHED_SUB.WRITING_PER%TYPE
+)
+IS
+BEGIN
+    
+    UPDATE ESTABLISHED_SUB
+    SET ATTEND_PER = V_ATTEND_PER, PRACTICAL_PER = V_PRACTICAL_PER, WRITING_PER = V_WRITING_PER
+    WHERE EST_SUB_ID = V_EST_SUB_ID; 
+    
+END;
+--==>> Procedure PRC_SUB_SCORE_RATIOì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+
+
+
+--ì§€ìœ¤
+--â—‹ê³¼ëª© DELETE í”„ë¡œì‹œì € ìƒì„±
+CREATE OR REPLACE PROCEDURE PRC_SUB_DELETE
+(
+    V_SUB_ID IN SUBJECTS.SUB_ID%TYPE
+)
+IS
+    NONEXIST_ERROR  EXCEPTION;
+BEGIN
+    DELETE
+    FROM SUBJECTS
+    WHERE SUB_ID = V_SUB_ID;
+    
+    IF SQL%NOTFOUND
+    THEN RAISE NONEXIST_ERROR;
+    END IF;
+        
+    COMMIT;
+
+    EXCEPTION
+        WHEN NONEXIST_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20009,'ì¼ì¹˜í•˜ëŠ” ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.');
+                 ROLLBACK;
+        WHEN OTHERS
+            THEN ROLLBACK;
+END;
+--==>>Procedure PRC_SUB_DELETEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+--â—‹ ê³¼ëª© UPDATE í”„ë¡œì‹œì €
+
+CREATE OR REPLACE PROCEDURE PRC_SUB_UPDATE
+(
+    V_SUB_ID    IN  SUBJECTS.SUB_ID%TYPE
+,   V_SUB_NAME    IN  SUBJECTS.SUB_NAME%TYPE 
+)
+IS
+    V_COUNT             NUMBER;
+    NOT_FOUND_ERROR    EXCEPTION;
+BEGIN
+    --ë™ì¼í•œ ê³¼ëª©ì½”ë“œì´ ìžˆëŠ”ì§€ ì²´í¬
+    SELECT COUNT(*) INTO V_COUNT
+    FROM SUBJECTS
+    WHERE SUB_ID = V_SUB_ID;
+    
+    --ë™ì¼í•œ ê³¼ëª©ì½”ë“œê°€ ìžˆëŠ” ê²½ìš°
+    IF V_COUNT = 1
+    THEN
+        UPDATE SUBJECTS
+        SET    SUB_NAME = V_SUB_NAME
+        WHERE  SUB_ID = V_SUB_ID;
+        
+        COMMIT;
+    ELSE
+        RAISE NOT_FOUND_ERROR;
+    END IF;
     
     EXCEPTION
-    WHEN INPUT_ERROR
-        THEN RAISE_APPLICATION_ERROR(-20005, 'ÇØ´çÇÏ´Â »ç¿ëÀÚ¸¦ ¼±ÅÃÇÏ¼¼¿ä. (1.°ü¸®ÀÚ, 2.±³¼ö, 3.ÇÐ»ý)');
+    WHEN NOT_FOUND_ERROR
+        THEN RAISE_APPLICATION_ERROR(-20010, 'ì¼ì¹˜í•˜ëŠ” ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.');
              ROLLBACK;
     WHEN OTHERS
         THEN ROLLBACK;
- 
 END;
-
---------------------------------------------------------------------------------
---¿ä±¸ºÐ¼®¼­ ³»¿ë ÁøÇàÇÑ ºÎºÐ °øÀ¯µå¸³´Ï´Ù.
---¡Û °ü¸®ÀÚ ¿ä±¸ ºÐ¼®
--- 3-5~6. ¸ðµç ±³¼öÀÚÀÇ Á¤º¸¸¦ Ãâ·Â
--- ±³¼öÀÚ¸í, °ú¸ñ¸í, °ú¸ñ±â°£(½ÃÀÛ), °ú¸ñ±â°£(³¡), ±³Àç¸í, °­ÀÇ½Ç, °­ÀÇÁøÇà¿©ºÎ(°­ÀÇ ¿¹Á¤, °­ÀÇ Áß, °­ÀÇÁ¾·á)
-SELECT P.PRO_NAME "±³¼öÀÚ¸í", S.SUB_NAME "°ú¸ñ¸í", S.S_START "°ú¸ñ ½ÃÀÛÀÏ", S.S_END "°ú¸ñ Á¾·áÀÏ"
-     , S.BOOK_NAME "±³Àç¸í", S.CLASSROOM "°­ÀÇ½Ç"
-     , CASE WHEN SYSDATE < S.S_START THEN '°­ÀÇ ¿¹Á¤'
-            WHEN S.S_END < SYSDATE THEN '°­ÀÇ Á¾·á'
-            ELSE '°­ÀÇ Áß'
-       END "°­ÀÇÁøÇà¿©ºÎ"
-FROM PROFESSORS P JOIN ESTABLISHED_SUB E
-     ON P.PRO_ID = E.PRO_ID
-                 JOIN SUBJECTS S
-                 ON E.SUB_ID = S.SUB_ID;
-                 
-                 
--- 4-4~5. ¸ðµç °úÁ¤ÀÇ Á¤º¸¸¦ Ãâ·Â
--- °úÁ¤¸í, °­ÀÇ½Ç, °ú¸ñ±â°£(½ÃÀÛ), °ú¸ñ±â°£(³¡), ±³Àç¸í, ±³¼öÀÚ¸í
-SELECT C.COURSE_NAME "°úÁ¤¸í", C.CLASSROOM "°úÁ¤ °­ÀÇ½Ç"
-     , S.SUB_NAME "°ú¸ñ¸í", S.CLASSROOM "°ú¸ñ °­ÀÇ½Ç", S.S_START "°ú¸ñ ½ÃÀÛÀÏ", S.S_END "°ú¸ñ Á¾·áÀÏ"
-     , S.BOOK_NAME "±³Àç¸í", P.PRO_NAME "±³¼öÀÚ¸í"
-FROM COURSE C JOIN PROFESSORS P
-     ON C.PRO_ID = P.PRO_ID
-             JOIN ESTABLISHED_SUB E
-             ON C.COURSE_ID = E.COURSE_ID
-                    JOIN SUBJECTS S
-                    ON E.SUB_ID = S.SUB_ID;
+--==>>Procedure PRC_SUB_UPDATEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
--- 3. ±³¼öÀÚ °üÁ¡¿¡¼­ ¼ºÀû Ãâ·Â ±â´É ±¸Çö
---±³¼öÀÚ ÀÚ½ÅÀÌ °­ÀÇÇÑ °ú¸ñ¿¡ ´ëÇÑ ¼ºÀû
--- °ú¸ñ¸í, °ú¸ñ±â°£, ±³Àç¸í, ÇÐ»ý¸í, Ãâ°á, ½Ç±â, ÇÊ±â, ÃÑÁ¡, µî¼ö
--- °úÁ¤ ÁßµµÅ»¶ô ½Ã: ¼ö°­ÇÑ °ú¸ñ ¼ºÀû Ãâ·Â, ÁßµµÅ»¶ô ¿©ºÎ Ãâ·Â
+--ê°œì„¤ê³¼ëª©ì½”ë“œ ì‹œí€€ìŠ¤ ìƒì„±
+CREATE SEQUENCE SEQ_E_SUB_ID
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOCACHE;
+--==>> Sequence SEQ_E_SUB_IDì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
 
-/* ¾Æ·¡¿Í ÁßµµÅ»¶ô¿©ºÎ »©°í µ¿ÀÏ
-SELECT S.SUB_NAME "°ú¸ñ¸í", S.S_START "°ú¸ñ½ÃÀÛÀÏ",S.S_END "°ú¸ñÁ¾·áÀÏ", S.BOOK_NAME "±³Àç¸í"
-     , ST.ST_NAME "ÇÐ»ý¸í", SC.ATTEND_SCORE "Ãâ°á",SC.PRACTICAL_SCORE "½Ç±â", SC.WRITING_SCORE "ÇÊ±â"
-     , (NVL(SC.ATTEND_SCORE,0) + NVL(SC.PRACTICAL_SCORE,0) + NVL(SC.WRITING_SCORE,0)) "ÃÑÁ¡"
-     , RANK() OVER(ORDER BY (NVL(SC.ATTEND_SCORE,0) + NVL(SC.PRACTICAL_SCORE,0) + NVL(SC.WRITING_SCORE,0)) DESC) "µî¼ö"
-     --, DECODE(M.E_ID,NULL,'N','Y')"ÁßµµÅ»¶ô ¿©ºÎ"
-     , (CASE  WHEN M.DROP_DATE BETWEEN S.S_START AND S.S_END 
-              THEN'ÁßµµÅ»¶ô'
-              ELSE '¼ö·á'
-        END) "ÁßµµÅ»¶ô ¿©ºÎ"
-FROM STUDENTS ST JOIN ENROLL E
-ON ST.ST_ID = E.ST_ID
-    LEFT JOIN SCORE SC
-    ON E.E_ID = SC.E_ID
-        LEFT JOIN ESTABLISHED_SUB ES
-        ON SC.EST_SUB_ID = ES.EST_SUB_ID
-            LEFT JOIN SUBJECTS S
-            ON ES.SUB_ID = S.SUB_ID
-                LEFT JOIN MID_DROP M
-                ON E.E_ID = M.E_ID
-WHERE PRO_ID IN ('PRO1', 'PRO2');-- WHEREÀý¿¡ ÇØ´çµÇ´Â ±³¼ö ÄÚµå ÀÔ·Â
+
+--â—‹ ê°œì„¤ê³¼ëª© INSERT í”„ë¡œì‹œì €
+CREATE OR REPLACE PROCEDURE PRC_ESTABLISHED_SUB
+( V_PRO_ID          IN ESTABLISHED_SUB.PRO_ID%TYPE
+, V_COURSE_ID       IN ESTABLISHED_SUB.COURSE_ID%TYPE
+, V_SUB_ID          IN ESTABLISHED_SUB.SUB_ID%TYPE
+)
+IS
+    V_C_START           COURSE.C_START%TYPE;
+    V_C_END             COURSE.C_END%TYPE;
+    V_S_START           SUBJECTS.S_START%TYPE;
+    V_S_END             SUBJECTS.S_END%TYPE;
+    
+    USER_DEFINE_ERROR   EXCEPTION;
+
+BEGIN
+    -- ë³€ìˆ˜ì— ê°’ ë‹´ê¸°
+    SELECT C_START, C_END INTO V_C_START, V_C_END
+    FROM COURSE
+    WHERE COURSE_ID = V_COURSE_ID;
+    
+    SELECT S_START, S_END INTO V_S_START, V_S_END
+    FROM SUBJECTS
+    WHERE SUB_ID = V_SUB_ID;
+    
+    IF (V_C_START > V_S_START OR V_S_END > V_C_END) --ê³¼ì • ì‹œìž‘ì¼ì´ ê³¼ëª© ì‹œìž‘ì¼ë³´ë‹¤ ë’¤ê±°ë‚˜ ê³¼ëª© ì¢…ë£Œì¼ì´ ê³¼ì • ì¢…ë£Œì¼ë³´ë‹¤ ë’¤ë©´ ì—ëŸ¬ë°œìƒ
+        THEN RAISE USER_DEFINE_ERROR;
+    END IF;
+
+    -- INSERT
+    INSERT INTO ESTABLISHED_SUB(EST_SUB_ID,PRO_ID,COURSE_ID,SUB_ID)
+    VALUES ('ESUB' || SEQ_E_SUB_ID.NEXTVAL, V_PRO_ID,V_COURSE_ID,V_SUB_ID);
+    
+    -- ì»¤ë°‹
+    COMMIT;
+    
+    -- ì˜ˆì™¸ ë°œìƒ
+    EXCEPTION
+        WHEN USER_DEFINE_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20001, 'ê³¼ëª© ì„¤ì • ë‚ ì§œê°€ ìž˜ëª» ìž…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤.');
+                 ROLLBACK;
+        WHEN OTHERS
+            THEN ROLLBACK;
+END;
+--==>> Procedure PRC_ESTABLISHED_SUBì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+
+--ê³¼ëª©ì½”ë“œ ì‹œí€€ìŠ¤ ìƒì„±
+CREATE SEQUENCE SEQ_SUB_ID
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOCACHE;
+--==>> Sequence SEQ_SUB_IDì´(ê°€) ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
+
+
+--â—‹ ê³¼ëª© + ê°œì„¤ê³¼ëª© INSERT 
+CREATE OR REPLACE PROCEDURE PRC_SUB_INSERT
+( V_COURSE_ID     IN COURSE.COURSE_NAME%TYPE
+, V_SUB_NAME        IN SUBJECTS.SUB_NAME%TYPE
+, V_S_START         IN SUBJECTS.S_START%TYPE
+, V_S_END           IN SUBJECTS.S_END%TYPE
+, V_BOOK_NAME       IN SUBJECTS.BOOK_NAME%TYPE
+, V_PRO_ID        IN PROFESSORS.PRO_NAME%TYPE
+)
+IS
+    V_EST_SUB_ID      ESTABLISHED_SUB.EST_SUB_ID%TYPE;
+   -- V_PRO_ID        ESTABLISHED_SUB.PRO_ID%TYPE;
+   -- V_COURSE_ID     ESTABLISHED_SUB.COURSE_ID%TYPE;
+    V_SUB_ID        ESTABLISHED_SUB.SUB_ID%TYPE;
+BEGIN
+
+/*
+    --ë™ëª…ì´ì¸ ìžˆì„ ìˆ˜ë„ ìžˆìœ¼ë‹ˆê¹ ì¡°ê±´ì ˆì— ë‹¤ë¥¸ ì¡°ê±´ ì¶”ê°€í•´ì•¼í•¨
+    SELECT PRO_ID INTO V_PRO_ID
+    FROM PROFESSORS
+    WHERE PRO_NAME = V_PRO_NAME AND 
+
+    -- ê·¼ë° ì´ê²ƒë„ ë­”ê°€... ê³¼ì •ì´ë¦„ ê°™ê³  êµìˆ˜ìžì´ë¦„ë„ ê°™ì„ ìˆ˜ ìžˆìž–ì•„...ã… ã… ã… 
+    SELECT COURSE_ID INTO V_COURSE_ID
+    FROM PROFESSORS
+    WHERE COURSE_NAME = V_COURSE_NAME AND --êµìˆ˜ìž ì´ë¦„ë„ ê°™ì€ì§€ ê²€ì‚¬
 */
+    
+    V_SUB_ID := 'SUB' || SEQ_SUB_ID.NEXTVAL;
 
--- ++ °ú¸ñ Ãß°¡
-INSERT INTO SUBJECTS(SUB_ID, SUB_NAME, S_START, S_END, CLASSROOM, BOOK_NAME)
-VALUES('SUB3', 'ÆÄÀÌ½ã°í±Þ',  TO_DATE('2020-10-2', 'YYYY-MM-DD'),  TO_DATE('2020-10-29', 'YYYY-MM-DD'), 'ÆÄÀÌ½ã°­ÀÇ½ÇB1', '°í±ÞÆÄÀÌ½ã¸¶½ºÅÍ');
+    -- SUBJECTS(ê³¼ëª©) í…Œì´ë¸”ì— INSERT
+    INSERT INTO SUBJECTS(SUB_ID, SUB_NAME, S_START, S_END, BOOK_NAME)
+    VALUES (V_SUB_ID, V_SUB_NAME, V_S_START, V_S_END, V_BOOK_NAME);
 
+    -- ESTABLISHED_SUB(ê³¼ëª©) í…Œì´ë¸”ì— INSERT
+    PRC_ESTABLISHED_SUB(V_PRO_ID, V_COURSE_ID, V_SUB_ID);
+    --EXEC PRC_ESTABLISHED_SUB(V_PRO_ID, V_COURSE_ID, V_SUB_ID); -- ì´ë ‡ê²Œ ìž‘ì„±í•´ì•¼ í•˜ëŠ”ì§€ ì•„ë‹Œì§€
 
-SELECT SUB.SUB_NAME "°ú¸ñ¸í", SUB.S_START "°ú¸ñ ½ÃÀÛÀÏ", SUB.S_END "°ú¸ñ Á¾·áÀÏ", SUB.BOOK_NAME "±³Àç¸í"
-     , STU.ST_NAME "ÇÐ»ý¸í", SC.ATTEND_SCORE "Ãâ°áÁ¡¼ö", SC.PRACTICAL_SCORE "½Ç±âÁ¡¼ö", SC.WRITING_SCORE "ÇÊ±âÁ¡¼ö"
-     , (NVL(SC.ATTEND_SCORE, 0) + NVL(SC.PRACTICAL_SCORE, 0) + NVL(SC.WRITING_SCORE, 0)) "ÃÑÁ¡"
-     , RANK() OVER(ORDER BY (NVL(SC.ATTEND_SCORE, 0) + NVL(SC.PRACTICAL_SCORE, 0) + NVL(SC.WRITING_SCORE, 0)) DESC) "µî¼ö"
-     , CASE WHEN MID.E_ID IS NOT NULL THEN 'Y'
-            ELSE 'N'
-       END "ÁßµµÆ÷±â"
-FROM STUDENTS STU LEFT JOIN ENROLL E
-    ON STU.ST_ID = E.ST_ID
-        LEFT JOIN SCORE SC
-        ON E.E_ID = SC.E_ID
-            LEFT JOIN ESTABLISHED_SUB EST
-            ON SC.EST_SUB_ID = EST.EST_SUB_ID
-                LEFT JOIN SUBJECTS SUB
-                ON EST.SUB_ID = SUB.SUB_ID
-                    LEFT JOIN MID_DROP MID
-                    ON E.E_ID = MID.E_ID;                   
-WHERE PRO_ID IN ('PRO1', 'PRO2');-- WHEREÀý¿¡ ÇØ´çµÇ´Â ±³¼ö ÄÚµå ÀÔ·Â
-
-SELECT *
-FROM ENROLL;
-
-SELECT *
-FROM SUBJECTS;
+    -- ì˜ˆì™¸
+    EXCEPTION
+        WHEN OTHERS THEN ROLLBACK;
 
 
-SELECT *
-FROM TEST;
---------------------------------------------------------------------------------
--- »ùÇÃµ¥ÀÌÅÍ
--- 1. °ü¸®ÀÚ
-INSERT INTO ADMINISTRATOR(ADMIN_ID, ADMIN_PW) VALUES('AD1', 'QWER1234');
-INSERT INTO ADMINISTRATOR(ADMIN_ID, ADMIN_PW) VALUES('AD2', 'ASDF1234');
-
--- 2. ±³¼ö
-INSERT INTO PROFESSORS(PRO_ID, PRO_NAME, PRO_PW, PRO_SSN)
-VALUES('PRO1', '³²±Ã ¼º', 'QWER1234', '840218-2813239');
-
-INSERT INTO PROFESSORS(PRO_ID, PRO_NAME, PRO_PW, PRO_SSN)
-VALUES('PRO2', '¼­Áø¼ö', 'ASDF1234', '111111-1111111');
-
--- 3. ÇÐ»ý
-INSERT INTO STUDENTS(ST_ID, ST_PW, ST_NAME, ST_SSN, ST_DATE)
-VALUES('STU1', 'QWER1234', 'Á¤È¸ÀÏ', '111111-3111111', TO_DATE('2020-09-24', 'YYYY-MM-DD'));
-
-INSERT INTO STUDENTS(ST_ID, ST_PW, ST_NAME, ST_SSN, ST_DATE)
-VALUES('STU2', 'ASDF1234', '±èÃÊ¿±', '111111-4111111', TO_DATE('2020-09-24', 'YYYY-MM-DD'));
-
--- 4. °ú¸ñ
-INSERT INTO SUBJECTS(SUB_ID, SUB_NAME, S_START, S_END, CLASSROOM, BOOK_NAME)
-VALUES('SUB1', '¿À¶óÅ¬Áß±Þ',  TO_DATE('2020-12-24', 'YYYY-MM-DD'),  TO_DATE('2021-1-19', 'YYYY-MM-DD'), '¿À¶óÅ¬°­ÀÇ½ÇA1', '¿À¶óÅ¬ÀÇÁ¤¼®');
-
-INSERT INTO SUBJECTS(SUB_ID, SUB_NAME, S_START, S_END, CLASSROOM, BOOK_NAME)
-VALUES('SUB2', 'ÀÚ¹Ù°í±Þ',  TO_DATE('2020-7-2', 'YYYY-MM-DD'),  TO_DATE('2020-9-19', 'YYYY-MM-DD'), 'ÀÚ¹Ù°­ÀÇ½ÇB1', '°í±ÞÀÚ¹Ù¸¶½ºÅÍ');
-
--- ++ °ú¸ñ Ãß°¡
-INSERT INTO SUBJECTS(SUB_ID, SUB_NAME, S_START, S_END, CLASSROOM, BOOK_NAME)
-VALUES('SUB3', 'ÆÄÀÌ½ã°í±Þ',  TO_DATE('2020-10-2', 'YYYY-MM-DD'),  TO_DATE('2020-10-29', 'YYYY-MM-DD'), 'ÆÄÀÌ½ã°­ÀÇ½ÇB1', '°í±ÞÆÄÀÌ½ã¸¶½ºÅÍ');
-
--- 5. °úÁ¤
-INSERT INTO COURSE(COURSE_ID, COURSE_NAME, PRO_ID, C_START, C_END, CLASSROOM)
-VALUES('CO1', '°³¹ßÀÚ¾ç¼º°úÁ¤', 'PRO1', TO_DATE('2020-11-24', 'YYYY-MM-DD'), TO_DATE('2021-4-18', 'YYYY-MM-DD'), '¿À¶óÅ¬°­ÀÇ½ÇA1');
-
-INSERT INTO COURSE(COURSE_ID, COURSE_NAME, PRO_ID, C_START, C_END, CLASSROOM)
-VALUES('CO2', 'ºòµ¥ÀÌÅÍÀü¹®°¡°úÁ¤', 'PRO2', TO_DATE('2020-6-14', 'YYYY-MM-DD'), TO_DATE('2020-12-30', 'YYYY-MM-DD'), 'ÀÚ¹Ù°­ÀÇ½ÇB1');
-
-
--- 6. °³¼³°ú¸ñ
-INSERT INTO ESTABLISHED_SUB(EST_SUB_ID, PRO_ID, COURSE_ID, SUB_ID, ATTEND_PER, PRACTICAL_PER, WRITING_PER)
-VALUES('ESI1', 'PRO1', 'CO1', 'SUB1', 20, 40, 40);
-
-INSERT INTO ESTABLISHED_SUB(EST_SUB_ID, PRO_ID, COURSE_ID, SUB_ID, ATTEND_PER, PRACTICAL_PER, WRITING_PER)
-VALUES('ESI2', 'PRO2', 'CO2', 'SUB2', 20, 20, 60);
-
--- 7. ½ÃÇè
-INSERT INTO TEST(TEST_ID, SUB_ID, TEST_DATE)
-VALUES('TEST1', 'SUB1', TO_DATE('2020-12-31', 'YYYY-MM-DD'));
-
-INSERT INTO TEST(TEST_ID, SUB_ID, TEST_DATE)
-VALUES('TEST2', 'SUB1', TO_DATE('2021-01-10', 'YYYY-MM-DD'));
-
-
--- 8. ¼ö°­½ÅÃ»
-INSERT INTO ENROLL(ENROLL_ID, ST_ID, COURSE_ID, ENROLL_DATE)
-VALUES('ENROLL1', 'STU1', 'CO1', TO_DATE('2020-10-24', 'YYYY-MM-DD'));
-
-INSERT INTO ENROLL(ENROLL_ID, ST_ID, COURSE_ID, ENROLL_DATE)
-VALUES('ENROLL2', 'STU2', 'CO1', TO_DATE('2020-10-25', 'YYYY-MM-DD'));
-
--- 9. ¼ºÀû
-INSERT INTO SCORE(SCORE_ID, ENROLL_ID, EST_SUB_ID, ATTEND_SCORE, PRACTICAL_SCORE, WRITING_SCORE)
-VALUES('SCORE1', 'ENROLL1', 'ESI1', 90, 30, 100);
-
--- 10. ÁßµµÆ÷±â
-INSERT INTO MID_DROP(DROP_ID, ENROLL_ID, DROP_DATE)
-VALUES('DROP1', 'ENROLL2', TO_DATE('2020-10-29', 'YYYY-MM-DD'));
-
--- Ä¿¹Ô
-COMMIT;
+END;
+--==>> Procedure PRC_SUB_INSERTì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 
 
--- ±³¼ö Ãß°¡ Å×½ºÆ®!
-INSERT INTO PROFESSORS(PRO_ID, PRO_NAME, PRO_PW, PRO_SSN)
-VALUES('PRO3', '±èÈ£Áø', 'QWER1234', '850218-1813239');
+--â—‹ êµìˆ˜ ì‚­ì œ í”„ë¡œì‹œì €
+CREATE OR REPLACE PROCEDURE PRC_PRO_DELETE
+( V_PRO_ID  IN PROFESSORS.PRO_ID%TYPE
+)
+IS
+BEGIN
+    -- PROFESSORS(êµìˆ˜ì •ë³´í…Œì´ë¸”) ì—ì„œ ì‚­ì œ
+    DELETE
+    FROM PROFESSORS
+    WHERE PRO_ID = V_PRO_ID;
+    
+    --COMMIT;
+END;
+--==>> Procedure PRC_PRO_DELETEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
-EXEC PRC_PRO_PW_INSERT('PRO4', '¸¶È£Áø', '550218-1813239');
 
-
-
-SELECT *
-FROM PROFESSORS;
-
-PURGE RECYCLEBIN;
+--â—‹ ê´€ë¦¬ìž ì‚­ì œ í”„ë¡œì‹œì €
+CREATE OR REPLACE PROCEDURE PRC_AD_DELETE
+( V_AD_ID   IN ADMINISTRATOR.ADMIN_ID%TYPE
+)
+IS
+BEGIN
+    -- ADMINISTRATOR(ê´€ë¦¬ìž í…Œì´ë¸”) ì—ì„œ ì‚­ì œ
+    DELETE
+    FROM ADMINISTRATOR
+    WHERE ADMIN_ID = V_AD_ID;
+    
+    --COMMIT;
+END;
+--==>> Procedure PRC_AD_DELETEì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 /*
 
-[Á¦Ãâ Ç×¸ñ]
+[ì œì¶œ í•­ëª©]
 1. ERD
-2. ¹°¸®¼³°è ERD
-3. Å×ÀÌºí ±¸Á¶ SQLÆÄÀÏ (ÇÁ·Î½ÃÀú FUNCTION, TRIGGER)
-4. ¿ä±¸ºÐ¼®¼­´ë·Î Äõ¸®¹® ±¸¼º. SQL
-5. ÆÀ¿øµé ÈÄ±â(¼¼¹ÌÇÁ·ÎÁ§Æ® ÇÏ¸é¼­ ¾ò°Ô µÈ ³»¿ë)
+2. ë¬¼ë¦¬ì„¤ê³„ ERD
+3. í…Œì´ë¸” êµ¬ì¡° SQLíŒŒì¼ (í”„ë¡œì‹œì € FUNCTION, TRIGGER)
+4. ìš”êµ¬ë¶„ì„ì„œëŒ€ë¡œ ì¿¼ë¦¬ë¬¸ êµ¬ì„±. SQL
+5. íŒ€ì›ë“¤ í›„ê¸°(ì„¸ë¯¸í”„ë¡œì íŠ¸ í•˜ë©´ì„œ ì–»ê²Œ ëœ ë‚´ìš©)
 
 
-TIP. ÃßÃâÇØ¼­ ¾µ ¼ö ÀÖ´Â ³»¿ë ÄÃ·³È­ ½ÃÅ°Áö ¾Ê´Â´Ù.
-±× ¹®ÀåÀÇ µ¿»ç°¡ Å×ÀÌºí ¸í»ç°¡ ÄÃ·³
-Á¦4Á¤±ÔÈ­ ÀÏ´ë´Ù·Î ±ú¶ß¸®´Â °ü°è¿¡¼­ ÆÄ»ýÅ×ÀÌºí »ý±ä´Ù.
+TIP. ì¶”ì¶œí•´ì„œ ì“¸ ìˆ˜ ìžˆëŠ” ë‚´ìš© ì»¬ëŸ¼í™” ì‹œí‚¤ì§€ ì•ŠëŠ”ë‹¤.
+ê·¸ ë¬¸ìž¥ì˜ ë™ì‚¬ê°€ í…Œì´ë¸” ëª…ì‚¬ê°€ ì»¬ëŸ¼
+ì œ4ì •ê·œí™” ì¼ëŒ€ë‹¤ë¡œ ê¹¨ëœ¨ë¦¬ëŠ” ê´€ê³„ì—ì„œ íŒŒìƒí…Œì´ë¸” ìƒê¸´ë‹¤.
 
 */
