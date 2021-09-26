@@ -260,6 +260,9 @@ ESUB1	PRO1	COURSE1	SUB1
 ESUB2	PRO2	COURSE2	SUB3			
 */
 
+--○ 교수정보 삭제 프로시저 확인
+EXEC PRC_SUB_DELETE('PRO1');
+
 --○ 교수정보 삭제 트리거 확인
 SELECT *
 FROM PROFESSORS
@@ -268,18 +271,38 @@ WHERE PRO_ID = 'PRO1';
 
 DELETE
 FROM PROFESSORS
-WHERE PRO_ID = 'PRO1';
+WHERE PRO_ID = 'PRO2';
 --==>> 1 행 이(가) 삭제되었습니다.
 
+SELECT *
+FROM PROFESSORS;
+--==>> 조회결과 없음!
 
---==>> 에러 발생
+SELECT *
+FROM ESTABLISHED_SUB;
+
+SELECT *
+FROM COURSE;
+
+-- 교수 다시 추가!
+--○ 교수 INSERT 프로시저 - PRC_PRO_PW_INSERT
+EXEC PRC_PRO_PW_INSERT('PRO1', '남궁 성', '840218-2813239');
+--==>> PL/SQL 프로시저가 성공적으로 완료되었습니다.
+
+SELECT *
+FROM PROFESSORS;
+--==>> PRO1	남궁 성	2813239	840218-2813239
+
+EXEC PRC_PRO_PW_INSERT('PRO2', '서진수', '111111-1111111');
+--==>> PL/SQL 프로시저가 성공적으로 완료되었습니다.
+
+SELECT *
+FROM PROFESSORS;
+--==>> 
 /*
-오류 보고 -
-ORA-04091: table HR.PROFESSORS is mutating, trigger/function may not see it
-ORA-06512: at "HR.TRG_PROFESSORS_DELETE", line 10
-ORA-04088: error during execution of trigger 'HR.TRG_PROFESSORS_DELETE
+PRO1	남궁 성	2813239	840218-2813239
+PRO2	서진수	1111111	111111-1111111
 */
-
 
 --○ 과정 추가(수강신청 테스트를 위함)
 EXEC PRC_COR_INSERT('백엔드개발자양성과정', TO_DATE('2021-10-14', 'YYYY-MM-DD'), TO_DATE('2022-3-30', 'YYYY-MM-DD'), '자바강의실C');
@@ -359,6 +382,11 @@ EXEC PRC_MID_DROP_INSERT('DROP1', 'ENROLL1', TO_DATE('2022-04-01', 'YYYY-MM-DD')
 --정상 처리
 EXEC PRC_MID_DROP_INSERT('DROP1', 'ENROLL1', TO_DATE('2022-01-01', 'YYYY-MM-DD'));
 --==>> PL/SQL 프로시저가 성공적으로 완료되었습니다.
+
+--이미 DROP한 사람 처리
+EXEC PRC_MID_DROP_INSERT('DROP1', 'ENROLL1', TO_DATE('2022-01-01', 'YYYY-MM-DD'));
+--==>> ORA-20055: 이미 DROP한 사람입니다.
+
 
 SELECT *
 FROM COURSE;
