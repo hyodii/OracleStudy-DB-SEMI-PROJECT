@@ -28,22 +28,18 @@ MID_DROP - 테이블.컬럼명 이 방식을 테이블 생성할 때 인식을 �
            어떨지 생각해봤고 우선 그 제약조건 제외하고 테이블 생성했습니다.
 */
 
-/*
-SELECT USER
-FROM DUAL;
---==>> HR
-
 --① 관리자
 CREATE TABLE ADMINISTRATOR
 ( ADMIN_ID  VARCHAR2(30)
 , ADMIN_PW  VARCHAR2(30) 
 , CONSTRAINT ADMINISTRATOR_ADMIN_ID_PK PRIMARY KEY(ADMIN_ID)
 );
+--==>> Table ADMINISTRATOR이(가) 생성되었습니다.
 
 ALTER TABLE ADMINISTRATOR
 MODIFY
 ( ADMIN_PW CONSTRAINT ADMINISTRATOR_ADMIN_PW_NN NOT NULL );
-
+--==>> Table ADMINISTRATOR이(가) 변경되었습니다.
 
 --② 교수자
 CREATE TABLE PROFESSORS
@@ -54,6 +50,7 @@ CREATE TABLE PROFESSORS
 , CONSTRAINT PROFESSORS_PRO_ID_PK PRIMARY KEY(PRO_ID)
 , CONSTRAINT PROFESSORS_PRO_SSN_UK UNIQUE(PRO_SSN)
 );
+--==>> Table PROFESSORS이(가) 생성되었습니다.
 
 -- NOT NULL 제약조건 수정
 ALTER TABLE PROFESSORS
@@ -62,7 +59,7 @@ MODIFY
 , PRO_PW CONSTRAINT PROFESSORS_PRO_PW_NN NOT NULL
 , PRO_SSN CONSTRAINT PROFESSORS_PRO_SSN_NN NOT NULL
 );
-
+--==>> Table PROFESSORS이(가) 변경되었습니다.
 
 --③ 학생
 CREATE TABLE STUDENTS
@@ -73,6 +70,7 @@ CREATE TABLE STUDENTS
 , ST_DATE   DATE         DEFAULT SYSDATE
 , CONSTRAINT STUDENTS_ST_ID_PK PRIMARY KEY(ST_ID)
 );
+--==>> Table STUDENTS이(가) 생성되었습니다.
 
 -- 제약조건 수정
 ALTER TABLE STUDENTS
@@ -83,7 +81,7 @@ MODIFY
 , ST_SSN CONSTRAINT STUDENTS_STUDENT_SSN_NN NOT NULL
 , ST_DATE CONSTRAINT STUDENTS_STUDENT_DATE_NN NOT NULL
 );
-
+--==>> Table STUDENTS이(가) 변경되었습니다.
 
 --④ 과목
 CREATE TABLE SUBJECTS
@@ -96,7 +94,7 @@ CREATE TABLE SUBJECTS
 , CONSTRAINT SUBJECTS_SUB_ID_PK PRIMARY KEY(SUB_ID)
 , CONSTRAINT SUBJECTS_S_START_CK CHECK(S_START < S_END)
 );
-
+--==>> Table SUBJECTS이(가) 생성되었습니다.
 
 --⑤ 과정
 CREATE TABLE COURSE
@@ -111,7 +109,7 @@ CREATE TABLE COURSE
                                             REFERENCES PROFESSORS(PRO_ID)
 , CONSTRAINT COURSE_C_START_CK CHECK(C_START < C_END)
 );
-
+--==>> Table COURSE이(가) 생성되었습니다.
 
 --⑥ 개설과목
 CREATE TABLE ESTABLISHED_SUB
@@ -134,6 +132,7 @@ CREATE TABLE ESTABLISHED_SUB
 , CONSTRAINT EST_SUB_WRITING_PER_CK CHECK(WRITING_PER BETWEEN 0 AND 100)
 , CONSTRAINT EST_SUB_TOTAL_PER_CK CHECK( (ATTEND_PER + PRACTICAL_PER + WRITING_PER) = 100 )
 );
+--==>> Table ESTABLISHED_SUB이(가) 생성되었습니다.
 
 
 --⑦ 시험
@@ -145,6 +144,7 @@ CREATE TABLE TEST
 ,CONSTRAINT TEST_TEST_ID_PK PRIMARY KEY(TEST_ID)
 ,CONSTRAINT TEST_EST_SUB_ID_FK FOREIGN KEY(EST_SUB_ID) REFERENCES ESTABLISHED_SUB(EST_SUB_ID)
 );
+--==>> Table TEST이(가) 생성되었습니다.
 
 
 --⑧ 수강신청
@@ -159,11 +159,13 @@ CREATE TABLE ENROLL
 , CONSTRAINT ENROLL_COURSE_ID_FK FOREIGN KEY(COURSE_ID) 
                                        REFERENCES COURSE(COURSE_ID)
 );
+--==>> Table ENROLL이(가) 생성되었습니다.
 
 --수강신청 제약조건 수정
 ALTER TABLE ENROLL
 MODIFY
 (E_DATE   CONSTRAINT ENROLL_E_DATE_NN NOT NULL);
+--==>> Table ENROLL이(가) 변경되었습니다.
 
 
 --⑨ 성적
@@ -184,6 +186,7 @@ CREATE TABLE SCORE
 , CONSTRAINT SCOREWRITING_SCORE_CK CHECK(WRITING_SCORE BETWEEN 0 AND 100)
 
 );
+--==>> Table SCORE이(가) 생성되었습니다.
 
 
 --⑩ 중도포기
@@ -196,6 +199,7 @@ CREATE TABLE MID_DROP
              REFERENCES ENROLL(E_ID)
 -- 등록일보다 중도포기 날짜가 뒤여야 한다는 제약조건
 );
+--==>> Table MID_DROP이(가) 생성되었습니다.
 
 
 --○ 교수자 이벤트로그 테이블
@@ -218,7 +222,7 @@ CREATE TABLE STD_EVENTLOG
                                        REFERENCES STUDENTS(ST_ID)
 );
 --==>> Table STD_EVENTLOG이(가) 생성되었습니다.
-
+DROP TABLE STD_EVENTLOG;
 
 DROP TABLE ADMINISTRATOR;
 DROP TABLE PROFESSORS;
@@ -254,7 +258,6 @@ BEGIN
  
 END;
 --==>> Procedure PRC_LOGIN_ST이(가) 컴파일되었습니다.
-
 
 --○관리자 로그인 프로시저 생성
 CREATE OR REPLACE PROCEDURE PRC_LOGIN_AD 
@@ -302,11 +305,11 @@ CREATE OR REPLACE PROCEDURE PRC_LOGIN
 (
     V_USER    IN NUMBER    
 ,   V_USERID  IN PROFESSORS.PRO_ID%TYPE
-,   V_USERPW  IN PROFESSORS.PRO_PW%TYPE
+,   V_USERPW IN PROFESSORS.PRO_PW%TYPE
 )
 IS
     INPUT_ERROR    EXCEPTION;
-    --V_COUNT        NUMBER;                        -- 안사용해서 빼고 될듯?
+    V_COUNT        NUMBER;
 BEGIN
     IF(V_USER = 1) -- 관리자
         THEN PRC_LOGIN_AD(V_USERID, V_USERPW);
@@ -328,10 +331,73 @@ BEGIN
         THEN ROLLBACK;
  
 END;
---==>> Procedure PRC_LOGIN이(가) 컴파일되었습니다
+--==>> Procedure PRC_LOGIN이(가) 컴파일되었습니다.
 
+
+--○ 관리자 삭제 프로시저
+CREATE OR REPLACE PROCEDURE PRC_AD_DELETE
+( V_AD_ID   IN ADMINISTRATOR.ADMIN_ID%TYPE
+)
+IS
+BEGIN
+    -- ADMINISTRATOR(관리자 테이블) 에서 삭제
+    DELETE
+    FROM ADMINISTRATOR
+    WHERE ADMIN_ID = V_AD_ID;
+    
+    --COMMIT;
+END;
+--==>> Procedure PRC_AD_DELETE이(가) 컴파일되었습니다.
+
+
+
+CREATE SEQUENCE SEQ_STUDENT_ID
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOCACHE;
+--==>> Sequence SEQ_STUDENT_ID이(가) 생성되었습니다.
 
 --○ STUDENT_INSERT 프로시저
+CREATE OR REPLACE PROCEDURE PRC_STUDENT_INSERT
+(
+   V_ST_NAME IN STUDENTS.ST_NAME%TYPE
+ , V_ST_SSN IN STUDENTS.ST_SSN%TYPE
+)
+IS
+    V_CHECK_SSN NUMBER; 
+    SSN_ERROR  EXCEPTION;
+
+BEGIN
+    -- 테이블을 DUAL로 하면 예외 20040번이 실행됨!!(왤까요..)
+    SELECT LENGTH(V_ST_SSN) INTO V_CHECK_SSN
+    FROM DUAL;
+    
+    IF(V_CHECK_SSN = 14)
+        THEN
+            --INSERT(완료)
+            INSERT INTO STUDENTS(ST_ID, ST_PW, ST_NAME, ST_SSN)
+            VALUES('STU' || SEQ_STUDENT_ID.NEXTVAL,SUBSTR(V_ST_SSN,8),V_ST_NAME,V_ST_SSN);
+    ELSE RAISE SSN_ERROR;        
+    END IF;
+    
+
+    COMMIT;
+
+    -- 예외 발생(완료)
+     EXCEPTION
+        WHEN SSN_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20040, '주민번호 (-) 포함 14자리를 정확히 입력해주세요!');
+                 ROLLBACK;
+        WHEN OTHERS
+            THEN RAISE_APPLICATION_ERROR(-20046, '주민번호 (-) 포함 14자리를 정확히 입력해주세요!'); 
+                ROLLBACK;
+    
+END;
+--==>> Procedure PRC_STUDENT_INSERT이(가) 컴파일되었습니다.
+
+-- 초기버전
+/*
 CREATE OR REPLACE PROCEDURE PRC_STUDENT_INSERT
 (
    V_ST_ID IN STUDENTS.ST_ID%TYPE
@@ -346,21 +412,20 @@ BEGIN
 
     COMMIT;
 END;
---==>> Procedure PRC_STUDENT_INSERT이(가) 컴파일되었습니다.
-
+*/
 
 --○ STUDENT_UPDATE 프로시저
 CREATE OR REPLACE PROCEDURE PRC_STUDENT_UPDATE
 (
   V_ST_ID   IN STUDENTS.ST_ID%TYPE
 , V_ST_NAME IN STUDENTS.ST_NAME%TYPE
-, V_ST_SSN  IN STUDENTS.ST_SSN%TYPE
+, V_ST_PW  IN STUDENTS.ST_PW%TYPE
 )
 IS
     NONEXIST_ERROR  EXCEPTION;
 BEGIN
     UPDATE STUDENTS
-    SET ST_NAME = V_ST_NAME, ST_SSN = V_ST_SSN
+    SET ST_NAME = V_ST_NAME, ST_PW = V_ST_PW
     WHERE ST_ID = V_ST_ID;
     
     IF SQL%NOTFOUND
@@ -423,6 +488,7 @@ BEGIN
     END IF; 
 END;
 --==>> Trigger TRG_STD_EVENTLOG이(가) 컴파일되었습니다.
+
 
 --○ 수강신청 INSERT 프로시저
 -- 아래의 조건을 확인 후 데이터를 입력한다.
@@ -556,27 +622,51 @@ END;
 --==>> Procedure PRC_MID_DROP_INSERT이(가) 컴파일되었습니다.
 
 
+--○ 교수 아이디 시퀀스
+CREATE SEQUENCE SEQ_PROFESSORS_ID
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOCACHE;
+--==>>Sequence SEQ_PROFESSORS_ID이(가) 생성되었습니다.
+
 --○ 교수 INSERT 프로시저
-CREATE OR REPLACE PROCEDURE PRC_PRO_PW_INSERT
-( V_PRO_ID      IN PROFESSORS.PRO_ID%TYPE
-, V_PRO_NAME    IN PROFESSORS.PRO_NAME%TYPE
+CREATE OR REPLACE PROCEDURE PRC_PRO_INSERT
+( V_PRO_NAME    IN PROFESSORS.PRO_NAME%TYPE
 , V_PRO_SSN     IN PROFESSORS.PRO_SSN%TYPE
 )
 IS
+    V_CHECK_SSN NUMBER; 
+    SSN_ERROR EXCEPTION;
+
 BEGIN
+    SELECT LENGTH(V_PRO_SSN) INTO V_CHECK_SSN
+    FROM DUAL;
+    
+    IF(V_CHECK_SSN = 14)
+        THEN
     -- INSERT 쿼리문
     INSERT INTO PROFESSORS(PRO_ID, PRO_NAME, PRO_PW, PRO_SSN)
-    VALUES(V_PRO_ID, V_PRO_NAME, SUBSTR(V_PRO_SSN,8), V_PRO_SSN);
-    
-    -- 커밋
+    VALUES('PRO' || SEQ_PROFESSORS_ID.NEXTVAL, V_PRO_NAME, SUBSTR(V_PRO_SSN,8), V_PRO_SSN);
+
+    ELSE RAISE SSN_ERROR;        
+    END IF;
+   
     COMMIT;
+
+    -- 예외 발생(완료)
+     EXCEPTION
+        WHEN SSN_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20040, '주민번호 (-) 포함 14자리를 정확히 입력해주세요!');
+                 ROLLBACK;
+        WHEN OTHERS
+            THEN ROLLBACK;
     
 END;
 --==>> Procedure PRC_PRO_PW_INSERT이(가) 컴파일되었습니다.
 
 
 --○ 교수 이벤트로그 트리거 생성
--- 에러남!
 CREATE OR REPLACE TRIGGER TRG_PRO_EVENTLOG
             AFTER
             INSERT OR UPDATE ON PROFESSORS
@@ -592,15 +682,6 @@ BEGIN
     END IF;
 END;
 --==>> Trigger TRG_PRO_EVENTLOG이(가) 컴파일되었습니다.
-/*
-LINE/COL  ERROR
---------- -------------------------------------------------------------
-5/14      PL/SQL: SQL Statement ignored
-6/20      PL/SQL: ORA-00984: column not allowed here
-8/14      PL/SQL: SQL Statement ignored
-9/20      PL/SQL: ORA-00984: column not allowed here
-오류: 컴파일러 로그를 확인하십시오.
-*/
 
 DROP TRIGGER TRG_PRO_EVENTLOG;
 
@@ -651,13 +732,43 @@ CREATE OR REPLACE PROCEDURE PRC_PRO_UPDATE
 , V_PRO_PW     IN PROFESSORS.PRO_PW%TYPE
 )
 IS
+    NONEXIST_ERROR EXCEPTION;
 BEGIN
     -- PROFESSORS(교수테이블) 이름, 비밀번호 업데이트
     UPDATE PROFESSORS
     SET PRO_NAME = V_PRO_NAME, PRO_PW = V_PRO_PW
     WHERE PRO_ID = V_PRO_ID;
+    
+    IF SQL%NOTFOUND
+        THEN RAISE NONEXIST_ERROR;
+    END IF;
+    
+    COMMIT;
+    
+    EXCEPTION
+        WHEN NONEXIST_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20006,'일치하는 데이터가 없습니다.');
+                ROLLBACK;
+        WHEN OTHERS
+            THEN ROLLBACK;
 END;
 --==>> Procedure PRC_PRO_UPDATE이(가) 컴파일되었습니다.
+
+
+--○ 교수 삭제 프로시저
+CREATE OR REPLACE PROCEDURE PRC_PRO_DELETE
+( V_PRO_ID  IN PROFESSORS.PRO_ID%TYPE
+)
+IS
+BEGIN
+    -- PROFESSORS(교수정보테이블) 에서 삭제
+    DELETE
+    FROM PROFESSORS
+    WHERE PRO_ID = V_PRO_ID;
+    
+    --COMMIT;
+END;
+--==>> Procedure PRC_PRO_DELETE이(가) 컴파일되었습니다.
 
 
 
@@ -711,6 +822,7 @@ END;
 --==>> Procedure PRC_ESTABLISHED_SUB이(가) 컴파일되었습니다.
 
 
+
 --제 컴에서는 돌아가지 않아요!!!!(현정)
 --○ 과정 삭제 트리거
 --> 수강신청 테이블, 개설과목 테이블에서도 과정 삭제
@@ -728,8 +840,7 @@ BEGIN
     WHERE COURSE_ID=:OLD.COURSE_ID;
     
 END;
-
-
+--==>> Trigger DEL_COURSE이(가) 컴파일되었습니다.
 
 
 --○ 강의진행여부(강의 예정, 강의 중, 강의 종료)
@@ -745,7 +856,7 @@ BEGIN
     -- 연산 및 처리
     IF ( V_S_START > SYSDATE )
         THEN VRESULT := '강의 예정';
-    ELSIF ( V_S_END <= SYSDATE )
+    ELSIF ( V_S_END >= SYSDATE )
         THEN VRESULT := '강의 중';
     ELSE
         VRESULT := '강의 종료';
@@ -760,8 +871,8 @@ END;
 
 --○ 수강과목 총점
 CREATE OR REPLACE FUNCTION FN_TOTAL_SCORE
-( V_ST_ID    IN STUDENTS.ST_ID%TYPE
-, V_SUB_ID   IN ESTABLISHED_SUB.SUB_ID%TYPE
+( V_SCORE_ID    IN SCORE.SCORE_ID%TYPE
+, V_EST_SUB_ID  IN SCORE.EST_SUB_ID%TYPE
 )
 RETURN NUMBER     -- 반환 자료형 : 자릿수(길이) 지정 안 함
 IS
@@ -777,21 +888,16 @@ IS
     V_W_SCORE SCORE.ATTEND_SCORE%TYPE;
     
 BEGIN
-
     -- 비중 받아오기
     SELECT NVL(ATTEND_PER, 0), NVL(PRACTICAL_PER, 0), NVL(WRITING_PER, 0) INTO V_A_PER, V_P_PER, V_W_PER
     FROM ESTABLISHED_SUB
-    WHERE SUB_ID = V_SUB_ID;
+    WHERE EST_SUB_ID = V_EST_SUB_ID;
     
     -- 점수 받아오기
     SELECT NVL(ATTEND_SCORE, 0), NVL(PRACTICAL_SCORE, 0), NVL(WRITING_SCORE, 0) INTO V_A_SCORE, V_P_SCORE, V_W_SCORE
     FROM SCORE
-    WHERE E_ID = (SELECT E.E_ID
-                  FROM ENROLL E
-                  WHERE E.ST_ID = V_ST_ID)
-          AND EST_SUB_ID = (SELECT ES.EST_SUB_ID
-                            FROM ESTABLISHED_SUB ES
-                            WHERE ES.SUB_ID = V_SUB_ID);
+    WHERE SCORE_ID = V_SCORE_ID AND EST_SUB_ID = V_EST_SUB_ID;
+
 
     VRESULT := (V_A_SCORE*V_A_PER + V_P_SCORE*V_P_PER + V_W_SCORE*V_W_PER)/100;
     
@@ -813,6 +919,70 @@ NOCACHE;
 
 --○ 성적입력 프로시저
 CREATE OR REPLACE PROCEDURE PRC_SCORE_INSERT 
+( V_E_ID                IN SCORE.E_ID%TYPE 
+, V_EST_SUB_ID          IN SCORE.EST_SUB_ID%TYPE
+, V_ATTEND_SCORE        IN SCORE.ATTEND_SCORE%TYPE
+, V_PRACTICAL_SCORE     IN SCORE.PRACTICAL_SCORE%TYPE
+, V_WRITING_SCORE       IN SCORE.WRITING_SCORE%TYPE
+)
+IS
+    V_COURSE_ID         COURSE.COURSE_ID%TYPE;
+    V_PRO_ID            COURSE.PRO_ID%TYPE;
+    V_CNT               NUMBER;
+
+    NOT_YOUR_EST_ERROR   EXCEPTION;
+    MID_DROP_STU_ERROR   EXCEPTION;
+
+BEGIN
+    -- 예외처리1. 자신이 강의한 과목이 아닐 경우
+    SELECT COURSE_ID INTO V_COURSE_ID
+    FROM ENROLL
+    WHERE E_ID = V_E_ID;
+    
+    SELECT PRO_ID INTO V_PRO_ID
+    FROM COURSE
+    WHERE COURSE_ID = V_COURSE_ID;
+    
+    IF (V_PRO_ID != 'PRO1') -- 해당 교수의 코드를 입력해야 함
+        THEN RAISE NOT_YOUR_EST_ERROR;
+    END IF;
+    
+    
+    -- 예외처리2. 중도탈락한 수강신청 내역일 경우
+    SELECT COUNT(*) INTO V_CNT
+    FROM MID_DROP
+    WHERE E_ID = V_E_ID;
+    
+    IF (V_CNT > 0)
+        THEN RAISE MID_DROP_STU_ERROR;
+    END IF;
+    
+
+    -- SCORE(성적테이블) INSERT 
+    INSERT INTO SCORE(SCORE_ID, E_ID, EST_SUB_ID, ATTEND_SCORE, PRACTICAL_SCORE, WRITING_SCORE)
+    VALUES('SCORE' || SEQ_SCORE_ID.NEXTVAL, V_E_ID, V_EST_SUB_ID, V_ATTEND_SCORE, V_PRACTICAL_SCORE, V_WRITING_SCORE);
+
+
+    -- 커밋
+    COMMIT;
+    
+    
+    -- 예외처리
+    EXCEPTION
+        WHEN NOT_YOUR_EST_ERROR 
+            THEN RAISE_APPLICATION_ERROR(-20001, '성적처리할 수 없는 수강신청 내역입니다.');
+                 ROLLBACK;
+        WHEN MID_DROP_STU_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20002, '중도포기한 수강신청 내역입니다.');
+                 ROLLBACK;
+        WHEN OTHERS 
+            THEN ROLLBACK;
+END;
+--==>> Procedure PRC_SCORE_INSERT이(가) 컴파일되었습니다.
+
+-- 초기버전
+/*
+CREATE OR REPLACE PROCEDURE PRC_SCORE_INSERT 
 ( V_E_ID                IN SCORE.E_ID%TYPE                -- 수강신청한 과정
 , V_EST_SUB_ID          IN SCORE.EST_SUB_ID%TYPE            -- 개설된 과목
 , V_ATTEND_SCORE        IN SCORE.ATTEND_SCORE%TYPE
@@ -828,6 +998,7 @@ BEGIN
     VALUES('SCORE' || SEQ_SCORE_ID.NEXTVAL, V_E_ID, V_EST_SUB_ID, V_ATTEND_SCORE, V_PRACTICAL_SCORE, V_WRITING_SCORE);
 
 END;
+*/
 --==>> Procedure PRC_SCORE_INSERT이(가) 컴파일되었습니다.
 
 
@@ -862,6 +1033,8 @@ BEGIN
 END;
 --==>> Procedure PRC_SCORE_DELETE이(가) 컴파일되었습니다.
 
+
+
 --과정코드 시퀀스 생성
 CREATE SEQUENCE SEQ_COURSE_ID
 START WITH 1
@@ -895,13 +1068,44 @@ CREATE OR REPLACE PROCEDURE PRC_COR_UPDATE
 , V_C_START      IN COURSE.C_START%TYPE
 , V_C_END        IN COURSE.C_END%TYPE
 , V_CLASSROOM    IN COURSE.CLASSROOM%TYPE
+
 )
 IS
+
+UESR_DEFINE_ERROR EXCEPTION;
+
+V_SUB_ID     SUBJECTS.SUB_ID%TYPE;
+V_S_START    DATE;
+V_S_END      DATE;
+
 BEGIN
 
+    SELECT SUB_ID INTO V_SUB_ID
+    FROM ESTABLISHED_SUB
+    WHERE COURSE_ID = V_COURSE_ID;
+    
+    SELECT S_START, S_END INTO V_S_START, V_S_END
+    FROM SUBJECTS
+    WHERE SUB_ID = V_SUB_ID;
+    
+    -- 과목 수강 기간을 벗어나면 수정하지 못하도록 하는 예외처리 필요  
+    
+    IF (V_C_START < V_S_START OR V_S_END > V_C_END)
+        THEN RAISE UESR_DEFINE_ERROR;
+    END IF;
+    
+    EXCEPTION
+        WHEN UESR_DEFINE_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20925,'과정의 기간이 잘못되었습니다..');
+                 ROLLBACK;
+        WHEN OTHERS
+            THEN ROLLBACK;
+            
     UPDATE COURSE
     SET COURSE_NAME = V_COURSE_NAME, C_START = V_C_START, C_END = V_C_END, CLASSROOM = V_CLASSROOM
     WHERE COURSE_ID = V_COURSE_ID; 
+    
+    COMMIT;
 
 END;
 --==>> Procedure PRC_COR_UPDATE이(가) 컴파일되었습니다.
@@ -928,7 +1132,7 @@ END;
 
 
 
---지윤
+
 --○과목 DELETE 프로시저 생성
 CREATE OR REPLACE PROCEDURE PRC_SUB_DELETE
 (
@@ -956,12 +1160,26 @@ BEGIN
 END;
 --==>>Procedure PRC_SUB_DELETE이(가) 컴파일되었습니다.
 
---○ 과목 UPDATE 프로시저
+--○과목 DELETE 트리거
+CREATE OR REPLACE TRIGGER TRG_SUB_DELETE
+        BEFORE
+        DELETE ON SUBJECTS
+        FOR EACH ROW
+        
+BEGIN
+    DELETE
+    FROM ESTABLISHED_SUB
+    WHERE SUB_ID=:OLD.SUB_ID; 
 
+END;
+--==>> Trigger TRG_SUB_DELETE이(가) 컴파일되었습니다.
+
+
+--○ 과목 UPDATE 프로시저
 CREATE OR REPLACE PROCEDURE PRC_SUB_UPDATE
 (
     V_SUB_ID    IN  SUBJECTS.SUB_ID%TYPE
-,   V_SUB_NAME    IN  SUBJECTS.SUB_NAME%TYPE 
+,   V_SUB_NAME    IN  SUBJECTS.SUB_NAME%TYPE
 )
 IS
     V_COUNT             NUMBER;
@@ -1001,6 +1219,20 @@ INCREMENT BY 1
 NOMAXVALUE
 NOCACHE;
 --==>> Sequence SEQ_E_SUB_ID이(가) 생성되었습니다.
+
+--○과목 UPDATE 트리거
+CREATE OR REPLACE TRIGGER TRG_SUB_UPDATE
+        BEFORE
+        UPDATE ON SUBJECTS
+        FOR EACH ROW
+        
+BEGIN
+    DELETE
+    FROM ESTABLISHED_SUB
+    WHERE SUB_ID=:OLD.SUB_ID; 
+
+END;
+--==>> Trigger TRG_SUB_UPDATE이(가) 컴파일되었습니다.
 
 
 --○ 개설과목 INSERT 프로시저
@@ -1074,17 +1306,7 @@ IS
     V_SUB_ID        ESTABLISHED_SUB.SUB_ID%TYPE;
 BEGIN
 
-/*
-    --동명이인 있을 수도 있으니깐 조건절에 다른 조건 추가해야함
-    SELECT PRO_ID INTO V_PRO_ID
-    FROM PROFESSORS
-    WHERE PRO_NAME = V_PRO_NAME AND 
-
-    -- 근데 이것도 뭔가... 과정이름 같고 교수자이름도 같을 수 있잖아...ㅠㅠㅠ
-    SELECT COURSE_ID INTO V_COURSE_ID
-    FROM PROFESSORS
-    WHERE COURSE_NAME = V_COURSE_NAME AND --교수자 이름도 같은지 검사
-*/
+    -- PRC_ESTABLISHED_SUB 프로시저에 날짜로 예외처리하는 부분 포함되어 있어서 따로 사용자 정의 예외처리 구문 작성하지 않았습니다.
     
     V_SUB_ID := 'SUB' || SEQ_SUB_ID.NEXTVAL;
 
@@ -1094,7 +1316,6 @@ BEGIN
 
     -- ESTABLISHED_SUB(과목) 테이블에 INSERT
     PRC_ESTABLISHED_SUB(V_PRO_ID, V_COURSE_ID, V_SUB_ID);
-    --EXEC PRC_ESTABLISHED_SUB(V_PRO_ID, V_COURSE_ID, V_SUB_ID); -- 이렇게 작성해야 하는지 아닌지
 
     -- 예외
     EXCEPTION
@@ -1104,38 +1325,6 @@ BEGIN
 END;
 --==>> Procedure PRC_SUB_INSERT이(가) 컴파일되었습니다.
 
-
-
---○ 교수 삭제 프로시저
-CREATE OR REPLACE PROCEDURE PRC_PRO_DELETE
-( V_PRO_ID  IN PROFESSORS.PRO_ID%TYPE
-)
-IS
-BEGIN
-    -- PROFESSORS(교수정보테이블) 에서 삭제
-    DELETE
-    FROM PROFESSORS
-    WHERE PRO_ID = V_PRO_ID;
-    
-    --COMMIT;
-END;
---==>> Procedure PRC_PRO_DELETE이(가) 컴파일되었습니다.
-
-
---○ 관리자 삭제 프로시저
-CREATE OR REPLACE PROCEDURE PRC_AD_DELETE
-( V_AD_ID   IN ADMINISTRATOR.ADMIN_ID%TYPE
-)
-IS
-BEGIN
-    -- ADMINISTRATOR(관리자 테이블) 에서 삭제
-    DELETE
-    FROM ADMINISTRATOR
-    WHERE ADMIN_ID = V_AD_ID;
-    
-    --COMMIT;
-END;
---==>> Procedure PRC_AD_DELETE이(가) 컴파일되었습니다.
 
 /*
 
