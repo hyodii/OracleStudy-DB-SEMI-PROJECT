@@ -1,6 +1,3 @@
-SELECT USER
-FROM DUAL;
---==>> HR
 /*
 [테이블 생성 순서]
 1. 관리자
@@ -27,6 +24,10 @@ MID_DROP - 테이블.컬럼명 이 방식을 테이블 생성할 때 인식을 �
            이것도 아마 프로시저 등으로 나중에 예외처리하는 방식으로 하는 건 
            어떨지 생각해봤고 우선 그 제약조건 제외하고 테이블 생성했습니다.
 */
+
+SELECT USER
+FROM DUAL;
+--==>> HR
 
 --① 관리자
 CREATE TABLE ADMINISTRATOR
@@ -578,6 +579,7 @@ END;
 
 --○ 중도포기 INSERT 프로시저
 --> 중도포기 레코드를 입력 시, "과정 시작일 < 중도포기일 < 과정종료일"이 맞는지 확인하는 프로시저
+-->이미 그 과정을 DROP한 사람이면 예외처리
 CREATE OR REPLACE PROCEDURE PRC_MID_DROP_INSERT
 ( V_DROP_ID     IN MID_DROP.DROP_ID%TYPE
 , V_E_ID        IN MID_DROP.E_ID%TYPE
@@ -587,7 +589,9 @@ IS
     V_COURSE_ID         COURSE.COURSE_ID%TYPE;
     V_C_START           COURSE.C_START%TYPE;
     V_C_END             COURSE.C_END%TYPE;
+    V_COUNT             NUMBER;
     USER_DEFINE_ERROR   EXCEPTION;
+    DROP_ERROR          EXCEPTION;
 
 BEGIN
     -- 변수에 값 담기
@@ -599,9 +603,18 @@ BEGIN
     FROM COURSE
     WHERE COURSE_ID = V_COURSE_ID;
     
+    SELECT COUNT(DROP_ID) INTO V_COUNT
+    FROM MID_DROP
+    WHERE DROP_ID = V_DROP_ID;
+    
     -- 예외 처리 : "과정 시작일 < 중도포기일 < 과정종료일"이 아닐 경우
     IF (V_DROP_DATE < V_C_START OR V_DROP_DATE > V_C_END)
         THEN RAISE USER_DEFINE_ERROR;
+    END IF;
+    
+    --이미 그 과정을 DROP한 사람이면 예외처리
+    IF (V_COUNT>0)
+        THEN RAISE DROP_ERROR;
     END IF;
 
     -- INSERT
@@ -616,6 +629,8 @@ BEGIN
         WHEN USER_DEFINE_ERROR
             THEN RAISE_APPLICATION_ERROR(-20001, '중도포기 날짜가 잘못 입력되었습니다.');
                  ROLLBACK;
+        WHEN DROP_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20055, '이미 DROP한 사람입니다.');
         WHEN OTHERS
             THEN ROLLBACK;
 END;
@@ -760,16 +775,44 @@ CREATE OR REPLACE PROCEDURE PRC_PRO_DELETE
 ( V_PRO_ID  IN PROFESSORS.PRO_ID%TYPE
 )
 IS
+    NONEXIST_ERROR  EXCEPTION;
 BEGIN
-    -- PROFESSORS(교수정보테이블) 에서 삭제
     DELETE
     FROM PROFESSORS
     WHERE PRO_ID = V_PRO_ID;
     
-    --COMMIT;
+    IF SQL%NOTFOUND
+    THEN RAISE NONEXIST_ERROR;
+    END IF;
+        
+    COMMIT;
+
+    EXCEPTION
+        WHEN NONEXIST_ERROR
+            THEN RAISE_APPLICATION_ERROR(-20009,'일치하는 데이터가 없습니다.');
+                 ROLLBACK;
+        WHEN OTHERS
+            THEN ROLLBACK;
 END;
 --==>> Procedure PRC_PRO_DELETE이(가) 컴파일되었습니다.
 
+--○ 교수 삭제 트리거
+CREATE OR REPLACE TRIGGER TRG_PRO_DELETE
+        BEFORE
+        DELETE ON PROFESSORS
+        FOR EACH ROW
+        
+BEGIN
+    DELETE
+    FROM COURSE
+    WHERE PRO_ID=:OLD.PRO_ID;
+    
+    DELETE
+    FROM ESTABLISHED_SUB
+    WHERE PRO_ID=:OLD.PRO_ID; 
+
+END;
+--==>> Trigger TRG_PRO_DELETE이(가) 컴파일되었습니다.
 
 
 --○ 개설과목 INSERT 프로시저
